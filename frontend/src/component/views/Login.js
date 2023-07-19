@@ -8,7 +8,7 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    axios.post(`http://localhost:8080/api/v1/auth/login`, {userId, userPw})
+    axios.post(`api/v1/auth/login`, {userId, userPw})
     .then((res)=>{
       console.log('로그인 성공', res)
     })

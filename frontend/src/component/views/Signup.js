@@ -12,7 +12,7 @@ function Signup() {
     const handleSignup = (e) => {
         e.preventDefault()
         axios
-        .post(`http://localhost:8080/api/v1/auth/signup`, 
+        .post(`api/v1/auth/signup`, 
         {userId, userPw, userPwCk, nickName, phoneNumber, userEmail})
         .then((res) => {
             console.log(res)
