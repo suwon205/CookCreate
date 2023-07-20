@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 public interface MemberService {
 
     // 회원가입
-
     public ResponseDto signUp(UserSignUpReq userSignUpReq) throws Exception;
     public ResponseDto login(UserLoginPostReq userLoginPostReq, HttpServletResponse response);
     public ResponseDto logout(HttpServletRequest request, HttpServletResponse response);
+
+    public ResponseDto checkUserId(String userId);
+    public ResponseDto checkNickname(String nickname);
 }

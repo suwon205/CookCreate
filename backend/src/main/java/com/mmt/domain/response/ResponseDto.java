@@ -11,10 +11,10 @@ import org.springframework.http.HttpStatus;
 @Getter
 @NoArgsConstructor
 public class ResponseDto {
-    private int statusCode;
+    private HttpStatus statusCode;
     private String message;
 
-    public ResponseDto(int statusCode, String message) {
+    public ResponseDto(HttpStatus statusCode, String message) {
         this.statusCode = statusCode;
         this.message = message;
     }
