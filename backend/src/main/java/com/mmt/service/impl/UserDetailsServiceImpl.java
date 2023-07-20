@@ -16,7 +16,7 @@ public class UserDetailsServiceImpl implements UserDetailsService { // userDetai
     private final MemberRepository memberRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+    public UserDetailsImpl loadUserByUsername(String userId) throws UsernameNotFoundException {
         Member member = memberRepository.findByUserId(userId).orElseThrow(
                 () -> new RuntimeException("Not Found Account")
         );
