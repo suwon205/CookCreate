@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 
 function Login() {
   const [userId, setUserId] = useState('');
