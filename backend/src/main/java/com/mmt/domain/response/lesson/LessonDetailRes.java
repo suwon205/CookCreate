@@ -1,6 +1,6 @@
 package com.mmt.domain.response.lesson;
 
-import com.mmt.domain.entity.auth.Member;
+import com.mmt.domain.entity.Auth.Member;
 import com.mmt.domain.entity.lesson.Difficulty;
 import com.mmt.domain.entity.lesson.Lesson;
 import com.mmt.domain.entity.lesson.LessonStep;
@@ -37,6 +37,7 @@ public class LessonDetailRes {
     private int jjimCount;
     private String createdDate;
     private String modifiedDate;
+    private String sessionId;
 
     public LessonDetailRes(Lesson lesson){
         this.lessonId = lesson.getLessonId();
@@ -56,5 +57,6 @@ public class LessonDetailRes {
         this.jjimCount = lesson.getJjimCount();
         this.createdDate = lesson.getCreatedDate().toString();
         this.modifiedDate = lesson.getModifiedDate().toString();
+        this.sessionId = lesson.getSessionId();
     }
 }

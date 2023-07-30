@@ -1,6 +1,6 @@
 package com.mmt.service.impl;
 
-import com.mmt.domain.entity.auth.Member;
+import com.mmt.domain.entity.Auth.Member;
 import com.mmt.domain.entity.lesson.Lesson;
 import com.mmt.domain.entity.lesson.LessonCategory;
 import com.mmt.domain.entity.lesson.LessonParticipant;
@@ -9,6 +9,7 @@ import com.mmt.domain.entity.pay.PaymentHistory;
 import com.mmt.domain.request.lesson.LessonPostReq;
 import com.mmt.domain.request.lesson.LessonPutReq;
 import com.mmt.domain.request.lesson.LessonSearchReq;
+import com.mmt.domain.request.session.SessionCreateReq;
 import com.mmt.domain.response.lesson.LessonDetailRes;
 import com.mmt.domain.response.lesson.LessonLatestRes;
 import com.mmt.domain.response.ResponseDto;
@@ -283,5 +284,30 @@ public class LessonServiceImpl implements LessonService {
         }
 
         return lessonLatestRes;
+    }
+
+    @Override
+    public ResponseDto createSession(int lessonId, SessionCreateReq sessionCreateReq) {
+        Optional<Lesson> find = lessonRepository.findByLessonId(lessonId);
+
+        if(find.isEmpty()) return new ResponseDto(HttpStatus.NOT_FOUND, "존재하지 않는 과외입니다.");
+
+        // session_id 컬럼 set
+        Lesson lesson = find.get();
+        lesson.setSessionId(sessionCreateReq.getSessionId());
+        lessonRepository.save(lesson);
+        return new ResponseDto(HttpStatus.OK, "Success");
+    }
+
+    @Override
+    public ResponseDto shutdownSession(int lessonId) {
+        Optional<Lesson> find = lessonRepository.findByLessonId(lessonId);
+        if(find.isEmpty()) return new ResponseDto(HttpStatus.NOT_FOUND, "존재하지 않는 과외입니다.");
+
+        // session_id 컬럼 값을 null 로 set
+        Lesson lesson = find.get();
+        lesson.setSessionId(null);
+        lessonRepository.save(lesson);
+        return new ResponseDto(HttpStatus.OK, "Success");
     }
 }

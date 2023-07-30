@@ -32,5 +32,6 @@ public class LessonPostReq {
     private String lessonDate;
     private String videoUrl;
     private String thumbnailUrl;
+    private String sessionId;
     private List<LessonStep> lessonStepList;
 }

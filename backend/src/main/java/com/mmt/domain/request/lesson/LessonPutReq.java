@@ -27,6 +27,7 @@ public class LessonPutReq {
     private List<String> materials;
     private String videoUrl;
     private String thumbnailUrl;
+    private String sessionId;
     @NotEmpty(message = "요리 단계는 필수입력값입니다.")
     private List<LessonStep> lessonStepList;
 }

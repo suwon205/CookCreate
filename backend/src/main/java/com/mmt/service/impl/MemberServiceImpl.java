@@ -3,7 +3,7 @@ package com.mmt.service.impl;
 import com.mmt.common.auth.JwtUtil;
 import com.mmt.domain.entity.auth.Role;
 import com.mmt.domain.TokenDto;
-import com.mmt.domain.entity.auth.Member;
+import com.mmt.domain.entity.Auth.Member;
 import com.mmt.domain.entity.auth.RefreshToken;
 import com.mmt.domain.request.auth.UserLoginPostReq;
 import com.mmt.domain.request.auth.UserSignUpReq;
