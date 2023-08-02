@@ -4,7 +4,7 @@ import SearchBar from './SearchBar';
 import { useSelector, useDispatch } from "react-redux";
 import '../../style/navbar.css'
 // import { logout } from '../../store/auth/auth'; // Import the logout action
-import { setOvToken } from '../../store/video/video';
+import { setOvToken, setRoomPresent, setVideoLessonId } from '../../store/video/video';
 import axios from 'axios';
 
 function NavBar() {
@@ -19,7 +19,8 @@ function NavBar() {
   const emoji = localStorage.getItem('emoji')
 
   const OvToken = useSelector((state) => state.video.OvToken)
-  const [ roomPresent, setRoomPresent ] = useState(null) // 선생님만 사용하는 변수
+  const videoLessonId = useSelector((state) => state.video.videoLessonId)
+  const roomPresent = useSelector((state) => state.video.roomPresent)
 
   const [ myLessons, setMyLessons ] = useState(undefined)  // 학생 모달창에 불러서 쓸 레슨 정보
 
@@ -47,24 +48,55 @@ function NavBar() {
 
   // 수업 목록에서 생성하기 버튼을 클릭하면 세션이 생성되고 등등
   const createRoom = ( lessonId ) => {
-    // 1. 선생님이 해당 수업 방 만들기 요청 보내기
-    axios.post(
-      `api/v1/session/create`,
-      { lessonId },
-      {
-        headers: {
-          accessToken: access_token
-        }
-      })
-      .then((res) => {
-        setRoomPresent(lessonId)
-        console.log('방 만들기 요청 성공', res)
-        // dispatch(setMySessionId(res.data)) // 토큰이랑 커넥션 설정하는걸로 바꾸기?
-      })
-      .catch((err) => {
-        console.log('방 만들기 요청 실패', err)
-      })
+    // 0. 레슨아이디 스토어에 저장
+    dispatch(setVideoLessonId(lessonId))
   }
+
+  
+  // 1. 레슨아이디가 잘 저장되면 선생님이 해당 수업 방 만들기 요청 보내기
+  useEffect(() => {
+    if (videoLessonId !== undefined) {
+      if (role === 'COOKYER') {
+        axios.post(
+          `api/v1/session/create`,
+          { videoLessonId },
+          {
+            headers: {
+              accessToken: access_token
+            }
+          })
+          .then((res) => {
+            dispatch(setRoomPresent(videoLessonId))
+            console.log('방 만들기 요청 성공', res)
+            // dispatch(setMySessionId(res.data)) // 토큰이랑 커넥션 설정하는걸로 바꾸기?
+          })
+          .catch((err) => {
+            console.log('방 만들기 요청 실패', err)
+          })
+      } else if (role === 'COOKIEE') {
+        // 레슨아이디가 등록되면 학생은 토큰 생성 요청
+        axios.get(
+          `api/v1/session/connect`,
+          { videoLessonId },
+          {
+            headers : {
+              accessToken : access_token
+            }
+          })
+          .then((res) => {
+            console.log('쿠키 토큰 생성 성공', res.data)
+            const token = res.data
+            dispatch(setOvToken(token))
+          })
+          .catch((err) => {
+            console.log('쿠키 토큰 생성 실패', err)
+          })
+      }
+    } else {
+      console.log("레슨아이디 없음")
+    }
+      
+  }, [videoLessonId])
 
   // 2. 방이 만들어지면 토큰 요청하기
   useEffect(() => {
@@ -136,24 +168,27 @@ function NavBar() {
   /** 학생이 과외방 입장하는 코드 */
   // 반복문 이용해서 모달에 각각 정보 띄우고, 온클릭 이벤트를 통해 전달받는 방식
 
+
+
   // 1. 입장 요청해서 토큰 받아오기
   const joinLesson = ( lessonId ) => {
-    axios.get(
-      `api/v1/session/connect`,
-      { lessonId },
-      {
-        headers : {
-          accessToken : access_token
-        }
-      })
-      .then((res) => {
-        console.log('쿠키 토큰 생성 성공', res.data)
-        const token = res.data
-        dispatch(setOvToken(token))
-      })
-      .catch((err) => {
-        console.log('쿠키 토큰 생성 실패', err)
-      })
+    dispatch(setVideoLessonId(lessonId))
+    // axios.get(
+    //   `api/v1/session/connect`,
+    //   { lessonId },
+    //   {
+    //     headers : {
+    //       accessToken : access_token
+    //     }
+    //   })
+    //   .then((res) => {
+    //     console.log('쿠키 토큰 생성 성공', res.data)
+    //     const token = res.data
+    //     dispatch(setOvToken(token))
+    //   })
+    //   .catch((err) => {
+    //     console.log('쿠키 토큰 생성 실패', err)
+    //   })
   }
   
   // 2. 토큰이 생기면 OV와 session 객체 만들기

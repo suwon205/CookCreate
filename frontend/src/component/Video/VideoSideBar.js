@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { audioMute, leaveSession, videoMute } from '../../store/video/video';
 import { useNavigate } from 'react-router-dom';
 import { setScreenShareActive, setStreamManager } from '../../store/video/screenShare';
+import axios from 'axios';
+import { setCheck } from '../../store/video/cookieeVideo';
 
 function VideoSideBar() {
   const dispatch = useDispatch()
-  const navigator = useNavigate()
+  const navigate = useNavigate()
 
   const OV = useSelector((state) => state.video.OV)
   const session = useSelector((state) => state.video.session)
@@ -16,17 +18,64 @@ function VideoSideBar() {
   const streamManager = useSelector((state) => state.screenShare.streamManager)
   const [ isShared, setIsShared ] = useState(false)
 
+  const OvToken = useSelector((state) => state.video.OvToken)
+  const videoLessonId = useSelector((state) => state.video.videoLessonId)
+  const access_token = useSelector((state) => state.auth.access_token)
+
   const role = localStorage.getItem('role')
 
   /** 체크 도전 */
-  // const check = useSelector((state) => state.cookieeVideo.check)
+  const check = useSelector((state) => state.cookieeVideo.check)
 
   const handleLeaveSession = () => {
-    if (session) {
-      session.disconnect()
-      dispatch(leaveSession())
+    if (OvToken !== undefined) {
+      axios.delete(
+        `api/v1/session`,
+        { videoLessonId },
+        {
+          headers: {
+            accessToken: access_token
+          }
+        })
+        .then((res) => {
+          dispatch(leaveSession())
+          session.disconnect()
+          console.log('디비 세션 삭제 성공', res)
+          // dispatch(setMySessionId(res.data)) // 토큰이랑 커넥션 설정하는걸로 바꾸기?
+          navigate('/')
+        })
+        .catch((err) => {
+          console.log('디비 세션 삭제 실패', err)
+        })
+    } else {
+      console.log("비정상적인 접근. 어떻게 여기에..?")
     }
-    navigator('/')
+  }
+
+  const handleDisconnectSession = () => {
+    if (OvToken !== undefined) {
+      axios.delete(
+        `api/v1/session`,
+        { videoLessonId },
+        {
+          headers: {
+            accessToken: access_token
+          }
+        })
+        .then((res) => {
+          dispatch(leaveSession())
+          session.forceDisconnect()
+          console.log("수업 강제 종료")
+          console.log('디비 세션 삭제 성공', res)
+          // dispatch(setMySessionId(res.data)) // 토큰이랑 커넥션 설정하는걸로 바꾸기?
+          navigate('/')
+        })
+        .catch((err) => {
+          console.log('디비 세션 삭제 실패', err)
+        })
+    } else {
+      console.log("비정상적인 접근. 어떻게 여기에..?")
+    }
   }
 
   // const handleScreenShare = () => {
@@ -35,9 +84,9 @@ function VideoSideBar() {
   //   // 취소를 눌렀을땐 false여야 하는데 어떻게 그렇게 하지..?
   // }
 
-  const handleStopScreenShare = () => {
-    setIsShared(false)
-  }
+  // const handleStopScreenShare = () => {
+  //   setIsShared(false)
+  // }
 
   const setVideoMute = () => {
     dispatch(videoMute())
@@ -129,11 +178,27 @@ function VideoSideBar() {
   // }
 
   /** 체크 */
-  // 쿠키가 체크를 누르면 쿠커에게 시그널을 보내고, 쿠커가 리셋하면 쿠키에게 시그널을 보내야 함함
+  // 쿠키가 체크를 누르면 쿠커에게 시그널을 보내고, 쿠커가 리셋하면 쿠키에게 시그널을 보내야 함
   // 쿠키가 체크를 누름
-  // const pressCheck = () => {
-  //   dispatch(setCheck())
-  // }
+  const pressCheck = () => {
+    dispatch(setCheck())
+  }
+
+  useEffect(() => {
+    if (check) {
+      const data = {
+        connectionId: publisher.stream.connection.connectionId
+      }
+      console.log("체크했다", data)
+      publisher.stream.session.signal({
+        data: JSON.stringify(data),
+        type: 'check'
+      })
+    } else {
+      console.log("선생님이 체크 리셋")
+      // 학생이 체크 리셋해제하면 선생님에게 또 신호를 보내야함(아직안함)
+    }
+  }, [check])
 
   return (
     <div className='video-sidebar'>
@@ -142,6 +207,13 @@ function VideoSideBar() {
       >
         나가기
       </button>
+      { role === 'COOKYER' ? (
+        <button
+          onClick={handleDisconnectSession}
+        >
+          수업 종료하기
+        </button>
+      ) : null}
       <button
         onClick={setAudioMute}
       >
@@ -163,7 +235,7 @@ function VideoSideBar() {
 
       { role === 'COOKIEE' ? (
         <button
-          // onClick={() => pressCheck(publisher)}
+          onClick={() => pressCheck(publisher)}
         >
           체크
         </button>

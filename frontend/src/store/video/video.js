@@ -10,6 +10,8 @@ const initialState = {
   subscribers: [],
   isVideoPublished: true,
   isAudioPublished: true,
+  videoLessonId: undefined,
+  roomPresent: false,
 }
 
 export const video = createSlice({
@@ -34,6 +36,12 @@ export const video = createSlice({
     setSubscribers: (state, {payload}) => {
       state.subscribers = payload.subscribers
     },
+    setVideoLessonId: (state, {payload}) => {
+      state.videoLessonId = payload.videoLessonId
+    },
+    setRoomPresent: (state, {payload}) => {
+      state.roomPresent = payload.roomPresent
+    },
     videoMute: (state) => {
       state.publisher.publishVideo(!state.isVideoPublished)
       state.isVideoPublished = !state.isVideoPublished
@@ -57,6 +65,8 @@ export const video = createSlice({
       state.subscribers = []
       state.isVideoPublished = true
       state.isAudioPublished = true
+      state.videoLessonId = undefined
+      state.roomPresent = false
     },
     enteredSubscriber: (state, action) => {
       // console.log("여기가 문제라고??", action.payload)
@@ -83,7 +93,8 @@ export const video = createSlice({
 })
 
 export const {
-    initOVSession, setOvToken, setPublisher, setMainStreamManager, setSubscribers,
+    initOVSession, setOvToken, setPublisher, setMainStreamManager,
+    setSubscribers, setVideoLessonId, setRoomPresent,
     videoMute, audioMute, leaveSession,
     enteredSubscriber, deleteSubscriber,
 } = video.actions

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   checkCookieeList: [],
+  checkCookiee: '',
 }
 
 export const cookyerVideo = createSlice({
@@ -11,13 +12,15 @@ export const cookyerVideo = createSlice({
     setCheckCookieeList: (state, { payload }) => {
       state.checkCookieeList = payload.checkCookieeList
     },
-    
+    setCheckCookiee: (state, { payload }) => {
+      state.checkCookiee = payload.checkCookiee
+    }
   },
   extraReducers: {
   }
 })
 
 export const {
-  setCheckCookieeList
+  setCheckCookieeList, setCheckCookiee
 } = cookyerVideo.actions
 export default cookyerVideo.reducer
