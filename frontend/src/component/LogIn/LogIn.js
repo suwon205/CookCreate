@@ -15,7 +15,6 @@
       e.preventDefault()
       axios.post(`api/v1/auth/login`, {userId, userPw})
       .then((res)=>{
-        console.log(res)
         dispatch(login({
           access_token : res.headers.access_token, 
           refresh_token : res.headers.refresh_token,

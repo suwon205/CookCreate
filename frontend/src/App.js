@@ -10,9 +10,9 @@ import RegisterLesson from './pages/registerLesson'
 import { Route, Routes } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login, logout } from './store/auth/auth'
+import CookyerScreen from './pages/video/cookyerScreen';
+import CookieeScreen from './pages/video/cookieeScreen';
 import LessonItem from './component/TotalLessons/LessonItem';
-
-
 import MyPageS from './pages/myPageS';
 import Calendar from './component/MyPageS/Calendar';
 import ClassList from './component/MyPageS/ClassList';
@@ -21,9 +21,6 @@ import Payment from './component/MyPageS/Payment';
 import RecipeBook from './component/MyPageS/RecipeBook';
 import Review from './component/MyPageS/Review';
 import Account from './component/MyPageS/Account';
-
-
-
 import MyPageT from './pages/myPageT';
 import CalendarT from './component/MyPageT/Calendar';
 import ClassListT from './component/MyPageT/ClassList';
@@ -68,6 +65,8 @@ function App() {
         <Route path='/totallessons' element={<TotalLessons />} />
         <Route path='/signupbefore' element={<SignUpBefore/>}/>
         <Route path='/registerlesson' element={<RegisterLesson/>}></Route>
+        <Route path='/videoLesson/COOKYER' element={<CookyerScreen/>}></Route>
+        <Route path='/videoLesson/COOKIEE' element={<CookieeScreen/>}></Route>
         <Route path='/lesson/:id' element={<LessonItem/>}></Route>
         <Route path="/calendar" element={<Calendar />}/>
         <Route path="/classList" element={<ClassList />}/>
