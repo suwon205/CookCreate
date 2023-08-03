@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCheckCookieeList } from '../../store/video/cookyerVideo';
+import { setCheckCookiee, setCheckCookieeList } from '../../store/video/cookyerVideo';
 
 function LessonStepWidget() {
   const dispatch = useDispatch()
@@ -8,9 +8,10 @@ function LessonStepWidget() {
   const [ checkCount, setCheckCount ] = useState(0)
   const publisher = useSelector((state) => state.video.publisher)
 
-  const resetCheck = (publisher) => {
-    dispatch(setCheckCookieeList([]))
+  const resetCheckCookiee = (publisher) => {
+    dispatch(setCheckCookieeList({checkCookieeList: []}))
     setCheckCount(0)
+    dispatch(setCheckCookiee({checkCookiee: ''}))
     // 학생들에게도 리셋 시그널 보내야 함
     publisher.stream.session.signal({
       type: 'resetCheck'
@@ -18,7 +19,7 @@ function LessonStepWidget() {
   }
 
   useEffect(() => {
-    if (checkCookieeList) {
+    if (checkCookieeList !== undefined && checkCookieeList !== []) {
       setCheckCount(checkCookieeList.length)
     }
   }, [checkCookieeList])
@@ -37,7 +38,7 @@ function LessonStepWidget() {
         </div>
         <div>
           <h1>체크 {checkCount}명</h1>
-          <button onClick={() => resetCheck(publisher)}>리셋</button>
+          <button onClick={() => resetCheckCookiee(publisher)}>리셋</button>
         </div>
       </div>
       <div>

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { publishStream } from './video-thunk'
+import { closeSession, publishStream } from './video-thunk'
 
 const initialState = {
   OV: null,
@@ -10,6 +10,9 @@ const initialState = {
   subscribers: [],
   isVideoPublished: true,
   isAudioPublished: true,
+  videoLessonId: undefined,
+  roomPresent: false,
+  isSessionClosed: false,
 }
 
 export const video = createSlice({
@@ -22,6 +25,7 @@ export const video = createSlice({
       console.log("initOVSession", state.OV, state.session)
     },
     setOvToken: (state, { payload }) => {
+      console.log("리덕스 토큰 추가", payload.token)
       state.OvToken = payload.token
     },
     setPublisher: (state, { payload }) => {
@@ -34,6 +38,12 @@ export const video = createSlice({
     setSubscribers: (state, {payload}) => {
       state.subscribers = payload.subscribers
     },
+    setVideoLessonId: (state, {payload}) => {
+      state.videoLessonId = payload.videoLessonId
+    },
+    setRoomPresent: (state, {payload}) => {
+      state.roomPresent = payload.roomPresent
+    },
     videoMute: (state) => {
       state.publisher.publishVideo(!state.isVideoPublished)
       state.isVideoPublished = !state.isVideoPublished
@@ -45,10 +55,10 @@ export const video = createSlice({
       console.log("오디오", state.isAudioPublished)
     },
     leaveSession: (state) => {
-      const mySession = state.session
-      if (mySession) {
-        mySession.disconnect()
-      }
+      // const mySession = state.session
+      // if (mySession) {
+      //   mySession.disconnect()
+      // }
       state.OV = null
       state.session = undefined
       state.OvToken = undefined
@@ -57,6 +67,8 @@ export const video = createSlice({
       state.subscribers = []
       state.isVideoPublished = true
       state.isAudioPublished = true
+      state.videoLessonId = undefined
+      state.roomPresent = false
     },
     enteredSubscriber: (state, action) => {
       // console.log("여기가 문제라고??", action.payload)
@@ -78,12 +90,27 @@ export const video = createSlice({
     },
     [publishStream.rejected]: (state, { payload }) => {
       console.log("publishStream rejected")
+    },
+    [closeSession.fulfilled]: (state, { payload }) => {
+      console.log("closeSession fulfilled", payload)
+      state.OV = null
+      state.session = undefined
+      state.OvToken = undefined
+      state.publisher = undefined
+      state.mainStreamManager = undefined
+      state.subscribers = []
+      state.isVideoPublished = true
+      state.isAudioPublished = true
+      state.videoLessonId = undefined
+      state.roomPresent = false
+      state.isSessionClosed = true
     }
   }
 })
 
 export const {
-    initOVSession, setOvToken, setPublisher, setMainStreamManager, setSubscribers,
+    initOVSession, setOvToken, setPublisher, setMainStreamManager,
+    setSubscribers, setVideoLessonId, setRoomPresent,
     videoMute, audioMute, leaveSession,
     enteredSubscriber, deleteSubscriber,
 } = video.actions

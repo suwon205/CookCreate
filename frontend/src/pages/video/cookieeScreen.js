@@ -7,17 +7,18 @@ import LessonStepWidget from '../../component/Video/LessonStepWidget';
 
 import '../../style/video.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteSubscriber, enteredSubscriber, setSubscribers } from '../../store/video/video';
+import { deleteSubscriber, enteredSubscriber, leaveSession, setSubscribers } from '../../store/video/video';
 import { publishStream } from '../../store/video/video-thunk';
-import { resetCheck } from '../../store/video/cookieeVideo';
+import { resetCheck, resetHandsUp, setIsCompleted } from '../../store/video/cookieeVideo';
+import { useNavigate } from 'react-router-dom';
 
 function CookieeScreen() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   const session = useSelector((state) => state.video.session)
   const publisher = useSelector((state) => state.video.publisher)
   const subscribers = useSelector((state) => state.video.subscribers)
-  // const cookieeConnection = useSelector((state) => state.video.cookieeConnection)
   // 항상 쿠커가 먼저 들어와있기 때문에 이 로직도 괜찮을 것 같지만, subscribers가 있을때만 실행되는 것으로 변경
   // const cookyerStream = subscribers.find((sub) => (
   //   JSON.parse(sub.stream.connection.data).clientData.role === 'cookyer'
@@ -29,8 +30,13 @@ function CookieeScreen() {
   const myUserName = localStorage.getItem('nickname');
   const role = localStorage.getItem('role')
 
-  // /** 체크 기능 */
-  // const check = useSelector((state) => state.cookieeVideo.check)
+  const isCompleted = useSelector((state) => state.cookieeVideo.isCompleted)
+
+  /** 체크 기능 */
+  const check = useSelector((state) => state.cookieeVideo.check)
+
+  /** 손들기 기능 */
+  const handsUp = useSelector((state) => state.cookieeVideo.handsUp)
 
   /** 선생님 화면 고정하기 위해 선생님 subscriber 찾기 */
   const [ cookyerStream, setCookyerStream ] = useState(undefined)
@@ -67,11 +73,25 @@ function CookieeScreen() {
       session.on('streamDestroyed', handleStreamDestroyed);
       session.on('exception', handleException);
 
-      // /** 쿠커로부터 체크 리셋 시그널 받고 체크 해제 */
-      // session.on('signal:resetCheck', () => {
-      //   console.log("리셋시그널")
-      //   dispatch(resetCheck())
-      // })
+      /** 쿠커가 수업을 종료하면 스토어에 저장된 관련 정보 초기화 후 리뷰쓰러 */
+      session.of('sessionDisconnected', () => {
+        dispatch(leaveSession())  // 혹시나 리뷰에서 관련 정보 필요하면 리뷰 쓴 후에 초기화로 미루기
+        dispatch(setIsCompleted())
+        // 쿠커가 수업 종료와 함께 모든 쿠키들을 페이지 이동 시키려면 이곳에서 하면 됨
+      })
+
+      /** 쿠커로부터 체크 리셋 시그널 받고 체크 해제 */
+      session.on('signal:resetCheck', () => {
+        console.log("체크 리셋 시그널")
+        dispatch(resetCheck())
+      })
+
+      /** 쿠커로부터 손들기 리셋 시그널 받고 손들기 해제 */
+      // 쿠커가 특정 쿠키에게만 신호를 보내도록 설정해줘야 함!!!!
+      session.on('signal:resetHandsUp', () => {
+        console.log("손들기 리셋 시그널")
+        dispatch(resetHandsUp())
+      })
 
       // /** 화면공유 받기 */
       // // 현재 시그널이 안받아지는 상태. 하지만 이전부터 문제이므로 일단은 신경X
@@ -140,9 +160,15 @@ function CookieeScreen() {
         <div>
           <div>
             <div className='cookiee-sharing'>
-              <div className='cookiee-sharing-content'>
-                <span>화면공유</span>
-              </div>
+              { isCompleted ? (
+                <div className='cookiee-sharing-content'>
+                  <span>수업이 종료되었습니다.</span>
+                </div>
+              ) : (
+                <div className='cookiee-sharing-content'>
+                  <span>화면공유</span>
+                </div>
+              )}
             </div>
             {/* <div className='cookiee-sharing' onClick={() => handleMainVideoStream(publisher)}>
               <UserVideoComponent
@@ -182,9 +208,12 @@ function CookieeScreen() {
                 videoStyle='cookiee-content-video'
                 streamManager={publisher}
               />
-              {/* {check ? (
+              {check ? (
                 <h1>나 체크했다</h1>
-              ) : null} */}
+              ) : null}
+              {handsUp ? (
+                <h1>나 손들었다</h1>
+              ) : null}
             </div>
 
             {/* <div className='cookyer-cookiees'> */}

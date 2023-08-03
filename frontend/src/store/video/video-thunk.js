@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
+import axios from "axios";
 import { OpenVidu } from "openvidu-browser";
 
 export const publishStream = createAsyncThunk(
   "video/publishStream",
   async (data) => {
+    const OV = data.OV
+    const session = data.session
     const token = data.token
     const myUserName = data.myUserName
-
-    const OV = new OpenVidu()
-    const session = OV.initSession()
 
     await session.connect(token, { clientData: myUserName })
 
@@ -31,3 +31,24 @@ export const publishStream = createAsyncThunk(
     }
     return response
   })
+
+export const closeSession = createAsyncThunk(
+  "video/closeSession",
+  async (data) => {
+    console.log("수업 끝 요청 보내기")
+    const access_token = data.access_token
+    const lessonId = data.lessonId
+
+    console.log("레슨번호", lessonId)
+    axios.delete(
+      `/api/v1/session`,
+      {
+        data: {
+          lessonId: lessonId
+        },
+        headers: {
+          Access_Token: access_token
+        }
+      })
+  }
+)

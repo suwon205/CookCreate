@@ -81,6 +81,7 @@ public class SessionController {
 
         Session session = openvidu.createSession();
         sessionPostReq.setSessionId(session.getSessionId());
+        log.info(sessionPostReq.toString());
 
         // db에 세션아이디 저장
         ResponseDto responseDto = lessonService.createSession(sessionPostReq);
@@ -158,6 +159,7 @@ public class SessionController {
 
         String loginId = userDetails.getUsername();
         sessionPostReq.setUserId(loginId);
+        log.info(sessionPostReq.toString());
 
         // front에서 처리하는 걸로 수정
 //        String sessionId = lessonService.getSessionId(sessionPostReq.getLessonId());

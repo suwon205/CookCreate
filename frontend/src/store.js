@@ -21,4 +21,8 @@ export const store = configureStore({
     cookyerVideo: cookyerVideoReducer,
     cookieeVideo: cookieeVideoReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 })
