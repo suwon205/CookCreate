@@ -88,7 +88,7 @@ function Timer({ role }) {
         }
       })
     }
-  }, [])
+  }, [publisher])
 
   return (
     <div>

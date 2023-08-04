@@ -4,10 +4,10 @@ import './UserVideo.css';
 
 export default class UserVideoComponent extends Component {
 
-    getNicknameTag() {
-        // Gets the nickName of the user
-        return JSON.parse(this.props.streamManager.stream.connection.data).clientData.myUserName;
-    }
+    // getNicknameTag() {
+    //     // Gets the nickName of the user
+    //     return JSON.parse(this.props.streamManager.stream.connection.data).clientData.myUserName;
+    // }
 
     render() {
         return (
@@ -18,7 +18,7 @@ export default class UserVideoComponent extends Component {
                             videoStyle={this.props.videoStyle}
                             streamManager={this.props.streamManager}
                         />
-                        <div><p>{this.getNicknameTag()}</p></div>
+                        {/* <div><p>{this.getNicknameTag()}</p></div> */}
                     </div>
                 ) : null}
             </div>

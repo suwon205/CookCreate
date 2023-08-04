@@ -449,9 +449,9 @@ public class LessonServiceImpl implements LessonService {
         if(lesson.get().getIsEnd()){
             return new ResponseDto(HttpStatus.CONFLICT, "이미 종료된 과외입니다.");
         }
-        if(lesson.get().getSessionId() != null){
-            return new ResponseDto(HttpStatus.CONFLICT, "이미 세션이 생성되어 있습니다.");
-        }
+//        if(lesson.get().getSessionId() != null){
+//            return new ResponseDto(HttpStatus.CONFLICT, "이미 세션이 생성되어 있습니다.");
+//        }
 
 //        String customSessionId = RandomStringUtils.randomAlphanumeric(15);
         lesson.get().setSessionId(sessionPostReq.getSessionId());
