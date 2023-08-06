@@ -4,7 +4,6 @@ import { closeSession, joinSession, publishStream } from './video-thunk'
 const initialState = {
   OV: null,
   session: undefined,
-  OvToken: undefined,
   sessionId: undefined,
   publisher: undefined,
   mainStreamManager: undefined,
@@ -12,8 +11,8 @@ const initialState = {
   isVideoPublished: true,
   isAudioPublished: true,
   videoLessonId: undefined,
-  roomPresent: false,
-  isSessionOpened: false,
+  isSessionOpened: false,  // 들어올때 이걸로 문제가 생기면 undefined로 바꾸기
+  isExited: false,
 }
 
 export const video = createSlice({
@@ -25,32 +24,28 @@ export const video = createSlice({
       state.session = payload.session
       console.log("initOVSession", state.OV, state.session)
     },
-    setOvToken: (state, { payload }) => {
-      console.log("리덕스 토큰 추가", payload.token)
-      state.OvToken = payload.token
-    },
     setSessionId: (state, { payload }) => {
       console.log("세션 아이디 저장 성공", payload)
-      state.sessionId = payload.sessionId
+      state.sessionId = payload
     },
     setPublisher: (state, { payload }) => {
       console.log("13")
-      state.publisher = payload.publisher
+      state.publisher = payload
     },
     setMainStreamManager: (state, { payload }) => {
-      state.mainStreamManager = payload.publisher
+      state.mainStreamManager = payload
     },
     setSubscribers: (state, {payload}) => {
-      state.subscribers = payload.subscribers
+      state.subscribers = payload
     },
     setVideoLessonId: (state, {payload}) => {
-      state.videoLessonId = payload.videoLessonId
-    },
-    setRoomPresent: (state, {payload}) => {
-      state.roomPresent = payload.roomPresent
+      state.videoLessonId = payload
     },
     setIsSessionOpened: (state, {payload}) => {
-      state.isSessionOpened = payload.isSessionOpened
+      state.isSessionOpened = payload
+    },
+    setIsExited: (state, {payload}) => {
+      state.isExited = payload
     },
     videoMute: (state) => {
       state.publisher.publishVideo(!state.isVideoPublished)
@@ -62,14 +57,15 @@ export const video = createSlice({
       state.isAudioPublished = !state.isAudioPublished
       console.log("오디오", state.isAudioPublished)
     },
+    setAudioMute: (state) => {
+      // 강제로 음소거할때
+      console.log("강제 음소거 됐니")
+      state.publisher.publishAudio(false)
+      state.isAudioPublished = false
+    },
     leaveSession: (state) => {
-      // const mySession = state.session
-      // if (mySession) {
-      //   mySession.disconnect()
-      // }
       state.OV = null
       state.session = undefined
-      state.OvToken = undefined
       state.sessionId = undefined
       state.publisher = undefined
       state.mainStreamManager = undefined
@@ -77,7 +73,6 @@ export const video = createSlice({
       state.isVideoPublished = true
       state.isAudioPublished = true
       state.videoLessonId = undefined
-      state.roomPresent = false
       state.isSessionOpened = false
     },
     enteredSubscriber: (state, action) => {
@@ -88,7 +83,7 @@ export const video = createSlice({
       if (index > -1) {
         state.subscribers.splice(index, 1)
       }
-    }
+    },
   },
   extraReducers: {
     [joinSession.fulfilled]: (state, { payload }) => {
@@ -112,17 +107,15 @@ export const video = createSlice({
     },
     [closeSession.fulfilled]: (state, { payload }) => {
       console.log("closeSession fulfilled", payload)
-      state.OV = null
-      state.session = undefined
-      state.OvToken = undefined
-      state.sessionId = undefined
-      state.publisher = undefined
-      state.mainStreamManager = undefined
-      state.subscribers = []
-      state.isVideoPublished = true
-      state.isAudioPublished = true
-      state.videoLessonId = undefined
-      state.roomPresent = false
+      // state.OV = null
+      // state.session = undefined
+      // state.sessionId = undefined
+      // state.publisher = undefined
+      // state.mainStreamManager = undefined
+      // state.subscribers = []
+      // state.isVideoPublished = true
+      // state.isAudioPublished = true
+      // state.videoLessonId = undefined
       state.isSessionOpened = false
     },
     [closeSession.rejected]: (state, { payload }) => {
@@ -132,9 +125,9 @@ export const video = createSlice({
 })
 
 export const {
-    initOVSession, setOvToken, setPublisher, setMainStreamManager, setSessionId,
-    setSubscribers, setVideoLessonId, setRoomPresent, setIsSessionOpened,
-    videoMute, audioMute, leaveSession,
-    enteredSubscriber, deleteSubscriber,
+    initOVSession, setPublisher, setMainStreamManager, setSessionId,
+    setSubscribers, setVideoLessonId, setIsSessionOpened, setIsExited,
+    videoMute, audioMute, setAudioMute, leaveSession,
+    enteredSubscriber, deleteSubscriber
 } = video.actions
 export default video.reducer

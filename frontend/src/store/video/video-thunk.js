@@ -8,23 +8,19 @@ export const joinSession = createAsyncThunk(
     const OV = data.OV
     const session = data.session
     const sessionId = data.sessionId
-    const myUserName = data.myUserName
+    const nickname = data.nickname
     const role = data.role
-    // let role = data.role
-    // if (role === 'COOKYER') {
-    //   role = 'MODERATOR'
-    // }
 
     console.log("2")
-    console.log(data, data.OV, data.session, data.sessionId, data.myUserName)
+    console.log(data)
     try {
       console.log("3", sessionId)
       const token = await getToken({sessionId: sessionId});
       console.log("getToken 이후", token)
 
-      if (myUserName && session) {
-        console.log("8", token, myUserName)
-        await session.connect(token, { clientData: { myUserName, role } });
+      if (nickname && session) {
+        console.log("8", token, nickname)
+        await session.connect(token, { clientData: { nickname, role } });
         console.log("9")
         const publisher = await OV.initPublisherAsync(undefined, {
           audioSource: undefined, // The source of audio. If undefined default microphone
@@ -41,25 +37,9 @@ export const joinSession = createAsyncThunk(
         console.log("10", publisher)
         await session.publish(publisher);
 
-        // /** switchCamera 관련 추가 부분 */
-        // // Obtain the current video device in use
-        // var devices = await OV.getDevices();
-        // var videoDevices = devices.filter(device => device.kind === 'videoinput');
-        // var currentVideoDeviceId = publisher.stream.getMediaStream().getVideoTracks()[0].getSettings().deviceId;
-        // var currentVideoDevice = videoDevices.find(device => device.deviceId === currentVideoDeviceId);
-
-        // // Set the main video in the page to display our webcam and store our Publisher
-        // const response = {
-        //   currentVideoDevice: currentVideoDevice,
-        //   publisher: publisher,
-        // }
-        // /** 여기까지 */
-
-        // setCurrentVideoDevice(currentVideoDevice);
         console.log("11")
         console.log(publisher)
         return publisher
-        // return publisher
       }
     } catch (error) {
       console.log('There was an error connecting to the session:', error.code, error.message);
@@ -141,9 +121,9 @@ export const publishStream = createAsyncThunk(
     const OV = data.OV
     const session = data.session
     const token = data.token
-    const myUserName = data.myUserName
+    const nickname = data.nickname
     console.log("커넥트 전")
-    await session.connect(token, { clientData: myUserName })
+    await session.connect(token, { clientData: nickname })
     console.log("커넥트 후")
 
     const publisher = await OV.initPublisherAsync(undefined, {

@@ -9,6 +9,7 @@ import videoReducer from './store/video/video'
 import screenShareReducer from './store/video/screenShare'
 import cookyerVideoReducer from './store/video/cookyerVideo'
 import cookieeVideoReducer from './store/video/cookieeVideo'
+import videoLessonInfoReducer from './store/video/videoLessonInfo'
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
     screenShare: screenShareReducer,
     cookyerVideo: cookyerVideoReducer,
     cookieeVideo: cookieeVideoReducer,
+    videoLessonInfo: videoLessonInfoReducer
   },
   middleware: (getDefaultMiddleware) =>
   getDefaultMiddleware({

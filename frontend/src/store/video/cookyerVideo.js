@@ -3,8 +3,10 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   checkCookieeList: [],
   checkCookiee: '',
+  uncheckCookiee: '',
   handsUpCookieeList: [],
   handsUpCookiee: '',
+  handsDownCookiee: '',
 }
 
 export const cookyerVideo = createSlice({
@@ -12,16 +14,30 @@ export const cookyerVideo = createSlice({
   initialState,
   reducers: {
     setCheckCookieeList: (state, { payload }) => {
-      state.checkCookieeList = payload.checkCookieeList
+      state.checkCookieeList = payload
     },
     setCheckCookiee: (state, { payload }) => {
-      state.checkCookiee = payload.checkCookiee
+      state.checkCookiee = payload
+    },
+    setUncheckCookiee: (state, { payload }) => {
+      state.uncheckCookiee = payload
     },
     setHandsUpCookieeList: (state, { payload }) => {
-      state.handsUpCookieeList = payload.handsUpCookieeList
+      state.handsUpCookieeList = payload
     },
     setHandsUpCookiee: (state, { payload }) => {
-      state.handsUpCookiee = payload.handsUpCookiee
+      state.handsUpCookiee = payload
+    },
+    setHandsDownCookiee: (state, { payload }) => {
+      state.handsDownCookiee = payload
+    },
+    initCookyerVideo: (state) => {
+      state.checkCookieeList = []
+      state.checkCookiee = ''
+      state.uncheckCookiee = ''
+      state.handsUpCookieeList = []
+      state.handsUpCookiee = ''
+      state.handsDownCookiee = ''
     }
   },
   extraReducers: {
@@ -29,6 +45,6 @@ export const cookyerVideo = createSlice({
 })
 
 export const {
-  setCheckCookieeList, setCheckCookiee, setHandsUpCookieeList, setHandsUpCookiee
+  setCheckCookieeList, setCheckCookiee, setUncheckCookiee, setHandsUpCookieeList, setHandsUpCookiee, setHandsDownCookiee, initCookyerVideo
 } = cookyerVideo.actions
 export default cookyerVideo.reducer

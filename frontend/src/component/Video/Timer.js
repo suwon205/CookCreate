@@ -91,7 +91,10 @@ function Timer({ role }) {
   }, [publisher])
 
   return (
-    <div>
+    <div className={role === 'COOKYER' ? 'cookyer-timer' : 'cookiee-timer'}>
+      <div className='timer-title'>
+        <p>타이머</p>
+      </div>
       {role === 'COOKYER' ? (
         <div>
           {/* 60미만으로 적도록 뭐,, 제한 걸기 */}

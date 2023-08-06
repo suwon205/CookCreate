@@ -3,9 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import { useSelector, useDispatch } from "react-redux";
 import '../../style/navbar.css'
-import { initOVSession, setIsSessionOpened, setOvToken, setRoomPresent, setSessionId, setVideoLessonId } from '../../store/video/video';
+import '../../style/video.css'
+import { initOVSession, setIsExited, setIsSessionOpened, setSessionId, setVideoLessonId } from '../../store/video/video';
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
+import AppliedLessonMenu from './AppliedLessonMenu';
 
 function NavBar() {
   const dispatch = useDispatch()
@@ -18,14 +20,14 @@ function NavBar() {
   const role = localStorage.getItem('role')
   const emoji = localStorage.getItem('emoji')
 
-  const OvToken = useSelector((state) => state.video.OvToken)
   const sessionId = useSelector((state) => state.video.sessionId)
   const videoLessonId = useSelector((state) => state.video.videoLessonId)
-  // const roomPresent = useSelector((state) => state.video.roomPresent)
   const session = useSelector((state) => state.video.session)
   const isSessionOpened = useSelector((state) => state.video.isSessionOpened)
+  const isExited = useSelector((state) => state.video.isExited) 
 
-  const [ myLessons, setMyLessons ] = useState(undefined)  // 학생 모달창에 불러서 쓸 레슨 정보
+  /** 신청 수업 */
+  const [ dropdown, setDropdown ] = useState(false)
 
   const Logout = () => {
 
@@ -51,14 +53,13 @@ function NavBar() {
 
   // 수업 목록에서 생성하기 버튼을 클릭하면 세션이 생성되고 등등
   const createRoom = ( lessonId ) => {
+    console.log("과외방 참여 버튼", isExited)
     // 0. 레슨아이디 스토어에 저장
-    dispatch(setVideoLessonId({videoLessonId: lessonId}))
-  }
-
-  /** 학생이 과외방 입장하는 코드 */
-  const joinLesson = ( lessonId ) => {
-    console.log("쿠키 입장 요청")
-    dispatch(setVideoLessonId({videoLessonId: lessonId}))
+    if (!isExited) {
+      dispatch(setVideoLessonId(lessonId))
+    } else {
+      dispatch(setIsExited(false))
+    }
   }
   
   // 1. 레슨아이디가 잘 저장되면 선생님이 해당 수업 방 만들기 요청 보내기
@@ -76,35 +77,14 @@ function NavBar() {
             }
           })
           .then((res) => {
-            // dispatch(setRoomPresent({roomPresent: true}))
             // console.log('방 만들기 요청 성공', res)
-            console.log('쿠커 토큰 생성 성공', res)
+            console.log('쿠커 세션아이디 생성 성공', res)
             const sessionId = res.data.token
-            // dispatch(setOvToken(token))
-            dispatch(setSessionId({sessionId}))
+            dispatch(setSessionId(sessionId))
             // dispatch(setMySessionId(res.data)) // 토큰이랑 커넥션 설정하는걸로 바꾸기?
           })
           .catch((err) => {
-            console.log('쿠커 토큰 생성 실패', err)
-          })
-      } else if (role === 'COOKIEE') {
-        // 레슨아이디가 등록되면 학생은 토큰 생성 요청
-        console.log("쿠키 토큰 요청")
-        axios.post(
-          `api/v1/session/create`,
-          { 'lessonId': videoLessonId },
-          {
-            headers : {
-              Access_Token : access_token
-            }
-          })
-          .then((res) => {
-            console.log('쿠키 토큰 생성 성공', res.data)
-            const sessionId = res.data.token
-            dispatch(setSessionId({sessionId}))
-          })
-          .catch((err) => {
-            console.log('쿠키 토큰 생성 실패', err)
+            console.log('쿠커 세션아이디 생성 실패', err)
           })
       }
     } else {
@@ -133,13 +113,7 @@ function NavBar() {
     if (session) {
       if (role === 'COOKYER') {
         console.log("방 생김")
-        dispatch(setIsSessionOpened({isSessionOpened: true}))
-      } else if (role === 'COOKIEE') {
-        if (sessionId) {
-          navigate(`/videoLesson/${role}`)
-        } else {
-          console.log("쿠키 세션아이디 없어서 입장 불가")
-        }
+        dispatch(setIsSessionOpened(true))
       } else {
         console.log("너 누구야")
       }
@@ -148,36 +122,41 @@ function NavBar() {
 
   // **4.
   useEffect(() => {
-    if (isSessionOpened && role === 'COOKYER') {
+    if (isSessionOpened && role === 'COOKYER' && !isExited) {
       console.log(isSessionOpened, "방이 열렸어요")
       if (sessionId) {
         navigate(`/videoLesson/${role}`)
       }
     }
-  }, [isSessionOpened])
+  }, [isSessionOpened, isExited])
 
 
   // useEffect(() => {  // 레슨 정보 받아오는 부분
-  //   if (role === 'COOKIEE') {
+  //   if (access_token) {
   //     axios.get(
   //       `api/v1/my/applied`,
   //       {
   //         headers : {
-  //           accessToken : access_token
+  //           Access_Token : access_token
   //         }
   //       })
   //       .then((res) => {
-  //         console.log(res)
+  //         console.log(res.data)
   //         console.log('신청한 수업 목록 받아와짐')
   //         setMyLessons(res.data) // 토큰이랑 커넥션 설정하는걸로 바꾸기?
-  //         // setSessionId(res.data.sessionId)
   //       })
   //       .catch((err) => {
   //         console.log(err)
   //         console.log('신청한 수업 목록 안받아와짐')
   //       })
   //   }
-  // }, [])
+  // }, [access_token])
+
+  /** 쿠키 신청 메뉴 드롭다운 */
+  const dropLessonMenu = () => {
+    console.log(!dropdown)
+    setDropdown((prev) => !prev)
+  }
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }} className='navbar'>
@@ -213,8 +192,15 @@ function NavBar() {
           </Link>
         </React.Fragment>
       )} | 
-      {role === 'COOKYER' ? <button onClick={() => createRoom(3)}>쿠커화면</button> : null}
-      {role === 'COOKIEE' ? <button onClick={() => joinLesson(3)}>쿠키화면</button> : null}
+      {role === 'COOKIEE' ? (
+        <div className='dropdown'>
+          <button className='drop-btn' onClick={dropLessonMenu}>신청수업</button>
+          { dropdown ? (
+            <AppliedLessonMenu />
+          ) : null}
+        </div>
+      ) : null}
+      {role === 'COOKYER' ? <button onClick={() => createRoom(5)}>쿠커화면</button> : null}
     </div>
   );
 }

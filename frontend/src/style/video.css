@@ -10,8 +10,28 @@ p {
   margin: 0px;
 }
 
+/* 네브바 드롭다운메뉴 나중에 옮기기 */
+.dropdown {
+  display: flex;
+  position: relative;
+}
+
+.dropdown-content {
+  /* display: none; */
+  overflow: scroll;
+  min-width: 240px;
+  height: 160px;
+  position: absolute;
+  top: 100px;
+  color: black;
+}
+/* 옮기기 */
+
 .video-page {
   background-color: #262626;
+  /* overflow: hidden; */
+  grid-template-columns: repeat(12, 1fr);
+  display: flex;
 }
 
 .video-sidebar {
@@ -23,6 +43,16 @@ p {
   /* transition-property: visibility; */
   width: 80px;
   background-color: white;
+}
+
+.video-nickname {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+}
+
+.stream-component {
+  position: relative;
 }
 
 /* 쿠커 화면 */
@@ -42,6 +72,7 @@ p {
   height: 100%; */
   /* width: 1277px; */
   height: 530px;
+  object-fit: cover;
 }
 
 .cookyer {
@@ -58,15 +89,19 @@ p {
   height: 100%; */
   /* width: 576px; */
   height: 386px;
+  object-fit: cover;
 }
 
 .cookyer-cookiees { 
   background-color: coral;
   /* display: grid; */
   /* display: flex; */
-  display: inline-block;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   width: 818px;
   height: 810px;
+  overflow: hidden;
 }
 
 .cookyer-cookiee {
@@ -76,9 +111,125 @@ p {
   width: 399px;
   height: 260px;
   display: inline-block; /* inline-flex */
+  object-fit: cover;
+}
+
+.cookyer-components {
+  display: flex;
+}
+
+.cookyer-components-left-bottom {
+  display: flex;
+}
+
+.cookyer-timer {
+  background-color: white;
+  width: 342px;
+  padding: 20px
+}
+
+.cookyer-timer input, .cookyer-timer span {
+  font-size: 50px;
+  color: rgb(33, 33, 33);
+  border: none;
+  width: 70px;
+}
+
+.cookyer-cookiee-content {
+  position: relative;
+}
+
+.cookyer-check-icon-active {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 80px;
+  color: rgb(33, 172, 33);
+}
+
+.cookyer-check-icon {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 80px;
+  color: rgb(114, 114, 114);
+}
+
+.cookyer-handsup-icon-active-0 {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 35px;
+  color: rgb(255, 0, 0);
+}
+
+.cookyer-handsup-icon-active-1 {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 35px;
+  color: rgb(255, 77, 0);
+}
+
+.cookyer-handsup-icon-active-2 {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 35px;
+  color: rgb(255, 200, 0);
+}
+
+.cookyer-handsup-icon-active-3 {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 35px;
+  color: rgb(27, 196, 12);
+}
+
+.cookyer-handsup-icon-active-4 {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 35px;
+  color: rgb(0, 94, 255);
+}
+
+.cookyer-handsup-icon-active-5 {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 35px;
+  color: rgb(89, 0, 134);
+}
+
+.cookyer-handsup-icon {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 35px;
+  color: rgb(114, 114, 114);
+}
+
+.cookyer-lesson-step-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 600px;
+  height: 800px;
+  z-index: 2;
 }
 
 /* 쿠키 화면 */
+
+.cookiee-video-content {
+  display: flex;
+}
 
 .cookiee-sharing {
   background-color: rgb(111, 220, 220);
@@ -92,6 +243,7 @@ p {
   background-color: var(--empty-color);
   border-radius: 5px;
   height: 799px;
+  object-fit: cover;
 }
 
 .cookiee-content {
@@ -99,10 +251,108 @@ p {
   width: 458px;
   height: 310px;
   padding: 5px;
+  position: relative;
 }
 
 .cookiee-content-video {
   background-color: var(--empty-color);
   border-radius: 5px;
   height: 300px;
+  object-fit: cover;
+}
+
+.cookiee-check-icon-active {
+  font-size: 35px;
+  position: absolute;
+  top: 250px;
+  right: 80px;
+  color: rgb(33, 172, 33);
+}
+
+.cookiee-check-icon {
+  font-size: 35px;
+  position: absolute;
+  top: 250px;
+  right: 80px;
+  color: rgb(114, 114, 114);
+}
+
+.cookiee-handsup-icon-active {
+  font-size: 35px;
+  position: absolute;
+  top: 250px;
+  right: 35px;
+  color: rgb(255, 200, 0);
+}
+
+.cookiee-handsup-icon {
+  font-size: 35px;
+  position: absolute;
+  top: 250px;
+  right: 35px;
+  color: rgb(114, 114, 114);
+}
+
+.cookiee-lesson-review-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 600px;
+  height: 800px;
+  z-index: 2;
+}
+
+/* 비디오 헤더 */
+.video-header {
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.video-header-left,
+.video-header-right,
+.video-lesson-time,
+.video-lesson-progress {
+  display: flex;
+}
+
+.video-lesson-title {
+  font-size: 30px;
+  margin-right: 30px;
+}
+
+.video-lesson-cookyer {
+  font-size: 20px;
+  color: rgb(207, 207, 207);
+  margin: auto 0px;
+}
+
+.video-lesson-time, .video-lesson-progress {
+  margin: 5px;
+}
+
+/* 비디오 사이드바 */
+.video-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: -120px;
+  width: 80px;
+  /* grid-column: 12 / 13; */
+  background-color: white;
+  /* display: grid;
+  grid-template-columns: 1fr; */
+  /* padding: 5px; */
+}
+
+.video-exit-icon {
+  font-size: 40px;
+  color: rgb(223, 0, 0);
+  margin: auto;
 }
