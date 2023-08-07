@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react';
-import VideoSideBar from '../../component/Video/Cookyer/CookyerVideoSideBar';
 import VideoHeader from '../../component/Video/VideoHeader';
 import UserVideoComponent from '../../component/Video/UserVideoComponent';
 import Timer from '../../component/Video/Timer';
 import CookyerLessonStep from '../../component/Video/Cookyer/CookyerLessonStep';
 import LessonStepModal from '../../component/Video/Cookyer/LessonStepModal';
+import CookyerVideoSideBar from '../../component/Video/Cookyer/CookyerVideoSideBar';
 
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteSubscriber, enteredSubscriber } from '../../store/video/video';
+import { deleteSubscriber, enteredSubscriber, setAudioOffStream, setAudioOnList, setAudioOnStream } from '../../store/video/video';
 import { joinSession } from '../../store/video/video-thunk';
 import { setCheckCookiee, setCheckCookieeList, setHandsDownCookiee, setHandsUpCookiee, setHandsUpCookieeList, setUncheckCookiee } from '../../store/video/cookyerVideo';
 import { setLessonInfo } from '../../store/video/videoLessonInfo';
 import '../../style/video.css'
-import CookyerVideoSideBar from '../../component/Video/Cookyer/CookyerVideoSideBar';
 
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { IoIosHand } from 'react-icons/io'
+import { BsMicFill, BsMicMuteFill } from "react-icons/bs";
 
 function CookyerScreen() {
   const dispatch = useDispatch()
@@ -49,6 +49,25 @@ function CookyerScreen() {
 
   /** 진행 단계 관련 모달 */
   const isSessionOpened = useSelector((state) => state.video.isSessionOpened)
+
+  /** 참가자 소리 상태 확인 */
+  const audioOnList = useSelector((state) => state.video.audioOnList)
+  const audioOnStream = useSelector((state) => state.video.audioOnStream)
+  const audioOffStream = useSelector((state) => state.video.audioOffStream)
+
+  /** 자동 전체 화면 */
+  useEffect(() => {
+    const element = document.documentElement; // 전체 화면으로 변경하고자 하는 요소
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  }, []);
 
   useEffect(() => {
     console.log(3, session)
@@ -100,6 +119,19 @@ function CookyerScreen() {
         const connectionId = JSON.parse(e.data).connectionId
         console.log('손 내린 사람', connectionId)
         dispatch(setHandsDownCookiee(connectionId))
+      })
+
+      /** 참가자 소리 조정 이벤트 추가 */
+      session.on('signal:audioOn', (e) => {
+        const connectionId = JSON.parse(e.data).connectionId
+        console.log('소리 켠 사람', connectionId)
+        dispatch(setAudioOnStream(connectionId))
+      })
+
+      session.on('signal:audioOff', (e) => {
+        const connectionId = JSON.parse(e.data).connectionId
+        console.log('소리 끈 사람', connectionId)
+        dispatch(setAudioOffStream(connectionId))
       })
 
       console.log(4)
@@ -204,7 +236,7 @@ function CookyerScreen() {
     }
   }, [handsUpCookiee])
 
-  /** 손 내린 쿠키 리스트에서 제거 */  // 선생님이 리셋시켰을때랑 본인이 내렸을때랑 잘 구분해서 변수처리 잘 해주기!!!!!
+  /** 손 내린 쿠키 리스트에서 제거 */
   useEffect(() => {
     console.log('손 내릴 쿠키 리스트에서 제거', handsDownCookiee)
     if (handsUpCookieeList !== undefined && handsDownCookiee !== '') {
@@ -238,6 +270,49 @@ function CookyerScreen() {
   const handleModalClick = (e) => {
     e.stopPropagation()
   }
+
+  const handleACookieeAudio = (data) => {
+    const cookyer = data.cookyer
+    const cookiee = data.cookiee
+    
+    cookyer.stream.session.signal({
+      to: [cookiee.stream.connection],
+      type: 'forceAudioAdjust'
+    })
+  }
+
+  /** 소리 켠 참가자 리스트에 추가 */
+  useEffect(() => {
+    console.log('소리 켠 참가자 리스트에 추가', audioOnStream)
+    if (audioOnStream !== undefined && audioOnStream !== '') {
+      // 만약 손든 사람이 또 손들면 거르기
+      if (audioOnList !== undefined && audioOnList !== []) {
+        const newAudioOnList = audioOnList.filter((item) => {
+          return item !== audioOnStream
+        })
+        newAudioOnList.push(audioOnStream)
+        dispatch(setAudioOnList(newAudioOnList))
+        console.log(newAudioOnList, "새 손들기 리스트")
+      } else {
+        dispatch(setAudioOnList([audioOnStream]))
+        console.log(audioOnList, "손들기리스트에 값 없음")
+      }
+      dispatch(setAudioOnStream(''))
+    }
+  }, [audioOnStream])
+
+  /** 소리 끈 참가자 리스트에서 제거 */
+  useEffect(() => {
+    console.log('손 내릴 쿠키 리스트에서 제거', audioOffStream)
+    if (audioOnList !== undefined && audioOffStream !== '') {
+      const newAudioOnList = audioOnList.filter((item) => {
+        return item !== audioOffStream
+      })
+      dispatch(setAudioOnList(newAudioOnList))
+      console.log(newAudioOnList, "손 내린 사람 제외 새 손들기 리스트")
+      dispatch(setAudioOffStream(''))
+    }
+  }, [audioOffStream])
 
   return (
     <div className='video-page'>
@@ -282,19 +357,21 @@ function CookyerScreen() {
                     videoStyle='cookyer-cookiee'
                     streamManager={sub}
                   />
+                  {audioOnList && audioOnList.find((item) => item === sub.stream.connection.connectionId) ? (
+                    <BsMicFill className='cookyer-cookiee-audio-icon-active' onClick={() => handleACookieeAudio({cookyer: publisher, cookiee: sub})}/>
+                  ) : (
+                    <BsMicMuteFill className='cookyer-cookiee-audio-icon' onClick={() => handleACookieeAudio({cookyer: publisher, cookiee: sub})}/>
+                  )}
                   {checkCookieeList && checkCookieeList.find((item) => item === sub.stream.connection.connectionId) ? (
                     <AiFillCheckCircle className='cookyer-check-icon-active'/>
                   ) : (
                     <AiFillCheckCircle className='cookyer-check-icon'/>
                   )}
                   {handsUpCookieeList && handsUpCookieeList.find((item) => item === sub.stream.connection.connectionId) ? (
-                    // <div>
-                    //   <h1>
-                    //     {handsUpCookieeList.indexOf(sub.stream.connection.connectionId) +  1}번째로 손 든 사람
-                    //   </h1>
-                    //   <button onClick={() => resetHandsUpCookiee({cookyer: publisher, cookiee: sub})}>손들기 해제</button>
-                    // </div>
-                    <IoIosHand className={`cookyer-handsup-icon-active-${handsUpCookieeList.indexOf(sub.stream.connection.connectionId)}`}/>
+                    <IoIosHand
+                      className={`cookyer-handsup-icon-active-${handsUpCookieeList.indexOf(sub.stream.connection.connectionId)}`}
+                      onClick={() => resetHandsUpCookiee({cookyer: publisher, cookiee: sub})}
+                    />
                   ) : (
                     <IoIosHand className='cookyer-handsup-icon'/>
                   )}

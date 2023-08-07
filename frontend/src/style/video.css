@@ -139,6 +139,20 @@ p {
   position: relative;
 }
 
+.cookyer-cookiee-audio-icon-active {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 125px;
+}
+
+.cookyer-cookiee-audio-icon {
+  font-size: 35px;
+  position: absolute;
+  top: 210px;
+  right: 125px;
+}
+
 .cookyer-check-icon-active {
   font-size: 35px;
   position: absolute;

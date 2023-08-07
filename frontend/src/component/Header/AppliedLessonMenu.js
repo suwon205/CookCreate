@@ -98,7 +98,11 @@ function AppliedLessonMenu() {
           <div key={lesson.lessonId}>
             <p>{lesson.lessonTitle}</p>
             <p>{lesson.cookyerName}</p>
-            <button onClick={() => joinLesson(lesson.lessonId)}>참여하기</button>
+            {lesson.sessionId === null ? (
+              <button disabled='disabled'>수업예정</button>
+            ) : (
+              <button onClick={() => joinLesson(lesson.lessonId)}>참여하기</button>
+            )}
           </div>
         ))
       ) : (

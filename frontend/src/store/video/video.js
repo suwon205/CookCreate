@@ -13,6 +13,9 @@ const initialState = {
   videoLessonId: undefined,
   isSessionOpened: false,  // 들어올때 이걸로 문제가 생기면 undefined로 바꾸기
   isExited: false,
+  audioOnList: [],
+  audioOnStream: undefined,
+  audioOffStream: undefined,
 }
 
 export const video = createSlice({
@@ -47,21 +50,46 @@ export const video = createSlice({
     setIsExited: (state, {payload}) => {
       state.isExited = payload
     },
-    videoMute: (state) => {
+    videoMute: (state, {payload}) => {
       state.publisher.publishVideo(!state.isVideoPublished)
       state.isVideoPublished = !state.isVideoPublished
       console.log("비디오", state.isVideoPublished)
     },
-    audioMute: (state) => {
-      state.publisher.publishAudio(!state.isAudioPublished)
-      state.isAudioPublished = !state.isAudioPublished
+    audioMute: (state, {payload}) => {
+      const status = !state.isAudioPublished
+      state.publisher.publishAudio(status)
+      state.isAudioPublished = status
       console.log("오디오", state.isAudioPublished)
+
+      const data = {
+        connectionId: state.publisher.stream.connection.connectionId
+      }
+      if (status) {  // 소리가 켜져있다면
+        state.publisher.stream.session.signal({
+          data: JSON.stringify(data),
+          type: 'audioOn'
+        })
+      } else {
+        state.publisher.stream.session.signal({
+          data: JSON.stringify(data),
+          type: 'audioOff'
+        })
+      }
+
     },
     setAudioMute: (state) => {
       // 강제로 음소거할때
       console.log("강제 음소거 됐니")
       state.publisher.publishAudio(false)
       state.isAudioPublished = false
+
+      const data = {
+        connectionId: state.publisher.stream.connection.connectionId
+      }
+      state.publisher.stream.session.signal({
+        data: JSON.stringify(data),
+        type: 'audioOff'
+      })
     },
     leaveSession: (state) => {
       state.OV = null
@@ -84,6 +112,15 @@ export const video = createSlice({
         state.subscribers.splice(index, 1)
       }
     },
+    setAudioOnList: (state, { payload }) => {
+      state.audioOnList = payload
+    },
+    setAudioOnStream: (state, { payload }) => {
+      state.audioOnStream = payload
+    },
+    setAudioOffStream: (state, { payload }) => {
+      state.audioOffStream = payload
+    }
   },
   extraReducers: {
     [joinSession.fulfilled]: (state, { payload }) => {
@@ -128,6 +165,6 @@ export const {
     initOVSession, setPublisher, setMainStreamManager, setSessionId,
     setSubscribers, setVideoLessonId, setIsSessionOpened, setIsExited,
     videoMute, audioMute, setAudioMute, leaveSession,
-    enteredSubscriber, deleteSubscriber
+    enteredSubscriber, deleteSubscriber, setAudioOnList, setAudioOnStream, setAudioOffStream
 } = video.actions
 export default video.reducer

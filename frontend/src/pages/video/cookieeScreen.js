@@ -7,7 +7,7 @@ import CookieeVideoSideBar from '../../component/Video/Cookiee/CookieeVideoSideB
 
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteSubscriber, enteredSubscriber, leaveSession, setAudioMute } from '../../store/video/video';
+import { audioMute, deleteSubscriber, enteredSubscriber, leaveSession, setAudioMute, setAudioOffStream, setAudioOnList, setAudioOnStream } from '../../store/video/video';
 import { joinSession } from '../../store/video/video-thunk';
 import { initCookieeVideo, resetCheck, resetHandsUp } from '../../store/video/cookieeVideo';
 import { setCurStep, setLessonInfo, setStepInfo } from '../../store/video/videoLessonInfo';
@@ -17,6 +17,7 @@ import LessonReviewModal from '../../component/Video/Cookiee/LessonReviewModal';
 
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { IoIosHand } from 'react-icons/io'
+import { BsMicFill, BsMicMuteFill } from "react-icons/bs";
 
 function CookieeScreen() {
   const dispatch = useDispatch()
@@ -49,6 +50,25 @@ function CookieeScreen() {
 
   /** 선생님 화면 고정하기 위해 선생님 subscriber 찾기 */
   const [ cookyerStream, setCookyerStream ] = useState(undefined)
+
+  /** 참가자 소리 상태 확인 */
+  const audioOnList = useSelector((state) => state.video.audioOnList)
+  const audioOnStream = useSelector((state) => state.video.audioOnStream)
+  const audioOffStream = useSelector((state) => state.video.audioOffStream)
+
+  /** 자동 전체 화면 */
+  useEffect(() => {
+    const element = document.documentElement; // 전체 화면으로 변경하고자 하는 요소
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    }
+  }, []);
 
   useEffect(() => {
     if (subscribers) {
@@ -122,6 +142,25 @@ function CookieeScreen() {
         dispatch(setAudioMute())
       })
 
+      /** 쿠커로부터 오디오 조정 시그널 받고 조정 */
+      session.on('signal:forceAudioAdjust', () => {
+        console.log("오디오 조정 시그널")
+        dispatch(audioMute())
+      })
+
+      /** 참가자 소리 조정 이벤트 추가 */
+      session.on('signal:audioOn', (e) => {
+        const connectionId = JSON.parse(e.data).connectionId
+        console.log('소리 켠 사람', connectionId)
+        dispatch(setAudioOnStream(connectionId))
+      })
+
+      session.on('signal:audioOff', (e) => {
+        const connectionId = JSON.parse(e.data).connectionId
+        console.log('소리 끈 사람', connectionId)
+        dispatch(setAudioOffStream(connectionId))
+      })
+
       /** 화면공유 받기 */
       // session.on('signal:sharedScreen', (e) => {
       //   console.log("화면공유 데이터 받았다", e)  // 시그널 받는거 필요하지 않을수도?
@@ -187,6 +226,39 @@ function CookieeScreen() {
   //   }
   // }
 
+  /** 소리 켠 참가자 리스트에 추가 */
+  useEffect(() => {
+    console.log('소리 켠 참가자 리스트에 추가', audioOnStream)
+    if (audioOnStream !== undefined && audioOnStream !== '') {
+      // 만약 손든 사람이 또 손들면 거르기
+      if (audioOnList !== undefined && audioOnList !== []) {
+        const newAudioOnList = audioOnList.filter((item) => {
+          return item !== audioOnStream
+        })
+        newAudioOnList.push(audioOnStream)
+        dispatch(setAudioOnList(newAudioOnList))
+        console.log(newAudioOnList, "새 손들기 리스트")
+      } else {
+        dispatch(setAudioOnList([audioOnStream]))
+        console.log(audioOnList, "손들기리스트에 값 없음")
+      }
+      dispatch(setAudioOnStream(''))
+    }
+  }, [audioOnStream])
+
+  /** 소리 끈 참가자 리스트에서 제거 */
+  useEffect(() => {
+    console.log('손 내릴 쿠키 리스트에서 제거', audioOffStream)
+    if (audioOnList !== undefined && audioOffStream !== '') {
+      const newAudioOnList = audioOnList.filter((item) => {
+        return item !== audioOffStream
+      })
+      dispatch(setAudioOnList(newAudioOnList))
+      console.log(newAudioOnList, "손 내린 사람 제외 새 손들기 리스트")
+      dispatch(setAudioOffStream(''))
+    }
+  }, [audioOffStream])
+
   return (
     <div className='video-page'>
       <CookieeVideoSideBar/>
@@ -223,6 +295,11 @@ function CookieeScreen() {
                   />
                 ) : (
                   <h1>쿠커 화면</h1>
+                )}
+                {audioOnList && audioOnList.find((item) => item === cookyerStream.stream.connection.connectionId) ? (
+                  <BsMicFill className='cookyer-cookiee-audio-icon-active'/>
+                ) : (
+                  <BsMicMuteFill className='cookyer-cookiee-audio-icon'/>
                 )}
               </div>
               <Timer role='COOKIEE'/>
