@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { setShareScreenPublisher } from '../../../store/video/screenShare';
 import axios from 'axios';
 import { closeSession, shareScreen } from '../../../store/video/video-thunk';
+import { BsMicFill, BsMicMute, BsCameraVideoFill, BsCameraVideoOff, BsWindowFullscreen, BsVolumeMuteFill } from "react-icons/bs"
+import { RxExit } from "react-icons/rx"
 
 function CookyerVideoSideBar() {
   const dispatch = useDispatch()
@@ -16,6 +18,7 @@ function CookyerVideoSideBar() {
   const session = useSelector((state) => state.video.session)
   const publisher = useSelector((state) => state.video.publisher)
   const isAudioPublished = useSelector((state) => state.video.isAudioPublished)
+  const isVideoPublished = useSelector((state) => state.video.isVideoPublished)
   
   /** 화면 공유 기능 */
   const shareScreenPublisher = useSelector((state) => state.screenShare.shareScreenPublisher)
@@ -169,36 +172,39 @@ function CookyerVideoSideBar() {
 
   return (
     <div className='video-sidebar'>
-      <button
-        onClick={handleLeaveSession}
-      >
-        (잠시) 나가기
-      </button>
+      {/* (잠시) 나가기 */}
+      <div className='video-side-icon-wrap' onClick={handleLeaveSession}>
+        <RxExit className='video-side-icon video-exit-icon'/>
+      </div>
       <button
         onClick={handleCloseSession}
       >
         수업 끝내기
       </button>
-      <button
-        onClick={setAudioMute}
-      >
-        {isAudioPublished ? ('소리켜짐') : ('소리꺼짐')}
-      </button>
-      <button
-        onClick={setVideoMute}
-      >
-        화면뮤트
-      </button>
-      <button
-        onClick={handleScreenShare}
-      >
-        화면공유
-      </button>
-      <button
-        onClick={() => handleCookieeAudio(publisher)}
-      >
-        쿠키 전체 음소거
-      </button>
+      {/* 화면뮤트 */}
+      <div className='video-side-icon-wrap' onClick={setVideoMute}>
+        {isVideoPublished ? (
+          <BsCameraVideoFill className='video-side-icon'/>
+        ) : (
+          <BsCameraVideoOff className='video-side-icon'/>
+        )}
+      </div>
+      {/* 소리뮤트 */}
+      <div className='video-side-icon-wrap' onClick={setAudioMute}>
+        {isAudioPublished ? (
+          <BsMicFill className='video-side-icon'/>
+        ) : (
+          <BsMicMute className='video-side-icon'/>
+        )}
+      </div>
+      {/* 화면공유 */}
+      <div className='video-side-icon-wrap' onClick={handleScreenShare}>
+        <BsWindowFullscreen className='video-side-icon'/>
+      </div>
+      {/* 쿠키 전체 음소거 */}
+      <div className='video-side-icon-wrap' onClick={() => handleCookieeAudio(publisher)}>
+        <BsVolumeMuteFill className='video-side-icon'/>
+      </div>
     </div>
   );
 }

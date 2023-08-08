@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCheckCookiee, setCheckCookieeList } from '../../../store/video/cookyerVideo';
 import { setCurIdx, setCurStep, setLessonStepList } from '../../../store/video/videoLessonInfo';
 
+import { BsFillPersonCheckFill } from "react-icons/bs"
+import { GoChevronLeft, GoChevronRight } from "react-icons/go"
+
 function CookyerLessonStep() {
   const dispatch = useDispatch()
   const checkCookieeList = useSelector((state) => state.cookyerVideo.checkCookieeList)
   const [ checkCount, setCheckCount ] = useState(0)
   const publisher = useSelector((state) => state.video.publisher)
+  const subscribers = useSelector((state) => state.video.subscribers)
 
   const lessonStepList = useSelector((state) => state.videoLessonInfo.lessonStepList)
   const curStep = useSelector((state) => state.videoLessonInfo.curStep)
@@ -97,40 +101,44 @@ function CookyerLessonStep() {
   }, [checkCookieeList])
 
   return (
-    <div>
-      <div>
-        <p>현재 진행 단계</p>
+    <div className='video-step-widget'>
+      <p className='video-step-title'>현재 진행 단계</p>
+      <div className='video-step-main'>
+        <GoChevronLeft onClick={goPrevStep}/>
         <div>
-          <button onClick={goPrevStep}>이전</button>
-          <div>
-            {curStep ? (
-              <div>
-                {isUpdate ? (
-                  <div>
-                    <p>{curIdx}</p>
+          {curStep ? (
+            <div>
+              {isUpdate ? (
+                <div className='video-step-content'>
+                  <div className='video-step-content-update'>
+                    <p>{curIdx}. </p>
                     <input value={inputStep} onChange={handleInputChange}></input>
-                    <button onClick={updateStepContent}>완료</button>
                   </div>
-                ) : (
-                  <div>
-                    <p>{curIdx}</p>
-                    <p>{curStep}</p>
-                    <button onClick={handleIsUpdate}>수정</button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <p>현재 요리 단계</p>
-            )}
-          </div>
-          <button onClick={goNextStep}>이후</button>
+                  <button onClick={updateStepContent}>완료</button>
+                </div>
+              ) : (
+                <div className='video-step-content'>
+                  <p>{curIdx}. {curStep}</p>
+                  <button onClick={handleIsUpdate}>수정</button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <p>현재 요리 단계</p>
+          )}
         </div>
-        <div>
-          <h1>체크 {checkCount}명</h1>
-          <button onClick={() => resetCheckCookiee(publisher)}>리셋</button>
-        </div>
+        <GoChevronRight onClick={goNextStep}/>
       </div>
-      <div>
+      <div className='video-step-check-btn'  onClick={() => resetCheckCookiee(publisher)}>
+        <div className='video-step-check-btn-wrap'>
+          <BsFillPersonCheckFill className='video-step-check-icon'/>
+          <div className='video-step-check-count'>
+            <p>{checkCount}</p>
+            <p>/</p>
+            {/* 총 숫자 어디선가 찾아서 넣기.. */}
+            <p>{subscribers.length}</p>
+          </div>
+        </div>
       </div>
     </div>
   );
