@@ -76,6 +76,10 @@ function CookyerScreen() {
       // On every new Stream received...
       const handleStreamCreated = (event) => {
         const subscriber = session.subscribe(event.stream, undefined);
+        console.log("등장", subscriber)
+        if (subscriber && subscriber.stream.audioActive) {
+          dispatch(setAudioOnStream(subscriber.stream.connection.connectionId))
+        }
         dispatch(enteredSubscriber(subscriber))
       };
 
@@ -303,13 +307,15 @@ function CookyerScreen() {
 
   /** 소리 끈 참가자 리스트에서 제거 */
   useEffect(() => {
-    console.log('손 내릴 쿠키 리스트에서 제거', audioOffStream)
+    console.log('소리 끈 참가자 리스트에서 제거', audioOffStream)
     if (audioOnList !== undefined && audioOffStream !== '') {
-      const newAudioOnList = audioOnList.filter((item) => {
-        return item !== audioOffStream
-      })
-      dispatch(setAudioOnList(newAudioOnList))
-      console.log(newAudioOnList, "손 내린 사람 제외 새 손들기 리스트")
+      if (audioOnList !== undefined && audioOnList !== []) {
+        const newAudioOnList = audioOnList.filter((item) => {
+          return item !== audioOffStream
+        })
+        dispatch(setAudioOnList(newAudioOnList))
+        console.log(newAudioOnList, "소리 끈 참가자 제외 새 손들기 리스트")
+      }
       dispatch(setAudioOffStream(''))
     }
   }, [audioOffStream])

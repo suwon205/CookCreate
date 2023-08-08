@@ -12,7 +12,6 @@ const initialState = {
   isAudioPublished: true,
   videoLessonId: undefined,
   isSessionOpened: false,  // 들어올때 이걸로 문제가 생기면 undefined로 바꾸기
-  isExited: false,
   audioOnList: [],
   audioOnStream: undefined,
   audioOffStream: undefined,
@@ -47,9 +46,6 @@ export const video = createSlice({
     setIsSessionOpened: (state, {payload}) => {
       state.isSessionOpened = payload
     },
-    setIsExited: (state, {payload}) => {
-      state.isExited = payload
-    },
     videoMute: (state, {payload}) => {
       state.publisher.publishVideo(!state.isVideoPublished)
       state.isVideoPublished = !state.isVideoPublished
@@ -65,11 +61,13 @@ export const video = createSlice({
         connectionId: state.publisher.stream.connection.connectionId
       }
       if (status) {  // 소리가 켜져있다면
+        console.log("소리 켜진 신호 보내기")
         state.publisher.stream.session.signal({
           data: JSON.stringify(data),
           type: 'audioOn'
         })
       } else {
+        console.log("소리 꺼진 신호 보내기")
         state.publisher.stream.session.signal({
           data: JSON.stringify(data),
           type: 'audioOff'
@@ -163,7 +161,7 @@ export const video = createSlice({
 
 export const {
     initOVSession, setPublisher, setMainStreamManager, setSessionId,
-    setSubscribers, setVideoLessonId, setIsSessionOpened, setIsExited,
+    setSubscribers, setVideoLessonId, setIsSessionOpened,
     videoMute, audioMute, setAudioMute, leaveSession,
     enteredSubscriber, deleteSubscriber, setAudioOnList, setAudioOnStream, setAudioOffStream
 } = video.actions

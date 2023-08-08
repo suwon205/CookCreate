@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import SideBar from "./SideBar";
 import { useDispatch, useSelector} from "react-redux";
 import axios from 'axios';
-import { initOVSession, setIsExited, setIsSessionOpened, setSessionId, setVideoLessonId } from '../../store/video/video';
+import { initOVSession, setIsSessionOpened, setSessionId, setVideoLessonId } from '../../store/video/video';
 import { OpenVidu } from 'openvidu-browser';
 import { useNavigate } from 'react-router-dom';
 import { setClassData, setCompletedData } from '../../store/mypageS/accountS';
@@ -21,7 +21,6 @@ function ClassList() {
   const session = useSelector((state) => state.video.session)
   const sessionId = useSelector((state) => state.video.sessionId)
   const videoLessonId = useSelector((state) => state.video.videoLessonId)
-  const isExited = useSelector((state) => state.video.isExited) 
   const isSessionOpened = useSelector((state) => state.video.isSessionOpened)
 
   /** 1시간 전부터 과외방 생성 가능 */ // 일단 새고해야 알 수 있는걸로..
@@ -63,13 +62,8 @@ function ClassList() {
 
   /** 쿠커 화상과외방 생성 및 입장 */
   const createRoom = ( lessonId ) => {
-    console.log("과외방 참여 버튼", isExited)
     // 0. 레슨아이디 스토어에 저장
-    if (!isExited) {
-      dispatch(setVideoLessonId(lessonId))
-    } else {
-      dispatch(setIsExited(false))
-    }
+    dispatch(setVideoLessonId(lessonId))
   }
 
   // 1. 레슨아이디가 잘 저장되면 선생님이 해당 수업 방 만들기 요청 보내기
@@ -126,13 +120,38 @@ function ClassList() {
 
   // **4.
   useEffect(() => {
-    if (isSessionOpened && !isExited) {
+    if (isSessionOpened && sessionId) {
       console.log(isSessionOpened, "방이 열렸어요")
-      if (sessionId) {
-        navigate(`/videoLesson/COOKYER`)
-      }
+      navigate(`/videoLesson/COOKYER`)
     }
-  }, [isSessionOpened, isExited])
+  }, [isSessionOpened])
+
+  /** 과외 수정 */
+  const updateClass = ( lessonId ) => {
+    navigate(`/lesson/edit/${lessonId}`)
+  }
+
+  /** 과외 삭제 */
+  const deleteClass = ( lessonId ) => {
+    axios.delete(
+      `api/v1/lesson/${lessonId}`,
+      {
+        headers: {
+          Access_Token: accessToken
+        }
+      }
+    )
+    .then((res) => {
+      console.log('쿠커 과외 삭제 성공', res)
+    })
+    .catch((err) => {
+      console.log('쿠커 과외 삭제 실패', err)
+      let error = Object.assign({}, err)
+      if (error?.response?.status === 409) {
+        alert('신청한 쿠키가 있어 수업을 삭제할 수 없습니다.')
+      }
+    })
+  }
 
   return (
     <div>
@@ -245,6 +264,8 @@ function ClassList() {
                                 <span className="tag" style={{ backgroundColor: "hsl(321,63%,90%)" }}>
                                   수정시간:{lesson.modifiedDate}
                                 </span>
+                                <button onClick={() => updateClass(lesson.lessonId)}>수정</button>
+                                <button onClick={() => deleteClass(lesson.lessonId)}>삭제</button>
                               </div>
                             </div>
                           </div>

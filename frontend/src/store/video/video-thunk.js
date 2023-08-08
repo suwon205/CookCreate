@@ -173,7 +173,16 @@ export const shareScreen = createAsyncThunk(
   "screenShare/shareScreen",
   async (data) => {
     console.log("video-thunk/shareScreen")
-    const shareScreenPublisher = await getShareScreenPublisher(data)
+    const OV = new OpenVidu()
+    const session = OV.initSession()
+    const sessionId = data.sessionId
+    const nickname = data.nickname
+
+    const newData = {
+      OV, session, sessionId, nickname
+    }
+
+    const shareScreenPublisher = await getShareScreenPublisher(newData)
     console.log(shareScreenPublisher, "스크린퍼블리셔 만들어서 여기까지 옴")
     return shareScreenPublisher
   }
@@ -184,6 +193,16 @@ function getShareScreenPublisher(data) {
     try {
       console.log("getShareScreenPublisher")
       const OV = data.OV
+      const session = data.session
+      const sessionId = data.sessionId
+      const nickname = data.nickname
+
+      const token = await getToken({sessionId})
+
+      if (nickname && session) {
+        await session.connect(token, { clientData: { nickname, role: 'SHARE' }})
+      }
+
       const sharedPublisher = await OV.initPublisherAsync(
         undefined,
         {
@@ -209,6 +228,8 @@ function getShareScreenPublisher(data) {
         },
       )
       console.log("공유 화면 발행됐나?", sharedPublisher)
+
+      await session.publish(sharedPublisher)
       return resolve(sharedPublisher)
     } catch (error) {
       return reject(error)

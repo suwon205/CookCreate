@@ -139,15 +139,15 @@ function EditLessonDetail() {
             EASY
           </div>
           <div
-            onClick={() => handleDifficultyClick('MEDIUM')}
+            onClick={() => handleDifficultyClick('NORMAL')}
             style={{ 
-              backgroundColor: selectedDifficulty === 'MEDIUM' ? 'lightgray' : 'white',
+              backgroundColor: selectedDifficulty === 'NORMAL' ? 'lightgray' : 'white',
               padding : '5px',
               marginRight : '5px',
               cursor : 'pointer' 
             }}
           >
-            MEDIUM
+            NORMAL
           </div>
           <div
             onClick={() => handleDifficultyClick('HARD')}
@@ -205,9 +205,11 @@ function EditLessonDetail() {
       <div>
         <h3>준비물 리스트</h3>
         <div>
-          {lessonMaterialList.map((str, index) => (
-            <div key={index}>{str}</div>
-          ))}
+          {lessonMaterialList !== undefined && lessonMaterialList !== null && lessonMaterialList ? (
+            lessonMaterialList.map((str, index) => (
+              <div key={index}>{str}</div>
+            ))
+          ) : null}
         </div>
       </div>
 

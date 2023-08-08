@@ -45,7 +45,9 @@ function EditLessonStep() {
   };
 
   const checkStepContentFilled = useCallback(() => {
-    return stepList.every((step) => step.stepContent.trim() !== '');
+    if (stepList) {
+      return stepList.every((step) => step.stepContent.trim() !== '');
+    }
   }, [stepList]);
 
   useEffect(() => {
@@ -60,19 +62,21 @@ function EditLessonStep() {
         <div style={{ marginLeft: '5px' }}>{stepValid ? '✅' : '🔲'}</div>
       </div>
       <div>
-        {stepList.map((step, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              value={step.stepContent}
-              onChange={(e) => handleChange(index, e.target.value)}
-              placeholder={`요리 진행 단계를 입력하세요`}
-            />
-            {stepList.length > 1 && (
-              <button onClick={() => handleRemoveInput(index)}>삭제</button>
-            )}
-          </div>
-        ))}
+        {stepList !== undefined && stepList !== null && stepList ? (
+          stepList.map((step, index) => (
+            <div key={index}>
+              <input
+                type="text"
+                value={step.stepContent}
+                onChange={(e) => handleChange(index, e.target.value)}
+                placeholder={`요리 진행 단계를 입력하세요`}
+              />
+              {stepList.length > 1 && (
+                <button onClick={() => handleRemoveInput(index)}>삭제</button>
+              )}
+            </div>
+          ))
+        ) : null}
         <button onClick={handleAddInput}>+</button>
         {errMsg && <p>{errMsg}</p>}
         <p>{checkStepContentFilled() ? '모든 단계가 찼습니다.' : '단계를 모두 입력해주세요.'}</p>
