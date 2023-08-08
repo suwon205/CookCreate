@@ -4,13 +4,18 @@ import '../../../style/video.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { audioMute, leaveSession, videoMute } from '../../../store/video/video';
-import { setCheck, setHandsUp } from '../../../store/video/cookieeVideo';
+import { setCheck, setHandsUp, setShowOthers } from '../../../store/video/cookieeVideo';
+import { BsMicFill, BsMicMute, BsCameraVideoFill, BsCameraVideoOff, BsPeopleFill } from "react-icons/bs"
+import { RxExit } from "react-icons/rx"
+import { AiFillCheckCircle } from 'react-icons/ai'
+import { IoIosHand } from 'react-icons/io'
 
 function CookieeVideoSideBar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const publisher = useSelector((state) => state.video.publisher)
+  const isVideoPublished = useSelector((state) => state.video.isVideoPublished)
   const isAudioPublished = useSelector((state) => state.video.isAudioPublished)
 
   /** 체크 기능 */
@@ -28,17 +33,6 @@ function CookieeVideoSideBar() {
     }
     navigate('/')
   }
-
-  // 쿠커가 화면공유하면 쿠키에게 시그널보냄
-  // 퍼블리셔만 갈아끼우는 지금은 필요없음
-  // const sendSignalUserChanged = (data) => {
-  //     const signalOptions = {
-  //         data: JSON.stringify(data),
-  //         type: 'sharedScreen',
-  //     };
-  //     console.log("쿠커가 쿠키에게 화면공유 시그널 보냄")
-  //     session.signal(signalOptions);
-  // }
   
   const setVideoMute = () => {
     dispatch(videoMute())
@@ -119,33 +113,53 @@ function CookieeVideoSideBar() {
     }
   }, [handsUp])
 
+  /** 다른 참가자 목록 보기 */
+  const handleShowOthers = () => {
+    dispatch(setShowOthers())
+  }
+
   return (
     <div className='video-sidebar'>
-      <button
-        onClick={handleLeaveSession}
-      >
-        나가기
-      </button>
-      <button
-        onClick={setAudioMute}
-      >
-        {isAudioPublished ? ('소리켜짐') : ('소리꺼짐')}
-      </button>
-      <button
-        onClick={setVideoMute}
-      >
-        화면뮤트
-      </button>
-      <button
-        onClick={() => pressCheck(publisher)}
-      >
-        {check ? ('체크 해제') : ('체크하기')}
-      </button>
-      <button
-        onClick={() => pressHandsUp(publisher)}
-      >
-        {handsUp ? ('손 내리기') : ('손 들기')}
-      </button>
+      {/* 나가기 */}
+      <div className='video-side-icon-wrap' onClick={handleLeaveSession}>
+        <RxExit className='video-side-icon video-exit-icon'/>
+      </div>
+      {/* 화면뮤트 */}
+      <div className='video-side-icon-wrap' onClick={setVideoMute}>
+        {isVideoPublished ? (
+          <BsCameraVideoFill className='video-side-icon'/>
+        ) : (
+          <BsCameraVideoOff className='video-side-icon'/>
+        )}
+      </div>
+      {/* 소리뮤트 */}
+      <div className='video-side-icon-wrap' onClick={setAudioMute}>
+        {isAudioPublished ? (
+          <BsMicFill className='video-side-icon'/>
+        ) : (
+          <BsMicMute className='video-side-icon'/>
+        )}
+      </div>
+      {/* 체크 */}
+      <div className='video-side-icon-wrap' onClick={() => pressCheck(publisher)}>
+        {check ? (
+          <AiFillCheckCircle className='video-side-icon'/>
+        ) : (
+          <AiFillCheckCircle className='video-side-icon'/>
+        )}
+      </div>
+      {/* 손들기 */}
+      <div className='video-side-icon-wrap' onClick={() => pressHandsUp(publisher)}>
+        {handsUp ? (
+          <IoIosHand className='video-side-icon'/>
+        ) : (
+          <IoIosHand className='video-side-icon'/>
+        )}
+      </div>
+      {/* 다른 쿠키 목록 */}
+      <div className='video-side-icon-wrap' onClick={handleShowOthers}>
+        <BsPeopleFill className='video-side-icon'/>
+      </div>
     </div>
   );
 }

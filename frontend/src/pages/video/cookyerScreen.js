@@ -8,7 +8,7 @@ import CookyerVideoSideBar from '../../component/Video/Cookyer/CookyerVideoSideB
 
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteSubscriber, enteredSubscriber, setAudioOffStream, setAudioOnList, setAudioOnStream } from '../../store/video/video';
+import { deleteSubscriber, enteredSubscriber, setAudioOffStream, setAudioOnList, setAudioOnStream, setMainStreamManager } from '../../store/video/video';
 import { joinSession } from '../../store/video/video-thunk';
 import { setCheckCookiee, setCheckCookieeList, setHandsDownCookiee, setHandsUpCookiee, setHandsUpCookieeList, setUncheckCookiee } from '../../store/video/cookyerVideo';
 import { setLessonInfo } from '../../store/video/videoLessonInfo';
@@ -55,19 +55,22 @@ function CookyerScreen() {
   const audioOnStream = useSelector((state) => state.video.audioOnStream)
   const audioOffStream = useSelector((state) => state.video.audioOffStream)
 
-  /** 자동 전체 화면 */
-  useEffect(() => {
-    const element = document.documentElement; // 전체 화면으로 변경하고자 하는 요소
-    if (element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if (element.mozRequestFullScreen) {
-      element.mozRequestFullScreen();
-    } else if (element.webkitRequestFullscreen) {
-      element.webkitRequestFullscreen();
-    } else if (element.msRequestFullscreen) {
-      element.msRequestFullscreen();
-    }
-  }, []);
+  /** 메인비디오스트림 설정 */
+  const mainStreamManager = useSelector((state) => state.video.mainStreamManager)
+
+  // /** 자동 전체 화면 */
+  // useEffect(() => {
+  //   const element = document.documentElement; // 전체 화면으로 변경하고자 하는 요소
+  //   if (element.requestFullscreen) {
+  //     element.requestFullscreen();
+  //   } else if (element.mozRequestFullScreen) {
+  //     element.mozRequestFullScreen();
+  //   } else if (element.webkitRequestFullscreen) {
+  //     element.webkitRequestFullscreen();
+  //   } else if (element.msRequestFullscreen) {
+  //     element.msRequestFullscreen();
+  //   }
+  // }, []);
 
   useEffect(() => {
     console.log(3, session)
@@ -80,7 +83,9 @@ function CookyerScreen() {
         if (subscriber && subscriber.stream.audioActive) {
           dispatch(setAudioOnStream(subscriber.stream.connection.connectionId))
         }
-        dispatch(enteredSubscriber(subscriber))
+        if (JSON.parse(subscriber.stream.connection.data).clientData.role === 'COOKIEE') {
+          dispatch(enteredSubscriber(subscriber))
+        }
       };
 
       // On every Stream destroyed...
@@ -320,6 +325,25 @@ function CookyerScreen() {
     }
   }, [audioOffStream])
 
+  /** 메인비디오스트림 지정 */
+  const handleMainVideoStream = (stream) => {
+    if (mainStreamManager !== stream) {
+      dispatch(setMainStreamManager(stream))
+    } else {
+      if (shareScreenPublisher) {
+        dispatch(setMainStreamManager(shareScreenPublisher))
+      } else {
+        dispatch(setMainStreamManager(publisher))
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (shareScreenPublisher) {
+      dispatch(setMainStreamManager(shareScreenPublisher))
+    }
+  }, [shareScreenPublisher])
+
   return (
     <div className='video-page'>
       <div className='video-page-main'>
@@ -331,8 +355,12 @@ function CookyerScreen() {
           <div className='cookyer-components'>
             <div className='cookyer-components-left'>
               <div className='cookyer-sharing'>
-                <div className='cookyer-sharing-content'>
-                  {shareScreenPublisher === null ? (
+                <div className='cookyer-sharing-content' onClick={() => handleMainVideoStream(mainStreamManager)}>
+                  <UserVideoComponent
+                    videoStyle='cookyer-sharing-content'
+                    streamManager={mainStreamManager}
+                  />
+                  {/* {shareScreenPublisher === null ? (
                     <UserVideoComponent
                       videoStyle='cookyer-sharing-content'
                       streamManager={publisher}
@@ -342,11 +370,11 @@ function CookyerScreen() {
                       videoStyle='cookyer-sharing-content'
                       streamManager={shareScreenPublisher}
                     />
-                  )}
+                  )} */}
                 </div>
               </div>
               <div className='cookyer-components-left-bottom'>
-                <div className='cookyer'>
+                <div className='cookyer' onClick={() => handleMainVideoStream(publisher)}>
                   <UserVideoComponent
                     videoStyle='cookyer-video'
                     streamManager={publisher}
@@ -358,7 +386,7 @@ function CookyerScreen() {
             <div className='cookyer-cookiees'>
               {subscribers.map((sub, i) => (
                 // <div key={sub.id} onClick={() => handleMainVideoStream(sub)}>
-                <div key={i} className='cookyer-cookiee-content'>
+                <div key={i} className='cookyer-cookiee-content' onClick={() => handleMainVideoStream(sub)}>
                   <UserVideoComponent
                     videoStyle='cookyer-cookiee'
                     streamManager={sub}

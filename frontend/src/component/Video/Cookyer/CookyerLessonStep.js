@@ -27,7 +27,7 @@ function CookyerLessonStep() {
   }, [curStep])
 
   const goPrevStep = () => {
-    if (lessonStepList && totalSteps && curIdx - 1 > 0) {
+    if (lessonStepList && totalSteps && curIdx - 1 >= 0) {
       dispatch(setCurIdx(curIdx-1))
     }
   }
@@ -39,13 +39,18 @@ function CookyerLessonStep() {
   }
 
   useEffect(() => {
-    dispatch(setCurIdx(1))
+    console.log("curStep 설정")
+    dispatch(setCurStep("수업이 시작하면 진행 단계를 표시해주세요."))
   }, [])
 
   useEffect(() => {
-    if (lessonStepList) {
-      const newStep = lessonStepList.find((step) => step.stepOrder === curIdx)
-      dispatch(setCurStep(newStep.stepContent))
+    if (curIdx === 0) {
+      dispatch(setCurStep("수업이 시작하면 진행 단계를 표시해주세요."))
+    } else {
+      if (lessonStepList) {
+        const newStep = lessonStepList.find((step) => step.stepOrder === curIdx)
+        dispatch(setCurStep(newStep.stepContent))
+      }
     }
   }, [curIdx, lessonStepList])
 
@@ -101,7 +106,7 @@ function CookyerLessonStep() {
   }, [checkCookieeList])
 
   return (
-    <div className='video-step-widget'>
+    <div className='video-step-widget-cookyer'>
       <p className='video-step-title'>현재 진행 단계</p>
       <div className='video-step-main'>
         <GoChevronLeft onClick={goPrevStep}/>
@@ -117,10 +122,17 @@ function CookyerLessonStep() {
                   <button onClick={updateStepContent}>완료</button>
                 </div>
               ) : (
-                <div className='video-step-content'>
-                  <p>{curIdx}. {curStep}</p>
-                  <button onClick={handleIsUpdate}>수정</button>
-                </div>
+                curIdx > 0 ? (
+                  <div className='video-step-content'>
+                    <p>{curIdx}. {curStep}</p>
+                    <button onClick={handleIsUpdate}>수정</button>
+                  </div>
+                ) : (
+                  <div className='video-step-content'>
+                    <p>{curIdx}. {curStep}</p>
+                    <button>수정</button>
+                  </div>
+                )
               )}
             </div>
           ) : (
@@ -135,7 +147,6 @@ function CookyerLessonStep() {
           <div className='video-step-check-count'>
             <p>{checkCount}</p>
             <p>/</p>
-            {/* 총 숫자 어디선가 찾아서 넣기.. */}
             <p>{subscribers.length}</p>
           </div>
         </div>

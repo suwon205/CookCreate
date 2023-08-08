@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import '../../../style/video.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { audioMute, leaveSession, videoMute } from '../../../store/video/video';
-import { useNavigate } from 'react-router-dom';
+import { audioMute, leaveSession, setMainStreamManager, videoMute } from '../../../store/video/video';
 import { setShareScreenPublisher } from '../../../store/video/screenShare';
 import axios from 'axios';
 import { closeSession, shareScreen } from '../../../store/video/video-thunk';
@@ -12,9 +11,7 @@ import { RxExit } from "react-icons/rx"
 
 function CookyerVideoSideBar() {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
-  const OV = useSelector((state) => state.video.OV)
   const session = useSelector((state) => state.video.session)
   const publisher = useSelector((state) => state.video.publisher)
   const isAudioPublished = useSelector((state) => state.video.isAudioPublished)
@@ -24,7 +21,6 @@ function CookyerVideoSideBar() {
   const shareScreenPublisher = useSelector((state) => state.screenShare.shareScreenPublisher)
   const [ isShared, setIsShared ] = useState(false)
   const nickname = localStorage.getItem('nickname');
-  const role = localStorage.getItem('role')
   
   /** 세션 나가기 */
   const sessionId = useSelector((state) => state.video.sessionId)
@@ -62,13 +58,6 @@ function CookyerVideoSideBar() {
     }
   }
 
-  // 쿠커이고 세션을 닫았으면 메인페이지로 이동 -> 진행단계 마지막으로 확인할 수 있도록 수정!?
-  // useEffect(() => {
-  //   if (role === 'COOKYER' && !isSessionOpened) {
-  //     navigate('/')
-  //   }
-  // }, [isSessionOpened])
-
   /** 화면 공유 */
   const handleScreenShare = () => {
     console.log("handleScreenShare", shareScreenPublisher)
@@ -80,8 +69,13 @@ function CookyerVideoSideBar() {
         console.log("화면공유하기")
       }
     } else {
+      publisher.stream.session.signal({
+        type: 'shareEnd'
+      })
+      session.unpublish(shareScreenPublisher)
       setIsShared(false)
       dispatch(setShareScreenPublisher(null))
+      dispatch(setMainStreamManager(publisher))
       console.log("화면공유 취소")
     }
   }
@@ -93,47 +87,8 @@ function CookyerVideoSideBar() {
         sessionId, nickname
       }
       dispatch(shareScreen(data))
-    } else {
-      // const data = {
-      //   sharePublisher: JSON.stringify(publisher)
-      // }
-      if (shareScreenPublisher) {  // 공유된 상태일때만
-        // publisher.stream.session.signal({
-        //   data: JSON.stringify(data),
-        //   type: 'sharedScreen'
-        // })
-        // session.unpublish(shareScreenPublisher)
-        // session.publish(publisher)
-        // dispatch(setShareScreenPublisher(null))
-        // console.log("화면공유 종료")
-      }
     }
   }, [isShared])
-
-  useEffect(() => {
-    if (shareScreenPublisher !== null) {
-      // shareScreenPublisher.once('accessAllowed', () => {
-      //   console.log("화면공유 여기까지 오니?", shareScreenPublisher.stream)
-        // session.unpublish(publisher);
-        // dispatch(setShareScreenPublisher(shareScreenPublisher))
-        // session.publish(shareScreenPublisher).then(() => {
-        //   console.log("화면공유 퍼블리셔 발행 성공", shareScreenPublisher)
-        //   // sendSignalUserChanged({ isScreenShareActive: true });
-        // })
-      // });
-    }
-  }, [shareScreenPublisher])
-
-  // 쿠커가 화면공유하면 쿠키에게 시그널보냄
-  // 퍼블리셔만 갈아끼우는 지금은 필요없음
-  // const sendSignalUserChanged = (data) => {
-  //     const signalOptions = {
-  //         data: JSON.stringify(data),
-  //         type: 'sharedScreen',
-  //     };
-  //     console.log("쿠커가 쿠키에게 화면공유 시그널 보냄")
-  //     session.signal(signalOptions);
-  // }
   
   const setVideoMute = () => {
     dispatch(videoMute())
@@ -191,7 +146,7 @@ function CookyerVideoSideBar() {
         <BsWindowFullscreen className='video-side-icon'/>
       </div>
       {/* 쿠키 전체 음소거 */}
-      <div onClick={() => handleCookieeAudio(publisher)}>
+      <div className='video-side-icon-wrap' onClick={() => handleCookieeAudio(publisher)}>
         <BsVolumeMuteFill className='video-side-icon'/>
       </div>
     </div>

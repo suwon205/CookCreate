@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   check: false,
   handsUp: false,
+  showOthers: false
 }
 
 export const cookieeVideo = createSlice({
@@ -21,16 +22,20 @@ export const cookieeVideo = createSlice({
     resetHandsUp: (state) => {
       state.handsUp = false
     },
+    setShowOthers: (state) => {
+      state.showOthers = !state.showOthers
+    },
     initCookieeVideo: (state) => {
       state.check = false
       state.handsUp = false
-    }
+      state.showOthers = false
+    },
   },
   extraReducers: {
   }
 })
 
 export const {
-  setCheck, resetCheck, setHandsUp, resetHandsUp, initCookieeVideo
+  setCheck, resetCheck, setHandsUp, resetHandsUp, setShowOthers, initCookieeVideo
 } = cookieeVideo.actions
 export default cookieeVideo.reducer

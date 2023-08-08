@@ -22,13 +22,13 @@ function VideoHeader() {
         )}
       </div>
       <div className='video-header-right'>
-        <div className='video-lesson-time'>
+        {/* <div className='video-lesson-time'>
           <p>진행시간</p>
           <p>0:30:47</p>
-        </div>
+        </div> */}
         <div className='video-lesson-progress'>
           <p>진행률</p>
-          <progress value={curIdx-1} max={totalSteps}></progress>
+          <progress value={curIdx} max={totalSteps}></progress>
           <p>{curIdx} / {totalSteps}</p>
         </div>
       </div>

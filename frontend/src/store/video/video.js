@@ -124,7 +124,7 @@ export const video = createSlice({
     [joinSession.fulfilled]: (state, { payload }) => {
       console.log("joinSession fulfilled", payload)
       // state.currentVideoDevice = payload.currentVideoDevice
-      // state.mainStreamManager = payload.publisher
+      state.mainStreamManager = payload
       state.publisher = payload
       // console.log(state.publisher)
     },
