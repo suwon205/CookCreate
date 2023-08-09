@@ -85,10 +85,10 @@ export default function ReviewDetail({ reviewId,onClose}) {
         <label htmlFor="reviewContents">리뷰 내용:{selectedReview.reviewContents}</label>
       </div>
       <div className="review-field">
-        <label htmlFor="reviewContents">생성날짜:{selectedReview.createdDate}</label>
+        <label htmlFor="reviewContents">생성날짜:{selectedReview ? new Date(selectedReview.createdDate).toISOString().split("T")[0] : null}</label>
       </div>
       <div className="review-field">
-        <label htmlFor="reviewContents">수정날짜:{selectedReview.modifiedDate}</label>
+        <label htmlFor="reviewContents">수정날짜:{selectedReview ? new Date(selectedReview.modifiedDate).toISOString().split("T")[0] : null}</label>
       </div>
       <div className="review-actions">
         <button type="button" onClick={handleUpdateReview}>

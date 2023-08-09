@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useEffect} from 'react';
 import SideBar from "./SideBar";
 import { useDispatch, useSelector} from "react-redux";
 import axios from 'axios';
@@ -11,7 +11,9 @@ function ClassList() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const accessToken = useSelector((state) => state.auth.access_token);
+  // const accessToken = useSelector((state) => state.auth.access_token);
+  const accessToken = localStorage.getItem('access_token')
+
   const classData = useSelector((state) => state.accountS.classData)
   const completedData = useSelector((state) => state.accountS.classData)
   // const [ classData, setClassData ] = useState([]);
@@ -352,7 +354,7 @@ function ClassList() {
                                   <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_calendar.png" alt="기간아이콘" width="29" />
                                   "과외 날짜"
                                 </dt>
-                                <dd>{lesson.lessonDate} 예정</dd>
+                                <dd>{lesson.lessonDate} 완료</dd>
                               </dl>
                               <div className="info_ea">
                                 <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_people.png" alt="수강아이콘" width="29" style={{ paddingRight: "5px", verticalAlign: "text-bottom" }} />

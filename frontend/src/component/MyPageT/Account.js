@@ -1,12 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 // import { useSelector, useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import FoodList from "../../component/SignUp/FoodList";
 import SideBar from "./SideBar";
 
 function Account() {
-  const accessToken = useSelector((state) => state.auth.access_token);
+  // const accessToken = useSelector((state) => state.auth.access_token);
+  const accessToken = localStorage.getItem('access_token')
+
 
   const [userData, setUserData] = useState({});
   const [food, setFood] = useState([]);

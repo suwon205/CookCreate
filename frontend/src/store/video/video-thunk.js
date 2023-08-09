@@ -184,7 +184,11 @@ export const shareScreen = createAsyncThunk(
 
     const shareScreenPublisher = await getShareScreenPublisher(newData)
     console.log(shareScreenPublisher, "스크린퍼블리셔 만들어서 여기까지 옴")
-    return shareScreenPublisher
+
+    const response = {
+      shareScreenPublisher, OV, session
+    }
+    return response
   }
 )
 

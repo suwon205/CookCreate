@@ -7,15 +7,17 @@ import axios from "axios";
 const Wrapper = styled.footer`
   position: fixed;
   bottom: 0px;
-  left: 0px;
-  right: 0px;
-  width: 100%;
+  right: 0px; /* Adjust right position */
+  width: 80%;
   min-height: 50px;
   max-height: 200px;
   overflow: auto;
   padding: 6px;
   z-index: 100;
   background-color: #eeeeee;
+  display: flex; /* Add display flex */
+  justify-content: flex-end; /* Align to the right */
+  
   & form {
     position: relative;
     display: flex;

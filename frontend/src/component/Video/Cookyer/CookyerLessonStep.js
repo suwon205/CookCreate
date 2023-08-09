@@ -44,12 +44,14 @@ function CookyerLessonStep() {
   }, [])
 
   useEffect(() => {
-    if (curIdx === 0) {
-      dispatch(setCurStep("수업이 시작하면 진행 단계를 표시해주세요."))
-    } else {
-      if (lessonStepList) {
-        const newStep = lessonStepList.find((step) => step.stepOrder === curIdx)
-        dispatch(setCurStep(newStep.stepContent))
+    if (curIdx) {
+      if (curIdx === 0) {
+        dispatch(setCurStep("수업이 시작하면 진행 단계를 표시해주세요."))
+      } else {
+        if (lessonStepList) {
+          const newStep = lessonStepList.find((step) => step.stepOrder === curIdx)
+          dispatch(setCurStep(newStep.stepContent))
+        }
       }
     }
   }, [curIdx, lessonStepList])

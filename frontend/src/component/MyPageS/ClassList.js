@@ -40,9 +40,13 @@ function ClassList() {
         },
       })
       .then((res) => {
-        dispatch(setClassData(res.data))
-        // setClassData(res.data);
         console.log("신청한 과외", res.data);
+        if (res.data[0].message !== "신청한 과외가 없습니다.") {
+          dispatch(setClassData(res.data))
+        } else {
+          dispatch(setClassData(null))
+        }
+        // setClassData(res.data);
       })
       .catch((err) => {
         console.log("신청한 과외 조회 에러", err);
@@ -56,9 +60,13 @@ function ClassList() {
         },
       })
       .then((res) => {
-        dispatch(setCompletedData(res.data))
-        // setCompletedData(res.data);
         console.log("완료한 과외", res.data);
+        if (res.data[0].message !== "신청한 과외가 없습니다.") {
+          dispatch(setCompletedData(res.data))
+        } else {
+          dispatch(setCompletedData(null))
+        }
+        // setCompletedData(res.data);
       })
       .catch((err) => {
         console.log("완료한 과외 조회 에러", err);
@@ -198,8 +206,8 @@ function ClassList() {
                             <figure className="image is_thumbnail">
                               <img
                                 loading="lazy"
-                                src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
-                                data-src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
+                                src={lesson.thumbnailUrl}
+                                // data-src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
                                 className="swiper-lazy"
                                 alt="course_title.png"
                               />
@@ -236,7 +244,7 @@ function ClassList() {
                               </dd>
                             </div>
                             <div className="instructor">쿠커: {lesson.cookyerName}({lesson.cookyerId})</div>
-                            <div className="date">신청날짜: {lesson.createdDate}</div>
+                            <div className="date">신청날짜: {new Date(lesson.createdDate).toISOString().split("T")[0]}</div>
                             <div className="price">가격:{lesson.price}</div>
                             <div className="difficulty">난이도:{lesson.difficulty}</div>
                             <div className="time">찜:{lesson.jjimCount}</div>
@@ -253,7 +261,7 @@ function ClassList() {
                                   <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_calendar.png" alt="기간아이콘" width="29" />
                                   "과외 날짜"
                                 </dt>
-                                <dd>{lesson.lessonDate} 예정</dd>
+                                <dd>{new Date(lesson.lessonDate).toISOString().split("T")[0]} 예정</dd>
                                 {lesson.sessionId === null ? (
                                   <button disabled="disabled">수업예정</button>
                                 ) : (
@@ -275,7 +283,7 @@ function ClassList() {
                               <p className="card-content__notice"></p>
                               <div className="tags">
                                 <span className="tag" style={{ backgroundColor: "hsl(321,63%,90%)" }}>
-                                  수정시간:{lesson.modifiedDate}
+                                  수정시간:{new Date(lesson.modifiedDate).toISOString().split("T")[0]}
                                 </span>
                               </div>
                             </div>
@@ -286,7 +294,9 @@ function ClassList() {
                     </div>
                   </div>
                 ))
-              ) : null}
+              ) : (
+                <p>신청한 과외가 없습니다.</p>
+              )}
             </div>
             <div>
               <h2>완료한 과외</h2>
@@ -308,8 +318,8 @@ function ClassList() {
                             <figure className="image is_thumbnail">
                               <img
                                 loading="lazy"
-                                src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
-                                data-src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
+                                src={lesson.thumbnailUrl}
+                                // data-src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
                                 className="swiper-lazy"
                                 alt="course_title.png"
                               />
@@ -346,7 +356,7 @@ function ClassList() {
                               </dd>
                             </div>
                             <div className="instructor">쿠커: {lesson.cookyerName}({lesson.cookyerId})</div>
-                            <div className="date">신청날짜: {lesson.createdDate}</div>
+                            <div className="date">신청날짜: {new Date(lesson.createdDate).toISOString().split("T")[0]}</div>
                             <div className="price">가격:{lesson.price}</div>
                             <div className="difficulty">난이도:{lesson.difficulty}</div>
                             <div className="time">찜:{lesson.jjimCount}</div>
@@ -363,7 +373,7 @@ function ClassList() {
                                   <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_calendar.png" alt="기간아이콘" width="29" />
                                   "과외 날짜"
                                 </dt>
-                                <dd>{lesson.lessonDate} 예정</dd>
+                                <dd>{new Date(lesson.lessonDate).toISOString().split("T")[0]} 완료</dd>
                                 <button disabled="disabled">수업종료</button>
                               </dl>
                               <div className="info_ea">
@@ -381,7 +391,7 @@ function ClassList() {
                               <p className="card-content__notice"></p>
                               <div className="tags">
                                 <span className="tag" style={{ backgroundColor: "hsl(321,63%,90%)" }}>
-                                  수정시간:{lesson.modifiedDate}
+                                  수정시간:{new Date(lesson.modifiedDate).toISOString().split("T")[0]}
                                 </span>
                               </div>
                             </div>
@@ -392,7 +402,9 @@ function ClassList() {
                     <button onClick={() => handleOpenModal(lesson.lessonId)}>리뷰작성</button>
                   </div>
                 ))
-              ) : null}
+              ) : (
+                <p>완료한 과외가 없습니다.</p>
+              )}
             </div>
         </div>
       </div>

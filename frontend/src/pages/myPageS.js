@@ -9,7 +9,7 @@ import SideBar from "../component/MyPageS/SideBar";
 // import ClassList from "../component/MyPageS/ClassList";
 // import Payment from "../component/MyPageS/Payment";
 // import Calendar from "../component/MyPageS/Calendar";
-import ReviewForm from "../component/MyPageS/ReviewForm";
+// import ReviewForm from "../component/MyPageS/ReviewForm";
 
 function MyPageS() {
   return (
@@ -18,7 +18,7 @@ function MyPageS() {
         <SideBar />
       </div>
       <section>
-        <ReviewForm />
+        {/* <ReviewForm /> */}
       </section>
     </div>
   );

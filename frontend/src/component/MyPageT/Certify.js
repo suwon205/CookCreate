@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 // import React, { useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import SideBar from "./SideBar";
 import axios from "axios";
 
 function Certify() {
-  const accessToken = useSelector((state) => state.auth.access_token);
+  // const accessToken = useSelector((state) => state.auth.access_token);
+  const accessToken = localStorage.getItem('access_token')
   const [certificates, setCertificates] = useState([])
   const [capture, setCapture] = useState(null);
   const [loading, setLoading] = useState(false);

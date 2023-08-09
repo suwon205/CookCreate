@@ -1,12 +1,12 @@
 // import React from 'react';
 import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
-import { useSelector} from "react-redux";
+// import { useSelector} from "react-redux";
 import axios from "axios";
 
 
 function Payroll() {
-  const accessToken = useSelector((state) => state.auth.access_token);
+  const accessToken = localStorage.getItem('access_token')
   const [pays, setPays] = useState([]);
   const payrollMessage = pays[0]?.lessonId === 0 ? "정산 내역이 없습니다." : "";
 

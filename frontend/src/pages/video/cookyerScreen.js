@@ -339,10 +339,17 @@ function CookyerScreen() {
   }
 
   useEffect(() => {
-    if (shareScreenPublisher) {
+    console.log(shareScreenPublisher, "화면공유 퍼블리셔 바뀜")
+    if (shareScreenPublisher !== null) {
       dispatch(setMainStreamManager(shareScreenPublisher))
+    } else {
+      dispatch(setMainStreamManager(publisher))
     }
   }, [shareScreenPublisher])
+
+  useEffect(() => {
+    console.log("메인스트림매니저", mainStreamManager === publisher)
+  }, [mainStreamManager])
 
   return (
     <div className='video-page'>
@@ -360,17 +367,6 @@ function CookyerScreen() {
                     videoStyle='cookyer-sharing-content'
                     streamManager={mainStreamManager}
                   />
-                  {/* {shareScreenPublisher === null ? (
-                    <UserVideoComponent
-                      videoStyle='cookyer-sharing-content'
-                      streamManager={publisher}
-                    />
-                  ) : (
-                    <UserVideoComponent
-                      videoStyle='cookyer-sharing-content'
-                      streamManager={shareScreenPublisher}
-                    />
-                  )} */}
                 </div>
               </div>
               <div className='cookyer-components-left-bottom'>

@@ -64,6 +64,7 @@ function NavBar() {
             {/* 쿠커들에게만 보입니다. */}
           </div>
         </div>
+        
       ) : (
           <React.Fragment>
             <div>

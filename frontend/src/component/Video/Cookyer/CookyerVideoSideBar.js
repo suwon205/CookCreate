@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import '../../../style/video.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { audioMute, leaveSession, setMainStreamManager, videoMute } from '../../../store/video/video';
-import { setShareScreenPublisher } from '../../../store/video/screenShare';
+import { initScreenShare, setShareScreenPublisher } from '../../../store/video/screenShare';
 import axios from 'axios';
 import { closeSession, shareScreen } from '../../../store/video/video-thunk';
 import { BsMicFill, BsMicMute, BsCameraVideoFill, BsCameraVideoOff, BsWindowFullscreen, BsVolumeMuteFill } from "react-icons/bs"
@@ -18,6 +18,8 @@ function CookyerVideoSideBar() {
   const isVideoPublished = useSelector((state) => state.video.isVideoPublished)
   
   /** 화면 공유 기능 */
+  const shareOV = useSelector((state) => state.screenShare.shareOV)
+  const shareSession = useSelector((state) => state.screenShare.shareSession)
   const shareScreenPublisher = useSelector((state) => state.screenShare.shareScreenPublisher)
   const [ isShared, setIsShared ] = useState(false)
   const nickname = localStorage.getItem('nickname');
@@ -72,11 +74,11 @@ function CookyerVideoSideBar() {
       publisher.stream.session.signal({
         type: 'shareEnd'
       })
-      session.unpublish(shareScreenPublisher)
+      shareSession.unpublish(shareScreenPublisher)
       setIsShared(false)
-      dispatch(setShareScreenPublisher(null))
+      dispatch(initScreenShare())
       dispatch(setMainStreamManager(publisher))
-      console.log("화면공유 취소")
+      console.log("화면공유 취소", publisher)
     }
   }
 

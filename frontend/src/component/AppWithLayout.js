@@ -31,6 +31,7 @@ import PaymentFailed from '../pages/paymentFailed';
 import PaymentSuccess from '../pages/paymentSuccess';
 import PaymentCancelld from '../pages/paymentCancelld';
 import EditLesson from '../pages/editLesson';
+import ChatRoom from '../pages/chatRoom'
 
 function AppWithLayout({ match }) {
   // const dispatch = useDispatch();
@@ -71,6 +72,7 @@ function AppWithLayout({ match }) {
         <Route path='/payment/success' element={<PaymentSuccess/>}></Route>
         <Route path='/payment/cancel' element={<PaymentCancelld/>}></Route>
         <Route path='/lesson/edit/:lessonId' element={<EditLesson/>}></Route>
+        <Route path='/chatroom' element={<ChatRoom/>}></Route>
 
 
         <Route path='/mypageS' element={<MyPageS />} />
