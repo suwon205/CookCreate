@@ -92,12 +92,12 @@ function ReviewEdit({ onClose, selectedReview}) {
   return (
     <div className="review_detail">
           <div>
-      <button type="submit" onClick={onClose}>❌</button>
-      <h2>리뷰 수정</h2>
+      {/* <button type="submit" onClick={onClose}>❌</button>
+      <h2>리뷰 수정</h2> */}
       <form onSubmit={handleSubmit}>
-        <div>
+        {/* <div>
           <label htmlFor="lectureName">강의명:{selectedReview.lessonTitle}</label>
-        </div>
+        </div> */}
         <div>
           <Base>
             <Name>별점</Name>
@@ -165,6 +165,7 @@ function ReviewEdit({ onClose, selectedReview}) {
           />
         </div>
         <button type="submit">수정</button>
+        <button onClick={onClose}>취소</button>
       </form>
     </div>
 

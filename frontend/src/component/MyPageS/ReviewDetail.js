@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import axios from 'axios';
 import ReviewEdit from "./ReviewEdit";
 
-
 export default function ReviewDetail({ reviewId,onClose}) {
   const accessToken = useSelector((state) => state.auth.access_token);
   const [selectedReview, setSelectedReview] = useState("");
@@ -13,8 +12,11 @@ export default function ReviewDetail({ reviewId,onClose}) {
 
 
   useEffect(() => {
-    handleViewDetail();
-  },  [reviewId] );
+    if (!isEditModalOpen) {
+      handleViewDetail();
+    }
+  }, [isEditModalOpen]);
+  // },  [reviewId] );
 
   
   //리뷰상세정보 조회
@@ -56,7 +58,6 @@ export default function ReviewDetail({ reviewId,onClose}) {
   // 수정모달 열기
   const handleUpdateReview = () => {
     setIsEditModalOpen(true);
-    
   }
 
   // 수정모달 닫기
@@ -68,43 +69,48 @@ export default function ReviewDetail({ reviewId,onClose}) {
     <div className="modal-content">
       <button type="submit" onClick={onClose}>❌</button>
     <h2 className="modal-title">리뷰 상세 정보</h2>
+    
+    
     <div className="review-details">
       <div className="review-field">
-        <label htmlFor="lessonTitle">강좌 이름:{selectedReview.lessonTitle}</label>
+        <label htmlFor="lessonTitle">강의명: {selectedReview.lessonTitle}</label>
       </div>
       <div className="review-field">
-        <label htmlFor="lessonTitle">선생님 아이디:{selectedReview.cookyerId}/선생님 성함:{selectedReview.cookyerName}</label>
+        <label htmlFor="lessonTitle">선생님: {selectedReview.cookyerName}</label>
       </div>
       <div className="review-field">
-        <label htmlFor="rating">평점:{selectedReview.rating}</label>
+        <label htmlFor="rating">유저아이디: {selectedReview.userId}/유저닉네임:{selectedReview.nickname}</label>
       </div>
       <div className="review-field">
-        <label htmlFor="rating">유저아이디:{selectedReview.userId}/유저닉네임:{selectedReview.nickname}</label>
+        <label htmlFor="reviewContents">생성날짜: {selectedReview ? new Date(selectedReview.createdDate).toISOString().split("T")[0] : null}</label>
       </div>
       <div className="review-field">
-        <label htmlFor="reviewContents">리뷰 내용:{selectedReview.reviewContents}</label>
+        <label htmlFor="reviewContents">수정날짜: {selectedReview ? new Date(selectedReview.modifiedDate).toISOString().split("T")[0] : null}</label>
       </div>
-      <div className="review-field">
-        <label htmlFor="reviewContents">생성날짜:{selectedReview ? new Date(selectedReview.createdDate).toISOString().split("T")[0] : null}</label>
-      </div>
-      <div className="review-field">
-        <label htmlFor="reviewContents">수정날짜:{selectedReview ? new Date(selectedReview.modifiedDate).toISOString().split("T")[0] : null}</label>
-      </div>
-      <div className="review-actions">
-        <button type="button" onClick={handleUpdateReview}>
-          수정하기
-        </button>
-        <button type="button" onClick={handleDeleteReview}>
-          삭제하기
-        </button>
-      </div>
-    </div>
-    {isEditModalOpen && (
+      {isEditModalOpen ? (
         <ReviewEdit
           selectedReview={selectedReview}
           onClose={handleCloseUpdateModal}
         />
+      ) : (
+        <div>
+          <div>
+            별점: {selectedReview.rating}
+          </div>
+          <div className="review-field">
+            <label htmlFor="reviewContents">리뷰 내용: {selectedReview.reviewContents}</label>
+          </div>
+          <div className="review-actions">
+            <button type="button" onClick={handleUpdateReview}>
+              수정하기
+            </button>
+            <button type="button" onClick={handleDeleteReview}>
+              삭제하기
+            </button>
+          </div>
+        </div>
       )}
+    </div>
   </div>
 );
 }
