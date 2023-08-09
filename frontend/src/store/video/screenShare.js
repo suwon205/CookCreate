@@ -29,7 +29,7 @@ export const screenShare = createSlice({
     [shareScreen.fulfilled]: (state, { payload }) => {
       console.log("공유 화면 퍼블리셔 저장 성공", payload)
       state.shareScreenPublisher = payload.shareScreenPublisher
-      state.shareOV = payload.shareOV
+      state.shareOV = payload.OV
       state.shareSession = payload.session
     },
     [shareScreen.rejected]: (state, { payload }) => {

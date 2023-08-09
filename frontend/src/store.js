@@ -40,7 +40,7 @@ const setTransform = createTransform(
   (outboundState, key) => {
     return {...outboundState, mySet: new Set(outboundState.mySet)}
   },
-  { whitelist: ['video'] }
+  { whitelist: ['video', 'screenShare'] }
 )
 
 const persistConfig = {
@@ -49,7 +49,7 @@ const persistConfig = {
   transforms: [setTransform],
   whitelist: [
     'auth', 'api', 'lesson', 'lessonSearch', 'lessonInfo', 'timer',
-    'accountS', 'screenShare', 'cookyerVideo', 'cookieeVideo', 'videoLessonInfo'
+    'accountS', 'cookyerVideo', 'cookieeVideo', 'videoLessonInfo'
   ],
   blacklist: []
 }

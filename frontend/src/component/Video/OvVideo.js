@@ -114,7 +114,7 @@ function OpenViduVideoComponent(props) {
           });
         }
       }
-    }, []);
+    }, [props]);
   
     const createHandLandmarker = async () => {
       const handLandmarker = await HandLandMarker();

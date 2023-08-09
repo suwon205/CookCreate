@@ -31,7 +31,7 @@ function CookieeVideoSideBar() {
         .then(() => console.log("Document Exited from Full screen mode"))
         .catch((err) => console.error(err));
     }
-    navigate('/')
+    navigate(-1)
   }
   
   const setVideoMute = () => {
@@ -42,19 +42,19 @@ function CookieeVideoSideBar() {
     dispatch(audioMute())
   }
 
-  useEffect(() => {
-    // componentDidMount
-    window.addEventListener('beforeunload', onbeforeunload);
+  // useEffect(() => {
+  //   // componentDidMount
+  //   window.addEventListener('beforeunload', onbeforeunload);
 
-    // componentWillUnmount
-    return () => {
-      window.removeEventListener('beforeunload', onbeforeunload);
-    };
-  }, []);
+  //   // componentWillUnmount
+  //   return () => {
+  //     window.removeEventListener('beforeunload', onbeforeunload);
+  //   };
+  // }, []);
 
-  const onbeforeunload = (e) => {
-    dispatch(leaveSession())  // 수정필요
-  }
+  // const onbeforeunload = (e) => {
+  //   dispatch(leaveSession())  // 수정필요
+  // }
 
   /** 체크 */
   const pressCheck = () => {

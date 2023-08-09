@@ -58,7 +58,7 @@ function LessonReviewContent() {
         .then(() => console.log("Document Exited from Full screen mode"))
         .catch((err) => console.error(err));
     }
-    navigate('/')
+    navigate(-1)
   }
 
   const handleClickRating = (value) => {
@@ -89,7 +89,7 @@ function LessonReviewContent() {
     .then((res) => {
       console.log(res.data);
       dispatch(initVideoLessonInfo())
-      navigate('/')
+      navigate(-1)
       if (document.fullscreenElement) {
         document
           .exitFullscreen()

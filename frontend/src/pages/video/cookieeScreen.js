@@ -121,6 +121,7 @@ function CookieeScreen() {
       /** 쿠커가 수업을 종료하면 스토어에 저장된 관련 정보 초기화 후 리뷰쓰러 */
       // session.off('sessionDisconnected', () => {
       session.on('sessionDisconnected', () => {
+        // session.disconnect()  // 얘가 없어서 카메라가 계속 켜져있었나?
         dispatch(leaveSession())
         dispatch(initCookieeVideo())
         dispatch(initScreenShare())
@@ -234,12 +235,6 @@ function CookieeScreen() {
         })
     }
   }, [videoLessonId])
-
-  // const handleMainVideoStream = (stream) => {
-  //   if (mainStreamManager !== stream) {
-  //     dispatch(setMainStreamManager(stream))
-  //   }
-  // }
 
   /** 소리 켠 참가자 리스트에 추가 */
   useEffect(() => {

@@ -45,7 +45,7 @@ function LessonStepModal() {
   useEffect(() => {
     if (isStoreStep) {
       // 스토어에 정보가 잘 지워졌는지 확인 후 이동하고 싶은데 수정해야 할듯
-      navigate('/')
+      navigate('/classlistT')
       if (document.fullscreenElement) {
         document
           .exitFullscreen()
@@ -62,13 +62,15 @@ function LessonStepModal() {
   return (
     <div className='cookyer-lesson-step-modal'>
       <h1>진행단계 확인</h1>
-      {lessonStepList.map((step) => (
-        <LessonStep
-          key={step.stepOrder}
-          stepOrder={step.stepOrder}
-          stepContent={step.stepContent}
-        />
-      ))}
+      {lessonStepList ? (
+        lessonStepList.map((step) => (
+          <LessonStep
+            key={step.stepOrder}
+            stepOrder={step.stepOrder}
+            stepContent={step.stepContent}
+          />
+        ))
+      ) : null}
       <button onClick={storeLessonStepList}>완료</button>
     </div>
   );

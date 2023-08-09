@@ -130,11 +130,11 @@ function Signup() {
     axios
     .get(`api/v1/auth/checkId/${userId}`)
     .then((res) => {
-      setUserIdDupMessage(res.data.message)
+      setUserIdMessage(res.data.message)
       setIsIddup(true)
     })
     .catch((err) => {
-      setUserIdDupMessage(err.response.data.message)
+      setUserIdMessage(err.response.data.message)
       setIsIddup(false)
     })
   }
@@ -142,11 +142,11 @@ function Signup() {
     axios
     .get(`api/v1/auth/checkNick/${nickname}`)
     .then((res) => {
-      setUserNNDupMessage(res.data.message)
+      setUserNicknameMessage(res.data.message)
       setIsNNdup(true)
     })
     .catch((err) => {
-      setUserNNDupMessage(err.response.data.message)
+      setUserNicknameMessage(err.response.data.message)
       setIsNNdup(false)
     })
   }

@@ -11,9 +11,6 @@ import { initOVSession, setSessionId, setVideoLessonId } from "../../store/video
 import { OpenVidu } from "openvidu-browser";
 import { setClassData, setCompletedData } from "../../store/mypageS/accountS";
 
-
-
-
 function ClassList() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
