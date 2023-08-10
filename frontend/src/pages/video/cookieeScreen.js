@@ -7,7 +7,7 @@ import CookieeVideoSideBar from '../../component/Video/Cookiee/CookieeVideoSideB
 
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { audioMute, deleteSubscriber, enteredSubscriber, leaveSession, setAudioMute, setAudioOffStream, setAudioOnList, setAudioOnStream } from '../../store/video/video';
+import { audioMute, deleteSubscriber, enteredSubscriber, leaveSession, setAudioMute, setAudioOffStream, setAudioOnList, setAudioOnStream, setMainStreamManager, setMainVideo } from '../../store/video/video';
 import { joinSession } from '../../store/video/video-thunk';
 import { initCookieeVideo, resetCheck, resetHandsUp } from '../../store/video/cookieeVideo';
 import { setCurStep, setLessonInfo, setStepInfo } from '../../store/video/videoLessonInfo';
@@ -60,6 +60,9 @@ function CookieeScreen() {
 
   /** 다른 쿠키 목록 기능 */
   const showOthers = useSelector((state) => state.cookieeVideo.showOthers)
+
+  /** 쿠커가 설정한 mainVideoStream */
+  const mainVideo = useSelector((state) => state.video.mainVideo)
 
   /** 자동 전체 화면 */
   useEffect(() => {
@@ -119,7 +122,6 @@ function CookieeScreen() {
       session.on('exception', handleException);
 
       /** 쿠커가 수업을 종료하면 스토어에 저장된 관련 정보 초기화 후 리뷰쓰러 */
-      // session.off('sessionDisconnected', () => {
       session.on('sessionDisconnected', () => {
         // session.disconnect()  // 얘가 없어서 카메라가 계속 켜져있었나?
         dispatch(leaveSession())
@@ -180,6 +182,13 @@ function CookieeScreen() {
       /** 화면 공유 종료시 이벤트 추가 */
       session.on('signal:shareEnd', () => {
         setScreenShareStream(undefined)
+      })
+
+      /** 쿠커가 설정한 mainVideoStream 이벤트 추가 */
+      session.on('signal:mainVideo', (e) => {
+        const connectionId = JSON.parse(e.data).connectionId
+        console.log(connectionId, "mainVideo 시그널 받음")
+        dispatch(setMainVideo(connectionId))
       })
 
       console.log(4)
@@ -270,6 +279,12 @@ function CookieeScreen() {
       dispatch(setAudioOffStream(''))
     }
   }, [audioOffStream])
+
+  useEffect(() => {
+    if (mainVideo) {
+      setScreenShareStream(mainVideo)
+    }
+  }, [mainVideo])
 
   return (
     <div className='video-page'>

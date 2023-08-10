@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   check: false,
   handsUp: false,
-  showOthers: false
+  showOthers: false,
 }
 
 export const cookieeVideo = createSlice({

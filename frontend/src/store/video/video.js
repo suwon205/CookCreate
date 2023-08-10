@@ -15,6 +15,7 @@ const initialState = {
   audioOnList: [],
   audioOnStream: undefined,
   audioOffStream: undefined,
+  mainVideo: undefined
 }
 
 export const video = createSlice({
@@ -118,6 +119,14 @@ export const video = createSlice({
     },
     setAudioOffStream: (state, { payload }) => {
       state.audioOffStream = payload
+    },
+    setMainVideo: (state, { payload }) => {
+      const allParticipants = [...state.subscribers, state.publisher]
+      const mainVideo = allParticipants.find((sub) => {
+        return sub.stream.connection.connectionId === payload
+      })
+      state.mainVideo = mainVideo
+      console.log("setMainVideo", allParticipants, mainVideo)
     }
   },
   extraReducers: {
@@ -163,6 +172,6 @@ export const {
     initOVSession, setPublisher, setMainStreamManager, setSessionId,
     setSubscribers, setVideoLessonId, setIsSessionOpened,
     videoMute, audioMute, setAudioMute, leaveSession,
-    enteredSubscriber, deleteSubscriber, setAudioOnList, setAudioOnStream, setAudioOffStream
+    enteredSubscriber, deleteSubscriber, setAudioOnList, setAudioOnStream, setAudioOffStream, setMainVideo
 } = video.actions
 export default video.reducer
