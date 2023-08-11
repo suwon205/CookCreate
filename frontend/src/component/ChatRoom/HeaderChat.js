@@ -19,6 +19,7 @@ const Wrapper = styled.header`
     margin-right: 50px;
     text-align: center;
     flex-grow: 1;
+  }
 
   & button {
     font-size: 20px;
@@ -31,66 +32,93 @@ const Wrapper = styled.header`
   }
 `;
 
-const HeaderChat = ({lessonId}) => {
-  const accessToken = localStorage.getItem('access_token')
-  const role = localStorage.getItem('role')
+const HeaderChat = ({ lessonId, chatTitle, chatOver }) => {
+  const accessToken = localStorage.getItem("access_token");
+  const role = localStorage.getItem("role");
   // const history = useHistory();
 
+  //채팅종료여부
+  console.log("chatOver", chatOver);
+  console.log("role", role);
 
-  const onExit = () => {
+  const ExitT = () => {
     axios
-    .put(`/api/v1/chat/close/${lessonId}`, {
-      headers: {
-        Access_Token: accessToken,
-      },
-    })
-    .then((res) => {
-      console.log("채팅종료",res.data);
-    })
-    .catch((err) => {
-      console.log("채팅종료못함",err);
-    });
+      .put(
+        `/api/v1/chat/close/${lessonId}`,
+        {},
+        {
+          headers: {
+            Access_Token: accessToken,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("채팅종료", res.data);
+      })
+      .catch((err) => {
+        console.log("채팅종료못함", err);
+      });
 
+      axios
+      .put(`/api/v1/chat/${lessonId}`,
+        {},
+       {
+        headers: {
+          Access_Token: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log("채팅나가기", res.data);
+      })
+      .catch((err) => {
+        console.log("채팅나가기못함", err);
+      });
+
+      alert("채팅이 종료되었습니다.")
   };
 
-  const onBye = () => {
+  const ExitS = () => {
     axios
-    .put(`/api/v1/chat/${lessonId}`, {
-      headers: {
-        Access_Token: accessToken,
-      },
-    })
-    .then((res) => {
-      console.log("채팅나가기",res.data);
-    })
-    .catch((err) => {
-      console.log("채팅나가기못함",err);
-    });
+      .put(`/api/v1/chat/${lessonId}`,
+        {},
+       {
+        headers: {
+          Access_Token: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log("채팅나가기", res.data);
+      })
+      .catch((err) => {
+        console.log("채팅나가기못함", err);
+      });
 
+      alert("채팅방나가기 성공")
   };
 
   const onBefore = () => {
-    window.location.href = '/chatlist';
-  };  
+    window.location.href = '/';
+  };
 
   return (
     <Wrapper>
-      {role === 'COOKYER' ? (
-        <button type="button" onClick={onExit}>
-          <p>종료</p>
-          <i className="fas fa-arrow-left" />
-        </button>
-      ) : (
-        <button type="button" onClick={onBye}>
-          <p>나가기</p>
-          <i className="fas fa-arrow-left" />
-        </button>
-      )}
-        <button type="button" onClick={onBefore}>
-          <p>뒤로</p>
-          <i className="fas fa-arrow-left" />
-        </button>
-      <span>채팅방이름</span>
+      {role === 'COOKYER' && chatOver === false ? (
+      <button type="button" onClick={ExitT}>
+        <p>종료</p>
+        <i className="fas fa-arrow-left" />
+      </button>
+    ) : null}
+    {role === 'COOKIEE' && chatOver === false ? (
+      <button type="button" onClick={ExitS}>
+        <p>나가기</p>
+        <i className="fas fa-arrow-left" />
+      </button>
+    ) : null}
+    <button type="button" onClick={onBefore}>
+      <p>HOME</p>
+      <i className="fas fa-arrow-left" />
+    </button>
+    <span>{chatTitle}</span>
     </Wrapper>
   );
 };

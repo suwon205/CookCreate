@@ -74,11 +74,11 @@ function AppWithLayout({ match }) {
         <Route path='/payment/success' element={<PaymentSuccess/>}></Route>
         <Route path='/payment/cancel' element={<PaymentCancelld/>}></Route>
         <Route path='/lesson/edit/:lessonId' element={<EditLesson/>}></Route>
-        <Route path='/chatroom' element={<ChatRoom/>}></Route>
+        {/* <Route path='/chatroom' element={<ChatRoom/>}></Route> */}
 
         
-        <Route path='/chatlist' element={<ChatList />} />
-        <Route path='/chatroom/:lessonId' element={<ChatRoom />} />
+        {/* <Route path='/chatlist' element={<ChatList />} /> */}
+        <Route path='/chatroom' element={<ChatRoom />} />
         {/* <Route path='/chatroom' element={<ChatRoom />} /> */}
 
         <Route path='/mypageS' element={<MyPageS />} />
@@ -103,3 +103,4 @@ function AppWithLayout({ match }) {
 }
 
 export default AppWithLayout;
+

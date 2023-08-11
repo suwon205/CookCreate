@@ -6,28 +6,23 @@ import FoodList from "../../component/SignUp/FoodList";
 import SideBar from "./SideBar";
 
 function Account() {
-  // const accessToken = useSelector((state) => state.auth.access_token);
-  const accessToken = localStorage.getItem('access_token')
+  const accessToken = localStorage.getItem("access_token");
 
-
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState("");
   const [food, setFood] = useState([]);
 
-  // const [userIdDef, setUserId] = useState(userData.userId);
   const [nicknameDef, setNickName] = useState(userData.nickname);
   const [phoneNumberDef, setPhoneNumber] = useState(userData.phoneNumber);
   const [userEmailDef, setUserEmail] = useState(userData.userEmail);
   const [IntroduceDef, setIntroduce] = useState(userData.introduce);
   const [IntroUrlDef, setIntroUrl] = useState(userData.introUrl);
   // const defaultProfileImgUrl = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
-  const [profileImgDef, setProfileImg] = useState(userData.profileImg  );
+  const [profileImgDef, setProfileImg] = useState(userData.profileImg);
   const [profileImgUrl, setProfileImgUrl] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
   // const [profileImgDef, setProfileImg] = useState(userData.profileImg || defaultProfileImgUrl );
   const fileInput = useRef(null);
 
   //오류 메세지 저장
-  // const [userIdMessage, setUserIdMessage] = useState("");
-  // const [userIdDupMessage, setUserIdDupMessage] = useState("");
   const [userNicknameMessage, setUserNicknameMessage] = useState("");
   const [userNNDupMessage, setUserNNDupMessage] = useState("");
   const [userPhoneNumberMessage, setUserPhoneNumberMessage] = useState("");
@@ -35,27 +30,12 @@ function Account() {
   const [userIntroduceMessage, setIntroduceMessage] = useState("");
 
   //유효성 검사
-  // const [isUserId, setIsUserId] = useState(false);
-  // const [isIdDupli, setIsIddup] = useState(false);
   const [isNickname, setIsNickname] = useState(false);
   const [isNicknameDupli, setIsNNdup] = useState(false);
   const [isPhoneNumber, setIsPhoneNumber] = useState(false);
   const [isUserEmail, setIsUserEmail] = useState(true);
   const [isIntroduce, setIsIntroduce] = useState(true);
 
-  //중복 체크 로직
-  // const idDupliCheck = () => {
-  //   axios
-  //     .get(`api/v1/auth/checkId/${userIdDef}`)
-  //     .then((res) => {
-  //       setUserIdDupMessage(res.data.message);
-  //       setIsIddup(true);
-  //     })
-  //     .catch((err) => {
-  //       setUserIdDupMessage(err.response.data.message);
-  //       setIsIddup(false);
-  //     });
-  // };
   const nicknameDupliCheck = () => {
     axios
       .get(`api/v1/auth/checkNick/${nicknameDef}`)
@@ -81,7 +61,6 @@ function Account() {
       setIsIntroduce(true);
     }
   };
-
 
   const onChangeUserNickName = async (e) => {
     const value = e.target.value;
@@ -123,12 +102,11 @@ function Account() {
     }
   };
 
-
-    //introUrl
-    const onChangeintroUrl = async (e) => {
-      const value = e.target.value;
-      await setIntroUrl(value);
-    };
+  //introUrl
+  const onChangeintroUrl = async (e) => {
+    const value = e.target.value;
+    await setIntroUrl(value);
+  };
 
   //회원정보조회
   useEffect(() => {
@@ -139,15 +117,14 @@ function Account() {
         },
       })
       .then((res) => {
-        setUserData(res.data);
         console.log(res.data);
+        setUserData(res.data);
+        console.log("userData", userData);
       })
       .catch((err) => {
-        console.log("회원정보조회못함");
+        console.log("회원정보조회못함", err);
       });
-  }, [accessToken]);
-
-
+  }, []);
 
   useEffect(() => {
     if (userData.food) {
@@ -158,37 +135,30 @@ function Account() {
 
 
 
-
   //프로필
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setProfileImgUrl(reader.result);
-        setProfileImg(file)
+        setProfileImg(file);
       };
       reader.readAsDataURL(file);
     }
   };
 
-
-
   // 프로필 이미지 변경
-// const handleFileChange = (e) => {
-//   const file = e.target.files[0];
-//   if (file) {
-//     setProfileImg(file); 
-//   }
-// };
-
-
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setProfileImg(file);
+  //   }
+  // };
 
   //프로필 삭제
   const handleProfile = (e) => {
     if (profileImgDef) {
-
       axios
         .get(`api/v1/my/profile`, {
           headers: {
@@ -200,11 +170,9 @@ function Account() {
           console.log(res.data);
         })
         .catch((err) => {
-          console.log("프로필삭제못함",err);
+          console.log("프로필삭제못함", err);
         });
-    
     }
-
   };
 
   //음식추가 제거
@@ -229,7 +197,6 @@ function Account() {
   const handleUpdate = (e) => {
     e.preventDefault();
 
-
     const formData = new FormData();
     formData.append("nickname", nicknameDef);
     console.log("폼데이터닉네임", typeof formData.get("nickname"));
@@ -247,7 +214,7 @@ function Account() {
     formData.append("introUrl", IntroUrlDef);
     console.log("폼데이터소개", formData.get("introduce"));
     console.log("폼데이터이미지", formData.get("profileImg"));
-    console.log("폼데이터이미지타입",  typeof formData.get("profileImg"));
+    console.log("폼데이터이미지타입", typeof formData.get("profileImg"));
 
     axios
       .put(`api/v1/member`, formData, {
@@ -265,6 +232,7 @@ function Account() {
 
   return (
     <div className="mypage">
+      
       <SideBar />
       <div className="mytitle">정보수정</div>
       <div>가입일:{userData.createdDate}</div>
@@ -292,7 +260,6 @@ function Account() {
           {userNNDupMessage}
         </div>
       </div>
-
 
       <div className="myinputTitle">자기소개</div>
       <div>
@@ -325,11 +292,7 @@ function Account() {
       </div>
 
       <div>
-        <button
-          onClick={handleUpdate}
-          className="bottomBtn"
-          disabled={!( isNickname && isNicknameDupli && isPhoneNumber && isUserEmail && isIntroduce)}
-        >
+        <button onClick={handleUpdate} className="bottomBtn" disabled={!(isNickname && isNicknameDupli && isPhoneNumber && isUserEmail && isIntroduce)}>
           정보수정
         </button>
       </div>
