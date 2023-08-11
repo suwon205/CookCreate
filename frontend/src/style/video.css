@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300);
+
 :root {
   --empty-color: #D9D9D9
 }
@@ -48,14 +50,13 @@ p {
 
 /* 옮기기 */
 
-.video-page {
+/* .video-page {
   background-color: #262626;
-  /* overflow: hidden; */
   grid-template-columns: repeat(12, 1fr);
   display: flex;
-}
+} */
 
-.video-nickname {
+/* .video-nickname {
   position: absolute;
   bottom: 30px;
   left: 30px;
@@ -63,30 +64,24 @@ p {
 
 .stream-component {
   position: relative;
-}
+} */
 
 /* 쿠커 화면 */
 
 .cookyer-sharing {
-  /* background-color: rgb(111, 220, 220); */
   width: 968px;
   height: 540px;
-  /* display: inline-block; */
   padding: 5px;
 } 
 
 .cookyer-sharing-content {
   background-color: var(--empty-color);
   border-radius: 5px;
-  /* width: 100%;
-  height: 100%; */
-  /* width: 1277px; */
   height: 530px;
   object-fit: cover;
 }
 
 .cookyer {
-  /* background-color: rgb(184, 108, 255); */
   width: 586px;
   height: 396px;
   padding: 5px;
@@ -95,17 +90,11 @@ p {
 .cookyer-video {
   background-color: var(--empty-color);
   border-radius: 5px;
-  /* width: 100%;
-  height: 100%; */
-  /* width: 576px; */
   height: 386px;
   object-fit: cover;
 }
 
 .cookyer-cookiees { 
-  /* background-color: coral; */
-  /* display: grid; */
-  /* display: flex; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
@@ -353,53 +342,53 @@ p {
 }
 
 /* 비디오 헤더 */
-.video-header {
+.full-video-header {
   color: white;
   padding: 20px;
   display: flex;
   justify-content: space-between;
 }
 
-.video-header-left,
-.video-header-right,
-.video-lesson-time,
-.video-lesson-progress {
+.full-video-header-left,
+.full-video-header-right,
+.full-video-lesson-time,
+.full-video-lesson-progress {
   display: flex;
 }
 
-.video-lesson-title {
+.full-video-lesson-title {
   font-size: 30px;
   margin-right: 30px;
 }
 
-.video-lesson-cookyer {
+.full-video-lesson-cookyer {
   font-size: 20px;
   color: rgb(207, 207, 207);
   margin: auto 0px;
 }
 
-.video-lesson-time, .video-lesson-progress {
+.full-video-lesson-time, .-video-lesson-progress {
   margin: 5px;
 }
 
-.video-lesson-progress {
+.full-video-lesson-progress {
   width: 360px;
   justify-content: space-between;
 }
 
-.video-lesson-progress progress {
+.full-video-lesson-progress progress {
   width: 240px;
   height: 20px;
   -webkit-appearance: none;
   appearance: none;
 }
 
-.video-lesson-progress progress::-webkit-progress-bar {
+.full-video-lesson-progress progress::-webkit-progress-bar {
   background: rgb(224, 224, 224);
   border-radius: 15px;
 }
 
-.video-lesson-progress progress::-webkit-progress-value {
+.full-video-lesson-progress progress::-webkit-progress-value {
   background-color: rgb(255, 136, 0);
   border-radius: 15px;
 }
@@ -407,17 +396,14 @@ p {
 /* 비디오 사이드바 */
 .video-sidebar {
   position: fixed;
-  /* position: absolute; */
   z-index: 1;
   top: 0;
   right: 0;
   bottom: -120px;
-  width: 70px;
-  /* grid-column: 12 / 13; */
+  width: 60px;
   background-color: white;
-  /* display: grid;
-  grid-template-columns: 1fr; */
-  /* padding: 5px; */
+  /* display: flex; */
+  /* justify-content: space-between; */
 }
 
 .video-side-icon-wrap {
@@ -443,7 +429,7 @@ input[type="number"]::-webkit-inner-spin-button {
   appearance: none;
 }
 
-.cookyer-timer {
+.full-cookyer-timer {
   background-color: white;
   height: 190px;
   width: 332px;
@@ -456,20 +442,20 @@ input[type="number"]::-webkit-inner-spin-button {
   justify-content: center;
 }
 
-.video-timer-title {
+.full-video-timer-title {
   position: absolute;
   top: 20px;
   left: 20px;
 }
 
-.video-timer-content {
+.full-video-timer-content {
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin: auto 30px;
 }
 
-.video-timer-input input {
+.full-video-timer-input input {
   border: none;
   width: 70px;
   margin: 0;
@@ -478,11 +464,11 @@ input[type="number"]::-webkit-inner-spin-button {
   outline: none;
 }
 
-.video-timer-input span {
+.full-video-timer-input span {
   margin: 5px;
 }
 
-.video-timer-set-btn {
+.full-video-timer-set-btn {
   border: none;
   width: 70px;
   height: 70px;
@@ -491,18 +477,18 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 15px;
 }
 
-.video-timer-set-btn:hover {
+.full-video-timer-set-btn:hover {
   background-color: #00A442;
   color: white;
 }
 
-.cookyer-timer input, .cookyer-timer span {
+.full-cookyer-timer input, .full-cookyer-timer span {
   font-size: 50px;
   color: rgb(33, 33, 33);
 }
 
 /* 쿠키 타이머 */
-.cookiee-timer {
+.full-cookiee-timer {
   background-color: white;
   height: 120px;
   width: 332px;
@@ -515,16 +501,16 @@ input[type="number"]::-webkit-inner-spin-button {
   justify-content: center;
 }
 
-.video-timer-time {
+.full-video-timer-time {
   display: flex ;
 }
 
-.video-timer-time p {
+.full-video-timer-time p {
   font-size: 50px;
 }
 
 /* 쿠커/쿠키 진행단계 */
-.video-step-widget-cookyer {
+.full-video-step-widget-cookyer {
   background-color: white;
   border-radius: 5px;
   margin: 5px;
@@ -536,7 +522,7 @@ input[type="number"]::-webkit-inner-spin-button {
   left: 586px;
 }
 
-.video-step-widget-cookiee {
+.full-video-step-widget-cookiee {
   background-color: white;
   border-radius: 5px;
   margin: 5px;
@@ -547,13 +533,13 @@ input[type="number"]::-webkit-inner-spin-button {
   position: relative;
 }
 
-.video-step-title {
+.full-video-step-title {
   position: absolute;
   top: 20px;
   left: 20px;
 }
 
-.video-step-check-btn {
+.full-video-step-check-btn {
   border: 1px solid #4B4B4B;
   width: 125px;
   height: 50px;
@@ -563,23 +549,23 @@ input[type="number"]::-webkit-inner-spin-button {
   right: 30px;
 }
 
-.video-step-check-btn-wrap {
+.full-video-step-check-btn-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: auto 20px;
 }
 
-.video-step-check-count {
+.full-video-step-check-count {
   display: flex;
   font-size: 25px;
 }
 
-.video-step-check-icon {
+.full-video-step-check-icon {
   font-size: 30px;
 }
 
-.video-step-main {
+.full-video-step-main {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -587,7 +573,7 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 23px;
 }
 
-.video-step-content {
+.full-video-step-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -596,18 +582,18 @@ input[type="number"]::-webkit-inner-spin-button {
   width: 600px;
 }
 
-.video-step-content-update {
+.full-video-step-content-update {
   display: flex;
 }
 
-.video-step-content-update input {
+.full-video-step-content-update input {
   border: none;
   box-sizing: border-box;
   outline: none;
   border-bottom: 1px solid #a6a6a6;
 }
 
-.video-step-content button {
+.full-video-step-content button {
   background-color: transparent;
   border: 1px solid #4B4B4B;
   border-radius: 45px;
@@ -617,24 +603,85 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 15px;
 }
 
-.video-step-content button:hover {
+.full-video-step-content button:hover {
   border: 1px solid rgb(255, 123, 0);
   color: rgb(255, 123, 0);
 }
 
-.video-step-content-cookiee {
+.full-video-step-content-cookiee {
   width: 800px;
   margin: auto;
 }
 
-.video-step-content-cookiee p {
+.full-video-step-content-cookiee p {
   text-align: center;
   font-size: 20px;
 }
 
-@media screen and (max-width: 768px) {
-  .cookyer-sharing {
-    width: 100vw;
-    /* margin-right: 100px; */
-  }
+.box:nth-child(2n-1){
+	background-color: rgba(0,0,0,0.05);
+}
+
+.box {
+  display: inline-block;
+	height: 200px;
+	width: 33.3%;
+	float:left;
+	position: relative;
+	transition: all .2s ease;
+}
+
+.loader6 {
+  position: relative;
+	width: 12px;
+	height: 12px;
+
+	top: 46%;
+	top: -webkit-calc(50% - 6px);
+	top: calc(50% - 6px);
+	left: 46%;
+	left: -webkit-calc(50% - 6px);
+	left: calc(50% - 6px);
+	
+	border-radius: 12px;
+	background-color: #fff;
+	-webkit-transform-origin:  50% 50%;
+			transform-origin:  50% 50% ;
+	-webkit-animation: loader6 1s ease-in-out infinite;
+			animation: loader6 1s ease-in-out infinite;
+}
+
+.loader6:before{
+	content: "";
+	position: absolute;
+	background-color: rgba(255, 255, 255, .5);
+	top: 0px;
+	left: -25px;
+	height: 12px;
+	width: 12px;
+	border-radius: 12px;
+}
+
+.loader6:after{
+	content: "";
+	position: absolute;
+	background-color: rgba(255, 255 ,255 ,.5);
+	top: 0px;
+	left: 25px;
+	height: 12px;
+	width: 12px;
+	border-radius: 12px;
+}
+
+
+@-webkit-keyframes loader6{
+    0%{-webkit-transform:rotate(0deg);}
+    50%{-webkit-transform:rotate(180deg);}
+    100%{-webkit-transform:rotate(180deg);}
+}
+
+@keyframes loader6{
+    0%{transform:rotate(0deg);}
+    50%{transform:rotate(180deg);}
+    100%{transform:rotate(180deg);}
 }

@@ -294,7 +294,7 @@ function CookieeScreen() {
           <LessonReviewModal/>
         ) : null}
         <div>
-          <VideoHeader/>
+          <VideoHeader size={'full'}/>
           <div className='cookiee-video-content'>
             <div>
               <div className='cookiee-sharing'>
@@ -317,7 +317,7 @@ function CookieeScreen() {
                   )}
                 </div>
               </div>
-              <CookieeLessonStep/>
+              <CookieeLessonStep size={'full'}/>
             </div>
             <div>
               {/* 쿠커 화면 */}
@@ -336,7 +336,7 @@ function CookieeScreen() {
                   <BsMicMuteFill className='cookiee-cookyer-audio-icon'/>
                 )}
               </div>
-              <Timer role='COOKIEE'/>
+              <Timer role='COOKIEE' size='full'/>
               {/* 쿠키 본인 화면 */}
               <div className='cookiee-content'>
                 {publisher !== undefined ? (

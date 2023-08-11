@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-function CookieeLessonStep() {
+function CookieeLessonStep({ size }) {
   const curStep = useSelector((state) => state.videoLessonInfo.curStep)
   const curIdx = useSelector((state) => state.videoLessonInfo.curIdx)
 
@@ -10,9 +10,9 @@ function CookieeLessonStep() {
   }, [curStep])
 
   return (
-    <div className='video-step-widget-cookiee'>
-      <p className='video-step-title'>현재 진행 단계</p>
-      <div className='video-step-content-cookiee'>
+    <div className={`${size}-video-step-widget-cookiee`}>
+      <p className={`${size}-video-step-title`}>현재 진행 단계</p>
+      <div className={`${size}-video-step-content-cookiee`}>
         {curIdx !== 0 ? (
             <p>{curIdx}. {curStep}</p>
         ) : (

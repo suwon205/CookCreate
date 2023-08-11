@@ -6,7 +6,7 @@ import { setCurIdx, setCurStep, setLessonStepList } from '../../../store/video/v
 import { BsFillPersonCheckFill } from "react-icons/bs"
 import { GoChevronLeft, GoChevronRight } from "react-icons/go"
 
-function CookyerLessonStep() {
+function CookyerLessonStep({ size }) {
   const dispatch = useDispatch()
   const checkCookieeList = useSelector((state) => state.cookyerVideo.checkCookieeList)
   const [ checkCount, setCheckCount ] = useState(0)
@@ -108,16 +108,16 @@ function CookyerLessonStep() {
   }, [checkCookieeList])
 
   return (
-    <div className='video-step-widget-cookyer'>
-      <p className='video-step-title'>현재 진행 단계</p>
-      <div className='video-step-main'>
+    <div className={`${size}-video-step-widget-cookyer`}>
+      <p className={`${size}-video-step-title`}>현재 진행 단계</p>
+      <div className={`${size}-video-step-main`}>
         <GoChevronLeft onClick={goPrevStep}/>
         <div>
           {curStep ? (
             <div>
               {isUpdate ? (
-                <div className='video-step-content'>
-                  <div className='video-step-content-update'>
+                <div className={`${size}-video-step-content`}>
+                  <div className={`${size}-video-step-content-update`}>
                     <p>{curIdx}. </p>
                     <input value={inputStep} onChange={handleInputChange}></input>
                   </div>
@@ -125,12 +125,12 @@ function CookyerLessonStep() {
                 </div>
               ) : (
                 curIdx > 0 ? (
-                  <div className='video-step-content'>
+                  <div className={`${size}-video-step-content`}>
                     <p>{curIdx}. {curStep}</p>
                     <button onClick={handleIsUpdate}>수정</button>
                   </div>
                 ) : (
-                  <div className='video-step-content'>
+                  <div className={`${size}-video-step-content`}>
                     <p>{curIdx}. {curStep}</p>
                     <button>수정</button>
                   </div>
@@ -143,10 +143,10 @@ function CookyerLessonStep() {
         </div>
         <GoChevronRight onClick={goNextStep}/>
       </div>
-      <div className='video-step-check-btn'  onClick={() => resetCheckCookiee(publisher)}>
-        <div className='video-step-check-btn-wrap'>
-          <BsFillPersonCheckFill className='video-step-check-icon'/>
-          <div className='video-step-check-count'>
+      <div className={`${size}-video-step-check-btn`}  onClick={() => resetCheckCookiee(publisher)}>
+        <div className={`${size}-video-step-check-btn-wrap`}>
+          <BsFillPersonCheckFill className={`${size}-video-step-check-icon`}/>
+          <div className={`${size}-video-step-check-count`}>
             <p>{checkCount}</p>
             <p>/</p>
             <p>{subscribers.length}</p>
