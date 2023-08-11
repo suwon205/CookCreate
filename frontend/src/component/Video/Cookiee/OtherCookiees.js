@@ -10,11 +10,11 @@ function OtherCookiees() {
 
   useEffect(() => {
     if (subscribers) {
-      setCookiees(subscribers)
-      // const newList = subscribers.filter((sub) => {
-      //   return JSON.parse(sub.stream.connection.data).clientData.role === 'COOKIEE'
-      // })
-      // setCookiees(newList)
+      // setCookiees(subscribers)
+      const newList = subscribers.filter((sub) => {
+        return JSON.parse(sub.stream.connection.data).clientData.role === 'COOKIEE'
+      })
+      setCookiees(newList)
     }
   }, [subscribers])
 

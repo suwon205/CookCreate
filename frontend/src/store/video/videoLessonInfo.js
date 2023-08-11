@@ -48,7 +48,7 @@ const videoLessonInfo = createSlice({
       state.lessonStepList = undefined
       state.totalSteps = 0
       state.curStep = undefined
-      state.curIdx = undefined
+      state.curIdx = 0
     }
   },
 });

@@ -214,6 +214,7 @@ function getShareScreenPublisher(data) {
           publishAudio: true,
           publishVideo: true,
           mirror: false,
+          resolution: "1280x720",
           // resolution: '640x480', // The resolution of your video
           // frameRate: 30, // The frame rate of your video
           // insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
