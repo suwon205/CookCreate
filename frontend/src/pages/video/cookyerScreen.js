@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteSubscriber, enteredSubscriber, setAudioOffStream, setAudioOnList, setAudioOnStream, setMainStreamManager } from '../../store/video/video';
 import { joinSession } from '../../store/video/video-thunk';
-import { setCheckCookiee, setCheckCookieeList, setHandsDownCookiee, setHandsUpCookiee, setHandsUpCookieeList, setUncheckCookiee } from '../../store/video/cookyerVideo';
+import { deleteCookiee, setCheckCookiee, setCheckCookieeList, setHandsDownCookiee, setHandsUpCookiee, setHandsUpCookieeList, setUncheckCookiee } from '../../store/video/cookyerVideo';
 import { setLessonInfo } from '../../store/video/videoLessonInfo';
 import '../../style/video.css'
 import '../../style/video/cookyerScreen.css'
@@ -79,7 +79,9 @@ function CookyerScreen() {
 
       // On every Stream destroyed...
       const handleStreamDestroyed = (event) => {
+        console.log("나간 사람 제외", event)
         dispatch(deleteSubscriber(event.stream.streamManager))
+        dispatch(deleteCookiee(event.stream.connection.connectionId))
       };
 
       // On every asynchronous exception...
