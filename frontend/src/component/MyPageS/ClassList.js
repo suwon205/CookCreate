@@ -198,7 +198,6 @@ function ClassList() {
                         data-gtm-vis-has-fired-8964582_476="1"
                       >
                         <div className="course_card_front">
-                        {/* <a className="course_card_front" href="ㅔㅔㅔㅔ"> */}
                           <div className="card-image">
                             <figure className="image is_thumbnail">
                               <img
@@ -240,7 +239,10 @@ function ClassList() {
                               </dd>
                             </div>
                             <div className="instructor">쿠커: {lesson.cookyerName}({lesson.cookyerId})</div>
-                            <div className="date">신청날짜: {new Date(lesson.createdDate).toISOString().split("T")[0]}</div>
+                            <div>
+                              과외 생성일: 
+                              {new Date(lesson.createdDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short', hour: '2-digit', minute: '2-digit' })}
+                            </div>
                             <div className="price">가격:{lesson.price}</div>
                             <div className="difficulty">난이도:{lesson.difficulty}</div>
                             <div className="time">찜:{lesson.jjimCount}</div>
@@ -257,7 +259,8 @@ function ClassList() {
                                   <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_calendar.png" alt="기간아이콘" width="29" />
                                   "과외 날짜"
                                 </dt>
-                                <dd>{new Date(lesson.lessonDate).toISOString().split("T")[0]} 예정</dd>
+                                <dd>{new Date(lesson.lessonDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short', hour: '2-digit', minute: '2-digit' })} 예정</dd>
+                                {/* <dd>{new Date(lesson.lessonDate).toISOString().split("T")[0]} 예정</dd> */}
                                 {lesson.sessionId === null ? (
                                   <button disabled="disabled">수업예정</button>
                                 ) : (
@@ -277,15 +280,14 @@ function ClassList() {
                                 </div>
                               </div>
                               <p className="card-content__notice"></p>
-                              <div className="tags">
+                              {/* <div className="tags">
                                 <span className="tag" style={{ backgroundColor: "hsl(321,63%,90%)" }}>
                                   수정시간:{new Date(lesson.modifiedDate).toISOString().split("T")[0]}
                                 </span>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>
-                        {/* </a> */}
                       </div>
                     </div>
                   </div>
@@ -309,7 +311,7 @@ function ClassList() {
                         data-gtm-vis-total-visible-time-8964582_476="100"
                         data-gtm-vis-has-fired-8964582_476="1"
                       >
-                        <a className="course_card_front" href="ㅔㅔㅔㅔ">
+                        <div className="course_card_front">
                           <div className="card-image">
                             <figure className="image is_thumbnail">
                               <img
@@ -351,7 +353,10 @@ function ClassList() {
                               </dd>
                             </div>
                             <div className="instructor">쿠커: {lesson.cookyerName}({lesson.cookyerId})</div>
-                            <div className="date">신청날짜: {new Date(lesson.createdDate).toISOString().split("T")[0]}</div>
+                            <div>
+                              과외 생성일: 
+                              {new Date(lesson.createdDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short', hour: '2-digit', minute: '2-digit' })}
+                            </div>
                             <div className="price">가격:{lesson.price}</div>
                             <div className="difficulty">난이도:{lesson.difficulty}</div>
                             <div className="time">찜:{lesson.jjimCount}</div>
@@ -368,7 +373,7 @@ function ClassList() {
                                   <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_calendar.png" alt="기간아이콘" width="29" />
                                   "과외 날짜"
                                 </dt>
-                                <dd>{new Date(lesson.lessonDate).toISOString().split("T")[0]} 완료</dd>
+                                <dd>{new Date(lesson.lessonDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short', hour: '2-digit', minute: '2-digit' })} 예정</dd>
                                 <button disabled="disabled">수업종료</button>
                               </dl>
                               <div className="info_ea">
@@ -384,14 +389,14 @@ function ClassList() {
                                 </div>
                               </div>
                               <p className="card-content__notice"></p>
-                              <div className="tags">
+                              {/* <div className="tags">
                                 <span className="tag" style={{ backgroundColor: "hsl(321,63%,90%)" }}>
                                   수정시간:{new Date(lesson.modifiedDate).toISOString().split("T")[0]}
                                 </span>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
-                        </a>
+                        </div>
                       </div>
                     </div>
                     <button onClick={() => handleOpenModal(lesson.lessonId)}>리뷰작성</button>

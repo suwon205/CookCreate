@@ -94,8 +94,9 @@ function Payment() {
                   <div className="info-details">
                     <div>과외명</div>
                     <div>{payment.lessonTitle}</div>
-                    <div>결제 시간</div>
-                    <div>{formatDateTime(payment.approvedAt)}</div>
+                    <div>결제일</div>
+                    <div>{new Date(payment.approvedAt).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</div>
+                    {/* <div>{formatDateTime(payment.approvedAt)}</div> */}
                     <div>환불 시간</div>
                     {payment.canceledAt !== null ? (
                       <div>{formatDateTime(payment.canceledAt)}</div>
