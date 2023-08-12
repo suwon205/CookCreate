@@ -2,15 +2,24 @@ import React, {useState, useEffect} from "react";
 import "../../style/recipebook.css";
 import SideBar from "./SideBar";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RecipeBookModal from "./RecipeBookModal";
+import { useNavigate } from "react-router";
+import { setLessonId } from "../../store/lesson/lessonInfo";
 
 function RecipeBook() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const accessToken = useSelector((state) => state.auth.access_token);
   // console.log(accessToken);
   const [ recipeBookData, setRecipeBookData ] = useState(null);
   const [ showRecipe, setShowRecipe ] = useState(false)
   const [ recipeModalData, setRecipeModalData ] = useState(null)
+
+  /** 이동할 과외 아이디 */
+  const [ goLessonDetail, setGoLessonDetail ] = useState(false)
+  const lessonId = useSelector((state) => state.lessonInfo.lessonId)
 
   useEffect(() => {
     axios
@@ -34,9 +43,20 @@ function RecipeBook() {
 
   const handleShowRecipe = ( data ) => {
     setShowRecipe(data.showRecipe)
-    setRecipeModalData(data.recipe)
-    
+    setRecipeModalData(data.recipe) 
   }
+
+  const goLesson = (lessonId) => {
+    setGoLessonDetail(true)
+    dispatch(setLessonId(lessonId))
+    navigate(`/lesson/${lessonId}`)
+  }
+
+  useEffect(() => {
+    if (goLessonDetail && lessonId !== null) {
+      navigate(`/lesson/${lessonId}`)
+    }
+  }, [lessonId])
 
   return (
     <div className="recipe_container">
@@ -57,8 +77,8 @@ function RecipeBook() {
                     {/* <img src="https://recipe1.ezmember.co.kr/cache/recipe/2019/08/21/f51404dc513ccc76be4b5668f5dd350b1_m.jpg" /> */}
                     {/* </a> */}
                   </div>
-                  <div>
-                    <div>강좌명: {recipe.lessonTitle}</div>
+                  <div  onClick={() => goLesson(recipe.lessonId)}>
+                    <div>과외명: {recipe.lessonTitle}</div>
                   </div>
                   <div>
                     <p>

@@ -2,22 +2,29 @@ import React, { useState, useEffect } from "react";
 import "../../style/review.css";
 import SideBar from "./SideBar";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReviewDetail from "./ReviewDetail";
 import Modal from 'react-modal';
 
 //별점표시
 import StarShow from "../MyPageT/StarShow";
+import { useNavigate } from "react-router";
+import { setLessonId } from "../../store/lesson/lessonInfo";
 
 
 
 function Review() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const accessToken = useSelector((state) => state.auth.access_token);
   const [reviews, setReviews] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedReviewId, setSelectedReviewId] = useState(null); // 선택된 리뷰의 reviewId 
 
-
+  /** 이동할 과외 아이디 */
+  const [ goLessonDetail, setGoLessonDetail ] = useState(false)
+  const lessonId = useSelector((state) => state.lessonInfo.lessonId)
 
   // const [selectedReview, setSelectedReview] = useState(null);
   //모달리뷰
@@ -56,7 +63,17 @@ function Review() {
       });
   }, [accessToken,reviews]);
 
-  
+  const goLesson = (lessonId) => {
+    setGoLessonDetail(true)
+    dispatch(setLessonId(lessonId))
+    navigate(`/lesson/${lessonId}`)
+  }
+
+  useEffect(() => {
+    if (goLessonDetail && lessonId !== null) {
+      navigate(`/lesson/${lessonId}`)
+    }
+  }, [lessonId])
 
   return (
     <div>
@@ -85,9 +102,9 @@ function Review() {
               <div className="review_box">
                 <div className="review_item">
                   <div className="review_cont">
-                    <a href="dd" className="review_link">
-                      강좌이름: {review.lessonTitle}
-                    </a>
+                    <div className="review_link" onClick={() => goLesson(review.lessonId)}>
+                      과외명: {review.lessonTitle}
+                    </div>
                     <StarShow rating={review.rating} size="1.4rem" color="gold" />
                     <div>{review.rating}</div>
                     <div className="review_author">작성자:{review.nickname}</div>

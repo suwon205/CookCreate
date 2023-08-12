@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SideBar from "./SideBar";
 import axios from "axios";
+import { useNavigate } from "react-router";
+import { setLessonId } from "../../store/lesson/lessonInfo";
 
 function formatDateTime(dateTimeString) {
   const options = {
@@ -15,10 +17,17 @@ function formatDateTime(dateTimeString) {
 }
 
 function Payment() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  
   const accessToken = useSelector((state) => state.auth.access_token);
   const [userPayment, setUserPayments] = useState([]);
   const [state, setState] = useState('') //결제 상태
   const paymentMessage = userPayment[0]?.lessonId === 0 ? "결제 내역이 없습니다." : "";
+
+  /** 이동할 과외 아이디 */
+  const [ goLessonDetail, setGoLessonDetail ] = useState(false)
+  const lessonId = useSelector((state) => state.lessonInfo.lessonId)
 
   const handleRefund = (lessonId) => {
     axios
@@ -68,6 +77,18 @@ function Payment() {
       });
   }, [accessToken]);
 
+  const goLesson = (lessonId) => {
+    setGoLessonDetail(true)
+    dispatch(setLessonId(lessonId))
+    navigate(`/lesson/${lessonId}`)
+  }
+
+  useEffect(() => {
+    if (goLessonDetail && lessonId !== null) {
+      navigate(`/lesson/${lessonId}`)
+    }
+  }, [lessonId])
+
   return (
     <div className="mypage">
       <SideBar />
@@ -84,7 +105,24 @@ function Payment() {
                 <div className="pay-label">
                   <div className="pay-state">
                     <div>결제상태</div>
-                    <div>{payment.payStatus}</div>
+                    <div>
+                      {(() => {
+                        switch (payment.payStatus) {
+                          case 'READY':
+                            return '결제 준비중';
+                          case 'FAIL':
+                            return '결제 실패'
+                          case 'CANCEL':
+                            return '결제 취소'
+                          case 'COMPLETED':
+                            return '결제 완료'
+                          case 'REFUND':
+                            return '환불 처리'
+                          default:
+                            return '알 수 없음'
+                        }
+                      })()}
+                    </div>
                   </div>
                 </div>
                 <div className="pay-info">
@@ -92,16 +130,21 @@ function Payment() {
                 </div>
                 <div className="class-info">
                   <div className="info-details">
-                    <div>과외명</div>
-                    <div>{payment.lessonTitle}</div>
-                    <div>결제일</div>
-                    <div>{new Date(payment.approvedAt).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</div>
-                    {/* <div>{formatDateTime(payment.approvedAt)}</div> */}
-                    <div>환불 시간</div>
-                    {payment.canceledAt !== null ? (
-                      <div>{formatDateTime(payment.canceledAt)}</div>
-                    ) : <div>-</div>
-                    }
+                    <div>
+                      <div onClick={() => goLesson(payment.lessonId)}>과외명</div>
+                      <div>{payment.lessonTitle}</div>
+                    </div>
+                    <div>
+                      <div>결제일</div>
+                      <div>{new Date(payment.approvedAt).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</div>
+                      {/* <div>{formatDateTime(payment.approvedAt)}</div> */}
+                    </div>
+                    <div>
+                      <div>환불 시간</div>
+                      {payment.canceledAt !== null ? (
+                        <div>{formatDateTime(payment.canceledAt)}</div>
+                      ) : <div>-</div>}
+                    </div>
                     
                   </div>
                   <div className="info-price">

@@ -15,10 +15,12 @@ import {
   setIntroduce, setCookyerName, setFood, setCookyerId, setBadge, setProfileImg
 } from '../store/lesson/lessonInfo';
 import '../style/lesson/lessonDetailCss.css';
+import { useParams } from 'react-router';
 
 
 function LessonDetail() {
   const dispatch = useDispatch();
+
   const lessonId = useSelector((state) => state.lessonInfo.lessonId);
   const accessToken = localStorage.getItem('access_token');
   const categoryName = useSelector((state) => state.lessonInfo.categoryName);
