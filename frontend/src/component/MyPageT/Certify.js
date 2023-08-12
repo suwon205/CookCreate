@@ -99,9 +99,24 @@ function Certify() {
         {certificates.map((certificate) => (
         <div key={certificate.badgeId}>
           <img src={certificate.capture} alt={`자격증 ID: ${certificate.badgeId}`} style={{ maxWidth: "200px" }} />
-          <p>자격증 ID: {certificate.badgeId}</p>
-          <p>상태: {certificate.certificated}</p>
-          <p>등록일: {new Date(certificate.createdDate).toISOString().split("T")[0]}</p>
+          <div>
+            <p>자격증 ID</p>
+            <p>{certificate.badgeId}</p>
+          </div>
+          <div>
+            <p>등록일</p>
+            <p>{new Date(certificate.createdDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
+          </div>
+          <div>
+            <p>승인 상태</p>
+            <p>{certificate.certificated}</p>
+          </div>
+          <div>
+            <p>승인일</p>
+            {certificate.modifiedDate ? (
+              <p>{new Date(certificate.modifiedDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</p>
+            ) : (<p>'-'</p>)}
+          </div>
           <hr />
         </div>
         ))}

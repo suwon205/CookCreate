@@ -203,7 +203,7 @@ function ClassList() {
             <h2>신청한 과외</h2>
             {classData !== null && classData !== undefined && classData ? (
               classData.map((lesson)=> (
-                <div key = {lesson.lessonId} className="columns is-multiline is-mobile courses_card_list_body" onClick={() => goLesson(lesson.lessonId)}>
+                <div key = {lesson.lessonId} className="columns is-multiline is-mobile courses_card_list_body">
                   <div className="column is-3-fullhd is-3-widescreen is-4-desktop is-4-tablet is-6-mobile ">
                     <div
                       className="card course course_card_item"
@@ -229,7 +229,7 @@ function ClassList() {
                           </figure>
                         </div>
                         <div className="card-content">
-                          <div className="course_title">과외명: {lesson.lessonTitle}</div>
+                          <div className="course_title" onClick={() => goLesson(lesson.lessonId)}>과외명: {lesson.lessonTitle}</div>
                           <div className="course_title">
                           <dt>카테고리</dt>
                             <dd>
@@ -298,7 +298,7 @@ function ClassList() {
             <h2>완료한 과외</h2>
             {completedData !== null && completedData !== undefined && completedData ? (
               completedData.map((lesson)=> (
-                <div key = {lesson.lessonId} className="columns is-multiline is-mobile courses_card_list_body" onClick={() => goLesson(lesson.lessonId)}>
+                <div key = {lesson.lessonId} className="columns is-multiline is-mobile courses_card_list_body">
                   <div className="column is-3-fullhd is-3-widescreen is-4-desktop is-4-tablet is-6-mobile ">
                     <div
                       className="card course course_card_item"
@@ -324,7 +324,7 @@ function ClassList() {
                           </figure>
                         </div>
                         <div className="card-content">
-                          <div className="course_title">과외명: {lesson.lessonTitle}</div>
+                          <div className="course_title" onClick={() => goLesson(lesson.lessonId)}>과외명: {lesson.lessonTitle}</div>
                           <div className="course_title">
                           <dt>카테고리</dt>
                             <dd>

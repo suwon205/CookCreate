@@ -234,7 +234,7 @@ function Account() {
     <div className="mypage">
       <SideBar />
       <div className="mytitle">정보수정</div>
-      {userData ? <div>가입일:{new Date(userData.createdDate).toISOString().split("T")[0]}</div> : null}
+      <div>가입일: {new Date(userData.createdDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</div>
       <div className="mysubtitle">프로필 변경</div>
       <img
         src={profileImgUrl}

@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import SideBar from "./SideBar";
 import { useDispatch, useSelector} from "react-redux";
 import axios from 'axios';
@@ -6,6 +6,9 @@ import { initOVSession, setIsSessionOpened, setSessionId, setVideoLessonId } fro
 import { OpenVidu } from 'openvidu-browser';
 import { useNavigate } from 'react-router-dom';
 import { setClassData, setCompletedData } from '../../store/mypageS/accountS';
+import { setLessonId } from '../../store/lesson/lessonInfo';
+import AlertModal from '../AlertModal';
+
 
 //시간 포맷
 const displayTime = (dateTime) => {
@@ -47,7 +50,20 @@ function ClassList() {
   /** 1시간 전부터 과외방 생성 가능 */ // 일단 새고해야 알 수 있는걸로..
   const currentDate = new Date()
 
-  useEffect(() => {
+  /** 이동할 과외 아이디 */
+  const [ goLessonDetail, setGoLessonDetail ] = useState(false)
+  const lessonId = useSelector((state) => state.lessonInfo.lessonId)
+
+  /** 삭제 전 알림 모달 관련 */
+  const [ showAlert, setShowAlert ] = useState(false)
+  const [ deleteAction, setDeleteAction ] = useState(false)
+  const [ deleteLessonId, setDeleteLessonId ] = useState(null)
+
+  /** 삭제 후 알림 모달 관련 */
+  const [ deleteContent, setDeleteContent ] = useState(null)
+  const [ showCompletedAlert, setShowCompletedAlert ] = useState(false)
+
+  const getClassList = () => {
     axios
       .get(`api/v1/my/applied`, {
         headers: {
@@ -83,7 +99,11 @@ function ClassList() {
         console.log("완료한 과외 조회 에러", err);
         // 에러 처리 로직 추가 가능
       });
-    }, []);
+  }
+
+  useEffect(() => {
+    getClassList()
+  }, []);
 
   /** 쿠커 화상과외방 생성 및 입장 */
   const createRoom = ( lessonId ) => {
@@ -168,15 +188,58 @@ function ClassList() {
     )
     .then((res) => {
       console.log('쿠커 과외 삭제 성공', res)
+      setDeleteContent("과외가 삭제되었습니다.")
+      getClassList()
     })
     .catch((err) => {
       console.log('쿠커 과외 삭제 실패', err)
       let error = Object.assign({}, err)
       if (error?.response?.status === 409) {
-        alert('신청한 쿠키가 있어 수업을 삭제할 수 없습니다.')
+        // alert('신청한 쿠키가 있어 수업을 삭제할 수 없습니다.')
+        setDeleteContent("신청한 쿠키가 있어 과외를 삭제할 수 없습니다.")
+      } else {
+        setDeleteContent("과외를 삭제할 수 없습니다.")
       }
     })
   }
+
+  const goLesson = (lessonId) => {
+    setGoLessonDetail(true)
+    dispatch(setLessonId(lessonId))
+    navigate(`/lesson/${lessonId}`)
+  }
+
+  useEffect(() => {
+    if (goLessonDetail && lessonId !== null) {
+      navigate(`/lesson/${lessonId}`)
+    }
+  }, [lessonId])
+
+  useEffect(() => {
+    console.log("여기까지 오니?", deleteAction, deleteLessonId)
+    if (deleteAction && deleteLessonId) {
+      setShowAlert(false)
+      deleteClass(deleteLessonId)
+      setDeleteAction(false)
+    }
+  }, [deleteAction, deleteLessonId])
+
+  const handleDeleteClass = (lessonId) => {
+    setShowAlert(true)
+    setDeleteLessonId(lessonId)
+  }
+
+  useEffect(() => {
+    if (deleteContent) {
+      setShowCompletedAlert(true)
+    }
+  }, [deleteContent])
+
+  useEffect(() => {
+    if (!showCompletedAlert) {
+      setDeleteContent(null)
+    }
+  }, [showCompletedAlert])
 
   return (
     <div>
@@ -220,7 +283,7 @@ function ClassList() {
                             </figure>
                           </div>
                           <div className="card-content">
-                            <div className="course_title">강좌명:{lesson.lessonTitle}</div>
+                            <div className="course_title" onClick={() => goLesson(lesson.lessonId)}>과외명:{lesson.lessonTitle}</div>
                             <div className="course_title">
                             <dt>카테고리</dt>
                               <dd>
@@ -247,17 +310,7 @@ function ClassList() {
                               </dd>
                             </div>
                             <div className="instructor">쿠커: {lesson.cookyerName}</div>
-                            <div className="date">신청날짜:{new Date(lesson.createdDate).toISOString().split("T")[0]}</div>
-                            {/* <div className="date">신청날짜: {new Date(lesson.createdDate).toISOString().split("T")[0]}</div>                            <div className="price">가격:{lesson.price}</div> */}
-                            <div className="difficulty">난이도:{lesson.difficulty}</div>
                             <div className="view2_summary_info">
-                              <dl className="info_delivery">
-                                <dt>
-                                  <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_clock2.png" alt="시간아이콘" width="29" />
-                                  "소요시간"
-                                </dt>
-                                <dd>{lesson.timeTaken}분</dd>
-                              </dl>
                               <dl className="info_delivery">
                                 <dt>
                                   <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_calendar.png" alt="기간아이콘" width="29" />
@@ -288,15 +341,15 @@ function ClassList() {
                               </div>
                               <p className="card-content__notice"></p>
                               <div className="tags">
-                                {/* <span className="tag" style={{ backgroundColor: "hsl(321,63%,90%)" }}>
-                                  수정시간:{lesson.modifiedDate}
-                                </span> */}
-                                {lesson ? 
-                                <span className="tag" style={{ backgroundColor: "hsl(321,63%,90%)" }}>
-                                  수정시간:{displayTime(lesson.modifiedDate)}
-                                </span>: null}
                                 <button onClick={() => updateClass(lesson.lessonId)}>수정</button>
-                                <button onClick={() => deleteClass(lesson.lessonId)}>삭제</button>
+                                <button onClick={() => handleDeleteClass(lesson.lessonId)}>삭제</button>
+                                {/* <button onClick={() => deleteClass(lesson.lessonId)}>삭제</button> */}
+                                {showAlert ? (
+                                  <AlertModal content={'정말로 삭제하시겠습니까?'} path='setTrue' actions={setDeleteAction}/>
+                                ) : null}
+                                {showCompletedAlert ? (
+                                  <AlertModal content={deleteContent} path='setFalse' actions={setShowCompletedAlert}/>
+                                ) : null}
                               </div>
                             </div>
                           </div>
@@ -340,7 +393,7 @@ function ClassList() {
                             </figure>
                           </div>
                           <div className="card-content">
-                            <div className="course_title">강좌명:{lesson.lessonTitle}</div>
+                            <div className="course_title" onClick={() => goLesson(lesson.lessonId)}>과외명:{lesson.lessonTitle}</div>
                             <div className="course_title">
                             <dt>카테고리</dt>
                               <dd>
@@ -367,17 +420,7 @@ function ClassList() {
                               </dd>
                             </div>
                             <div className="instructor">쿠커: {lesson.cookyerName}</div>
-                            <div className="date">신청날짜:{new Date(lesson.createdDate).toISOString().split("T")[0]}</div>
-                            <div className="price">가격:{lesson.price}</div>
-                            <div className="difficulty">난이도:{lesson.difficulty}</div>
                             <div className="view2_summary_info">
-                              <dl className="info_delivery">
-                                <dt>
-                                  <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_clock2.png" alt="시간아이콘" width="29" />
-                                  "소요시간"
-                                </dt>
-                                <dd>{lesson.timeTaken}분</dd>
-                              </dl>
                               <dl className="info_delivery">
                                 <dt>
                                   <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_calendar.png" alt="기간아이콘" width="29" />
@@ -391,8 +434,8 @@ function ClassList() {
                               </dl>
                               <div className="info_ea">
                                 <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_people.png" alt="수강아이콘" width="29" style={{ paddingRight: "5px", verticalAlign: "text-bottom" }} />
-                                <b>"{lesson.remaining}"명 남음.</b>
-                                  최대인원:{lesson.maximum}명
+                                <p>수강 인원</p>
+                                <p>{lesson.maximum - lesson.remaining}</p>
                               </div>
                             </div>
                             <div className="rating">
@@ -402,15 +445,6 @@ function ClassList() {
                                 </div>
                               </div>
                               <p className="card-content__notice"></p>
-                              <div className="tags">
-                                {/* <span className="tag" style={{ backgroundColor: "hsl(321,63%,90%)" }}>
-                                  수정시간:{lesson.modifiedDate}
-                                </span> */}
-                                {lesson ? 
-                                <span className="tag" style={{ backgroundColor: "hsl(321,63%,90%)" }}>
-                                  수정시간:{displayTime(lesson.modifiedDate)}
-                                </span>: null}
-                              </div>
                             </div>
                           </div>
                         </div>

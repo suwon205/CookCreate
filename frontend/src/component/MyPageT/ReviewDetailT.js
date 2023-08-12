@@ -60,7 +60,7 @@ export default function ReviewDetailT({ reviewId,onClose}) {
     <h2 className="modal-title">리뷰 상세 정보</h2>
     <div className="review-details">
       <div className="review-field">
-        <label htmlFor="lessonTitle">강좌 이름:{selectedReview.lessonTitle}</label>
+        <label htmlFor="lessonTitle">과외명:{selectedReview.lessonTitle}</label>
       </div>
       <div className="review-field">
         <label htmlFor="rating">평점:{selectedReview.rating}</label>
