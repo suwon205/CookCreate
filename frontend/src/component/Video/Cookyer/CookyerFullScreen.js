@@ -94,7 +94,7 @@ function CookyerFullScreen(props) {
         </div>
       ) : (
         <div className='box'>
-          <div className='loader6'></div>
+          <div className='loader10'></div>
         </div>
       )}
     </div>

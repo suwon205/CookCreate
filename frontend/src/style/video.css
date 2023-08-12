@@ -4,14 +4,6 @@
   --empty-color: #D9D9D9
 }
 
-iframe {
-  display: none;
-}
-
-p {
-  margin: 0px;
-}
-
 /* 네브바 드롭다운메뉴 나중에 옮기기 */
 .dropdown {
   display: flex;
@@ -50,348 +42,7 @@ p {
 
 /* 옮기기 */
 
-/* .video-page {
-  background-color: #262626;
-  grid-template-columns: repeat(12, 1fr);
-  display: flex;
-} */
 
-/* .video-nickname {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-}
-
-.stream-component {
-  position: relative;
-} */
-
-/* 쿠커 화면 */
-
-.cookyer-sharing {
-  width: 968px;
-  height: 540px;
-  padding: 5px;
-} 
-
-.cookyer-sharing-content {
-  background-color: var(--empty-color);
-  border-radius: 5px;
-  height: 530px;
-  object-fit: cover;
-}
-
-.cookyer {
-  width: 586px;
-  height: 396px;
-  padding: 5px;
-}
-
-.cookyer-video {
-  background-color: var(--empty-color);
-  border-radius: 5px;
-  height: 386px;
-  object-fit: cover;
-}
-
-.cookyer-cookiees { 
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  width: 818px;
-  height: 810px;
-  overflow: hidden;
-}
-
-.cookyer-cookiee {
-  background-color: var(--empty-color);
-  border-radius: 5px;
-  margin: 5px;
-  width: 399px;
-  height: 260px;
-  display: inline-block; /* inline-flex */
-  object-fit: cover;
-}
-
-.cookyer-components {
-  display: flex;
-}
-
-.cookyer-components-left-bottom {
-  display: flex;
-}
-
-.cookyer-cookiee-content {
-  position: relative;
-}
-
-.cookyer-cookiee-audio-icon-active {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 125px;
-}
-
-.cookyer-cookiee-audio-icon {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 125px;
-}
-
-.cookyer-check-icon-active {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 80px;
-  color: rgb(33, 172, 33);
-}
-
-.cookyer-check-icon {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 80px;
-  color: rgb(114, 114, 114);
-}
-
-.cookyer-handsup-icon-active-0 {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 35px;
-  color: rgb(255, 0, 0);
-}
-
-.cookyer-handsup-icon-active-1 {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 35px;
-  color: rgb(255, 106, 42);
-}
-
-.cookyer-handsup-icon-active-2 {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 35px;
-  color: rgb(255, 200, 0);
-}
-
-.cookyer-handsup-icon-active-3 {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 35px;
-  color: rgb(27, 196, 12);
-}
-
-.cookyer-handsup-icon-active-4 {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 35px;
-  color: rgb(0, 94, 255);
-}
-
-.cookyer-handsup-icon-active-5 {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 35px;
-  color: rgb(89, 0, 134);
-}
-
-.cookyer-handsup-icon {
-  font-size: 35px;
-  position: absolute;
-  top: 210px;
-  right: 35px;
-  color: rgb(114, 114, 114);
-}
-
-.cookyer-lesson-step-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 600px;
-  height: 800px;
-  z-index: 2;
-}
-
-/* 쿠키 화면 */
-
-.cookiee-video-content {
-  display: flex;
-}
-
-.cookiee-sharing {
-  /* background-color: rgb(111, 220, 220); */
-  width: 1042px;
-  height: 652px;
-  /* display: inline-block; */
-  padding: 5px;
-} 
-
-.cookiee-sharing-content {
-  background-color: var(--empty-color);
-  border-radius: 5px;
-  height: 642px;
-  object-fit: cover;
-}
-
-.cookiee-content {
-  /* background-color: rgb(184, 108, 255); */
-  width: 378px;
-  height: 251px;
-  padding: 5px;
-  position: relative;
-}
-
-.cookiee-content-video {
-  background-color: var(--empty-color);
-  border-radius: 5px;
-  height: 241px;
-  object-fit: cover;
-}
-
-.cookiee-cookyer-audio-icon-active {
-  font-size: 25px;
-  position: absolute;
-  top: 200px;
-  right: 25px;
-}
-
-.cookiee-cookyer-audio-icon {
-  font-size: 25px;
-  position: absolute;
-  top: 200px;
-  right: 25px;
-}
-
-.cookiee-check-icon-active {
-  font-size: 35px;
-  position: absolute;
-  top: 195px;
-  right: 70px;
-  color: rgb(33, 172, 33);
-}
-
-.cookiee-check-icon {
-  font-size: 35px;
-  position: absolute;
-  top: 195px;
-  right: 70px;
-  color: rgb(114, 114, 114);
-}
-
-.cookiee-handsup-icon-active {
-  font-size: 35px;
-  position: absolute;
-  top: 195px;
-  right: 25px;
-  color: rgb(255, 200, 0);
-}
-
-.cookiee-handsup-icon {
-  font-size: 35px;
-  position: absolute;
-  top: 195px;
-  right: 25px;
-  color: rgb(114, 114, 114);
-}
-
-.cookiee-lesson-review-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 600px;
-  height: 800px;
-  z-index: 2;
-}
-
-/* 다른 쿠키 목록 */
-.other-cookiees {
-  position: absolute;
-  top: 500px;
-  right: 82px;
-  width: 330px;
-  height: 324px;
-  background-color: orange;
-}
-
-.other-cookiees-video {
-  background-color: var(--empty-color);
-  border-radius: 5px;
-  margin: 5px;
-  width: 150px;
-  height: 98px;
-  display: inline-block; /* inline-flex */
-  object-fit: cover;
-}
-
-/* 비디오 헤더 */
-.full-video-header {
-  color: white;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.full-video-header-left,
-.full-video-header-right,
-.full-video-lesson-time,
-.full-video-lesson-progress {
-  display: flex;
-}
-
-.full-video-lesson-title {
-  font-size: 30px;
-  margin-right: 30px;
-}
-
-.full-video-lesson-cookyer {
-  font-size: 20px;
-  color: rgb(207, 207, 207);
-  margin: auto 0px;
-}
-
-.full-video-lesson-time, .-video-lesson-progress {
-  margin: 5px;
-}
-
-.full-video-lesson-progress {
-  width: 360px;
-  justify-content: space-between;
-}
-
-.full-video-lesson-progress progress {
-  width: 240px;
-  height: 20px;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.full-video-lesson-progress progress::-webkit-progress-bar {
-  background: rgb(224, 224, 224);
-  border-radius: 15px;
-}
-
-.full-video-lesson-progress progress::-webkit-progress-value {
-  background-color: rgb(255, 136, 0);
-  border-radius: 15px;
-}
 
 /* 비디오 사이드바 */
 .video-sidebar {
@@ -413,6 +64,11 @@ p {
 
 .video-side-icon {
   font-size: 30px;
+  transition: all 0.2s linear;
+}
+
+.video-side-icon:hover {
+  transform: scale(1.1);
 }
 
 .video-exit-icon {
@@ -421,26 +77,15 @@ p {
   /* margin: auto; */
 }
 
-/* 쿠커 타이머 */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+.video-side-icon-wrap div {
+  display: none;
 }
 
-.full-cookyer-timer {
-  background-color: white;
-  height: 190px;
-  width: 332px;
-  padding: 20px;
-  border-radius: 5px;
-  margin: 5px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.video-side-icon:hover + .video-side-icon-p {
+  display: block;
 }
+
+/* 쿠커 타이머 */
 
 .full-video-timer-title {
   position: absolute;
@@ -453,169 +98,6 @@ input[type="number"]::-webkit-inner-spin-button {
   display: flex;
   justify-content: space-between;
   margin: auto 30px;
-}
-
-.full-video-timer-input input {
-  border: none;
-  width: 70px;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  outline: none;
-}
-
-.full-video-timer-input span {
-  margin: 5px;
-}
-
-.full-video-timer-set-btn {
-  border: none;
-  width: 70px;
-  height: 70px;
-  border-radius: 35px;
-  background-color: #D9D9D9;
-  font-size: 15px;
-}
-
-.full-video-timer-set-btn:hover {
-  background-color: #00A442;
-  color: white;
-}
-
-.full-cookyer-timer input, .full-cookyer-timer span {
-  font-size: 50px;
-  color: rgb(33, 33, 33);
-}
-
-/* 쿠키 타이머 */
-.full-cookiee-timer {
-  background-color: white;
-  height: 120px;
-  width: 332px;
-  padding: 20px;
-  border-radius: 5px;
-  margin: 5px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.full-video-timer-time {
-  display: flex ;
-}
-
-.full-video-timer-time p {
-  font-size: 50px;
-}
-
-/* 쿠커/쿠키 진행단계 */
-.full-video-step-widget-cookyer {
-  background-color: white;
-  border-radius: 5px;
-  margin: 5px;
-  width: 1183px;
-  height: 106px;
-  display: flex;
-  position: absolute;
-  top: 911px;
-  left: 586px;
-}
-
-.full-video-step-widget-cookiee {
-  background-color: white;
-  border-radius: 5px;
-  margin: 5px;
-  width: 1042px;
-  height: 96px;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.full-video-step-title {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-
-.full-video-step-check-btn {
-  border: 1px solid #4B4B4B;
-  width: 125px;
-  height: 50px;
-  border-radius: 46px;
-  position: absolute;
-  top: 28px;
-  right: 30px;
-}
-
-.full-video-step-check-btn-wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto 20px;
-}
-
-.full-video-step-check-count {
-  display: flex;
-  font-size: 25px;
-}
-
-.full-video-step-check-icon {
-  font-size: 30px;
-}
-
-.full-video-step-main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  font-size: 23px;
-}
-
-.full-video-step-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: auto 10px;
-  padding: 20px;
-  width: 600px;
-}
-
-.full-video-step-content-update {
-  display: flex;
-}
-
-.full-video-step-content-update input {
-  border: none;
-  box-sizing: border-box;
-  outline: none;
-  border-bottom: 1px solid #a6a6a6;
-}
-
-.full-video-step-content button {
-  background-color: transparent;
-  border: 1px solid #4B4B4B;
-  border-radius: 45px;
-  width: 50px;
-  height: 25px;
-  margin-left: 10px;
-  font-size: 15px;
-}
-
-.full-video-step-content button:hover {
-  border: 1px solid rgb(255, 123, 0);
-  color: rgb(255, 123, 0);
-}
-
-.full-video-step-content-cookiee {
-  width: 800px;
-  margin: auto;
-}
-
-.full-video-step-content-cookiee p {
-  text-align: center;
-  font-size: 20px;
 }
 
 .box:nth-child(2n-1){
@@ -684,4 +166,85 @@ input[type="number"]::-webkit-inner-spin-button {
     0%{transform:rotate(0deg);}
     50%{transform:rotate(180deg);}
     100%{transform:rotate(180deg);}
+}
+
+.loader10:before{
+	content: "";
+	position: absolute;
+	top: 0px;
+	left: -25px;
+	height: 12px;
+	width: 12px;
+	border-radius: 12px;
+	-webkit-animation: loader10g 3s ease-in-out infinite;
+			animation: loader10g 3s ease-in-out infinite;
+}
+
+.loader10{
+	position: relative;
+	width: 12px;
+	height: 12px;
+	top: 46%;
+	left: 46%;
+	border-radius: 12px;
+	-webkit-animation: loader10m 3s ease-in-out infinite;
+			animation: loader10m 3s ease-in-out infinite;
+}
+
+
+.loader10:after{
+	content: "";
+	position: absolute;
+	top: 0px;
+	left: 25px;
+	height: 10px;
+	width: 10px;
+	border-radius: 10px;
+	-webkit-animation: loader10d 3s ease-in-out infinite;
+			animation: loader10d 3s ease-in-out infinite;
+}
+
+@-webkit-keyframes loader10g{
+	0%{background-color: rgba(255, 255, 255, .2);}
+	25%{background-color: rgba(255, 255, 255, 1);}
+	50%{background-color: rgba(255, 255, 255, .2);}
+	75%{background-color: rgba(255, 255, 255, .2);}
+	100%{background-color: rgba(255, 255, 255, .2);}
+}
+@keyframes loader10g{
+	0%{background-color: rgba(255, 255, 255, .2);}
+	25%{background-color: rgba(255, 255, 255, 1);}
+	50%{background-color: rgba(255, 255, 255, .2);}
+	75%{background-color: rgba(255, 255, 255, .2);}
+	100%{background-color: rgba(255, 255, 255, .2);}
+}
+
+@-webkit-keyframes loader10m{
+	0%{background-color: rgba(255, 255, 255, .2);}
+	25%{background-color: rgba(255, 255, 255, .2);}
+	50%{background-color: rgba(255, 255, 255, 1);}
+	75%{background-color: rgba(255, 255, 255, .2);}
+	100%{background-color: rgba(255, 255, 255, .2);}
+}
+@keyframes loader10m{
+	0%{background-color: rgba(255, 255, 255, .2);}
+	25%{background-color: rgba(255, 255, 255, .2);}
+	50%{background-color: rgba(255, 255, 255, 1);}
+	75%{background-color: rgba(255, 255, 255, .2);}
+	100%{background-color: rgba(255, 255, 255, .2);}
+}
+
+@-webkit-keyframes loader10d{
+	0%{background-color: rgba(255, 255, 255, .2);}
+	25%{background-color: rgba(255, 255, 255, .2);}
+	50%{background-color: rgba(255, 255, 255, .2);}
+	75%{background-color: rgba(255, 255, 255, 1);}
+	100%{background-color: rgba(255, 255, 255, .2);}
+}
+@keyframes loader10d{
+	0%{background-color: rgba(255, 255, 255, .2);}
+	25%{background-color: rgba(255, 255, 255, .2);}
+	50%{background-color: rgba(255, 255, 255, .2);}
+	75%{background-color: rgba(255, 255, 255, 1);}
+	100%{background-color: rgba(255, 255, 255, .2);}
 }

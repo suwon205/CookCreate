@@ -1,0 +1,310 @@
+/* 쿠커 화면 */
+
+.video-page-main {
+  width: 100%;
+}
+
+.cookyer-sharing {
+  width: 850px;
+  height: 475px;
+  padding: 5px;
+} 
+
+.cookyer-sharing-content {
+  /* background-color: var(--empty-color); */
+  border-radius: 5px;
+  height: 465px;
+  object-fit: cover;
+}
+
+.cookyer {
+  width: 258px;
+  height: 172px;
+  padding: 5px;
+}
+
+.cookyer-video {
+  background-color: var(--empty-color);
+  border-radius: 5px;
+  height: 162px;
+  object-fit: cover;
+}
+
+.cookyer-cookiees { 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: 551px;
+  height: 548px;
+  overflow: hidden;
+  border: 1px solid orange;
+
+}
+
+.cookyer-cookiee {
+  background-color: var(--empty-color);
+  border-radius: 5px;
+  margin: 5px;
+  width: 273px;
+  height: 179px;
+  display: inline-block; /* inline-flex */
+  object-fit: cover;
+}
+
+.cookyer-components {
+  display: flex;
+  width: 1401px;
+  margin: 0 auto;
+}
+
+.cookyer-components-left-bottom {
+  display: flex;
+}
+
+.cookyer-cookiee-content {
+  position: relative;
+}
+
+.cookyer-cookiee-audio-icon-active,
+.cookyer-cookiee-audio-icon,
+.cookyer-check-icon-active,
+.cookyer-check-icon,
+.cookyer-handsup-icon,
+.cookyer-handsup-icon-active-0,
+.cookyer-handsup-icon-active-1,
+.cookyer-handsup-icon-active-2,
+.cookyer-handsup-icon-active-3,
+.cookyer-handsup-icon-active-4,
+.cookyer-handsup-icon-active-5 {
+  font-size: 25px;
+  position: absolute;
+  bottom: 25px;
+}
+
+.cookyer-cookiee-audio-icon-active,
+.cookyer-cookiee-audio-icon {
+  right: 90px;
+}
+
+.cookyer-check-icon-active,
+.cookyer-check-icon {
+  right: 55px;
+}
+
+.cookyer-check-icon-active {
+  color: rgb(33, 172, 33);
+}
+
+.cookyer-check-icon {
+  color: rgb(114, 114, 114);
+}
+
+.cookyer-handsup-icon,
+.cookyer-handsup-icon-active-0,
+.cookyer-handsup-icon-active-1,
+.cookyer-handsup-icon-active-2,
+.cookyer-handsup-icon-active-3,
+.cookyer-handsup-icon-active-4,
+.cookyer-handsup-icon-active-5 {
+  right: 25px;
+}
+
+.cookyer-handsup-icon {
+  color: rgb(114, 114, 114);
+}
+
+.cookyer-handsup-icon-active-0 {
+  color: rgb(255, 0, 0);
+}
+
+.cookyer-handsup-icon-active-1 {
+  color: rgb(255, 106, 42);
+}
+
+.cookyer-handsup-icon-active-2 {
+  color: rgb(255, 200, 0);
+}
+
+.cookyer-handsup-icon-active-3 {
+  color: rgb(27, 196, 12);
+}
+
+.cookyer-handsup-icon-active-4 {
+  color: rgb(0, 94, 255);
+}
+
+.cookyer-handsup-icon-active-5 {
+  color: rgb(89, 0, 134);
+}
+
+.cookyer-lesson-step-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 600px;
+  height: 800px;
+  z-index: 2;
+}
+
+/* 타이머 */
+.full-cookyer-timer {
+  background-color: white;
+  height: 162px;
+  width: 288px;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 5px 3px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-video-timer-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.full-video-timer-content-cookyer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto 7px;
+}
+
+.full-video-timer-input input {
+  border: none;
+  width: 70px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.full-video-timer-input span {
+  margin: 5px;
+}
+
+.full-video-timer-set-btn {
+  border: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: #D9D9D9;
+  font-size: 15px;
+}
+
+.full-video-timer-set-btn:hover {
+  background-color: #00A442;
+  color: white;
+}
+
+.full-cookyer-timer input, .full-cookyer-timer span {
+  font-size: 50px;
+  color: rgb(33, 33, 33);
+}
+
+/* 진행 단계 */
+.full-video-step-widget-cookyer {
+  background-color: white;
+  border-radius: 5px;
+  margin: 5px;
+  width: 845px;
+  height: 81px;
+  display: flex;
+  position: absolute;
+  top: 640px;
+  left: 589px;
+}
+
+.full-video-step-title {
+  font-size: 13px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.full-video-step-check-btn {
+  border: 1px solid #4B4B4B;
+  width: 80px;
+  height: 40px;
+  border-radius: 46px;
+  position: absolute;
+  top: 22px;
+  right: 20px;
+}
+
+.full-video-step-check-btn-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 12px;
+}
+
+.full-video-step-check-count {
+  display: flex;
+  font-size: 18px;
+}
+
+.full-video-step-check-icon {
+  font-size: 20px;
+}
+
+.full-video-step-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-size: 18px;
+}
+
+.full-video-step-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto 10px;
+  padding: 20px;
+  width: 550px;
+}
+
+.full-video-step-content-update {
+  display: flex;
+}
+
+.full-video-step-content-update input {
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+  border-bottom: 1px solid #a6a6a6;
+  font-size: 18px;
+  margin-left: 7px;
+}
+
+.full-video-step-content button {
+  background-color: transparent;
+  border: 1px solid #4B4B4B;
+  border-radius: 45px;
+  width: 45px;
+  height: 25px;
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+.full-video-step-content button:hover {
+  border: 1px solid rgb(255, 123, 0);
+  color: rgb(255, 123, 0);
+}
+
+.full-video-step-p {
+  display: flex;
+}
+
+.full-video-step-current {
+  margin-left: 7px;
+}

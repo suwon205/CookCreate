@@ -9,7 +9,7 @@ const initialState = {
   mainStreamManager: undefined,
   subscribers: [],
   isVideoPublished: true,
-  isAudioPublished: true,
+  isAudioPublished: false,
   videoLessonId: undefined,
   isSessionOpened: false,  // 들어올때 이걸로 문제가 생기면 undefined로 바꾸기
   audioOnList: [],

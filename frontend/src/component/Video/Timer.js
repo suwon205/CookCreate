@@ -13,9 +13,21 @@ function Timer({ role, size }) {
   /* 쿠키 타이머 시작 표시 */
   const [ isRunning, setIsRunning ] = useState(false)
 
+  const [ classRole, setClassRole ] = useState(null)
+
   // const [ clickInput, setSetTime ] = useState(false)
 
   console.log("나는야", role)
+
+  useEffect(() => {
+    if (role) {
+      if (role === 'COOKIEE') {
+        setClassRole('cookiee')
+      } else {
+        setClassRole('cookyer')
+      }
+    }
+  }, [role])
 
   useEffect(() => {
     const total = curMinutes*60 + curSeconds
@@ -105,7 +117,7 @@ function Timer({ role, size }) {
       <div className={`${size}-video-timer-title`}>
         <p>타이머</p>
       </div>
-      <div className={`${size}-video-timer-content`}>
+      <div className={`${size}-video-timer-content-${classRole}`}>
         {role === 'COOKYER' ? (
           <div className={`${size}-video-timer-input`}>
             <input

@@ -1,16 +1,11 @@
-.video-background {
-  background-color: #262626;
-  height: 100vh;
-}
-
 /* 반쪽화면 */
 .half-video-page {
-  margin-right: 60px;
+  /* margin-right: 60px; */
 }
 
 .half-video-header {
   color: white;
-  padding: 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -44,11 +39,11 @@
   width: 508px;
   height: 281px;
   padding: 5px;
-  margin: auto;
+  margin: 10px auto;
 } 
 
 .half-cookyer-sharing-content {
-  background-color: var(--empty-color);
+  /* background-color: var(--empty-color); */
   border-radius: 5px;
   height: 271px;
   object-fit: cover;
@@ -60,7 +55,8 @@
   grid-template-rows: 1fr 1fr;
   width: 678px;
   height: 298px;
-  margin: auto;
+  margin: 10px auto;
+  border: 1px solid orange;
 }
 
 .half-cookyer-cookiee-content {
@@ -68,7 +64,7 @@
 }
 
 .half-cookyer-cookiee {
-  background-color: var(--empty-color);
+  /* background-color: var(--empty-color); */
   border-radius: 5px;
   margin: 3px;
   width: 220px;
@@ -77,23 +73,53 @@
   object-fit: cover;
 }
 
+.half-cookyer-cookiee-audio-icon-active,
+.half-cookyer-cookiee-audio-icon,
+.half-cookyer-check-icon-active,
+.half-cookyer-check-icon,
+.half-cookyer-handsup-icon-active,
+.half-cookyer-handsup-icon {
+  font-size: 20px;
+  position: absolute;
+}
+
+.half-cookyer-cookiee-audio-icon-active,
+.half-cookyer-cookiee-audio-icon {
+  bottom: 15px;
+  right: 65px;
+}
+
+.half-cookyer-check-icon-active,
+.half-cookyer-check-icon {
+  bottom: 15px;
+  right: 40px;
+}
+
+.half-cookyer-handsup-icon-active,
+.half-cookyer-handsup-icon {
+  bottom: 15px;
+  right: 15px;
+}
+
 /* 반쪽화면 쿠커 진행단계 */
 .half-video-step-widget-cookyer-container {
   width: 100%;
 }
+
 .half-video-step-widget-cookyer {
   background-color: white;
   border-radius: 5px;
-  margin: 0 10px;
+  margin: 0 20px;
   display: flex;
   position: relative;
+  height: 57px;
 }
 
 .half-video-step-title {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  font-size: 13px;
+  top: 9px;
+  left: 9px;
+  font-size: 12px;
 }
 
 .half-video-step-check-btn {
@@ -102,20 +128,20 @@
   height: 29px;
   border-radius: 46px;
   position: absolute;
-  top: 28px;
-  right: 30px;
+  top: 15px;
+  right: 20px;
 }
 
 .half-video-step-check-btn-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: auto 20px;
+  margin: 3px 10px;
 }
 
 .half-video-step-check-count {
   display: flex;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .half-video-step-check-icon {
@@ -127,8 +153,16 @@
   align-items: center;
   justify-content: center;
   margin: auto;
-  font-size: 18px;
+  font-size: 15px;
   /* text-align: center; */
+}
+
+.half-video-step-p {
+  display: flex;
+}
+
+.half-video-step-current {
+  margin-left: 7px;
 }
 
 .half-video-step-content {
@@ -149,6 +183,8 @@
   box-sizing: border-box;
   outline: none;
   border-bottom: 1px solid #a6a6a6;
+  font-size: 15px;
+  margin-left: 7px;
 }
 
 .half-video-step-content button {
@@ -169,8 +205,8 @@
 /* 반쪽화면 쿠커 타이머 */
 .half-timer-widget {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 310px;
+  right: -84px;
   transform: translate(-50%, -50%);
   height: 120px;
   width: 332px;
@@ -196,6 +232,8 @@ input[type="number"]::-webkit-inner-spin-button {
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0;
+  animation: widgetFadeInAnimation 0.5s ease forwards;
 }
 
 .half-video-timer-title {
@@ -246,16 +284,18 @@ input[type="number"]::-webkit-inner-spin-button {
 /* 본인 화면 모달 */
 .half-me-widget {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 212px;
+  right: 80px;
   transform: translate(-50%, -50%);
   width: 141px;
   height: 92px;
   z-index: 2;
+  opacity: 0;
+  animation: widgetFadeInAnimation 0.5s ease forwards;
 }
 
 .half-cookyer-video {
-  background-color: var(--empty-color);
+  /* background-color: var(--empty-color); */
   border-radius: 5px;
   height: 92px;
   object-fit: cover;
@@ -276,4 +316,15 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .stream-component {
   position: relative;
+}
+
+@keyframes widgetFadeInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

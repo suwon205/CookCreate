@@ -10,8 +10,9 @@ import { joinSession } from '../../store/video/video-thunk';
 import { deleteCookiee, setCheckCookiee, setCheckCookieeList, setHandsDownCookiee, setHandsUpCookiee, setHandsUpCookieeList, setUncheckCookiee } from '../../store/video/cookyerVideo';
 import { setLessonInfo } from '../../store/video/videoLessonInfo';
 import '../../style/video.css'
-import '../../style/video/cookyerScreen.css'
-import CookyerVideoSideBar from "../../component/Video/Cookyer/CookyerVideoSideBar";
+import '../../style/video/common.css'
+import '../../style/video/cookyerHalfScreen.css'
+import '../../style/video/cookyerFullScreen.css'
 
 function CookyerScreen() {
   /** 반응형 웹 관련 */
@@ -409,6 +410,7 @@ function CookyerScreen() {
           checkCookieeList={checkCookieeList}
           handsUpCookieeList={handsUpCookieeList}
           isSessionOpened={isSessionOpened}
+          shareScreenPublisher={shareScreenPublisher}
           handleModalClick={handleModalClick}
           handleMainVideoStream={handleMainVideoStream}
           handleACookieeAudio={handleACookieeAudio}

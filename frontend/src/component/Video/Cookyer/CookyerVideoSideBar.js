@@ -131,10 +131,12 @@ function CookyerVideoSideBar({ size, setMeWidget, setTimerWidget }) {
 
   const handleSetMeWidget = () => {
     setMeWidget((prev) => !prev)
+    setTimerWidget(false)
   }
 
   const handleSetTimerWidget = () => {
     setTimerWidget((prev) => !prev)
+    setMeWidget(false)
   }
 
   return (
@@ -143,6 +145,9 @@ function CookyerVideoSideBar({ size, setMeWidget, setTimerWidget }) {
         {/* 수업 끝내기 */}
         <div className='video-side-icon-wrap' onClick={handleCloseSession}>
           <RxExit className='video-side-icon video-exit-icon'/>
+          <div className='video-side-icon-p'>
+            <p>수업</p><p>끝내기</p>
+          </div>
         </div>
         {/* 화면뮤트 */}
         <div className='video-side-icon-wrap' onClick={setVideoMute}>

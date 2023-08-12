@@ -11,7 +11,7 @@ function CookieeLessonStep({ size }) {
 
   return (
     <div className={`${size}-video-step-widget-cookiee`}>
-      <p className={`${size}-video-step-title`}>현재 진행 단계</p>
+      <p className={`${size}-video-step-title-cookiee`}>현재 진행 단계</p>
       <div className={`${size}-video-step-content-cookiee`}>
         {curIdx !== 0 ? (
             <p>{curIdx}. {curStep}</p>

@@ -1,0 +1,100 @@
+p, input {
+  margin: 0;
+  padding: 0;
+}
+
+iframe {
+  display: none;
+}
+
+video {
+  width: 100%;
+  float: left;
+}
+
+/* 비디오 닉네임 */
+.stream-component div {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  /* font-size: 1em; */
+  /* font-weight: bold; */
+  /* bottom: 30px;
+  left: 30px; */
+}
+
+.video-background {
+  background-color: #262626;
+  height: 100vh;
+}
+
+.video-page,
+.half-video-page {
+  margin-right: 60px;
+  /* width: 100%; */
+}
+
+/* 쿠커 타이머 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* 풀스크린 헤더 */
+/* 비디오 헤더 */
+.full-video-header {
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.full-video-header-left,
+.full-video-header-right,
+.full-video-lesson-time,
+.full-video-lesson-progress {
+  display: flex;
+}
+
+.full-video-lesson-title {
+  font-size: 30px;
+  margin-right: 30px;
+}
+
+.full-video-lesson-cookyer {
+  font-size: 20px;
+  color: rgb(207, 207, 207);
+  margin: auto 0px;
+}
+
+.full-video-lesson-time, .full-video-lesson-progress {
+  margin: 5px;
+}
+
+.full-video-lesson-progress {
+  width: 360px;
+  justify-content: space-between;
+}
+
+.full-video-lesson-progress p, .full-video-lesson-progress progress {
+  margin: auto 0px;
+}
+
+.full-video-lesson-progress progress {
+  width: 240px;
+  height: 20px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.full-video-lesson-progress progress::-webkit-progress-bar {
+  background: rgb(224, 224, 224);
+  border-radius: 15px;
+}
+
+.full-video-lesson-progress progress::-webkit-progress-value {
+  background-color: rgb(255, 136, 0);
+  border-radius: 15px;
+}
