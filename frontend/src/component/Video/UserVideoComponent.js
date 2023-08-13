@@ -6,7 +6,11 @@ export default class UserVideoComponent extends Component {
 
     getNicknameTag() {
         // Gets the nickName of the user
-        return JSON.parse(this.props.streamManager.stream.connection.data).clientData.nickname;
+        if (JSON.parse(this.props.streamManager.stream.connection.data).clientData.role === 'COOKIEE') {
+            return `🍪 ${JSON.parse(this.props.streamManager.stream.connection.data).clientData.nickname}`;
+        } else {
+            return `👩‍🍳 ${JSON.parse(this.props.streamManager.stream.connection.data).clientData.nickname}`;
+        }
         
     }
 

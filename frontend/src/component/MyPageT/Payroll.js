@@ -13,7 +13,7 @@ function Payroll() {
   const navigate = useNavigate()
 
   const accessToken = localStorage.getItem('access_token')
-  const [pays, setPays] = useState([]);
+  const [ pays, setPays ] = useState([]);
   const payrollMessage = pays[0]?.lessonId === 0 ? "정산 내역이 없습니다." : "";
 
   /** 이동할 과외 아이디 */
@@ -21,20 +21,22 @@ function Payroll() {
   const lessonId = useSelector((state) => state.lessonInfo.lessonId)
 
   useEffect(() => {
-    axios
-      .get(`api/v1/my/cookyer`, {
-        headers: {
-          Access_Token: accessToken,
-        },
-      })
-      .then((res) => {
-        setPays(res.data);
-        console.log("정산목록",pays);
-      })
-      .catch((err) => {
-        console.log("정산에러",err);
-      });
-  }, [accessToken,pays]);
+    if (accessToken) {
+      axios
+        .get(`api/v1/my/cookyer`, {
+          headers: {
+            Access_Token: accessToken,
+          },
+        })
+        .then((res) => {
+          setPays(res.data);
+          console.log("정산목록", res.data);
+        })
+        .catch((err) => {
+          console.log("정산에러", err);
+        });
+    }
+  }, [accessToken]);
 
   const goLesson = (lessonId) => {
     setGoLessonDetail(true)

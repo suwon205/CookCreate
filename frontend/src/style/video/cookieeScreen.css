@@ -16,6 +16,7 @@
   border-radius: 5px;
   height: 642px;
   object-fit: cover;
+  font-size: 25px;
 }
 
 .cookiee-content {
@@ -77,25 +78,6 @@
   color: rgb(114, 114, 114);
 }
 
-  /* 다른 쿠키 목록 */
-.other-cookiees {
-  position: absolute;
-  top: 500px;
-  right: 82px;
-  width: 330px;
-  height: 324px;
-  background-color: orange;
-}
-
-.other-cookiees-video {
-  border-radius: 5px;
-  margin: 5px;
-  width: 150px;
-  height: 98px;
-  display: inline-block; /* inline-flex */
-  object-fit: cover;
-}
-
 /* 쿠커/쿠키 진행단계 */
 
 .full-video-step-widget-cookiee {
@@ -155,4 +137,46 @@
   margin: auto 7px;
   margin-left: 60px;
   margin-right: 18px;
+}
+
+/* 다른 쿠키 목록 */
+.other-cookiees {
+  position: fixed;
+  top: 292px;
+  right: 80px;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 288px;
+  padding: 5px;
+  background-color: white;
+  z-index: 2;
+  opacity: 0;
+  animation: widgetFadeInAnimation 0.5s ease forwards;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.other-cookiees img {
+  width: 100px;
+  height: 100px;
+}
+
+.other-cookiees-video {
+  border-radius: 5px;
+  margin: 4px;
+  width: 126px;
+  height: 82px;
+  display: inline-block; /* inline-flex */
+  object-fit: cover;
+}
+
+@keyframes widgetFadeInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

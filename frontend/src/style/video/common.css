@@ -23,7 +23,7 @@ video {
   left: 30px; */
 }
 
-.video-background {
+.video-page, .video-background {
   background-color: #262626;
   height: 100vh;
 }

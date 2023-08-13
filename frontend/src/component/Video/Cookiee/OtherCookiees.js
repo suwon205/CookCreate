@@ -29,7 +29,10 @@ function OtherCookiees() {
             />
           </div>
         ))
-      ) : null}
+      ) : (
+        null
+        // <img src='../../../assets/noCookiees.png' alt='참가중인 쿠키가 없습니다'/>
+      )}
     </div>
   );
 }
