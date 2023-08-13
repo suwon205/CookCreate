@@ -7,7 +7,8 @@ import { OpenVidu } from 'openvidu-browser';
 import { useNavigate } from 'react-router-dom';
 import { setClassData, setCompletedData } from '../../store/mypageS/accountS';
 import { setLessonId } from '../../store/lesson/lessonInfo';
-import AlertModal from '../AlertModal';
+import AlertModal from '../Modal/AlertModal';
+import SelectModal from '../Modal/SelectModal';
 
 
 //시간 포맷
@@ -241,6 +242,16 @@ function ClassList() {
     }
   }, [showCompletedAlert])
 
+  const handleDeleteAction = (data) => {
+    console.log("handleDeleteAction", data)
+    if (data) {
+      setDeleteAction(data)
+    } else {
+      console.log("false일때")
+      setShowAlert(data)
+    }
+  }
+
   return (
     <div>
         <SideBar />
@@ -345,10 +356,10 @@ function ClassList() {
                                 <button onClick={() => handleDeleteClass(lesson.lessonId)}>삭제</button>
                                 {/* <button onClick={() => deleteClass(lesson.lessonId)}>삭제</button> */}
                                 {showAlert ? (
-                                  <AlertModal content={'정말로 삭제하시겠습니까?'} path='setTrue' actions={setDeleteAction}/>
+                                  <SelectModal content={'정말로 삭제하시겠습니까?'} path={null} actions={handleDeleteAction}/>
                                 ) : null}
                                 {showCompletedAlert ? (
-                                  <AlertModal content={deleteContent} path='setFalse' actions={setShowCompletedAlert}/>
+                                  <AlertModal content={deleteContent} path={null} actions={setShowCompletedAlert} data={false}/>
                                 ) : null}
                               </div>
                             </div>

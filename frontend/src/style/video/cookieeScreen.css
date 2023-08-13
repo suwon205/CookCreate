@@ -77,20 +77,6 @@
   color: rgb(114, 114, 114);
 }
 
-.cookiee-lesson-review-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 600px;
-  height: 800px;
-  z-index: 2;
-}
-
   /* 다른 쿠키 목록 */
 .other-cookiees {
   position: absolute;

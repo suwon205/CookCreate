@@ -1,16 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import '../style/modal/alertModal.css';
+import '../../style/modal/alertModal.css';
 
-function AlertModal({ content, path, actions }) {
+function AlertModal({ content, path, actions, data }) {
   const navigate = useNavigate();
 
   const goPage = () => {
-    if (path === 'setTrue') {
-      actions(true)
-    } else if (path === 'setFalse') {
-      actions(false)
-    } else if (path !== null) {
-      navigate(path);
+    if (path === null) {
+      actions(data)
+    } else {
+      navigate(path)
     }
   }
 

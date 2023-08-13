@@ -27,9 +27,10 @@ function NavBar() {
   }
 
   /** 유저 메뉴 드롭다운 */
-  const dropUserMenu = () => {
+  const dropUserMenu = (data) => {
     console.log(!userDropdown)
-    setUserDropdown((prev) => !prev)
+    setUserDropdown(data)
+    // setUserDropdown((prev) => !prev)
   }
 
   return (
@@ -52,16 +53,20 @@ function NavBar() {
             <div className='dropdown'>
               <button className='drop-btn' onClick={dropLessonMenu}>신청수업</button>
               { lessonDropdown ? (
-                <AppliedLessonMenu />
+                <div onMouseLeave={() => dropLessonMenu(false)}>
+                  <AppliedLessonMenu />
+                </div>
               ) : null}
             </div>
         ) : null}
-            <div onClick={dropUserMenu} className="nav-user">
+            <div onClick={() => dropUserMenu(true)} className="nav-user">
               {emoji}
               {nickname}
               님
             { userDropdown ? (
-              <UserDropMenu/>
+              <div onMouseLeave={() => dropUserMenu(false)}>
+                <UserDropMenu/>
+              </div>
             ) : null}
               {/* 쿠커들에게만 보입니다. */}
             </div>

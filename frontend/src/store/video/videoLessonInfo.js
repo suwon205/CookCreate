@@ -5,6 +5,7 @@ const initialState = {
   lessonId: undefined,
   lessonTitle: undefined,
   cookyerName: undefined,
+  thumbnailUrl: undefined,
   lessonStepList: undefined,
   totalSteps: 0,
   curStep: undefined,
@@ -19,6 +20,7 @@ const videoLessonInfo = createSlice({
       state.lessonId = payload.lessonId
       state.lessonTitle = payload.lessonTitle
       state.cookyerName = payload.cookyerName
+      state.thumbnailUrl = payload.thumbnailUrl
       state.lessonStepList = payload.lessonStepList
       state.totalSteps = payload.lessonStepList.length
     },
@@ -45,6 +47,7 @@ const videoLessonInfo = createSlice({
       state.lessonId = undefined
       state.lessonTitle = undefined
       state.cookyerName = undefined
+      state.thumbnailUrl = undefined
       state.lessonStepList = undefined
       state.totalSteps = 0
       state.curStep = undefined

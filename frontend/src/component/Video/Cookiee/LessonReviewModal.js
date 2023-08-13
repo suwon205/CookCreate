@@ -5,7 +5,9 @@ function LessonReviewModal() {
 
   return (
     <div className='cookiee-lesson-review-modal'>
-      <h1>리뷰 쓰기</h1>
+      <div className='cookyer-lesson-step-modal-title-wrapper'>
+        <p className='cookyer-lesson-step-modal-title'>리뷰 쓰기</p>
+      </div>
       <div>
         <LessonReviewContent/>
       </div>

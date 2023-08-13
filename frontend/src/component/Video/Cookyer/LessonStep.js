@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLessonStepList } from '../../../store/video/videoLessonInfo';
 
@@ -37,21 +37,44 @@ function LessonStep({ stepOrder, stepContent }) {
     setIsUpdate((prev) => !prev)
   }
 
+  /** textarea 디자인 관련 */
+  const DEFAULT_HEIGHT = 24
+  // const textareaRef = useRef(null)
+  
+  // useEffect(() => {
+  //   if (textareaRef) {
+  //     console.log(textareaRef)
+  //   }
+  //   if (textareaRef && textareaRef.current) {
+  //     console.log(textareaRef.current)
+  //     textareaRef.current.style.height = DEFAULT_HEIGHT + textareaRef.current.scrollHeight + 'px'
+  //   }
+  // }, [textareaRef, textareaRef.current])
+
+  const setTextareaHeight = (e) => {
+    console.log(e)
+    const $target = e.target
+
+    $target.style.height = 0
+    $target.style.height = DEFAULT_HEIGHT + $target.scrollHeight + 'px'
+  }
+
   return (
-    <div className=''>
-      {isUpdate ? (
-        <div>
-          <p>{stepOrder}</p>
-          <input value={inputStep} onChange={handleInputChange}></input>
-          <button onClick={updateStepContent}>완료</button>
-        </div>
-      ) : (
-        <div>
-          <p>{stepOrder}</p>
-          <p>{inputStep}</p>
-          <button onClick={handleIsUpdate}>수정</button>
-        </div>
-      )}
+    <div className='cookyer-lesson-step-modal-container'>
+    {isUpdate ? (
+      <div className='cookyer-lesson-step-modal-step'>
+        <p className='cookyer-lesson-step-modal-step-order'>{stepOrder}.</p>
+        {/* <textarea ref={textareaRef} rows={1} className='cookyer-lesson-step-modal-step-content' value={inputStep} onChange={handleInputChange}></textarea> */}
+        <textarea id='cookyer-step-textarea' onInput={(e) => setTextareaHeight(e)} className='cookyer-lesson-step-modal-step-content' value={inputStep} onChange={handleInputChange}></textarea>
+        <button onClick={updateStepContent}>완료</button>
+      </div>
+    ) : (
+      <div className='cookyer-lesson-step-modal-step' onClick={handleIsUpdate}>
+        <p className='cookyer-lesson-step-modal-step-order'>{stepOrder}.</p>
+        <p className='cookyer-lesson-step-modal-step-content'>{inputStep}</p>
+        {/* <button onClick={handleIsUpdate}>수정</button> */}
+      </div>
+    )}
     </div>
   );
 }

@@ -1,0 +1,236 @@
+/* 쿠커 진행단계 모달 */
+
+.cookyer-lesson-step-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px;
+  width: 517px;
+  height: 533px;
+  z-index: 2;
+  animation: modalFadeIn 0.2s;
+}
+
+.cookyer-lesson-step-modal-title-wrapper {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.cookyer-lesson-step-modal-title {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.cookyer-lesson-step-modal-desc {
+  font-size: 13px;
+  color: #969696;
+  margin-top: 5px;
+}
+
+.cookyer-lesson-step-modal-steps {
+  margin: 25px auto 25px;
+  width: 408px;
+  height: 310px;
+  overflow-y: scroll;
+}
+
+.cookyer-lesson-step-modal-steps::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cookyer-lesson-step-modal-steps::-webkit-scrollbar-thumb {
+  height: 100px;
+  background: #CBCBCB;
+  border-radius: 10px;
+}
+
+.cookyer-lesson-step-modal-steps::-webkit-scrollbar-track {
+  background: #ededed;
+  border-radius: 10px;
+}
+
+.cookyer-lesson-step-modal-step {
+  display: flex;
+  word-break: break-all;
+  margin-bottom: 10px;
+}
+
+.cookyer-lesson-step-modal-step-content {
+  margin-left: 15px;
+  margin-right: 20px;
+}
+
+.cookyer-lesson-step-modal-step textarea {
+  width: 100%;
+  /* height: 24px; */
+  border: none;
+  border-bottom: 1px solid #656363;
+  resize: none;
+}
+
+.cookyer-lesson-step-modal-step button {
+  width: 38px;
+  height: 18px;
+  font-size: 7px;
+  color: #656363;
+  border: #CBCBCB solid 0.7px;
+  border-radius: 50px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.cookyer-lesson-step-modal-btn {
+  margin: 0px auto;
+  width: 174px;
+  height: 36px;
+}
+
+.cookyer-lesson-step-modal-btn button {
+  width: 100%;
+  height: 100%;
+  background-color: #FF7A42;
+  color: white;
+  border-radius: 5px;
+  border: none;
+}
+
+
+/* 쿠키 리뷰 모달 */
+
+.cookiee-lesson-review-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+  box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px;
+  width: 426px;
+  height: 533px;
+  z-index: 2;
+  animation: modalFadeIn 0.2s;
+}
+
+.cookiee-lesson-review-modal-info {
+  width: 336px;
+  height: 71px;
+  display: flex;
+  border-top: 0.7px solid #D9D9D9;
+  border-bottom: 0.7px solid #D9D9D9;
+  margin: 25px auto 20px;
+}
+
+.cookiee-lesson-review-modal-img {
+  width: 70px;
+  height: 70px;
+
+}
+
+.cookiee-lesson-review-modal-img img {
+  width: 66px;
+  height: 66px;
+  margin: 2px;
+  object-fit: cover;
+  /* object-fit: contain; */
+}
+
+.cookiee-lesson-review-modal-p {
+  width: 266px;
+  height: 71px;
+  padding: 10px;
+}
+
+.cookiee-lesson-review-modal-p p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+}
+
+.cookiee-lesson-review-modal-title {
+  font-size: 13px;
+  color: #474646;
+  margin-bottom: 7px;
+}
+
+.cookiee-lesson-review-modal-cookyer {
+  font-size: 11px;
+  color: #7B7B7B;
+}
+
+.cookiee-lesson-review-modal-desc {
+  margin-top: 35px;
+  text-align: center;
+}
+
+.cookiee-lesson-review-modal-desc p {
+  font-size: 15px;
+  color: #474646;
+  font-weight: 500;
+}
+
+.cookiee-lesson-review-modal-stars-wrapper {
+  /* margin: 0 auto; */
+  position: relative;
+  width: 200px;
+  left: 118px;
+}
+
+.cookiee-lesosn-review-modal-textarea {
+  width: 336px;
+  margin: 20px auto 30px;
+}
+
+.cookiee-lesosn-review-modal-textarea textarea {
+  width: 336px;
+  height: 128px;
+  resize: none;
+  background-color: #EFEFEF;
+  border: 0.7px solid #D9D9D9;
+  padding: 10px;
+}
+
+.cookiee-lesosn-review-modal-textarea textarea::placeholder {
+  color: #969696;
+  font-size: 12px;
+}
+
+.cookiee-lesson-review-modal-btn {
+  width: 269px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.cookiee-lesson-review-modal-btn button {
+  width: 131px;
+  height: 36px;
+  border-radius: 5px;
+  border: none;
+}
+
+.cookiee-lesson-review-modal-submit-btn {
+  background-color: #FF7A42;
+  color: white;
+}
+
+.cookiee-lesson-review-modal-leave-btn {
+  background-color: #F4F4F4;
+  color: #656363;
+}
+
+@keyframes modalFadeIn {
+  from {  
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

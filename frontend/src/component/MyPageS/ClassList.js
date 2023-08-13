@@ -22,7 +22,7 @@ function ClassList() {
   const completedData = useSelector((state) => state.accountS.completedData)
   // const [classData, setClassData] = useState([]);
   // const [completedData, setCompletedData] = useState([]);
-  const [reviewLessonId, setReviewLessonId] = useState(null);
+  const [ reviewLessonData, setReviewLessonData ] = useState(null);
   // const [showCompletedLectures, setShowCompletedLectures] = useState(false);
 
   /** 쿠커 화상과외방 입장 */
@@ -87,12 +87,13 @@ function ClassList() {
 
   //모달
 
-  const handleOpenModal = (lessonId) => {
+  const handleOpenModal = (data) => {
     setIsModalOpen(true);
-    setReviewLessonId(lessonId)
+    setReviewLessonData(data)
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (e) => {
+    e.preventDefault()
     setIsModalOpen(false);
   };
 
@@ -186,9 +187,11 @@ function ClassList() {
       <SideBar />
       {/* <button >리뷰작성</button> */}
       {/* {isModalOpen && <ReviewForm onClose={handleCloseModal} />} */}
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
-        <ReviewForm onClose={handleCloseModal} rating={rating} onClickRating={handleClickRating} lessonId={reviewLessonId} />
-      </Modal>
+      {isModalOpen ? (
+        <div>
+          <ReviewForm onClose={handleCloseModal} rating={rating} onClickRating={handleClickRating} reviewLessonData={reviewLessonData} />
+        </div>
+      ) : null}
       <div className="column is-10 main_container">
         <div className="header">
           <div className="summary">
@@ -377,7 +380,7 @@ function ClassList() {
                       </div>
                     </div>
                   </div>
-                  <button onClick={() => handleOpenModal(lesson.lessonId)}>리뷰작성</button>
+                  <button onClick={() => handleOpenModal(lesson)}>리뷰작성</button>
                 </div>
               ))
             ) : (

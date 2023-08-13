@@ -7,7 +7,7 @@ import RegisterForm from '../component/RegisterLesson/RegisterForm';
 import { useDispatch } from 'react-redux';
 import PreviousLesson  from '../component/RegisterLesson/PreviousLesson'
 import { resetlessonReducer } from '../store/lesson/lesson';
-import AlertModal from '../component/AlertModal';
+import AlertModal from '../component/Modal/AlertModal';
 
 function RegisterLesson() {
   const dispatch = useDispatch();

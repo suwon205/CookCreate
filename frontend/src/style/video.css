@@ -77,14 +77,6 @@
   /* margin: auto; */
 }
 
-.video-side-icon-wrap div {
-  display: none;
-}
-
-.video-side-icon:hover + .video-side-icon-p {
-  display: block;
-}
-
 /* 쿠커 타이머 */
 
 .full-video-timer-title {
