@@ -294,3 +294,33 @@
 .full-video-step-current {
   margin-left: 7px;
 }
+
+.full-cookyer-cookiees-container {
+  width: 551px;
+  height: 548px;
+}
+
+.full-cookyer-nocookiees {
+  width: 551px;
+  height: 548px;
+  margin: 60px auto;
+}
+
+.full-cookyer-nocookiees p {
+  color: white;
+  font-size: 20px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.full-cookyer-nocookiees img {
+  width: 200px;
+  margin: 0 auto;
+  animation: rotate_image 4s linear infinite;
+}
+
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
+  }
+}

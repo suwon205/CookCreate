@@ -30,35 +30,36 @@ function CookyerFullScreen(props) {
   return (
     <div className='video-page'>
       <CookyerVideoSideBar size={'full'}/>
-      {publisher ? (
-
       
-        <div className='video-page-main'>
-          {isSessionOpened ? null : (
-            <LessonStepModal onClick={handleModalClick}/>
-          )}
-          <div className='video-content'>
-            <VideoHeader size={'full'}/>
-            <div className='cookyer-components'>
-              <div className='cookyer-components-left'>
-                <div className='cookyer-sharing'>
-                  <div className='cookyer-sharing-content' onClick={() => handleMainVideoStream(mainStreamManager)}>
-                    <UserVideoComponent
-                      videoStyle='cookyer-sharing-content'
-                      streamManager={mainStreamManager}
-                    />
-                  </div>
-                </div>
-                <div className='cookyer-components-left-bottom'>
-                  <div className='cookyer' onClick={() => handleMainVideoStream(publisher)}>
-                    <UserVideoComponent
-                      videoStyle='cookyer-video'
-                      streamManager={publisher}
-                    />
-                  </div>
-                  <Timer role='COOKYER' size='full'/>
+      <div className='video-page-main'>
+        {isSessionOpened ? null : (
+          <LessonStepModal onClick={handleModalClick}/>
+        )}
+        <div className='video-content'>
+          <VideoHeader size={'full'}/>
+          <div className='cookyer-components'>
+            <div className='cookyer-components-left'>
+              <div className='cookyer-sharing'>
+                <div className='cookyer-sharing-content' onClick={() => handleMainVideoStream(mainStreamManager)}>
+                  <UserVideoComponent
+                    videoStyle='cookyer-sharing-content'
+                    streamManager={mainStreamManager}
+                  />
                 </div>
               </div>
+              <div className='cookyer-components-left-bottom'>
+                <div className='cookyer' onClick={() => handleMainVideoStream(publisher)}>
+                  <UserVideoComponent
+                    videoStyle='cookyer-video'
+                    streamManager={publisher}
+                  />
+                </div>
+                <Timer role='COOKYER' size='full'/>
+              </div>
+            </div>
+
+          <div className='full-cookyer-cookiees-container'>
+            {Object.keys(subscribers).length ? (
               <div className='cookyer-cookiees'>
                 {subscribers.map((sub, i) => (
                   // <div key={sub.id} onClick={() => handleMainVideoStream(sub)}>
@@ -88,15 +89,17 @@ function CookyerFullScreen(props) {
                   </div>
                 ))}
               </div>
-            </div>
+            ) : (
+              <div className="full-cookyer-nocookiees">
+                <p>수업에 참가중인 쿠키가 없습니다.</p>
+                <img src='/cookiee.png' alt=''/>
+              </div>
+            )}
           </div>
-          <CookyerLessonStep size={'full'}/>
+          </div>
         </div>
-      ) : (
-        <div className='box'>
-          <div className='loader10'></div>
-        </div>
-      )}
+        <CookyerLessonStep size={'full'}/>
+      </div>
     </div>
   );
 }

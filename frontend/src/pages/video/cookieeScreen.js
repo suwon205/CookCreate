@@ -4,6 +4,8 @@ import UserVideoComponent from '../../component/Video/UserVideoComponent';
 import Timer from '../../component/Video/Timer';
 import CookieeLessonStep from '../../component/Video/Cookiee/CookieeLessonStep';
 import CookieeVideoSideBar from '../../component/Video/Cookiee/CookieeVideoSideBar';
+import OtherCookiees from '../../component/Video/Cookiee/OtherCookiees';
+import LessonReviewModal from '../../component/Video/Cookiee/LessonReviewModal';
 
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,15 +13,13 @@ import { audioMute, deleteSubscriber, enteredSubscriber, leaveSession, setAudioM
 import { joinSession } from '../../store/video/video-thunk';
 import { initCookieeVideo, resetCheck, resetHandsUp } from '../../store/video/cookieeVideo';
 import { setCurStep, setLessonInfo, setStepInfo } from '../../store/video/videoLessonInfo';
-import '../../style/video.css'
-import '../../style/video/cookieeScreen.css'
 import { initScreenShare } from '../../store/video/screenShare';
-import LessonReviewModal from '../../component/Video/Cookiee/LessonReviewModal';
 
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { IoIosHand } from 'react-icons/io'
 import { BsMicFill, BsMicMuteFill } from "react-icons/bs";
-import OtherCookiees from '../../component/Video/Cookiee/OtherCookiees';
+import '../../style/video.css'
+import '../../style/video/cookieeScreen.css'
 
 function CookieeScreen() {
   const dispatch = useDispatch()
@@ -42,9 +42,11 @@ function CookieeScreen() {
 
   /** 체크 기능 */
   const check = useSelector((state) => state.cookieeVideo.check)
+  const [ checkVisible, setCheckVisible ] = useState(false)
 
   /** 손들기 기능 */
   const handsUp = useSelector((state) => state.cookieeVideo.handsUp)
+  const [ handsUpVisible, setHandsUpVisible ] = useState(false)
 
   /** 선생님 화면 고정하기 위해 선생님 subscriber 찾기 */
   const [ cookyerStream, setCookyerStream ] = useState(undefined)
@@ -286,6 +288,26 @@ function CookieeScreen() {
     }
   }, [mainVideo])
 
+  useEffect(() => {
+    if (handsUp) {
+      setHandsUpVisible(true)
+    }
+  }, [handsUp])
+
+  useEffect(() => {
+    if (handsUpVisible) {
+      // 5초 후에 요소를 보이지 않게 설정
+      const timeoutId = setTimeout(() => {
+        setHandsUpVisible(false);
+      }, 2000);
+  
+      // 컴포넌트가 언마운트되면 타임아웃 클리어
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [handsUpVisible]);
+
   return (
     <div className='video-page'>
       <CookieeVideoSideBar/>
@@ -358,6 +380,7 @@ function CookieeScreen() {
                 ) : (
                   <IoIosHand className='cookiee-handsup-icon'/>
                 )}
+                {handsUpVisible && <IoIosHand className='cookiee-handsup-animation'/>}
               </div>
             </div>
           </div>

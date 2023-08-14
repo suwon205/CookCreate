@@ -4,7 +4,8 @@
 }
 
 .Side_container {
-
+  position: relative;
+  z-index: 10;
 }
 
 .sidebar_items {
@@ -14,7 +15,7 @@
   border: 0.7px solid #8D9193;
   width: 130px;
   border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
 }
 
@@ -39,8 +40,8 @@
 }
 
 .side-item a:hover {
-  background-color: #fcc367; 
-  border-radius: 5px; 
+  color: #FF7A42; 
+  font-weight: 500;
 }
 
 
