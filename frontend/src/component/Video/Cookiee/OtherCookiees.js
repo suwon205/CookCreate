@@ -20,7 +20,7 @@ function OtherCookiees() {
 
   return (
     <div className='other-cookiees'>
-      {cookiees ? (
+      {cookiees && Object.keys(cookiees).length ? (
         cookiees.map((sub, i) => (
           <div key={i}>
             <UserVideoComponent
@@ -30,8 +30,8 @@ function OtherCookiees() {
           </div>
         ))
       ) : (
-        null
-        // <img src='../../../assets/noCookiees.png' alt='참가중인 쿠키가 없습니다'/>
+        // null
+        <img src='/cookiees.png' alt='쿠키'/>
       )}
     </div>
   );

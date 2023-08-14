@@ -4,29 +4,6 @@
   --empty-color: #D9D9D9
 }
 
-/* 학생 마이페이지 나중에 옮기기 */
-.recipe-book-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 600px;
-  height: 600px;
-  z-index: 2;
-}
-
-.recipe-img {
-  width: 200px;
-}
-
-/* 옮기기 */
-
-
-
 /* 비디오 사이드바 */
 .video-sidebar {
   position: fixed;

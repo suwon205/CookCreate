@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import VideoHeader from '../VideoHeader';
 import UserVideoComponent from '../UserVideoComponent';
 import Timer from '../Timer';
@@ -32,6 +32,10 @@ function CookyerHalfScreen(props) {
   /** 본인화면, 타이머 위젯 */
   const [ meWidget, setMeWidget ] = useState(false)
   const [ timerWidget, setTimerWidget ] = useState(false)
+
+  useEffect(() => {
+    console.log(subscribers, "구독자들 있냐 없냐")
+  }, [subscribers])
   
   return (
     <div className='half-video-page'>
@@ -70,33 +74,42 @@ function CookyerHalfScreen(props) {
           </div>
         </div>
         
-        <div className='half-cookyer-cookiees'>
-          {subscribers.map((sub, i) => (
-            <div key={i} className='half-cookyer-cookiee-content' onClick={() => handleMainVideoStream(sub)}>
-              <UserVideoComponent
-                videoStyle='half-cookyer-cookiee'
-                streamManager={sub}
-              />
-              {audioOnList && audioOnList.find((item) => item === sub.stream.connection.connectionId) ? (
-                <BsMicFill className='half-cookyer-cookiee-audio-icon-active' onClick={(e) => handleACookieeAudio(e, {cookyer: publisher, cookiee: sub})}/>
-              ) : (
-                <BsMicMuteFill className='half-cookyer-cookiee-audio-icon' onClick={(e) => handleACookieeAudio(e, {cookyer: publisher, cookiee: sub})}/>
-              )}
-              {checkCookieeList && checkCookieeList.find((item) => item === sub.stream.connection.connectionId) ? (
-                <AiFillCheckCircle onClick={(e) => noneClick(e)} className='half-cookyer-check-icon-active'/>
-              ) : (
-                <AiFillCheckCircle onClick={(e) => noneClick(e)} className='half-cookyer-check-icon'/>
-              )}
-              {handsUpCookieeList && handsUpCookieeList.find((item) => item === sub.stream.connection.connectionId) ? (
-                <IoIosHand
-                  className={`half-cookyer-handsup-icon-active-${handsUpCookieeList.indexOf(sub.stream.connection.connectionId)}`}
-                  onClick={(e) => resetHandsUpCookiee(e, {cookyer: publisher, cookiee: sub})}
-                />
-              ) : (
-                <IoIosHand onClick={(e) => noneClick(e)} className='half-cookyer-handsup-icon'/>
-              )}
+        <div className='half-cookyer-cookiees-container'>
+          {Object.keys(subscribers).length ? (
+            <div className='half-cookyer-cookiees'>
+              {subscribers.map((sub, i) => (
+                <div key={i} className='half-cookyer-cookiee-content' onClick={() => handleMainVideoStream(sub)}>
+                  <UserVideoComponent
+                    videoStyle='half-cookyer-cookiee'
+                    streamManager={sub}
+                  />
+                  {audioOnList && audioOnList.find((item) => item === sub.stream.connection.connectionId) ? (
+                    <BsMicFill className='half-cookyer-cookiee-audio-icon-active' onClick={(e) => handleACookieeAudio(e, {cookyer: publisher, cookiee: sub})}/>
+                  ) : (
+                    <BsMicMuteFill className='half-cookyer-cookiee-audio-icon' onClick={(e) => handleACookieeAudio(e, {cookyer: publisher, cookiee: sub})}/>
+                  )}
+                  {checkCookieeList && checkCookieeList.find((item) => item === sub.stream.connection.connectionId) ? (
+                    <AiFillCheckCircle onClick={(e) => noneClick(e)} className='half-cookyer-check-icon-active'/>
+                  ) : (
+                    <AiFillCheckCircle onClick={(e) => noneClick(e)} className='half-cookyer-check-icon'/>
+                  )}
+                  {handsUpCookieeList && handsUpCookieeList.find((item) => item === sub.stream.connection.connectionId) ? (
+                    <IoIosHand
+                      className={`half-cookyer-handsup-icon-active-${handsUpCookieeList.indexOf(sub.stream.connection.connectionId)}`}
+                      onClick={(e) => resetHandsUpCookiee(e, {cookyer: publisher, cookiee: sub})}
+                    />
+                  ) : (
+                    <IoIosHand onClick={(e) => noneClick(e)} className='half-cookyer-handsup-icon'/>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <div className="half-cookyer-nocookiees">
+              <p>수업에 참가중인 쿠키가 없습니다.</p>
+              <img src="/cookiee.png" alt=""/>
+            </div>
+          )}
         </div>
         
         <CookyerLessonStep size='half'/>

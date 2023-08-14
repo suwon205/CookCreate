@@ -157,8 +157,10 @@
 }
 
 .other-cookiees img {
-  width: 100px;
-  height: 100px;
+  width: 220px;
+  height: 220px;
+  margin-top: 30px;
+  margin-left: 23px;
 }
 
 .other-cookiees-video {
@@ -168,6 +170,42 @@
   height: 82px;
   display: inline-block; /* inline-flex */
   object-fit: cover;
+}
+
+.cookiee-handsup-animation {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  transform-origin: 50% 100%;
+  animation-name: shake;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-delay: 0.2s;
+  z-index: 2;
+  font-size: 300px;
+  color: rgb(255, 200, 0);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+}
+
+@keyframes shake{
+  0%{
+    transform: rotate(0deg);
+  }
+  20%{
+    transform: rotate(-5deg);
+  }
+  40%{
+    transform: rotate(5deg);
+  }
+  60%{
+    transform: rotate(-5deg);
+  }
+  80%{
+    transform: rotate(5deg);
+  }
+  100%{
+    transform: rotate(0deg);
+  }
 }
 
 @keyframes widgetFadeInAnimation {

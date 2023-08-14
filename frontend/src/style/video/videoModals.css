@@ -36,7 +36,7 @@
   margin: 25px auto 25px;
   width: 408px;
   height: 310px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .cookyer-lesson-step-modal-steps::-webkit-scrollbar {
