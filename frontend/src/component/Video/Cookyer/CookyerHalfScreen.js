@@ -76,11 +76,19 @@ function CookyerHalfScreen(props) {
         
         <div className='half-cookyer-cookiees-container'>
           {Object.keys(subscribers).length ? (
-            <div className='half-cookyer-cookiees'>
+            <div
+              className='half-cookyer-cookiees'>
               {subscribers.map((sub, i) => (
-                <div key={i} className='half-cookyer-cookiee-content' onClick={() => handleMainVideoStream(sub)}>
+                <div key={i}
+                  className='half-cookyer-cookiee-content'
+                  onClick={() => handleMainVideoStream(sub)
+                }>
                   <UserVideoComponent
-                    videoStyle='half-cookyer-cookiee'
+                    videoStyle={`
+                      half-cookyer-cookiee
+                      ${checkCookieeList && checkCookieeList.find((item) => item === sub.stream.connection.connectionId) ? 'cookyer-check-border' : ''}
+                      ${handsUpCookieeList && handsUpCookieeList.find((item) => item === sub.stream.connection.connectionId) ? `cookyer-handsup-border-${handsUpCookieeList.indexOf(sub.stream.connection.connectionId)}` : ''}
+                    `}
                     streamManager={sub}
                   />
                   {audioOnList && audioOnList.find((item) => item === sub.stream.connection.connectionId) ? (

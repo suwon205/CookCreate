@@ -139,6 +139,17 @@
   margin-right: 18px;
 }
 
+.full-video-timer-stop-btn {
+  border: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: #ff1b1b;
+  font-size: 15px;
+  color: white;
+}
+
+
 /* 다른 쿠키 목록 */
 .other-cookiees {
   position: fixed;
@@ -156,11 +167,18 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.other-cookiees img {
-  width: 220px;
-  height: 220px;
-  margin-top: 30px;
-  margin-left: 23px;
+.cookiee-nocookiees p {
+  color: #4B4B4B;
+  font-size: 15px;
+  margin: 60px auto 20px;
+  text-align: center;
+}
+
+.cookiee-nocookiees img {
+  width: 110px;
+  margin-top: 5px;
+  margin-left: 75px;
+  animation: rotate_image 4s linear infinite;
 }
 
 .other-cookiees-video {
@@ -185,6 +203,34 @@
   font-size: 300px;
   color: rgb(255, 200, 0);
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+}
+
+.cookiee-timer-animation {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  transform-origin: 50% 100%;
+  animation-name: shake;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-delay: 0.2s;
+  z-index: 2;
+  font-size: 300px;
+  color: rgb(0, 110, 255);
+}
+
+.cookiee-check-animation {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  transform-origin: 50% 100%;
+  animation-name: shake;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-delay: 0.2s;
+  z-index: 2;
+  font-size: 300px;
+  color: rgb(33, 172, 33);
 }
 
 @keyframes shake{
@@ -216,5 +262,11 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
   }
 }

@@ -188,7 +188,7 @@ function Timer({ role, size, isGestureTest }) {
         ) : (
           <div>
             {isRunning ? (
-              <button className={`${size}-video-timer-set-btn`} onClick={stop}>Stop</button>
+              <button className={`${size}-video-timer-stop-btn`} onClick={stop}>Stop</button>
             ) : (
               <button className={`${size}-video-timer-set-btn`} onClick={start}>Start</button>
             )}

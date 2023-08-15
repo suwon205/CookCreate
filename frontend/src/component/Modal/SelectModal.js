@@ -16,8 +16,10 @@ function SelectModal({ content, path, actions }) {
     <div className="alert-modal">
       <div className="alert-content-container">
         <p className="alert-content">{content}</p>
-        <button className="alert-button" onClick={() => goAction(true)}>예</button>
-        <button className="alert-button" onClick={() => goAction(false)}>아니오</button>
+        <div className='alert-button-container'>
+          <button className="alert-button" onClick={() => goAction(true)}>예</button>
+          <button className="alert-cancel-button" onClick={() => goAction(false)}>아니오</button>
+        </div>
       </div>
     </div>
   );

@@ -65,7 +65,7 @@ function RecipeBook() {
         <p className="recipe-book-page-title">레시피북</p>
         <div className="recipe-book-desc">
           <p>레시피북을 클릭하면 요리 진행단계를 볼 수 있습니다.</p>
-          <p>레시피북을 참고해 과외가 끝난 후에도 요리를 즐겨보세요!</p>
+          <p>과외가 끝난 후에도 요리를 즐겨보세요!</p>
         </div>
       </div>
 

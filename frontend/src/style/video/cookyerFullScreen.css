@@ -37,8 +37,6 @@
   width: 551px;
   height: 548px;
   overflow: hidden;
-  border: 1px solid orange;
-
 }
 
 .cookyer-cookiee {
@@ -126,7 +124,7 @@
 }
 
 .cookyer-handsup-icon-active-3 {
-  color: rgb(27, 196, 12);
+  color: rgb(12, 142, 0);
 }
 
 .cookyer-handsup-icon-active-4 {
@@ -303,19 +301,20 @@
 .full-cookyer-nocookiees {
   width: 551px;
   height: 548px;
-  margin: 60px auto;
+  margin: 96px auto 0;
 }
 
 .full-cookyer-nocookiees p {
   color: white;
   font-size: 20px;
-  margin: 0 auto 50px;
+  margin: 30px auto 50px;
   text-align: center;
 }
 
 .full-cookyer-nocookiees img {
   width: 200px;
-  margin: 0 auto;
+  /* margin-top: 20px; */
+  margin-left: 180px;
   animation: rotate_image 4s linear infinite;
 }
 

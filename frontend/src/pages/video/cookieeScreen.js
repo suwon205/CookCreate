@@ -16,7 +16,7 @@ import { setCurStep, setLessonInfo, setStepInfo } from '../../store/video/videoL
 import { initScreenShare } from '../../store/video/screenShare';
 
 import { AiFillCheckCircle } from 'react-icons/ai'
-import { IoIosHand } from 'react-icons/io'
+import { IoIosHand, IoIosTimer } from 'react-icons/io'
 import { BsMicFill, BsMicMuteFill } from "react-icons/bs";
 import '../../style/video.css'
 import '../../style/video/cookieeScreen.css'
@@ -47,6 +47,10 @@ function CookieeScreen() {
   /** 손들기 기능 */
   const handsUp = useSelector((state) => state.cookieeVideo.handsUp)
   const [ handsUpVisible, setHandsUpVisible ] = useState(false)
+
+  /** 타이머 아이콘 보이기 */
+  const timerCheck = useSelector((state) => state.timer.timerCheck)
+  const [ timerVisible, setTimerVisible ] = useState(false)
 
   /** 선생님 화면 고정하기 위해 선생님 subscriber 찾기 */
   const [ cookyerStream, setCookyerStream ] = useState(undefined)
@@ -289,14 +293,32 @@ function CookieeScreen() {
   }, [mainVideo])
 
   useEffect(() => {
+    if (check) {
+      setCheckVisible(true)
+    }
+  }, [check])
+
+  useEffect(() => {
     if (handsUp) {
       setHandsUpVisible(true)
     }
   }, [handsUp])
 
   useEffect(() => {
+    if (checkVisible) {
+      const timeoutId = setTimeout(() => {
+        setCheckVisible(false);
+      }, 2000);
+  
+      // 컴포넌트가 언마운트되면 타임아웃 클리어
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [checkVisible]);
+
+  useEffect(() => {
     if (handsUpVisible) {
-      // 5초 후에 요소를 보이지 않게 설정
       const timeoutId = setTimeout(() => {
         setHandsUpVisible(false);
       }, 2000);
@@ -307,6 +329,25 @@ function CookieeScreen() {
       };
     }
   }, [handsUpVisible]);
+
+  useEffect(() => {
+    if (timerCheck) {
+      setTimerVisible(true)
+    }
+  }, [timerCheck])
+
+  useEffect(() => {
+    if (timerVisible) {
+      const timeoutId = setTimeout(() => {
+        setTimerVisible(false);
+      }, 2000);
+  
+      // 컴포넌트가 언마운트되면 타임아웃 클리어
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [timerVisible]);
 
   return (
     <div className='video-page'>
@@ -350,7 +391,7 @@ function CookieeScreen() {
                     streamManager={cookyerStream}
                   />
                 ) : (
-                  <h1>쿠커 화면</h1>
+                  null
                 )}
                 {cookyerStream && audioOnList && audioOnList.find((item) => item === cookyerStream.stream.connection.connectionId) ? (
                   <BsMicFill className='cookiee-cookyer-audio-icon-active'/>
@@ -368,7 +409,7 @@ function CookieeScreen() {
                     gesture={true}
                   />
                 ) : (
-                  <h1>쿠키 화면</h1>
+                  null
                 )}
                 {check ? (
                   <AiFillCheckCircle className='cookiee-check-icon-active'/>
@@ -380,7 +421,9 @@ function CookieeScreen() {
                 ) : (
                   <IoIosHand className='cookiee-handsup-icon'/>
                 )}
+                {checkVisible && <AiFillCheckCircle className='cookiee-check-animation'/>}
                 {handsUpVisible && <IoIosHand className='cookiee-handsup-animation'/>}
+                {timerVisible && <IoIosTimer className='cookiee-timer-animation'/>}
               </div>
             </div>
           </div>

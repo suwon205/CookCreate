@@ -30,8 +30,10 @@ function OtherCookiees() {
           </div>
         ))
       ) : (
-        // null
-        <img src='/cookiees.png' alt='쿠키'/>
+        <div className="cookiee-nocookiees">
+          <p>수업에 참가중인 쿠키가 없습니다.</p>
+          <img src='/cookiee.png' alt=''/>
+        </div>
       )}
     </div>
   );

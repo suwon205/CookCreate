@@ -65,7 +65,11 @@ function CookyerFullScreen(props) {
                   // <div key={sub.id} onClick={() => handleMainVideoStream(sub)}>
                   <div key={i} className='cookyer-cookiee-content' onClick={() => handleMainVideoStream(sub)}>
                     <UserVideoComponent
-                      videoStyle='cookyer-cookiee'
+                      videoStyle={`
+                        cookyer-cookiee
+                        ${checkCookieeList && checkCookieeList.find((item) => item === sub.stream.connection.connectionId) ? 'cookyer-check-border' : ''}
+                        ${handsUpCookieeList && handsUpCookieeList.find((item) => item === sub.stream.connection.connectionId) ? `cookyer-handsup-border-${handsUpCookieeList.indexOf(sub.stream.connection.connectionId)}` : ''}
+                      `}
                       streamManager={sub}
                     />
                     {audioOnList && audioOnList.find((item) => item === sub.stream.connection.connectionId) ? (

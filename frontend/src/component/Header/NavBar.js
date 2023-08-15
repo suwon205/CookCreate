@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import { useSelector } from "react-redux";
@@ -6,16 +6,19 @@ import '../../style/navbar.css'
 import '../../style/video.css'
 import AppliedLessonMenu from './AppliedLessonMenu';
 import UserDropMenu from './UserDropMenu';
+import axios from 'axios';
 
 function NavBar() {
   const isLogin = useSelector((state) => state.auth.isLogin)
 
+  const access_token = localStorage.getItem('access_token')
   const nickname = localStorage.getItem('nickname')
   const role = localStorage.getItem('role')
   const emoji = localStorage.getItem('emoji')
 
   /** 신청 수업 드롭다운 */
   const [ lessonDropdown, setLessonDropdown ] = useState(false)
+  const [ myLessons, setMyLessons ] = useState(undefined)  // 학생 모달창에 불러서 쓸 레슨 정보
 
   /** 유저 드롭다운 */
   const [ userDropdown, setUserDropdown ] = useState(false)
@@ -35,6 +38,32 @@ function NavBar() {
 
   const location = useLocation();
   const mainPageStyle = location.pathname === '/';
+
+  useEffect(() => {  // 레슨 정보 받아오는 부분  // 누를때마다 요청되므로 나중에 스토어에 저장하던지 위치 바꿔주기
+    if (access_token && role === 'COOKIEE') {
+      axios.get(
+        `api/v1/my/applied`,
+        {
+          headers : {
+            Access_Token : access_token
+          }
+        })
+        .then((res) => {
+          console.log(res.data)
+          console.log('신청한 수업 목록 받아와짐')
+        if (res.data[0].message !== "신청한 과외가 없습니다.") {
+          setMyLessons(res.data)
+        } else {
+          setMyLessons(undefined)
+        }
+
+        })
+        .catch((err) => {
+          console.log(err)
+          console.log('신청한 수업 목록 안받아와짐')
+        })
+    }
+  }, [access_token, role])
 
   return (
     <div className={`navbar ${mainPageStyle ? 'navbar-main' : ''}`}>
@@ -57,7 +86,7 @@ function NavBar() {
               <button className='drop-btn' onClick={dropLessonMenu}>신청수업</button>
               { lessonDropdown ? (
                 <div onMouseLeave={() => dropLessonMenu(false)} className="drop-wrap">
-                  <AppliedLessonMenu />
+                  <AppliedLessonMenu myLessons={myLessons}/>
                 </div>
               ) : null}
             </div>

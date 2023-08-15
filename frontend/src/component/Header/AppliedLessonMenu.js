@@ -6,7 +6,7 @@ import { OpenVidu } from 'openvidu-browser';
 import { useNavigate } from 'react-router-dom';
 import '../../style/appliedLessonMenu.css'
 
-function AppliedLessonMenu() {
+function AppliedLessonMenu({ myLessons }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -15,35 +15,7 @@ function AppliedLessonMenu() {
   const sessionId = useSelector((state) => state.video.sessionId)
   const session = useSelector((state) => state.video.session)
 
-  const [ myLessons, setMyLessons ] = useState(undefined)  // 학생 모달창에 불러서 쓸 레슨 정보
   const videoLessonId = useSelector((state) => state.video.videoLessonId)
-
-
-  useEffect(() => {  // 레슨 정보 받아오는 부분  // 누를때마다 요청되므로 나중에 스토어에 저장하던지 위치 바꿔주기
-    if (access_token) {
-      axios.get(
-        `api/v1/my/applied`,
-        {
-          headers : {
-            Access_Token : access_token
-          }
-        })
-        .then((res) => {
-          console.log(res.data)
-          console.log('신청한 수업 목록 받아와짐')
-        if (res.data[0].message !== "신청한 과외가 없습니다.") {
-          setMyLessons(res.data)
-        } else {
-          setMyLessons(undefined)
-        }
-
-        })
-        .catch((err) => {
-          console.log(err)
-          console.log('신청한 수업 목록 안받아와짐')
-        })
-    }
-  }, [access_token])
 
   /** 학생이 과외방 입장하는 코드 */
   const joinLesson = (lessonId) => {
