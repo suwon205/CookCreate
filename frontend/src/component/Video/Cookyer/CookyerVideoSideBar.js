@@ -9,6 +9,7 @@ import { closeSession, shareScreen } from '../../../store/video/video-thunk';
 import { BsMicFill, BsMicMute, BsCameraVideoFill, BsCameraVideoOff, BsWindowFullscreen, BsVolumeMuteFill, BsPersonSquare } from "react-icons/bs"
 import { RxExit } from "react-icons/rx"
 import { IoIosTimer } from "react-icons/io"
+import SelectModal from '../../Modal/SelectModal';
 
 function CookyerVideoSideBar({ size, setMeWidget, setTimerWidget }) {
   const dispatch = useDispatch()
@@ -30,35 +31,41 @@ function CookyerVideoSideBar({ size, setMeWidget, setTimerWidget }) {
   const videoLessonId = useSelector((state) => state.video.videoLessonId)
   const access_token = localStorage.getItem('access_token')
 
+  /** 과외방 나가기 관련 모달 */
+  const [ showAlert, setShowAlert ] = useState(false)
+
   /** 과외방 닫기 */
-  const handleCloseSession = () => {
-    if (sessionId !== undefined) {
-    // if (session.sessionId) {
-      console.log("레슨번호", videoLessonId)
-      console.log(access_token, "삭제시도")
-      axios.delete(
-        // `http://localhost:4443/openvidu/api/sessions/${session.sessionId}`,
-        `https://i9c111.p.ssafy.io:8447/openvidu/api/sessions/${session.sessionId}`,
-        {
-          headers: {
-            Authorization:
-              'Basic ' + btoa('OPENVIDUAPP:MMT_SECRET'),
-          }
-        })
-        .then((res) => {
-          session.disconnect()
-          const data = {
-            access_token, lessonId: videoLessonId
-          }
-          dispatch(closeSession(data))
-          console.log('세션 종료 성공', res)
-        })
-        .catch((err) => {
-          console.log('세션 종료 실패', err)
-        })
-    } else {
-      console.log("비정상적인 접근. 어떻게 여기에..?")
+  const handleCloseSession = (data) => {
+    if (data) {
+      if (sessionId !== undefined) {
+      // if (session.sessionId) {
+        console.log("레슨번호", videoLessonId)
+        console.log(access_token, "삭제시도")
+        axios.delete(
+          // `http://localhost:4443/openvidu/api/sessions/${session.sessionId}`,
+          `https://i9c111.p.ssafy.io:8447/openvidu/api/sessions/${session.sessionId}`,
+          {
+            headers: {
+              Authorization:
+                'Basic ' + btoa('OPENVIDUAPP:MMT_SECRET'),
+            }
+          })
+          .then((res) => {
+            session.disconnect()
+            const data = {
+              access_token, lessonId: videoLessonId
+            }
+            dispatch(closeSession(data))
+            console.log('세션 종료 성공', res)
+          })
+          .catch((err) => {
+            console.log('세션 종료 실패', err)
+          })
+      } else {
+        console.log("비정상적인 접근. 어떻게 여기에..?")
+      }
     }
+    setShowAlert(false)
   }
 
   /** 화면 공유 */
@@ -141,9 +148,11 @@ function CookyerVideoSideBar({ size, setMeWidget, setTimerWidget }) {
 
   return (
     <div className='video-sidebar'>
+      {showAlert && <SelectModal content='과외를 끝내시겠습니까?' path={null} actions={handleCloseSession} />}
       <div>
         {/* 수업 끝내기 */}
-        <div className='video-side-icon-wrap' onClick={handleCloseSession}>
+        <div className='video-side-icon-wrap' onClick={() => setShowAlert(true)}>
+        {/* <div className='video-side-icon-wrap' onClick={handleCloseSession}> */}
           <RxExit className='video-side-icon video-exit-icon'/>
         </div>
         {/* 화면뮤트 */}

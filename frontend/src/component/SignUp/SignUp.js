@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import AlertModal from '../Modal/AlertModal'
 
 import FoodList from './FoodList';
 function Signup() {
@@ -32,6 +33,10 @@ function Signup() {
   const [isNicknameDupli, setIsNNdup] = useState(false)
   const [isPhoneNumber, setIsPhoneNumber] = useState(true)
   const [isUserEmail, setIsUserEmail] = useState(true)
+
+  /** 회원가입 성공 알림 모달 관련 */
+  const [ showAlert, setShowAlert ] = useState(false)
+  const [ content, setContent ] = useState(null)
 
   //유효성 검사 구현
   const onChangeUserId = async (e) => {
@@ -167,16 +172,23 @@ function Signup() {
     .post(`api/v1/auth/signup`, 
     {userId, userPw, userPwCk, nickname, phoneNumber, userEmail, role, food})
     .then(() => {
-      alert('회원가입 성공! Cook Create를 즐겨보세요!')
+      setContent('회원가입 성공! Cook Create를 즐겨보세요!')
       localStorage.removeItem('userType')
-      navigate('/login')
     })
     .catch((err) => {
       setUserCanSignUp(err.response.data.message)
     })
   }
+
+  useEffect(() => {
+    if (content !== null) {
+      setShowAlert(true)
+    }
+  }, [content])
+
     return (
     <div className='page'>
+      {showAlert && <AlertModal content={content} path='/login'/>}
       <div className='titleWrap'>
         회원가입
       </div>
