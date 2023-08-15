@@ -41,10 +41,12 @@ function CookyerFullScreen(props) {
             <div className='cookyer-components-left'>
               <div className='cookyer-sharing'>
                 <div className='cookyer-sharing-content' onClick={() => handleMainVideoStream(mainStreamManager)}>
-                  <UserVideoComponent
-                    videoStyle='cookyer-sharing-content'
-                    streamManager={mainStreamManager}
-                  />
+                  {mainStreamManager ? (
+                    <UserVideoComponent
+                      videoStyle='cookyer-sharing-content'
+                      streamManager={mainStreamManager}
+                    />
+                  ) : null}
                 </div>
               </div>
               <div className='cookyer-components-left-bottom'>

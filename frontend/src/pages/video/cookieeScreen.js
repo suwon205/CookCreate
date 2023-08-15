@@ -364,7 +364,7 @@ function CookieeScreen() {
               {/* <div className='cookiee-sharing' onClick={() => handleMainVideoStream(cookyerStream)}> */}
                 <div className='cookiee-sharing-content'>
                   {isCompleted ? (
-                    <p>수업이 종료되었습니다.</p>
+                    null
                   ) : (
                     screenShareStream ? (
                       <UserVideoComponent

@@ -7,11 +7,14 @@ import {
   setMaterials, setLessonStepList, setVideoUrl
   } from '../../store/lesson/lesson';
 import '../../style/lesson/previousLessonCss.css';
+import AlertModal from '../Modal/AlertModal';
 
 function PreviousLesson() {
   const dispatch = useDispatch()
   const access_token = localStorage.getItem('access_token');
   const [showModal, setShowModal] = useState(false);
+
+  const [showFailModal, setShowFailModal] = useState(false)
 
   const handlePreviousLesson = () => {
     setShowModal(true);
@@ -40,6 +43,7 @@ function PreviousLesson() {
       .catch((err) => {
         console.log(err);
         setShowModal(false);
+        setShowFailModal(true)
       });
   };
 
@@ -49,6 +53,7 @@ function PreviousLesson() {
 
   return (
     <div>
+      {showFailModal && <AlertModal content='최근에 예약한 과외 내역이 없습니다.' path={null} actions={setShowFailModal} data={false}/>}
       <div 
         className='previousLessonTitle'
         onClick={handlePreviousLesson}

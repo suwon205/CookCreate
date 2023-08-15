@@ -85,7 +85,7 @@ function CookyerVideoSideBar({ size, setMeWidget, setTimerWidget }) {
       shareSession.unpublish(shareScreenPublisher)
       setIsShared(false)
       dispatch(initScreenShare())
-      dispatch(setMainStreamManager(publisher))
+      dispatch(setMainStreamManager(null))
       const data = {
         connectionId: publisher.stream.connection.connectionId
       }
