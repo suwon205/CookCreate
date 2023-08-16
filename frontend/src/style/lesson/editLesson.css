@@ -1,0 +1,60 @@
+.edit-lesson-title-container{
+  display: flex;
+  margin-top: 30px;
+  flex-direction: row;
+  align-items: center; /* 수평 가운데 정렬 */
+}
+
+.registerLessonTitle{
+  text-align: left;
+  font-weight: 500;
+  font-size: 25px;
+  margin-right: 100px;
+}
+
+.edit-step-input-wrapper {
+  display: flex; /* 추가된 입력 요소들을 가로로 나란히 배치 */
+  align-items: center; /* 세로 방향 가운데 정렬 */
+  margin-bottom: 10px; /* 입력 요소 사이 간격 조절 */
+}
+
+.edit-step-cancel-button{
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 40px;
+  height: 30px;
+  font-size: 13px;
+  padding-bottom: 3px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: #FF7A42;
+  color: #FFFDFD;
+
+}
+.edit-step-cancel-button:hover {
+  background-color: #FF6060;
+}
+
+.edit-step-plus-button{
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  padding-bottom: 3px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: #FF7A42;
+  color: #FFFDFD;
+}
+.edit-step-plus-button:hover {
+  background-color: #FF6060;
+}
+
+.edit-step-msg{
+  font-size: 13px;
+}

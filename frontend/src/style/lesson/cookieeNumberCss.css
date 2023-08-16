@@ -1,0 +1,41 @@
+.cookieeNumberContainer{
+    height: 80px;
+    border-radius: 7px;
+    border: 0.7px solid #D9D9D9;
+    background: #FFF;
+    margin-bottom: 10px;
+}
+
+.cookieeNumberFlexContainer{
+    display: flex;
+    justify-content: space-between; /* 내부 요소를 좌우 정렬 */
+    align-items: center; /* 내부 요소를 수직 가운데 정렬 */
+    height: 100%;
+    padding: 2rem; /* 좌우 여백 추가 */
+}
+
+.cookieeNumberTitle{
+    text-align: left;
+    font-weight: 500;
+    color: #666;
+}
+
+.cookieeNumberCurrentContainer{
+    text-align: right;
+}
+
+.cookieeNumberCurrent{
+    color: #FF7A42;
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.cookieeNumberDesc{
+    color: #FF7A42;
+    font-size: 16px;
+}
+
+.cookieeNumberMax{
+    color: #666;
+    font-size: 16px;
+}

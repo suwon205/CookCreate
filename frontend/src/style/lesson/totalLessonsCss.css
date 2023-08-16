@@ -1,0 +1,36 @@
+.title{
+    color: #404040;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: 40px;
+}
+
+.desc{
+    color: #666;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.lessonsContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.contentContainer {
+    display: flex;
+}
+  
+.mainContent {
+    flex: 1;
+}
+  
+.sidebar {
+    width: 300px; /* 오른쪽에 고정할 컴포넌트의 너비 */
+    position: fixed;
+    top: 270px; /* 필요에 따라 조절하여 원하는 위치에 고정 */
+    right: -70px;
+}
+  

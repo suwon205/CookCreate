@@ -1,0 +1,59 @@
+.edit-info-top-container{
+  display: flex;
+  align-items: center; /* 가로 정렬 시 세로 정렬 설정 */
+  margin-top: 40px;
+}
+
+.edit-info-top-category-container{
+  display: flex;
+  align-items: center; /* 가로 정렬 시 세로 정렬 설정 */
+  width: 400px;
+}
+
+.edit-info-top-title-container{
+  display: flex;
+  align-items: center; /* 가로 정렬 시 세로 정렬 설정 */
+  width: 400px;
+}
+
+.edit-info-top-category-container{
+  display: flex;
+  align-items: center; /* 가로 정렬 시 세로 정렬 설정 */
+  width: 400px;
+}
+.edit-info-text {
+  margin-right: 10px; /* 아이콘과 텍스트 사이 간격 */
+  font-size: 15px;
+  font-weight: 500;
+  width: 130px;
+}
+.required {
+  color: red; /* * 문자의 색상을 빨간색으로 설정 */
+  margin-left: 10px; /* 아이디와 * 사이에 공백을 추가 */
+}
+
+.edit-info-select{
+  width: 150px;
+  height: 35px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  border: 0.7px solid #D9D9D9;
+  background: #FFF;
+  color: #4B4B4B;
+  padding-left: 20px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+.edit-info-input{
+  width: 300px;
+  height: 35px;
+  flex-shrink: 0;
+  font-size: 12px;
+  border-radius: 7px;
+  border: 0.7px solid #D9D9D9;
+  background: #FFF;
+  padding-left: 15px;
+}

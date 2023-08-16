@@ -1,0 +1,27 @@
+.previousLessonTitle{
+    cursor: pointer;
+    border-radius: 27px;
+    border: 1px solid #656363;
+    background: rgba(217, 217, 217, 0.00);
+    padding: 5px 12px 5px 12px;
+    margin-top: 3px;
+    font-size: 13px;
+}
+
+.alert-button-container{
+
+}
+
+.alert-cancel-button{
+    background-color: #a1a0a0;
+    color: #FFFDFD;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+.alert-cancel-button:hover {
+    background-color: #777777;
+}

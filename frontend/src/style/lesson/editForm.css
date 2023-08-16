@@ -1,0 +1,27 @@
+.file-input-thumbnail{
+  border: none;
+  border-radius: 0;
+}
+
+.lesson-edit-button{
+  display: flex;
+  width: 200px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: #FF7A42;
+  color: #FFFDFD;
+  margin-top: 80px;
+}
+
+.lesson-edit-button.disabled {
+    /* 비활성화된 스타일 */
+    background-color: #ccc;
+    color: #777;
+    cursor: not-allowed;
+}

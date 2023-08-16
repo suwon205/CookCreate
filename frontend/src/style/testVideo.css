@@ -1,0 +1,106 @@
+.test-content-video {
+    display: flex;
+    flex-direction: row; /* 수평 레이아웃으로 설정 */
+    background-color: var(--empty-color);
+    border-radius: 5px;
+    object-fit: cover;
+    padding: 5px;
+}
+
+.test-video {
+    /* 필요한 스타일을 추가하십시오. */
+    flex: 1; /* 왼쪽 열을 주 축의 나머지 공간에 확장 */
+    border-radius: 5px;
+    margin: 5px;
+    position: relative;
+}
+
+.test-video video {
+    border-radius: 5px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column; /* 수직 레이아웃으로 설정 */
+    justify-content: space-between; /* cross 축에서 아이템들 사이에 공간을 만듭니다. */
+}
+
+.timer-reset-container {
+    display: flex;
+    flex-direction: column; /* 수직 방향으로 아이템을 배치 */
+    gap: 5px;
+    height: 100%;
+}
+
+.test-reset {
+    background-color: white;
+    height: 80px;
+    width: 383px;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 5px;
+    /* position: relative; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0px;
+    font-size: 38px;
+}
+
+
+.test-check-icon-active {
+    font-size: 35px;
+    position: absolute;
+    bottom: 10px;
+    right: 65px;
+    color: rgb(33, 172, 33);
+}
+  
+.test-check-icon {
+    font-size: 35px;
+    position: absolute;
+    bottom: 10px;
+    right: 65px;
+    color: rgb(114, 114, 114);
+}
+
+.test-handsup-icon-active {
+    font-size: 35px;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    color: rgb(27, 196, 12);
+}
+
+.test-handsup-icon {
+    font-size: 35px;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    color: rgb(114, 114, 114);
+}
+
+.test-explain {
+    padding: 38px 0;
+    background-color: white;
+    flex-grow: 1;
+    border-radius: 5px;
+    margin: 5px;
+
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.test-explain-text {
+    margin: 0 auto;
+    font-size: 17.5px;
+    line-height: 2;
+    font-weight: 500;
+    /* text-align: center; */
+}
+
+.test-explain-reset {
+    text-align: center;
+}

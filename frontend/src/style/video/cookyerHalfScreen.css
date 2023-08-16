@@ -1,0 +1,447 @@
+/* 반쪽화면 */
+.half-video-page {
+  /* margin-right: 60px; */
+}
+
+.half-video-header {
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.half-video-header-left,
+.half-video-header-right {
+  display: flex;
+}
+
+.half-video-lesson-title {
+  font-size: 20px;
+  margin-right: 30px;
+}
+
+.half-video-lesson-cookyer {
+  font-size: 14px;
+  color: rgb(207, 207, 207);
+  margin: auto 0px;
+}
+
+.half-video-lesson-time {
+  margin: 5px;
+}
+
+.half-cookyer-container {
+  width: 100%;
+}
+
+.half-cookyer-sharing {
+  position: relative;
+  width: 508px;
+  height: 281px;
+  padding: 5px;
+  margin: 10px auto;
+} 
+
+.half-cookyer-sharing-content {
+  /* background-color: var(--empty-color); */
+  border-radius: 5px;
+  height: 271px;
+  object-fit: cover;
+  /* font-size: 15px; */
+}
+
+.half-cookyer-cookiees {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 678px;
+  height: 298px;
+  margin: 10px auto;
+  /* border: 1px solid orange; */
+}
+
+.half-cookyer-cookiee-content {
+  position: relative;
+}
+
+.half-cookyer-cookiee {
+  /* background-color: var(--empty-color); */
+  border-radius: 5px;
+  margin: 3px;
+  width: 220px;
+  height: 143px;
+  display: inline-block; /* inline-flex */
+  object-fit: cover;
+}
+
+.half-cookyer-cookiee-audio-icon-active,
+.half-cookyer-cookiee-audio-icon,
+.half-cookyer-check-icon-active,
+.half-cookyer-check-icon,
+.half-cookyer-handsup-icon-active,
+.half-cookyer-handsup-icon,
+.half-cookyer-handsup-icon-active-1,
+.half-cookyer-handsup-icon-active-2,
+.half-cookyer-handsup-icon-active-3,
+.half-cookyer-handsup-icon-active-0,
+.half-cookyer-handsup-icon-active-4,
+.half-cookyer-handsup-icon-active-5 {
+  font-size: 20px;
+  position: absolute;
+}
+
+.half-cookyer-cookiee-audio-icon-active,
+.half-cookyer-cookiee-audio-icon {
+  bottom: 15px;
+  right: 65px;
+}
+
+.half-cookyer-check-icon-active,
+.half-cookyer-check-icon {
+  bottom: 15px;
+  right: 40px;
+}
+
+.half-cookyer-check-icon-active{
+  color: rgb(33, 172, 33);
+}
+
+.half-cookyer-check-icon {
+  color: rgb(114, 114, 114);
+}
+
+.half-cookyer-handsup-icon-active-0,
+.half-cookyer-handsup-icon-active-1,
+.half-cookyer-handsup-icon-active-2,
+.half-cookyer-handsup-icon-active-3,
+.half-cookyer-handsup-icon-active-4,
+.half-cookyer-handsup-icon-active-5,
+.half-cookyer-handsup-icon {
+  bottom: 15px;
+  right: 15px;
+}
+
+.half-cookyer-handsup-icon{
+  color: rgb(114, 114, 114);
+}
+
+.half-cookyer-handsup-icon-active-0 {
+  color: rgb(255, 0, 0);
+}
+
+.half-cookyer-handsup-icon-active-1 {
+  color: rgb(255, 106, 42);
+}
+
+.half-cookyer-handsup-icon-active-2 {
+  color: rgb(255, 200, 0);
+}
+.half-cookyer-handsup-icon-active-3 {
+  color: rgb(12, 142, 0);
+}
+
+.half-cookyer-handsup-icon-active-4 {
+  color: rgb(0, 94, 255);
+}
+
+.half-cookyer-handsup-icon-active-5 {
+  color: rgb(89, 0, 134);
+}
+
+/* 반쪽화면 쿠커 진행단계 */
+.half-video-step-widget-cookyer-container {
+  width: 100%;
+}
+
+.half-video-step-widget-cookyer {
+  background-color: white;
+  border-radius: 5px;
+  margin: 0 20px;
+  display: flex;
+  position: relative;
+  height: 57px;
+}
+
+.half-video-step-title {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  font-size: 12px;
+}
+
+.half-video-step-check-btn {
+  border: 1px solid #4B4B4B;
+  width: 65px;
+  height: 29px;
+  border-radius: 46px;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+.half-video-step-check-btn-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3px 10px;
+}
+
+.half-video-step-check-count {
+  display: flex;
+  font-size: 14px;
+}
+
+.half-video-step-check-icon {
+  font-size: 20px;
+}
+
+.half-video-step-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-size: 15px;
+  /* text-align: center; */
+}
+
+.half-video-step-p {
+  display: flex;
+}
+
+.half-video-step-current {
+  margin-left: 7px;
+}
+
+.half-video-step-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto 10px;
+  padding: 20px;
+  width: 600px;
+}
+
+.half-video-step-content-update {
+  display: flex;
+}
+
+.half-video-step-content-update input {
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+  border-bottom: 1px solid #a6a6a6;
+  font-size: 15px;
+  margin-left: 7px;
+}
+
+.half-video-step-content button {
+  background-color: transparent;
+  border: 1px solid #4B4B4B;
+  border-radius: 45px;
+  width: 40px;
+  height: 20px;
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.half-video-step-content button:hover {
+  border: 1px solid rgb(255, 123, 0);
+  color: rgb(255, 123, 0);
+}
+
+/* 반쪽화면 쿠커 타이머 */
+.half-timer-widget {
+  position: fixed;
+  top: 310px;
+  right: -84px;
+  transform: translate(-50%, -50%);
+  height: 120px;
+  width: 332px;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.half-cookyer-timer {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  height: 120px;
+  width: 332px;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: widgetFadeInAnimation 0.5s ease forwards;
+}
+
+.half-video-timer-title {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.half-video-timer-content-cookyer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* margin: auto 30px; */
+  margin-right: 30px;
+  margin-left: 40px;
+}
+
+.half-video-timer-input input {
+  border: none;
+  width: 40px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.half-video-timer-input span {
+  margin: 5px;
+}
+
+.half-video-timer-set-btn {
+  border: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: #D9D9D9;
+  font-size: 15px;
+}
+
+.half-video-timer-set-btn:hover {
+  background-color: #00A442;
+  color: white;
+}
+
+.half-cookyer-timer input, .half-cookyer-timer span {
+  font-size: 50px;
+  color: rgb(33, 33, 33);
+}
+
+/* 본인 화면 모달 */
+.half-me-widget {
+  position: fixed;
+  top: 212px;
+  right: 80px;
+  transform: translate(-50%, -50%);
+  width: 141px;
+  height: 92px;
+  z-index: 2;
+  opacity: 0;
+  animation: widgetFadeInAnimation 0.5s ease forwards;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.half-cookyer-video {
+  /* background-color: var(--empty-color); */
+  border-radius: 5px;
+  height: 92px;
+  object-fit: cover;
+}
+
+/* 전체 화면 */
+.video-page {
+  background-color: #262626;
+  grid-template-columns: repeat(12, 1fr);
+  display: flex;
+}
+
+.video-nickname {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+}
+
+.stream-component {
+  position: relative;
+}
+
+.half-cookyer-nocookiees {
+  width: 678px;
+  height: 298px;
+  margin: 10px auto;
+  padding: 30px;
+  overflow: hidden;
+}
+
+.half-cookyer-nocookiees p {
+  color: white;
+  font-size: 20px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.half-cookyer-nocookiees img {
+  width: 100px;
+  margin: 0 auto;
+  animation:
+    move_image 4s linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes widgetFadeInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes move_image {
+  0% {
+    transform: translatey(0px) translateX(-100px) rotate(0deg);
+  }
+  8% {
+      transform: translatey(36px) translateX(-27px) rotate(90deg)
+  }
+  17% {
+      transform: translatey(54px) translateX(47px) scale(1, 0.9) rotate(180deg);
+  }
+  25% {
+      transform: translatey(36px) translateX(120px) rotate(270deg);
+  }
+  34% {
+      transform: translatey(0px) translateX(194px) rotate(360deg);
+  }
+  42% {
+    transform: translatey(36px) translateX(267px) rotate(450deg)
+  }
+  51% {
+      transform: translatey(54px) translateX(341px) scale(1, 0.9) rotate(540deg);
+  }
+  59% {
+      transform: translatey(36px) translateX(418px) rotate(630deg);
+  }
+  68% {
+      transform: translatey(0px) translateX(492px) rotate(720deg);
+  }
+  76% {
+    transform: translatey(36px) translateX(565px) rotate(810deg)
+  }
+  84% {
+      transform: translatey(54px) translateX(639px) scale(1, 0.9) rotate(900deg);
+  }
+  92% {
+      transform: translatey(36px) translateX(712px) rotate(990deg);
+  }
+  100% {
+      transform: translatey(0px) translateX(778px) rotate(1080deg);
+  }
+  
+}

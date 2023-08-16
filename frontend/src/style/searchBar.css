@@ -1,0 +1,80 @@
+.mainSearch-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.searchBar {
+    border: none;
+    background-color: #EFEFEF;
+    border-radius: 0 0.3rem 0.3rem 0;
+    padding: 0.6rem 9rem 0.6rem 0.7rem;
+    font-size: 0.9rem;  
+    transition: padding 0.3s ease; 
+}
+
+.searchBar::placeholder {
+    color: #b5b2b2; /* placeholder 텍스트 색상 설정 */
+  }
+
+.mainSearchContainer {
+    margin-left: 2rem;
+    border-radius: 0.3rem;
+    background-color: #EFEFEF;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.search-result {
+  position: absolute;
+  padding: 0.3rem 0;
+  top: 3.5rem;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+  z-index: 2; /* z-index 값으로 요소의 쌓임 순서를 조절 */
+}
+
+.search-result-item {
+  font-size: 0.9rem;  
+  padding: 0.6rem 0.7rem 0.6rem 3rem;
+  min-width: 388.18px;
+  transition: padding 0.3s ease; 
+}
+
+.mainSearchIcon {
+    font-size: 1.5rem;
+    color: #656363;
+}
+
+@media screen and (max-width: 1400px) {
+    .searchBar {
+      padding: 0.6rem 5rem 0.6rem 0.7rem; 
+    }
+
+    .search-result-item {
+      padding: 0.6rem 0.7rem 0.6rem 3rem; 
+      min-width: 324.8px;
+    }
+}
+
+@media screen and (max-width: 1180px) {
+    .searchBar {
+      padding: 0.6rem 0.8rem 0.6rem 0.7rem; /* 화면 크기가 768px 미만일 때 padding 값을 조정 */
+    }
+
+    .search-result-item {
+      padding: 0.6rem 0.7rem 0.6rem 3rem; 
+      min-width: 257.6px;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .mainSearchContainer {
+      display: none;
+    }
+}

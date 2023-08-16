@@ -1,0 +1,8 @@
+.categoryWrapper {
+  border: 2px solid black;
+  padding: 5px;
+}
+
+.selectedCategory {
+  border: 2px solid black;
+}

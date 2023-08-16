@@ -1,0 +1,272 @@
+/* 쿠키 화면 */
+.cookiee-video-content {
+  display: flex;
+  width: 1401px;
+  /* margin: 0 auto; */
+  margin-left: 20px;
+}
+
+.cookiee-sharing {
+  width: 1036px;
+  height: 652px;
+  padding: 5px;
+} 
+
+.cookiee-sharing-content {
+  border-radius: 5px;
+  height: 642px;
+  object-fit: cover;
+  font-size: 25px;
+}
+
+.cookiee-content {
+  width: 393px;
+  height: 261px;
+  padding: 5px;
+  position: relative;
+}
+
+.cookiee-content-video {
+  border-radius: 5px;
+  height: 251px;
+  object-fit: cover;
+}
+
+.cookiee-cookyer-audio-icon-active {
+  font-size: 25px;
+  position: absolute;
+  top: 205px;
+  right: 25px;
+}
+
+.cookiee-cookyer-audio-icon {
+  font-size: 25px;
+  position: absolute;
+  top: 205px;
+  right: 25px;
+}
+
+.cookiee-check-icon-active {
+  font-size: 35px;
+  position: absolute;
+  top: 195px;
+  right: 70px;
+  color: rgb(33, 172, 33);
+}
+
+.cookiee-check-icon {
+  font-size: 35px;
+  position: absolute;
+  top: 195px;
+  right: 70px;
+  color: rgb(114, 114, 114);
+}
+
+.cookiee-handsup-icon-active {
+  font-size: 35px;
+  position: absolute;
+  top: 195px;
+  right: 25px;
+  color: rgb(255, 200, 0);
+}
+
+.cookiee-handsup-icon {
+  font-size: 35px;
+  position: absolute;
+  top: 195px;
+  right: 25px;
+  color: rgb(114, 114, 114);
+}
+
+/* 쿠커/쿠키 진행단계 */
+
+.full-video-step-widget-cookiee {
+  background-color: white;
+  border-radius: 5px;
+  margin: 5px;
+  width: 1026px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.full-video-step-title-cookiee {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.full-video-step-content-cookiee {
+  width: 800px;
+  margin: auto;
+}
+
+.full-video-step-content-cookiee p {
+  text-align: center;
+  font-size: 25px;
+}
+
+/* 쿠키 타이머 */
+.full-cookiee-timer {
+  background-color: white;
+  height: 121px;
+  width: 383px;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-video-timer-time {
+  display: flex ;
+}
+
+.full-video-timer-time p {
+  font-size: 50px;
+  margin: auto 5px;
+}
+
+.full-video-timer-content-cookiee {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto 7px;
+  margin-left: 60px;
+  margin-right: 18px;
+}
+
+.full-video-timer-stop-btn {
+  border: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  background-color: #ff1b1b;
+  font-size: 15px;
+  color: white;
+}
+
+
+/* 다른 쿠키 목록 */
+.other-cookiees {
+  position: fixed;
+  top: 292px;
+  right: 80px;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 288px;
+  padding: 5px;
+  background-color: white;
+  z-index: 2;
+  opacity: 0;
+  animation: widgetFadeInAnimation 0.5s ease forwards;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.cookiee-nocookiees p {
+  color: #4B4B4B;
+  font-size: 15px;
+  margin: 60px auto 20px;
+  text-align: center;
+}
+
+.cookiee-nocookiees img {
+  width: 110px;
+  margin-top: 5px;
+  margin-left: 75px;
+  animation: rotate_image 4s linear infinite;
+}
+
+.other-cookiees-video {
+  border-radius: 5px;
+  margin: 4px;
+  width: 126px;
+  height: 82px;
+  display: inline-block; /* inline-flex */
+  object-fit: cover;
+}
+
+.cookiee-handsup-animation {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  transform-origin: 50% 100%;
+  animation-name: shake;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-delay: 0.2s;
+  z-index: 2;
+  font-size: 300px;
+  color: rgb(255, 200, 0);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+}
+
+.cookiee-timer-animation {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  transform-origin: 50% 100%;
+  animation-name: shake;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-delay: 0.2s;
+  z-index: 2;
+  font-size: 300px;
+  color: rgb(0, 110, 255);
+}
+
+.cookiee-check-animation {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+  transform-origin: 50% 100%;
+  animation-name: shake;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-delay: 0.2s;
+  z-index: 2;
+  font-size: 300px;
+  color: rgb(33, 172, 33);
+}
+
+@keyframes shake{
+  0%{
+    transform: rotate(0deg);
+  }
+  20%{
+    transform: rotate(-5deg);
+  }
+  40%{
+    transform: rotate(5deg);
+  }
+  60%{
+    transform: rotate(-5deg);
+  }
+  80%{
+    transform: rotate(5deg);
+  }
+  100%{
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes widgetFadeInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,147 @@
+.signup-container {
+  max-width: 500px; /* 가로 크기를 500px로 고정 */
+  margin: 0 auto; /* 가운데 정렬을 위해 margin 설정 */
+  padding: 20px; /* 내용과의 간격을 주기 위해 padding 설정 */
+  margin-top: 15px;
+}
+
+.titleWrap{
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 35px;
+  color: #404040;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.signupinputContainer{
+  display: flex;
+  align-items: center; /* 내용 수직 가운데 정렬 */
+  margin-bottom: 10px; /* 아이템 간 간격을 주기 위한 마진 */
+}
+
+.signupinputTitle {
+  min-width: 180px; /* 입력 제목의 최소 너비 설정 */
+  font-size: 15px;
+  text-align: left;
+}
+
+.signupinputWrap {
+  flex: 1; /* 남은 공간 모두 사용 */
+  display: flex;
+  align-items: flex-start; /* 내용 수직 가운데 정렬 */
+}
+
+.signupinput{
+  width: 300px;
+  height: 35px;
+  flex-shrink: 0;
+  font-size: 12px;
+  border-radius: 7px;
+  border: 0.7px solid #D9D9D9;
+  background: #FFF;
+  padding-left: 15px;
+}
+
+.validInput {
+  background-color: rgba(181, 252, 181, 0.533); /* 원하는 색상으로 변경하세요 */
+}
+
+.required {
+  color: red; /* * 문자의 색상을 빨간색으로 설정 */
+  margin-left: 10px; /* 아이디와 * 사이에 공백을 추가 */
+}
+
+.signupdupliButton{
+  width: 90px;
+  margin-left: 20px;
+  display: inline-flex;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  border: 0.7px solid #CBCBCB;
+  background: #FFF;
+  cursor: pointer;
+  color: #666
+}
+
+.signupinputMessage{
+  font-size: 12px;
+  display: block;
+  margin-top: -3px;
+  margin-bottom: 10px;
+  margin-left: 185px;
+  height: 15px;
+  text-align: left;
+}
+
+.bottomBtnContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* 원하는 여백을 추가하세요 */
+}
+
+/* 활성화됐을 때 스타일 */
+.activeBtn {
+  display: flex;
+  width: 299px;
+  height: 40px;
+  padding: 15px 94px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: #FF7A42;
+  color: #FFFDFD;
+  margin-top: 25px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.activeBtn:hover {
+  background-color: #fd621f;
+}
+
+/* 비활성화됐을 때 스타일 */
+.disabledBtn {
+  display: flex;
+  width: 299px;
+  height: 40px;
+  padding: 15px 94px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: gray;
+  color: #FFFDFD;
+  margin-top: 25px;
+  cursor: not-allowed;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.bottomBtn{
+  display: flex;
+  width: 250px;
+  height: 40px;
+  padding: 15px 94px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: #FF7A42;
+  color: #FFFDFD;
+  margin-top: 25px;
+}
+.bottomBtn:hover {
+  background-color: #FF6060;
+}

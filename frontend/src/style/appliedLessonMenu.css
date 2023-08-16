@@ -1,0 +1,24 @@
+.drop-lesson {
+    display: flex;
+    flex-direction: row;
+    color: #656363;
+    min-width: 15rem;
+    justify-content: space-between;
+}
+
+.drop-title {
+    font-weight: 500;
+    color: #414141;
+}
+
+.drop-lesson-btn {
+    display: inline-flex;
+    padding: 0rem 0.5rem;
+    height: 28px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3.125rem;
+    border: 0.7px solid;
+    background: #FFF;  
+    font-size: 0.8rem;
+}

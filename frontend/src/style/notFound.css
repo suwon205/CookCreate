@@ -1,0 +1,28 @@
+.not-found-page-container {
+  height: 400px;
+}
+
+.not-found-img {
+  max-width: 100%;
+  /* align-items: center; */
+  width: 500px;
+}
+.not-found-page{
+  text-align: left;
+  margin-top: 50px;
+  font-size: 25px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+
+.not-found-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px; /* 이미지 위 마진 설정 */
+}
+.not-found-arrow {
+  scale: 150%;
+  margin-top: 15px;
+  color: rgb(255, 132, 0);
+}

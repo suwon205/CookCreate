@@ -1,0 +1,31 @@
+.lessonScheduleContainer{
+    height: 120px;
+    border-radius: 7px;
+    border: 0.7px solid #D9D9D9;
+    background: #FFF;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem; /* 좌우 여백 추가 */
+    gap: 1rem;
+}
+
+.lessonScheduleRowContainer {
+    display: flex;
+    align-items: center;
+}
+
+.lessonScheduleFirstTitle,
+.lessonScheduleSecondTitle {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color:#666;
+    width: 80px; /* 원하는 너비로 조정하세요 */
+}
+  
+.lessonScheduleFirstDesc,
+.lessonScheduleSecondDesc {
+    font-size: 0.9rem;
+    color: #656363;
+}

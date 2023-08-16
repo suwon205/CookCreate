@@ -1,0 +1,56 @@
+.lessonInfoTopContainer {
+    display: flex;
+    align-items: center; /* 가로 정렬 시 세로 정렬 설정 */
+    margin-top: 40px;
+  }
+
+.lessonInfoTopCategoryContainer{
+    display: flex;
+    align-items: center; /* 가로 정렬 시 세로 정렬 설정 */
+    width: 400px;
+}
+
+.lessonInfoTopTitleContainer{
+    display: flex;
+    align-items: center; /* 가로 정렬 시 세로 정렬 설정 */
+    width: 400px;
+}
+
+
+.lessonInfoText {
+    margin-right: 10px; /* 아이콘과 텍스트 사이 간격 */
+    font-size: 15px;
+    font-weight: 500;
+    width: 130px;
+}
+  
+.lessonInfoIcon {
+    margin-right: 10px; /* 아이콘과 입력 필드 사이 간격 */
+}
+  
+.lessonInfoInput {
+    width: 300px;
+    height: 35px;
+    flex-shrink: 0;
+    font-size: 12px;
+    border-radius: 7px;
+    border: 0.7px solid #D9D9D9;
+    background: #FFF;
+    padding-left: 15px;
+}
+
+.lessonInfoSelect{
+    width: 150px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    border: 0.7px solid #D9D9D9;
+    background: #FFF;
+    color: #4B4B4B;
+    padding-left: 20px;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+}

@@ -1,0 +1,52 @@
+.searchContainer{
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px; /* 컨테이너의 높이 설정 */
+}
+
+.categorySelect{
+    height: 56px;
+    border: 0.7px solid #FF7A42;
+    border-right: none;
+    padding: 1rem 1rem 1rem 3.5rem;
+    border-radius: 50px 0px 0px 50px;
+    box-shadow: 0px 8px 24px 0px #FFF7F5;
+    color: #FF7A42;
+    font-size: 1rem;
+    /* appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none; */
+}
+.categorySelect:focus {
+    outline: none; /* 선택됐을 때의 기본 외곽선 제거 */
+    border-color: #FF7A42; /* 선택됐을 때의 border 색상 설정 */
+  }
+
+.inputContainer{
+    box-sizing: border-box;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    border: 0.7px solid #FF7A42;
+    padding: 1rem 1rem 1rem 3rem;
+    border-radius: 0px 50px 50px 0px;
+    box-shadow: 0px 8px 24px 0px #FFF7F5;
+}
+
+.searchInput{
+    padding-left: 30px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+.searchInput::placeholder {
+    color: #FFC6B1; /* placeholder 텍스트 색상 설정 */
+  }
+
+.searchIcon{
+    font-size: 2.1rem;
+    padding-right: 10px;
+    color: #FF7A42;
+}

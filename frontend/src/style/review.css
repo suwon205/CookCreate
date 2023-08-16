@@ -1,0 +1,70 @@
+.header {
+  padding: 1rem;
+  background-color: #f8e8b5;
+  text-align: center;
+}
+
+.header_title {
+  font-size: 1.5rem;
+}
+
+.section_title {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.review_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.review_item {
+  background-color: #fcf7eb;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 0.5rem;
+  width: 300px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.review_cont {
+  margin-bottom: 0.5rem;
+}
+
+.review_link {
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
+}
+
+.review_author {
+  color: #888;
+}
+
+.review_star {
+  color: gold;
+}
+
+.review_fun {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.review_btn {
+  background-color: #e79f33;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.review_btn_txt {
+  margin-left: 0.5rem;
+}

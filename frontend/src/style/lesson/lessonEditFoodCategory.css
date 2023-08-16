@@ -1,0 +1,33 @@
+.categoryContainer{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px; /* 컨테이너의 높이 설정 */
+}
+
+.categoryItem{
+  margin: 5px;
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  cursor: pointer;
+
+  border: 1px solid #CBCBCB;
+  background: #FFF;
+  color: #656363;
+
+  text-align: center;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.categoryItem.selected {
+  border: 1px solid #FF7A42;
+  background: #FFF;
+  color: #FF7A42;
+}

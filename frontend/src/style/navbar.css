@@ -1,0 +1,117 @@
+.navbar {
+  background-color: #ffffff;
+  padding: 0.9rem 15rem;
+  display: flex; 
+  align-items: center;
+  justify-content: space-between;
+  color: #656363;
+  border-bottom: #d9d9d9 solid 0.7px;
+}
+
+.navbar-main {
+  background-color: #ffffff00;
+  border-bottom: #ffffff00 solid 0.7px;
+}
+
+.logo {
+  /* width: 10rem; */
+  height: 1.2rem;
+}
+
+a {
+  text-decoration: none; /* 밑줄 제거 */
+  color : #656363;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+a:not(:first-of-type) {  
+  margin-left: 2rem;
+}
+
+a:hover, .nav-user:hover, .drop-btn:hover {
+  font-weight: 500;
+  /* background-color: #f9f9f9;
+  padding: 0.8rem 0.5rem;
+  border-radius: 2px; */
+}
+
+.leftNav {
+  display: flex;
+  align-items: center;
+}
+
+.rightNav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-lesson {
+  display: flex;
+  font-size: 0.9rem;
+  margin-left: 2rem;
+}
+
+.nav-user {
+  margin-left: 1.7rem;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.drop-btn {
+  background: none; /* 배경 제거 */
+  border: none; /* 테두리 제거 */
+  font-size: 0.9rem; 
+  color : #656363;
+  padding : 0;
+  cursor: pointer;
+}
+
+.drop-wrap {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+/* 네브바 드롭다운메뉴 나중에 옮기기 */
+.dropdown{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dropdown-content {
+  /* display: none; */
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  position: absolute;
+  top: 4.3rem;
+  border-radius: 0.2rem;
+  /* border: 0.7px solid #8D9193; */
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+}
+/* 옮기기 */
+
+.dropdown-icon {
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 1350px) {
+  .navbar {
+    padding: 0.9rem 8rem;
+  }
+}
+
+/* @media screen and (max-width: 1000px) {
+  .container {
+    padding: 0 7rem;
+  }
+} */
+
+@media screen and (max-width: 646px) {
+  .navbar {
+    padding: 0.9rem 3rem;
+  }
+}

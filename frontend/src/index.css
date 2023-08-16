@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+iframe {
+  display: none;
+}
+
+.container {
+  padding: 0 15rem;
+}
+
+@media screen and (max-width: 1350px) {
+  .container {
+    padding: 0 8rem;
+  }
+}
+
+/* @media screen and (max-width: 1000px) {
+  .container {
+    padding: 0 7rem;
+  }
+} */
+
+@media screen and (max-width: 646px) {
+  .container {
+    padding: 0 3rem; /* 화면 크기가 768px 미만일 때 padding 값을 조정 */
+  }
+}

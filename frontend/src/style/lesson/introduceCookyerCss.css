@@ -1,0 +1,66 @@
+.introduceCookyerContainer {
+    text-align: left; /* 내용을 왼쪽 정렬로 설정 */
+    margin-top: 40px; /* 내용 위쪽 여백 추가 */
+}
+
+.introduceCookyerTitle{
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    color:#414141;
+}
+
+.introduceCookyerNameContainer{
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.introduceCookyerProfileImg {
+    width: 50px; /* 원하는 너비로 변경 */
+    height: 50px; /* 높이를 너비와 같게 설정하여 동그랗게 만듦 */
+    border-radius: 50%; /* 동그란 모양으로 표시 */
+    object-fit: cover; /* 이미지를 적절하게 맞춤 */
+    margin-right: 15px;
+}  
+  
+.introduceCookyerName {
+    font-weight: 500;
+    font-size: 1.7rem;
+    margin-right: 50px;
+    color:#414141;
+}
+
+.introduceCookyerFood {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.separator {
+    font-size: 13px; /* Font size for separator | */
+    color: #666; /* Color for separator | */
+    margin: 0 5px; /* Margin around separator */
+}
+
+.introduceCookyerBadge {
+    display: inline-block;
+    width: auto;
+    padding: 5px 20px 7px 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50px;
+    border: 1px solid #CBCBCB;
+    background: #FFF;
+    color: #656363;
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    margin-bottom: 20px;
+}
+
+.introduceCookyerIntroduce {
+    font-size: 0.9rem;
+    color: #666;
+}

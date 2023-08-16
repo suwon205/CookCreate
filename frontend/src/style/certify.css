@@ -1,0 +1,49 @@
+/* Certify.css */
+.certify-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.certify-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.certify-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.certify-form input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.certify-form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.certify-form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.certify-form button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.certify-message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}

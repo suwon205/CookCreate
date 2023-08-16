@@ -1,0 +1,71 @@
+.mainTitle {
+    color: #FF7A42;
+    text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.25);
+    font-size: 6rem;
+    font-weight: 900;
+    margin: 1rem 0;
+
+}
+
+.mainpageContent {
+    display : flex;
+    flex-direction: column;
+    align-items: center;  
+    padding: 9rem 0 21rem 0;  
+}
+
+.bg {
+    background-image: url("../../assets/main.png");
+    background-size: cover; /* 이미지를 컨테이너에 맞게 조절 */
+    background-repeat: no-repeat; /* 이미지 반복 없음 */
+    width: 100%;
+    height: 100vh; /* 뷰포트 높이에 맞게 조절 */
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+.mainText {
+    color: #444;
+    font-size: 1.4rem;
+    font-weight: 500;
+    display: flex;
+    text-align: left;
+    justify-content: center;
+}
+
+.down-icon {
+    position: absolute;
+    top: 88vh;
+    font-size: 3rem;   
+    font-weight: 900;
+    color: #828282; 
+    animation: moveUpDown 2s infinite;
+}
+
+.animation-container {
+    opacity: 0;
+    animation: fadeInAnimation 2s ease forwards;
+}
+  
+@keyframes fadeInAnimation {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+  
+@keyframes moveUpDown {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(20px); /* 이동할 거리 조절 */
+    }
+}

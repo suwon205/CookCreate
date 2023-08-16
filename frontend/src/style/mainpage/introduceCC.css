@@ -1,0 +1,13 @@
+.introCC-title {
+    font-weight: 500;
+    font-size: 1.7rem;
+    /* color: #FF7A42; */
+    text-align: left;
+    margin: 1rem 0;
+}
+
+.introCC-content {
+    text-align: left;
+    font-size : 1.3rem;
+    color : #6B7684;
+}
