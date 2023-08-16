@@ -16,7 +16,7 @@ function ApplyCompleteModal({ setShowModal, lesson }) {
         </div>
         <div className="apply-complete-content">
           <p className="apply-complete-title">결제 금액</p>
-          <p className="apply-complete-info">{lesson.totalAmount}</p>
+          <p className="apply-complete-info">{lesson.price}</p>
         </div>
         <div className="apply-complete-content">
           <p className="apply-complete-title">과외 일정</p>
@@ -24,7 +24,7 @@ function ApplyCompleteModal({ setShowModal, lesson }) {
         </div>
         <div className="apply-complete-content">
           <p className="apply-complete-title">과외 시간</p>
-          <p className="apply-complete-info">{lesson.timeTaken}</p>
+          <p className="apply-complete-info">{lesson.timeTaken} 분</p>
         </div>
       </div>
       <div className='cookyer-lesson-step-modal-btn'>
