@@ -1,8 +1,10 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import "../../style/lesson/apply-lesson-css.css";
-import { useNavigate } from "react-router";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import '../../style/lesson/apply-lesson-css.css';
+import { useNavigate } from 'react-router';
+import ApplyCompleteModal from './ApplyCompleteModal';
+import AlertModal from '../Modal/AlertModal'
 
 function ApplyLesson() {
   const navigate = useNavigate();
@@ -23,6 +25,11 @@ function ApplyLesson() {
   const DateTransformType = new Date(lessonDate);
   const currentTime = new Date();
   const futureTime = new Date(currentTime.getTime() + 12 * 60 * 60 * 1000);
+
+  /** 과외 신청 완료 및 실패 모달 */
+  const [ showModal, setShowModal ] = useState(false)
+  const [ modalInfo, setModalInfo ] = useState(null)
+  const [ showFailModal, setShowFailModal ] = useState(false)
 
   useEffect(() => {
     if (remaining === 0) {
@@ -68,8 +75,9 @@ function ApplyLesson() {
     if (popupWindow) {
       const timer = setInterval(() => {
         const searchParams = new URL(popupWindow.location.href).searchParams;
-        const payStatus = searchParams.get("payStatus");
-        if (payStatus === "COMPLETED") {
+        const payStatus = searchParams.get('payStatus');
+        console.log(payStatus)
+        if (payStatus === 'COMPLETED') {
           popupWindow.close();
           console.log("결제 성공");
           axios
@@ -83,15 +91,19 @@ function ApplyLesson() {
               }
             )
             .then((res) => {
-              alert("결제가 성공적으로 완료되었습니다!");
-              navigate("/classList");
+              setShowModal(true)
+              setModalInfo(res.data)
+              console.log(res.data)
+              // alert('결제가 성공적으로 완료되었습니다!')
+              // navigate('/classList')
             })
             .catch((err) => {
               console.log(err);
             });
           clearInterval(timer);
-        } else if (payStatus === "CANCELLED" || payStatus === "FAILED") {
-          alert("다시 결제를 시도해주세요!");
+        } else if (payStatus === 'CANCELLED' || payStatus === 'FAILED') {
+          // alert('다시 결제를 시도해주세요!');
+          setShowFailModal(true)
           clearInterval(timer);
         }
       }, 100);
@@ -102,8 +114,11 @@ function ApplyLesson() {
   }, [popupWindow]);
 
   return (
-    <div className="applyLessonContainer">
-      <div className="applyLessonPrice">
+    <div className='applyLessonContainer'>
+      {showFailModal && <AlertModal content='다시 결제를 시도해주세요.' path={null} actions={setShowFailModal} data={false}/>}
+      {showModal && <ApplyCompleteModal setShowModal={setShowModal} lesson={modalInfo}/>}
+      {/* <ApplyCompleteModal setShowModal={setShowModal} lesson={modalInfo}/> */}
+      <div className='applyLessonPrice'>
         {price && price.toLocaleString()}원
       </div>
       <div className="applyLessonApplyButtonContainer">

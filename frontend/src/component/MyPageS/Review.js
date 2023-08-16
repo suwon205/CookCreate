@@ -18,7 +18,7 @@ function Review() {
   const navigate = useNavigate()
 
   const accessToken = useSelector((state) => state.auth.access_token);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedReviewId, setSelectedReviewId] = useState(null); // 선택된 리뷰의 reviewId 
 
@@ -48,20 +48,23 @@ function Review() {
 
   //리뷰목록 불러오기
   useEffect(() => {
-    axios
-      .get(`api/v1/my/review`, {
-        headers: {
-          Access_Token: accessToken,
-        },
-      })
-      .then((res) => {
-        // console.log("리뷰목록",res.data);
-        setReviews("리뷰목록",res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [accessToken,reviews]);
+    console.log("리뷰목록 불러오기")
+    if (accessToken) {
+      axios
+        .get(`api/v1/my/review`, {
+          headers: {
+            Access_Token: accessToken,
+          },
+        })
+        .then((res) => {
+          // console.log("리뷰목록",res.data);
+          setReviews(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [accessToken]);
 
   const goLesson = (lessonId) => {
     setGoLessonDetail(true)
@@ -96,38 +99,40 @@ function Review() {
             </select>
           </div>
         </div>
-        {reviews.map((review, index) => (
-          <div key={index}>
-            <section className="review">
-              <div className="review_box">
-                <div className="review_item">
-                  <div className="review_cont">
-                    <div className="review_link" onClick={() => goLesson(review.lessonId)}>
-                      과외명: {review.lessonTitle}
-                    </div>
-                    <StarShow rating={review.rating} size="1.4rem" color="gold" />
-                    <div>{review.rating}</div>
-                    <div className="review_author">작성자:{review.nickname}</div>
-                    <div className="review_tutor">
-                      선생님:
-                      {review.cookyerName}
-                    </div>
+        {reviews ? 
+          reviews.map((review, index) => (
+            <div key={index}>
+              <section className="review">
+                <div className="review_box">
+                  <div className="review_item">
                     <div className="review_cont">
-                      리뷰내용
-                      <div className="review_cont">{review.reviewContents}</div>
-                    </div>
-                    <div className="review_fun">
-                      <button type="button" className="review_btn" onClick={() =>handleOpenModal(review.reviewId)}>
-                        <i className="review_icon">🔍</i>
-                        <span className="review_btn_txt">자세히보기</span>
-                      </button>
+                      <div className="review_link" onClick={() => goLesson(review.lessonId)}>
+                        과외명: {review.lessonTitle}
+                      </div>
+                      <StarShow rating={review.rating} size="1.4rem" color="gold" />
+                      <div>{review.rating}</div>
+                      <div className="review_author">작성자:{review.nickname}</div>
+                      <div className="review_tutor">
+                        선생님:
+                        {review.cookyerName}
+                      </div>
+                      <div className="review_cont">
+                        리뷰내용
+                        <div className="review_cont">{review.reviewContents}</div>
+                      </div>
+                      <div className="review_fun">
+                        <button type="button" className="review_btn" onClick={() =>handleOpenModal(review.reviewId)}>
+                          <i className="review_icon">🔍</i>
+                          <span className="review_btn_txt">자세히보기</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </section>
-          </div>
-        ))}
+              </section>
+            </div>
+          )) : null
+        }
       </section>
       <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
         <ReviewDetail reviewId={selectedReviewId} onClose={handleCloseModal} />

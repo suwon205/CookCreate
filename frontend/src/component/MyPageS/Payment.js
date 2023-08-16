@@ -74,20 +74,22 @@ function Payment() {
   };
 
   useEffect(() => {
-    axios
-      .get(`api/v1/my/cookiee`, {
-        headers: {
-          Access_Token: accessToken,
-        },
-      })
-      .then((res) => {
-        setUserPayments(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [accessToken, userPayment]);
+    if (accessToken) {
+      axios
+        .get(`api/v1/my/cookiee`, {
+          headers: {
+            Access_Token: accessToken,
+          },
+        })
+        .then((res) => {
+          setUserPayments(res.data);
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [accessToken]);
 
   const goLesson = (lessonId) => {
     setGoLessonDetail(true);
@@ -113,7 +115,7 @@ function Payment() {
           <div className="no-payment">{paymentMessage}</div>
         ) : (
           userPayment.map((payment) => (
-            <div className="pay-item" key={payment.lessonId}>
+            <div className="pay-item" key={payment.paymentId}>
               <div className="pay-list">
                 
                 {/* <div className="pay-info">
