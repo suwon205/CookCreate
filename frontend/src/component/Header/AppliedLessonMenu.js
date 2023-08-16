@@ -81,7 +81,7 @@ function AppliedLessonMenu({ myLessons }) {
             {lesson.sessionId === null ? (
               <button disabled='disabled' className="drop-lesson-btn">수업예정</button>
             ) : (
-              <button onClick={() => joinLesson(lesson.lessonId)} className="drop-lesson-btn">참여하기</button>
+              <button onClick={() => joinLesson(lesson.lessonId)} className={`drop-lesson-btn drop-lesson-btn-active`}>참여하기</button>
             )}
           </div>
         ))

@@ -21,4 +21,10 @@
     border: 0.7px solid;
     background: #FFF;  
     font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.drop-lesson-btn-active:hover {
+    border-color: #FF6060;
+    color: #FF6060;
 }
