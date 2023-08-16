@@ -22,7 +22,7 @@ function OtherCookiees() {
     <div className='other-cookiees'>
       {cookiees && Object.keys(cookiees).length ? (
         cookiees.map((sub, i) => (
-          <div key={i}>
+          <div key={i} className='other-cookiee'>
             <UserVideoComponent
               videoStyle='other-cookiees-video'
               streamManager={sub}

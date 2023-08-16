@@ -13,14 +13,16 @@ video {
 }
 
 /* 비디오 닉네임 */
-.stream-component div {
+.video-common-nickname {
   position: absolute;
   top: 10px;
   left: 15px;
-  /* font-size: 1em; */
-  /* font-weight: bold; */
-  /* bottom: 30px;
-  left: 30px; */
+}
+
+.video-common-nickname p {
+  /* position: absolute;
+  top: 10px;
+  left: 15px; */
 }
 
 .video-page, .video-background {
