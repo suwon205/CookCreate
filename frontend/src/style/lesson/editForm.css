@@ -1,6 +1,7 @@
 .file-input-thumbnail{
   border: none;
   border-radius: 0;
+  object-fit: cover;
 }
 
 .lesson-edit-button{

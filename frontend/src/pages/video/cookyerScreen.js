@@ -387,6 +387,7 @@ function CookyerScreen() {
     <div className="video-background">
       {isFull && 
         <CookyerFullScreen
+          session={session}
           publisher={publisher}
           mainStreamManager={mainStreamManager}
           subscribers={subscribers}
@@ -403,6 +404,7 @@ function CookyerScreen() {
       }
       {isHalf && 
         <CookyerHalfScreen
+          session={session}
           publisher={publisher}
           mainStreamManager={mainStreamManager}
           subscribers={subscribers}

@@ -46,6 +46,7 @@
 .detailThumbnail{
     width: 550px;
     height: 280px;
+    object-fit: cover;
 }
 
 .detailRightSection {
