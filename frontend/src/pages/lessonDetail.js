@@ -47,6 +47,8 @@ function LessonDetail() {
   const lessonDate = useSelector((state) => state.lessonInfo.lessonDate);
   const userType = localStorage.getItem('role')
 
+  const categoryId = useSelector((state) => state.lessonInfo.categoryId)
+
   const [ showModal, setShowModal ] = useState(false)
 
   const categories = ["-", "한식", "양식", "중식", "일식", "아시안", "건강식", "디저트"]
@@ -110,7 +112,7 @@ function LessonDetail() {
       <div className="detailLeftSection">
         <br />
         <div className="detailCategoryContainer">
-          <span className="detailCategory">{categories[categoryName]}</span>{" "}
+          <span className="detailCategory">{categories[categoryId]}</span>{" "}
           <span className="detailCategory">{difficulty}</span>
         </div>
         <h2 className="detailLessonTitle"> {lessonTitle} </h2>
