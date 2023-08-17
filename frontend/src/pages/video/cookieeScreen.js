@@ -18,7 +18,6 @@ import { initScreenShare } from '../../store/video/screenShare';
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { IoIosHand, IoIosTimer } from 'react-icons/io'
 import { BsMicFill, BsMicMuteFill } from "react-icons/bs";
-import '../../style/video.css'
 import '../../style/video/cookieeScreen.css'
 
 function CookieeScreen() {

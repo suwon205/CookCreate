@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import '../../../style/video.css'
 import { useSelector } from 'react-redux';
 import UserVideoComponent from '../UserVideoComponent';
 

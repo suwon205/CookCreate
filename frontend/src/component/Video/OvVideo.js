@@ -5,8 +5,6 @@ import { DrawingUtils, HandLandmarker as abc } from "@mediapipe/tasks-vision";
 import { setHandsUpTrue, setCheckTrue } from './../../store/video/cookieeVideo';
 import { trigTimer } from './../../store/video/timer';
 
-import '../../style/video.css'
-
 function OpenViduVideoComponent(props) {
     const canvasRef = useRef(null);
     // const contextRef = useRef(null);

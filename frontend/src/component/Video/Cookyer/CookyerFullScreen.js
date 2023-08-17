@@ -6,8 +6,6 @@ import CookyerLessonStep from './CookyerLessonStep';
 import LessonStepModal from './LessonStepModal';
 import CookyerVideoSideBar from './CookyerVideoSideBar';
 
-import '../../../style/video.css'
-
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { IoIosHand } from 'react-icons/io'
 import { BsMicFill, BsMicMuteFill } from "react-icons/bs";

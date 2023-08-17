@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import '../../../style/video.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { audioMute, leaveSession, setMainStreamManager, videoMute } from '../../../store/video/video';
 import { initScreenShare, setShareScreenPublisher } from '../../../store/video/screenShare';

@@ -9,7 +9,6 @@ import { deleteSubscriber, enteredSubscriber, setAudioOffStream, setAudioOnList,
 import { joinSession } from '../../store/video/video-thunk';
 import { deleteCookiee, setCheckCookiee, setCheckCookieeList, setHandsDownCookiee, setHandsUpCookiee, setHandsUpCookieeList, setUncheckCookiee } from '../../store/video/cookyerVideo';
 import { setLessonInfo } from '../../store/video/videoLessonInfo';
-import '../../style/video.css'
 import '../../style/video/common.css'
 import '../../style/video/cookyerHalfScreen.css'
 import '../../style/video/cookyerFullScreen.css'

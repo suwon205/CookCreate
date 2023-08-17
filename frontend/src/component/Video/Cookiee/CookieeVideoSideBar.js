@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 
-import '../../../style/video.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { audioMute, leaveSession, videoMute } from '../../../store/video/video';
