@@ -52,7 +52,8 @@
 .cookyer-components {
   display: flex;
   width: 1401px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
+  margin-left: 40px;
 }
 
 .cookyer-components-left-bottom {

@@ -72,13 +72,14 @@ function NavBar() {
           },
         })
         .then((res) => {
-          console.log(res.data);
-          console.log("신청한 수업 목록 받아와짐");
-          if (res.data[0].message !== "신청한 과외가 없습니다.") {
-            setMyLessons(res.data);
-          } else {
-            setMyLessons(undefined);
-          }
+          console.log(res.data)
+          console.log('신청한 수업 목록 받아와짐')
+        if (typeof(res.data) === 'object' && res.data[0].message !== "신청한 과외가 없습니다.") {
+          setMyLessons(res.data)
+        } else {
+          setMyLessons(undefined)
+        }
+
         })
         .catch((err) => {
           console.log(err);
