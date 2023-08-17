@@ -65,7 +65,6 @@ function CookyerScreen() {
   useEffect(() => {
     console.log(3, session)
     if (session) {
-      // console.log("세션 바뀜")
       // On every new Stream received...
       const handleStreamCreated = (event) => {
         const subscriber = session.subscribe(event.stream, undefined);
@@ -144,7 +143,6 @@ function CookyerScreen() {
         role
       }
       dispatch(joinSession(data))
-      // dispatch(publishStream(data))
 
       console.log(5)
 
@@ -173,7 +171,6 @@ function CookyerScreen() {
         .then((res) => {
           console.log(res.data)
           console.log('화상 과외 수업 정보 받아와짐')
-          // setMyLesson(res.data) // 토큰이랑 커넥션 설정하는걸로 바꾸기?
           dispatch(setLessonInfo(res.data))
         })
         .catch((err) => {
@@ -190,7 +187,6 @@ function CookyerScreen() {
       // 만약 체크한 사람이 또 체크하면 거르기
       if (checkCookieeList !== [] && checkCookieeList !== undefined) {
         const newCheckCookieeList = checkCookieeList.filter((item) => {
-          // console.log(item, "아이템")
           return item !== checkCookiee
         })
         newCheckCookieeList.push(checkCookiee)

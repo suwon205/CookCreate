@@ -11,17 +11,12 @@ export const joinSession = createAsyncThunk(
     const nickname = data.nickname
     const role = data.role
 
-    console.log("2")
-    console.log(data)
     try {
-      console.log("3", sessionId)
       const token = await getToken({sessionId: sessionId});
       console.log("getToken 이후", token)
 
       if (nickname && session) {
-        console.log("8", token, nickname)
         await session.connect(token, { clientData: { nickname, role } });
-        console.log("9")
         const publisher = await OV.initPublisherAsync(undefined, {
           audioSource: undefined, // The source of audio. If undefined default microphone
           videoSource: undefined, // The source of video. If undefined default webcam
@@ -34,11 +29,8 @@ export const joinSession = createAsyncThunk(
         });
 
         // --- 6) Publish your stream ---
-        console.log("10", publisher)
         await session.publish(publisher);
 
-        console.log("11")
-        console.log(publisher)
         return publisher
       }
     } catch (error) {
@@ -48,15 +40,10 @@ export const joinSession = createAsyncThunk(
 )
 
 async function getToken(mySessionId) {
-  console.log("4", mySessionId)
 
   const newSessionId = await createSession(mySessionId.sessionId)
-  console.log("5", newSessionId)
-
   const token = await createToken(newSessionId)
 
-  console.log("7")
-  console.log(token)
   return token
 }
 
@@ -116,37 +103,6 @@ function createToken(sessionId) {
     }
   })
 }
-
-export const publishStream = createAsyncThunk(
-  "video/publishStream",
-  async (data) => {
-    const OV = data.OV
-    const session = data.session
-    const token = data.token
-    const nickname = data.nickname
-    console.log("커넥트 전")
-    await session.connect(token, { clientData: nickname })
-    console.log("커넥트 후")
-
-    const publisher = await OV.initPublisherAsync(undefined, {
-      audioSource: undefined, // The source of audio. If undefined default microphone
-      videoSource: undefined, // The source of video. If undefined default webcam
-      publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
-      publishVideo: true, // Whether you want to start publishing with your video enabled or not
-      resolution: '640x480', // The resolution of your video
-      frameRate: 30, // The frame rate of your video
-      insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
-      mirror: false, // Whether to mirror your local video or not
-    })
-
-    console.log("쿠키/쿠커 퍼블리셔 만들어졌나?", publisher)
-    await session.publish(publisher)
-
-    const response = {
-      OV, session, publisher
-    }
-    return response
-  })
 
 export const closeSession = createAsyncThunk(
   "video/closeSession",
@@ -215,14 +171,10 @@ function getShareScreenPublisher(data) {
           publishVideo: true,
           mirror: false,
           resolution: "1280x720",
-          // resolution: '640x480', // The resolution of your video
-          // frameRate: 30, // The frame rate of your video
-          // insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
         },
         (error) => {
           if (error && error.name === 'SCREEN_EXTENSION_NOT_INSTALLED') {
             alert('screen extension not installed')
-              // this.setState({ showExtensionDialog: true });
           } else if (error && error.name === 'SCREEN_SHARING_NOT_SUPPORTED') {
             alert('Your browser does not support screen sharing');
           } else if (error && error.name === 'SCREEN_EXTENSION_DISABLED') {
@@ -232,7 +184,7 @@ function getShareScreenPublisher(data) {
           }
         },
       )
-      console.log("공유 화면 발행됐나?", sharedPublisher)
+      console.log("공유 화면 발행", sharedPublisher)
 
       await session.publish(sharedPublisher)
       return resolve(sharedPublisher)

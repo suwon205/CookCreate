@@ -33,10 +33,6 @@ function LessonStepModal() {
       .then((res) => {
         console.log('쿠커 진행단계 디비 업데이트 성공', res.data)
         setIsStoreStep(true)
-        // dispatch(leaveSession())  // 스토어에 화상과외 관련 데이터 초기화
-        // dispatch(initCookyerVideo())
-        // dispatch(initVideoLessonInfo())
-        // dispatch(initScreenShare())
       })
       .catch((err) => {
         console.log('쿠커 진행단계 디비 업데이트 실패', err)

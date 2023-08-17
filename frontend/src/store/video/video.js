@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { closeSession, joinSession, publishStream } from './video-thunk'
+import { closeSession, joinSession } from './video-thunk'
 
 const initialState = {
   OV: null,
@@ -140,26 +140,8 @@ export const video = createSlice({
     [joinSession.rejected]: (state, { payload }) => {
       console.log("joinSession rejected")
     },
-    [publishStream.fulfilled]: (state, { payload }) => {
-      console.log("publishStream fulfilled", payload)
-      state.OV = payload.OV
-      state.session = payload.session
-      state.publisher = payload.publisher
-    },
-    [publishStream.rejected]: (state, { payload }) => {
-      console.log("publishStream rejected")
-    },
     [closeSession.fulfilled]: (state, { payload }) => {
       console.log("closeSession fulfilled", payload)
-      // state.OV = null
-      // state.session = undefined
-      // state.sessionId = undefined
-      // state.publisher = undefined
-      // state.mainStreamManager = undefined
-      // state.subscribers = []
-      // state.isVideoPublished = true
-      // state.isAudioPublished = true
-      // state.videoLessonId = undefined
       state.isSessionOpened = false
     },
     [closeSession.rejected]: (state, { payload }) => {
