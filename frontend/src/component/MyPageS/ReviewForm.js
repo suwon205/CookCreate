@@ -182,7 +182,7 @@ function ReviewForm({onClose, onClickRating, reviewLessonData }) {
               id="reviewContents"
               value={reviewContents}
               onChange={(e) => setreviewContents(e.target.value)}
-              placeholder="쿠커와 수업에 대한 리뷰를 남겨주세요."
+              placeholder="쿠커와 과외에 대한 리뷰를 남겨주세요."
             />
           </div>
           <div className="cookiee-lesson-review-modal-btn">

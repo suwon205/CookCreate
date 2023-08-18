@@ -97,6 +97,7 @@
   color: white;
   border-radius: 5px;
   border: none;
+  cursor: pointer;
 }
 
 
@@ -207,6 +208,7 @@
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 .cookiee-lesson-review-modal-btn button {

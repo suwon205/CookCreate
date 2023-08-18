@@ -23,18 +23,17 @@
 .detailCategory{
     display: inline-block;
     width: auto;
-    padding: 5px 11px;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-radius: 50px;
-    border: 1px solid #CBCBCB;
-    background: #FFF;
-    color: #656363;
-    text-align: center;
-    font-size: 12px;
-    font-style: normal;
+
     margin-right: 10px;
+    padding: 6px 12px;
+    border-style: none;
+    border-radius: 5px;
+    background: #F4F4F4;
+    color: #656363;
+    font-size: 12px;
 }
 
 .detailLessonTitle{
@@ -47,6 +46,7 @@
 .detailThumbnail{
     width: 550px;
     height: 280px;
+    object-fit: cover;
 }
 
 .detailRightSection {

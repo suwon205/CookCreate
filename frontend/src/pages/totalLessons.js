@@ -9,15 +9,14 @@ import { setLessonId } from '../store/lesson/lessonInfo';
 import '../style/lesson/totalLessonsCss.css';
 
 function TotalLessons() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(resetlessonSearch())
-  })
-
+  }, [])
   return (
     <div>
       <div>
-        <h3 className='title'>
+        <h3 className='total-lesson-title'>
           수업 전체
         </h3>
         <div className='desc'>
@@ -30,7 +29,7 @@ function TotalLessons() {
           <LessonFoodCategory/>
           <LessonList/>
         </div>
-        <div className='sidebar'>
+        <div className='lessonSidebar'>
           <LessonListFliter/>
         </div>
       </div>

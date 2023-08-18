@@ -20,7 +20,7 @@ const initialState = {
   descriptionValid : true,
   materials: [],
   materialsValid : true,
-  lessonStepList: [],
+  lessonStepList: [{ stepOrder: 1, stepContent: "" }],
   stepValid : true,
   videoUrl: "",
   thumbnailUrl : '',

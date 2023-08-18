@@ -1,3 +1,7 @@
+.account-container {
+    padding : 0rem 15rem;
+}
+
 .account input {
     border-radius: 7px;
     border: 0.7px solid #D9D9D9;

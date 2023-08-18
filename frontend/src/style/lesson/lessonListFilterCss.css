@@ -1,27 +1,37 @@
-.sortSelect {
+.lessonSortSelect {
     width: 150px;
     height: 40px;
     flex-shrink: 0;
     border-radius: 4px;
     border: 0.7px solid #D9D9D9;
-    background: #FFF;
+    background: #FFFFFF00;
     padding-left: 20px;
     font-size: 0.9rem;
     color: #4b4b4b;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    z-index: 1;
 }
 
-.sortSelectContainer {
+.sort-icon {
+    position: absolute;
+    left : 7.7rem;
+    color: #4b4b4b;
+}
+
+.lessonSortSelectContainer {
     display: flex;
     align-items: center;    
 }
 
-.deadlineContainer {
+.lessonDeadlineContainer {
     display: flex;
     align-items: center;
     margin-top: 1rem;
 }
 
-.deadlineCheckbox {
+.lessonDeadlineCheckbox {
     appearance: none;
     width: 14px;
     height: 14px;
@@ -32,7 +42,7 @@
     position: relative;
     vertical-align: middle;
 }
-.deadlineCheckbox:checked::before {
+.lessonDeadlineCheckbox:checked::before {
     content: '\2713';
     margin: -1px;
     width: 14px;
@@ -46,7 +56,7 @@
     justify-content: center;
 }
 
-.deadlineLabel {
+.lessonDeadlineLabel {
     font-size: 0.9rem;
     color: #4b4b4b;
     cursor: pointer;

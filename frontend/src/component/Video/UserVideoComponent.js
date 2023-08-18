@@ -24,7 +24,7 @@ export default class UserVideoComponent extends Component {
                             streamManager={this.props.streamManager}
                             gesture={this.props.gesture}
                         />
-                        <div>
+                        <div className='video-common-nickname'>
                             <p>{this.getNicknameTag()}</p>
                         </div>
                     </div>

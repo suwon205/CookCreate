@@ -6,7 +6,8 @@ const initialState = {
   deadline : true,
   category : [],
   keyword : "",
-  lessonId : ""
+  lessonId : "",
+  result : []
 }
 
 const lessonSearch = createSlice({
@@ -31,6 +32,9 @@ const lessonSearch = createSlice({
     setLessonId : (state, action) => {
       state.lessonId = action.payload
     },
+    setResult : (state, action) => {
+      state.result = action.payload
+    },
     resetlessonSearch : (state) => {
       return initialState
     }
@@ -38,6 +42,6 @@ const lessonSearch = createSlice({
 })
 
 export const {
-  setOrder, setDeadLine, setCategories, setKeyword, setType, setLessonId, resetlessonSearch
+  setOrder, setDeadLine, setCategories, setKeyword, setType,setResult, setLessonId, resetlessonSearch
 } = lessonSearch.actions
 export default lessonSearch.reducer

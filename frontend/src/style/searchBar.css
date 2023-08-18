@@ -37,6 +37,8 @@
   flex-direction: column;
   box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
   z-index: 2; /* z-index 값으로 요소의 쌓임 순서를 조절 */
+  cursor: pointer;
+  background-color: #FFFFFF;
 }
 
 .search-result-item {

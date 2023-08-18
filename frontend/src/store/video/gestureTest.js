@@ -21,6 +21,11 @@ export const gestureTest = createSlice({
         },
         resetAll: (state) => {
             return initialState;
+        },
+        initGesture: (state) => {
+            state.timerTest = false
+            state.hand = false
+            state.check = false
         }
     },
     extraReducers: {
@@ -28,5 +33,5 @@ export const gestureTest = createSlice({
     }
 })
 
-export const { startTimer, raiseHand, checkUp, resetAll } = gestureTest.actions
+export const { startTimer, raiseHand, checkUp, resetAll, initGesture } = gestureTest.actions
 export default gestureTest.reducer

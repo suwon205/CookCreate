@@ -9,17 +9,47 @@ import "./../../style/mypage/mypage.css";
 
 function Account() {
   const accessToken = localStorage.getItem("access_token");
-
   const [userData, setUserData] = useState("");
   const [food, setFood] = useState([]);
 
-  const [nicknameDef, setNickName] = useState(userData.nickname);
-  const [phoneNumberDef, setPhoneNumber] = useState(userData.phoneNumber);
-  const [userEmailDef, setUserEmail] = useState(userData.userEmail);
-  const [IntroduceDef, setIntroduce] = useState(userData.introduce);
-  
-    // const [profileImgDef, setProfileImg] = useState(userData.profileImg);
-    // const [profileImgUrl, setProfileImgUrl] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+  const [nicknameDef, setNickName] = useState("");
+  const [phoneNumberDef, setPhoneNumber] = useState("");
+  const [userEmailDef, setUserEmail] = useState("");
+  const [IntroduceDef, setIntroduce] = useState("");
+
+  //회원정보조회
+  useEffect(() => {
+    axios
+      .get(`api/v1/member`, {
+        headers: {
+          Access_Token: accessToken,
+        },
+      })
+      .then((res) => {
+        console.log("resdata", res.data);
+        setUserData(res.data);
+        console.log("userData", userData);
+        setNickName(res.data.nickname);
+        setPhoneNumber(res.data.phoneNumber);
+        setUserEmail(res.data.userEmail);
+        setIntroduce(res.data.introduce);
+      })
+      .catch((err) => {
+        console.log("회원정보조회못함", err);
+      });
+
+    const storedPreviewImage = localStorage.getItem("previewImage");
+    if (storedPreviewImage) {
+      setPreviewImage(storedPreviewImage);
+    }
+  }, [accessToken]);
+
+  // if (userData) {
+  //   console.log(nicknameDef, phoneNumberDef, userEmailDef, IntroduceDef);
+  // }
+
+  // const [profileImgDef, setProfileImg] = useState(userData.profileImg);
+  // const [profileImgUrl, setProfileImgUrl] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
   const [previewImage, setPreviewImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
   const [profileImgDef, setProfileImg] = useState(userData.profileImg);
   const fileInput = useRef(null);
@@ -32,29 +62,25 @@ function Account() {
   const [userIntroduceMessage, setIntroduceMessage] = useState("");
 
   //유효성 검사
-  const [isNickname, setIsNickname] = useState(false);
-  const [isNicknameDupli, setIsNNdup] = useState(false);
-  const [isPhoneNumber, setIsPhoneNumber] = useState(false);
+  const [isNickname, setIsNickname] = useState(true);
+  const [isNicknameDupli, setIsNNdup] = useState(true);
+  const [isPhoneNumber, setIsPhoneNumber] = useState(true);
   const [isUserEmail, setIsUserEmail] = useState(true);
   const [isIntroduce, setIsIntroduce] = useState(true);
 
-
-
-    //닉네임 중복검사
-    const nicknameDupliCheck = () => {
-      axios
-        .get(`api/v1/auth/checkNick/${nicknameDef}`)
-        .then((res) => {
-          setUserNicknameMessage(res.data.message);
-          setIsNNdup(true);
-        })
-        .catch((err) => {
-          setUserNicknameMessage(err.response.data.message);
-          setIsNNdup(false);
-        });
-    };
-
-
+  //닉네임 중복검사
+  const nicknameDupliCheck = () => {
+    axios
+      .get(`api/v1/auth/checkNick/${nicknameDef}`)
+      .then((res) => {
+        setUserNicknameMessage(res.data.message);
+        setIsNNdup(true);
+      })
+      .catch((err) => {
+        setUserNicknameMessage(err.response.data.message);
+        setIsNNdup(false);
+      });
+  };
 
   //유효성 검사 구현
   const onChangeIntroduce = async (e) => {
@@ -69,20 +95,18 @@ function Account() {
     }
   };
 
-
   const onChangeUserNickName = async (e) => {
-    const value = e.target.value
-    await setNickName(value)
+    const value = e.target.value;
+    await setNickName(value);
     if (value.length < 2 || value.length > 8) {
-      setUserNicknameMessage('2글자 이상 8글자 이하로 입력해주세요')
-      setIsNickname(false)
+      setUserNicknameMessage("2글자 이상 8글자 이하로 입력해주세요");
+      setIsNickname(false);
     } else {
-      setUserNicknameMessage('적합한 닉네임 형식입니다! 🤗')
-      setIsNickname(true)
+      setUserNicknameMessage("적합한 닉네임 형식입니다! 🤗");
+      setIsNickname(true);
     }
-    setUserNNDupMessage('')
-  }
-
+    setUserNNDupMessage("");
+  };
 
   const onChangeUserPhonenumber = async (e) => {
     const value = e.target.value;
@@ -113,36 +137,6 @@ function Account() {
     }
   };
 
-  //introUrl
-  // const onChangeintroUrl = async (e) => {
-  //   const value = e.target.value;
-  //   await setIntroUrl(value);
-  // };
-
-  //회원정보조회
-  useEffect(() => {
-    axios
-      .get(`api/v1/member`, {
-        headers: {
-          Access_Token: accessToken,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setUserData(res.data);
-        console.log("userData", userData);
-      })
-      .catch((err) => {
-        console.log("회원정보조회못함", err);
-      });
-
-      const storedPreviewImage = localStorage.getItem('previewImage');
-      if (storedPreviewImage) {
-        setPreviewImage(storedPreviewImage);
-      }
-      
-  }, []);
-
   useEffect(() => {
     if (userData.food) {
       setFood(userData.food);
@@ -159,8 +153,7 @@ function Account() {
         setPreviewImage(reader.result);
         setProfileImg(file);
 
-        localStorage.setItem('previewImage', reader.result);
-
+        localStorage.setItem("previewImage", reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -173,25 +166,43 @@ function Account() {
   //     setProfileImg(file);
   //   }
   // };
-  
 
   //프로필 삭제
+  // const handleProfile = (e) => {
+  //   e.preventDefault();
+  //   setPreviewImage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+  //   if (profileImgDef) {
+  //     axios
+  //       .delete(`api/v1/my/profile`, {
+  //         headers: {
+  //           Access_Token: accessToken,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         console.log("프로필삭제성공",res.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log("프로필삭제못함", err);
+  //       });
+  //   }
+  // };
+
   const handleProfile = (e) => {
-    if (profileImgDef) {
-      axios
-        .get(`api/v1/my/profile`, {
-          headers: {
-            Access_Token: accessToken,
-          },
-        })
-        .then((res) => {
-          setPreviewImage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log("프로필삭제못함", err);
-        });
-    }
+    e.preventDefault();
+    setPreviewImage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+
+    // axios
+    //   .delete(`api/v1/my/profile`, {
+    //     headers: {
+    //       Access_Token: accessToken,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log("프로필삭제성공", res.data);
+    //   })s
+    //   .catch((err) => {
+    //     console.log("프로필삭제못함", err);
+    //   });
   };
 
   //음식추가 제거
@@ -218,21 +229,21 @@ function Account() {
 
     const formData = new FormData();
     formData.append("nickname", nicknameDef);
-    console.log("폼데이터닉네임", typeof formData.get("nickname"));
+    // console.log("폼데이터닉네임", typeof formData.get("nickname"));
     formData.append("phoneNumber", phoneNumberDef);
-    console.log("폼데이터폰", typeof formData.get("phoneNumber"));
+    // console.log("폼데이터폰", typeof formData.get("phoneNumber"));
     formData.append("userEmail", userEmailDef);
-    console.log("폼데이터이메일", typeof formData.get("phoneNumber"));
+    // console.log("폼데이터이메일", typeof formData.get("phoneNumber"));
 
     formData.append("food", food);
-    console.log("폼데이터푸드", formData.get("food"));
-    console.log("폼데이터푸드", typeof formData.get("food"));
+    // console.log("폼데이터푸드", formData.get("food"));
+    // console.log("폼데이터푸드", typeof formData.get("food"));
 
     formData.append("introduce", IntroduceDef);
     formData.append("profileImg", profileImgDef);
-    console.log("폼데이터소개", formData.get("introduce"));
-    console.log("폼데이터이미지", formData.get("profileImg"));
-    console.log("폼데이터이미지타입", typeof formData.get("profileImg"));
+    // console.log("폼데이터소개", formData.get("introduce"));
+    // console.log("폼데이터이미지", formData.get("profileImg"));
+    // console.log("폼데이터이미지타입", typeof formData.get("profileImg"));
 
     axios
       .put(`api/v1/member`, formData, {
@@ -242,11 +253,12 @@ function Account() {
         },
       })
       .then((res) => {
-        console.log(res);
+        // console.log(formData);
+        console.log("결과입니다", res.data);
         alert("회원정보수정이 완료됐습니다.");
       })
       .catch((err) => {
-        console.log("회원정보수정못함",err)
+        console.log("회원정보수정못함", err);
       });
   };
 
@@ -262,78 +274,95 @@ function Account() {
               className="mypage-profile-image"
               src={previewImage}
               alt="Profile"
-              style={{ margin: "20px", marginTop:"10px", width: "150px", height: "150px", objectFit: "cover" }}
+              style={{ margin: "20px", marginTop: "10px", width: "150px", height: "150px", objectFit: "cover" }}
               // onClick={() => {
               //   fileInput.current.click();
               // }}
             />
             <div className="mypage-profile-sidecontent">
-            <div className="joindate">가입일: {new Date(userData.createdDate).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</div>
-            {/* <input type="file" onChange={(e) => profileImgDef(e.target.files[0])}  ref={fileInput} required /> */}
-            <div className="mypage-profile-buttongroup">
-              <button className="button orange" onClick={() => fileInput.current.click()}>변경</button>
-              <button className="button" onClick={handleProfile}>기본 프로필로 변경</button>
+              <div className="joindate">
+                가입일:{" "}
+                {new Date(userData.createdDate).toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </div>
+              {/* <input type="file" onChange={(e) => profileImgDef(e.target.files[0])}  ref={fileInput} required /> */}
+              <div className="mypage-profile-buttongroup">
+                <button className="button orange" onClick={() => fileInput.current.click()}>
+                  변경
+                </button>
+                <button className="button" onClick={handleProfile}>
+                  기본 프로필로 변경
+                </button>
+              </div>
             </div>
-            </div>
-            <input type="file" style={{ display: "none" }} accept="image/jpg,image/png,image/jpeg" name="profile_img" onChange={handleFileChange} ref={fileInput} />
+            <input
+              type="file"
+              style={{ display: "none" }}
+              accept="image/jpg,image/png,image/jpeg"
+              name="profile_img"
+              onChange={handleFileChange}
+              ref={fileInput}
+            />
           </div>
           <div className="mypage-nickname">
             <div className="subtitle">닉네임</div>
             <div className="inputWrap">
               <input placeholder={userData.nickname} type="text" value={nicknameDef} onChange={onChangeUserNickName} />
-              <button className="button" onClick={nicknameDupliCheck}>중복확인</button>
-              </div>
-              <div className="validation">
-                {userNicknameMessage}
-                {userNNDupMessage}
-              </div>
+              <button className="button" onClick={nicknameDupliCheck}>
+                중복확인
+              </button>
             </div>
-
-            <div className="mypage-introduce">
-              <div className="subtitle">자기소개</div>
-              <div className="mypage-introduce-container">
-                <textarea placeholder={userData.introduce} value={IntroduceDef} onChange={onChangeIntroduce}></textarea>
-                <div className="validation">{userIntroduceMessage}</div>
-              </div>
+            <div className="validation">
+              {userNicknameMessage}
+              {userNNDupMessage}
             </div>
+          </div>
 
-            {/* 쿠커에게만 있는 태그 */}
-            {/* <div className="mypage-url"> 
+          <div className="mypage-introduce">
+            <div className="subtitle">자기소개</div>
+            <div className="mypage-introduce-container">
+              <textarea placeholder={userData.introduce} value={IntroduceDef} onChange={onChangeIntroduce}></textarea>
+              <div className="validation">{userIntroduceMessage}</div>
+            </div>
+          </div>
+
+          {/* 쿠커에게만 있는 태그 */}
+          {/* <div className="mypage-url"> 
               <div className="subtitle">소개영상url</div>
               <input placeholder={userData.introUrl} type="text" value={IntroUrlDef} onChange={onChangeintroUrl} />
             </div> */}
 
-            <div className="mypage-phonenumber">
-              <div className="subtitle">휴대폰번호</div>
-              <div>
-                <input type="text" placeholder={userData.phoneNumber} value={phoneNumberDef} onChange={onChangeUserPhonenumber} />
-                <div>{userPhoneNumberMessage}</div>
-              </div>
-            </div>
-
-              <div className="mypage-email">
-                <div className="subtitle">이메일</div>
-                <div>
-                  <input placeholder={userData.userEmail} type="text" value={userEmailDef} onChange={onChangeUserEmail} />
-                  <div>{userEmailMessage}</div>
-                </div>
-              </div>
-
-              <div className="mypage-foodcagetory">
-                {/* <div>관심있는 요리</div>
-                <div>{userData.food}</div> */}
-                <div className="subtitle">관심있는 요리</div>
-                <FoodList selectedFood={food} toggleFood={handleSelectedFood} />
-              </div>
-              <div>
+          <div className="mypage-phonenumber">
+            <div className="subtitle">휴대폰번호</div>
+            <div>
+              <input type="text" placeholder={userData.phoneNumber} value={phoneNumberDef} onChange={onChangeUserPhonenumber} />
+              <div>{userPhoneNumberMessage}</div>
             </div>
           </div>
-          <div class="bottomBtn-container">
-          <button 
-            onClick={handleUpdate} 
-            className="bottomBtn" 
-            disabled={!(isNickname && isNicknameDupli && isPhoneNumber && isUserEmail && isIntroduce)}
-          >
+
+          <div className="mypage-email">
+            <div className="subtitle">이메일</div>
+            <div>
+              <input placeholder={userData.userEmail} type="text" value={userEmailDef} onChange={onChangeUserEmail} />
+              <div>{userEmailMessage}</div>
+            </div>
+          </div>
+
+          <div className="mypage-foodcagetory">
+            {/* <div>관심있는 요리</div>
+                <div>{userData.food}</div> */}
+            <div className="subtitle">관심있는 요리</div>
+            <FoodList selectedFood={food} toggleFood={handleSelectedFood} />
+          </div>
+          <div></div>
+        </div>
+        <div class="bottomBtn-container">
+          <button onClick={handleUpdate} className="bottomBtn" disabled={!(isNickname && isNicknameDupli && isPhoneNumber && isUserEmail && isIntroduce)}>
             정보수정
           </button>
         </div>

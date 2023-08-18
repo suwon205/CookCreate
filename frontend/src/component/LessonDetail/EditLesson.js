@@ -34,9 +34,9 @@ function EditLesson({ lessonId }) {
   useEffect(() => {
     if (cookyerDisable || dateDisable) {
       if (cookyerDisable) {
-        setDisableMsg('본인이 작성한 강의만 수정할 수 있습니다');
+        setDisableMsg('본인이 작성한 과외만 수정할 수 있습니다');
       } else if (dateDisable) {
-        setDisableMsg('12시간 이전의 강의는 수정할 수 없습니다');
+        setDisableMsg('12시간 이전의 과외는 수정할 수 없습니다');
       } else {
         setDisableMsg('');
       }

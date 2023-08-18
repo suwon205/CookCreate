@@ -18,6 +18,7 @@ function GestureTest() {
 
     return (
         <>
+        <div className="title">제스처 테스트</div>
         <div className='test-content-video'>
             <TestScreen>
                 {handRdx ? (<IoIosHand className='test-handsup-icon-active'/>) : (<IoIosHand className='test-handsup-icon'/>)}

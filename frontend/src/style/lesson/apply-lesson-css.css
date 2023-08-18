@@ -55,3 +55,48 @@
     font-size: 0.9rem;
     color: #666;
 }
+
+.apply-complete-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 40px 20px;
+    border-radius: 5px;
+    box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px;
+    width: 350px;
+    height: 450px;
+    z-index: 2;
+    animation: modalFadeIn 0.2s;
+}
+
+.apply-complete-contents {
+    width: 263px;
+    height: 160px;
+    margin: 40px auto 30px;
+    padding: 20px;
+}
+
+.apply-complete-content {
+    display: flex;
+}
+
+.apply-complete-content p {
+    font-size: 15px;
+}
+
+.apply-complete-title {
+    width: 63px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
+
+.apply-complete-info {
+    width: 154px;
+    color: #666666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: break-all;
+}

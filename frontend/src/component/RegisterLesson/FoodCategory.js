@@ -9,7 +9,7 @@ function FoodCategory() {
   const [selectedIndex, setSelectedIndex] = useState(""); // 카테고리 idx 저장
 
   const categories = useMemo(
-    () => ["한식", "양식", "중식", "일식", "아시안", "건강식", "디저트"],
+    () => ["-", "한식", "양식", "중식", "일식", "아시안", "건강식", "디저트"],
     []
   );
 
@@ -22,7 +22,7 @@ function FoodCategory() {
 
   useEffect(() => {
     setSelectedIndex(reduxCategoryId);
-    setSelectedCategory(categories[reduxCategoryId - 1]);
+    setSelectedCategory(categories[reduxCategoryId]);
     dispatch(setCategoryValid(selectedIndex !== "" && selectedIndex !== 0));
   }, [reduxCategoryId, selectedCategory, selectedIndex]);
 
@@ -37,7 +37,7 @@ function FoodCategory() {
         value={selectedCategory}
         onChange={handleCategoryChange}
       >
-        <option value="">-</option>
+        {" "}
         {categories.map((category, index) => (
           <option key={index}>{category}</option>
         ))}

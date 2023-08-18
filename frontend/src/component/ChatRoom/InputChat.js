@@ -11,17 +11,18 @@ const Wrapper = styled.footer`
   left: 0px;
   right: 0px;
   width: 100%;
-  min-height: 50px;
+  min-height: 100px;
   max-height: 200px;
   overflow: auto;
-  padding: 6px;
-  z-index: 100;
+  padding: 6px 30px 6px 6px;
+  z-index: 1;
   // background-color: #f5f2f2;
   // display: flex;
   justify-content: flex-end;
 
   // border: 1px solid rgb(255 239 221);
-  border: 1px solid #D9D9D9;
+  border-top: 0.7px solid #D9D9D9;
+  align-items: center;
   
 
   
@@ -110,15 +111,16 @@ const InputChat = ({ sendMessage }) => {
     }
   };
 
-  const buttonContent = role === "COOKIEE" ? "🍪" : "🍳"; // 버튼 내용 설정
-
+  // const buttonContent = role === "COOKIEE" ? "🍪" : "🍳"; // 버튼 내용 설정
 
   return (
     <Wrapper>
       <form onSubmit={onSubmit}>
         <textarea value={messages} autoFocus={true} onChange={onMessageChange} onKeyPress={onEnterPress} />
         <button className={btnClassName} type="submit">
-          <p style={{ fontSize: '20px' }} >{buttonContent}</p>
+          {role === "COOKIEE" ? <img src= "/cookiee-user.png" style={{width : '35px'}}/> 
+          : <img src= "/cookyer.png" style={{width : '35px'}}/>}
+          {/* <p style={{ fontSize: '20px' }} >{buttonContent}</p> */}
           {/* <p style={{ fontSize: '20px' }} >🍳</p> */}
         </button>
       </form>

@@ -50,11 +50,15 @@ function RecipeBook() {
     setGoLessonDetail(true)
     dispatch(setLessonId(lessonId))
     navigate(`/lesson/${lessonId}`)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
   }
 
   useEffect(() => {
     if (goLessonDetail && lessonId !== null) {
       navigate(`/lesson/${lessonId}`)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
     }
   }, [lessonId])
 

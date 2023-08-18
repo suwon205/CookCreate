@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: center;  
     padding: 9rem 0 21rem 0;  
+    height: 100vh; /* 뷰포트 높이에 맞게 조절 */
 }
 
 .bg {
@@ -42,7 +43,7 @@
     font-size: 3rem;   
     font-weight: 900;
     color: #828282; 
-    animation: moveUpDown 2s infinite;
+    animation: moveUpDown 2s infinite 2s, downFadeInAnimation 2s ease forwards;
 }
 
 .animation-container {
@@ -58,6 +59,15 @@
     100% {
       opacity: 1;
       transform: translateY(0);
+    }
+}
+
+@keyframes downFadeInAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
 }
   

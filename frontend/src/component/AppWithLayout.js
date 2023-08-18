@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import NavBar from './Header/NavBar';
 import SignUp from '../pages/signUp';
 import LogIn from '../pages/logIn';
@@ -9,8 +9,6 @@ import LessonDetail from '../pages/lessonDetail';
 import SignUpBefore from '../pages/signUpBefore';
 import RegisterLesson from '../pages/registerLesson'
 import { Route, Routes } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { login, logout } from '../store/auth/auth'
 import LessonItem from '../pages/lessonDetail';
 import MyPageS from '../pages/myPageS';
 import ClassList from './MyPageS/ClassList';
@@ -31,7 +29,6 @@ import EditLesson from '../pages/editLesson';
 import GestureTest from '../pages/video/gestureTest';
 import NotFound from "../pages/notFound";
 
-import ChatList from '../pages/chatList';
 import ChatRoom from '../pages/chatRoom';
 
 function AppWithLayout({ match }) {

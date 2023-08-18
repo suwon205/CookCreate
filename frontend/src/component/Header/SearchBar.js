@@ -51,6 +51,7 @@ function SearchBar() {
     setIsOpen(result.length > 0 && keyword !== '');
   }, [result, keyword]);
 
+  //검색 후 item 누르면 이동
   const searchResClick = (lessonId) => {
     dispatch(setLessonId(lessonId));
     setIsOpen(false);
@@ -60,10 +61,13 @@ function SearchBar() {
   const handleSearchEnter = (e) => {
     if (e.key === 'Enter') {
       navigate(`/lesson`)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       dispatch(setSearchBarKeyword(keyword))
+      console.log(keyword)
       setKeyword('')
     }
   };
+
   document.addEventListener('DOMContentLoaded', () => {
     const searchResult = document.getElementById('searchResult');
     const searchInput = document.getElementById('searchInput');

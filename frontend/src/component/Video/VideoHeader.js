@@ -13,7 +13,7 @@ function VideoHeader({ size }) {
         {lessonTitle ? (
           <p className={`${size}-video-lesson-title`}>{lessonTitle}</p>
         ) : (
-          <p className={`${size}-video-lesson-title`}>수업 제목</p>
+          <p className={`${size}-video-lesson-title`}>과외 제목</p>
         )}
         {cookyerName ? (
           <p className={`${size}-video-lesson-cookyer`}>{cookyerName}</p>

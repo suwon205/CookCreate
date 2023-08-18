@@ -7,7 +7,7 @@ function IntroduceLesson() {
   const materials = useSelector((state) => state.lessonInfo.materials)
   return (
     <div className='introduceLessonContainer'>
-      <div className='introduceLessonTitle'>강의 소개</div>
+      <div className='introduceLessonTitle'>과외 소개</div>
       <div className='introduceLessonDescription'>
         {description}
       </div>

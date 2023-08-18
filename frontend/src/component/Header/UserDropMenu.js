@@ -19,6 +19,8 @@ function UserDropMenu() {
     .then(() => {
       localStorage.clear()
       window.location.replace("/");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
     })
     .catch((err) => {
       console.log(err)

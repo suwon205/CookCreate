@@ -94,7 +94,7 @@ export default function ReviewDetail({ reviewId,onClose}) {
     
     <div className="review-details">
       <div className="review-field">
-        <label htmlFor="lessonTitle">강의명: {selectedReview.lessonTitle}</label>
+        <label htmlFor="lessonTitle">과외명: {selectedReview.lessonTitle}</label>
       </div>
       <div className="review-field">
         <label htmlFor="lessonTitle">선생님:{selectedReview.cookyerName}({selectedReview.cookyerId})</label>

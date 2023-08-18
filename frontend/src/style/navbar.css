@@ -1,3 +1,10 @@
+.nav-wrap {
+  position: fixed;  
+  z-index: 1001;
+  right: 0%;
+  left: 0%;
+}
+
 .navbar {
   background-color: #ffffff;
   padding: 0.9rem 15rem;
@@ -9,8 +16,11 @@
 }
 
 .navbar-main {
-  background-color: #ffffff00;
   border-bottom: #ffffff00 solid 0.7px;
+}
+
+.navbar-main.scroll {
+  border-bottom: #d9d9d9 solid 0.7px;
 }
 
 .logo {
@@ -28,7 +38,7 @@ a:not(:first-of-type) {
   margin-left: 2rem;
 }
 
-a:hover, .nav-user:hover, .drop-btn:hover {
+a:hover, .nav-user:hover, .drop-btn:hover,.nav-sign:hover {
   font-weight: 500;
   /* background-color: #f9f9f9;
   padding: 0.8rem 0.5rem;
@@ -96,6 +106,14 @@ a:hover, .nav-user:hover, .drop-btn:hover {
 
 .dropdown-icon {
   font-size: 1.3rem;
+}
+
+.nav-sign {
+  display: flex;
+  color : #656363;
+  font-size: 0.9rem;
+  font-weight: 400;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1350px) {

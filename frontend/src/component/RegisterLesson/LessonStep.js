@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLessonStepList, setStepValid } from '../../store/lesson/lesson';
+import React, { useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setLessonStepList, setStepValid } from "../../store/lesson/lesson";
 
 function LessonStep() {
   const dispatch = useDispatch();
-  const [stepList, setStepList] = useState([{ stepOrder: 1, stepContent: '' }]);
-  const [errMsg, setErrMsg] = useState('');
+  const [stepList, setStepList] = useState([{ stepOrder: 1, stepContent: "" }]);
+  const [errMsg, setErrMsg] = useState("");
 
   const reduxStepList = useSelector((state) => state.lesson.lessonStepList);
 
@@ -18,14 +18,14 @@ function LessonStep() {
 
   const handleAddInput = () => {
     if (stepList) {
-      if (stepList[stepList.length - 1].stepContent.trim() === '') {
-        setErrMsg('마지막 단계를 채워주세요.');
+      if (stepList[stepList.length - 1].stepContent.trim() === "") {
+        setErrMsg("마지막 단계를 채워주세요.");
         return;
       }
     }
     const newStep = {
       stepOrder: stepList.length + 1,
-      stepContent: '',
+      stepContent: "",
     };
     const updatedList = [...stepList, newStep];
     setStepList(updatedList);
@@ -47,22 +47,29 @@ function LessonStep() {
   };
 
   const checkStepContentFilled = useCallback(() => {
-    return stepList.every((step) => step.stepContent.trim() !== '');
+    if (stepList) {
+      return stepList.every((step) => step.stepContent.trim() !== "");
+    }
   }, [stepList]);
 
   useEffect(() => {
-    setStepList(reduxStepList);
     dispatch(setLessonStepList(stepList));
     dispatch(setStepValid(checkStepContentFilled()));
-  }, [reduxStepList, checkStepContentFilled, dispatch]);
+  }, [stepList, checkStepContentFilled, dispatch]);
+  
+  useEffect(() => {
+    setStepList(reduxStepList);
+  }, [reduxStepList])
 
   return (
     <div>
+      {console.log(stepList, 'stepList')}
       <div className="lessonInfoDescContainer">
         <div className="lessonInfoMate">
           진행 단계 <span className="required">*</span>
         </div>
         <div className="stepInputContainer">
+          
           {stepList.map((step, index) => (
             <div key={index} className="stepInputWrapper">
               <input
@@ -70,7 +77,7 @@ function LessonStep() {
                 type="text"
                 value={step.stepContent}
                 onChange={(e) => handleChange(index, e.target.value)}
-                placeholder={`요리 진행 단계를 입력하세요`}
+                placeholder={"요리 진행 단계를 입력하세요"}
               />
               {stepList.length > 1 && (
                 <button
@@ -87,7 +94,7 @@ function LessonStep() {
           </button>
           {errMsg && <p className="stepMsg">{errMsg}</p>}
           <p className="stepMsg">
-            {checkStepContentFilled() ? '' : '단계를 모두 입력해주세요.'}
+            {checkStepContentFilled() ? "" : "단계를 모두 입력해주세요."}
           </p>
         </div>
       </div>

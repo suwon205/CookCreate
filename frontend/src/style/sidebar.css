@@ -1,12 +1,21 @@
 
 .Side {
-
+  position: relative;
 }
 
 .Side_container {
-  position: relative;
+  position: absolute;
+  left: 0;
   z-index: 10;
 }
+
+.sidebar {
+  width: 300px; /* 오른쪽에 고정할 컴포넌트의 너비 */
+  position: fixed;
+  top: 270px; /* 필요에 따라 조절하여 원하는 위치에 고정 */
+  left: 70px;
+}
+
 
 .sidebar_items {
   list-style: none;

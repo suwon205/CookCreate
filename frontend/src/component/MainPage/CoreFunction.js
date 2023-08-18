@@ -19,7 +19,7 @@ function CoreFunction() {
         // const windowHeight = window.innerHeight;
         // console.log(elementTop + " " + windowHeight);
       
-        if (elementTop < 450 && !animated[index]) {
+        if (elementTop < 500 && !animated[index]) {
           element.classList.add('visible');
           animated[index] = true;
         }

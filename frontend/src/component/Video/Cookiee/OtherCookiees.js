@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import '../../../style/video.css'
 import { useSelector } from 'react-redux';
 import UserVideoComponent from '../UserVideoComponent';
 
@@ -19,19 +18,21 @@ function OtherCookiees() {
   }, [subscribers])
 
   return (
-    <div className='other-cookiees'>
+    <div className='other-cookiees-container'>
       {cookiees && Object.keys(cookiees).length ? (
-        cookiees.map((sub, i) => (
-          <div key={i}>
-            <UserVideoComponent
-              videoStyle='other-cookiees-video'
-              streamManager={sub}
-            />
-          </div>
-        ))
+        <div className='other-cookiees'>
+          {cookiees.map((sub, i) => (
+            <div key={i} className='other-cookiee'>
+              <UserVideoComponent
+                videoStyle='other-cookiees-video'
+                streamManager={sub}
+              />
+            </div>
+          ))}
+        </div>
       ) : (
         <div className="cookiee-nocookiees">
-          <p>수업에 참가중인 쿠키가 없습니다.</p>
+          <p>과외에 참가중인 쿠키가 없습니다.</p>
           <img src='/cookiee.png' alt=''/>
         </div>
       )}

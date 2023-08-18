@@ -9,7 +9,8 @@
     font-size: 2.5rem;
     /* color: #FF7A42; */
     text-align: left;
-    margin: 1rem 0;
+    margin-top: 10rem;
+    margin-bottom: 1rem;
 }
 
 .coreSubTitle {
@@ -66,11 +67,9 @@
 .coreContainer > :nth-child(3) > .core-img-wrap > .core-img {
   width: 10rem;
   transform-origin: 50% 100%;
-  animation: shake;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-delay: 1s; /* 딜레이 시간 조절 */
-}
+  animation: shake 1s infinite; /* 2초 동안 20단계로 반복 */
+  animation-delay: 0.5s; /* 0.5초 동안 애니메이션을 멈춤 */
+  }
 
 .coreContainer > :nth-child(3) > .core-img-wrap {
   width: 30rem;
@@ -143,3 +142,4 @@
     transform: rotate(0deg);
   }
 }
+

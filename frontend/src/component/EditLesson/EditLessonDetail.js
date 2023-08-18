@@ -113,7 +113,11 @@ function EditLessonDetail() {
                 없습니다.
               </div>
             </div>
-            <div className="price">{initPrice.toLocaleString()} 원</div>
+            {initPrice && (
+              <div className="price edit-form-cannot-edit">
+                {initPrice.toLocaleString()} 원
+              </div>
+            )}
           </div>
           {/* 최대 수강 인원 */}
           <div className="edit-info-top-title-container">

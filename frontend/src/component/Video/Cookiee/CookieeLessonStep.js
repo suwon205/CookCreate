@@ -16,7 +16,7 @@ function CookieeLessonStep({ size }) {
         {curIdx !== 0 ? (
             <p>{curIdx}. {curStep}</p>
         ) : (
-          <p>0. 수업이 시작되면 진행 단계가 표시됩니다.</p>
+          <p>0. 과외가 시작되면 진행 단계가 표시됩니다.</p>
         )}
       </div>
     </div>

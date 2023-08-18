@@ -37,7 +37,7 @@ const videoLessonInfo = createSlice({
     setStepInfo: (state, { payload }) => {
       console.log("요리단계 시그널 받아 저장", payload)
       if (payload.curIdx === 0) {
-        state.curStep = "수업이 시작되면 진행 단계가 표시됩니다."
+        state.curStep = "과외가 시작되면 진행 단계가 표시됩니다."
       } else {
         state.curStep = payload.curStep
       }

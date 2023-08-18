@@ -6,6 +6,8 @@ function GoToGesture() {
   const navigate = useNavigate();
   const gotoGesture = () => {
     navigate("/gestureTest");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
   }
   return (
     <div>

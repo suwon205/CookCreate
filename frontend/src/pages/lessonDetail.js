@@ -33,12 +33,12 @@ import {
   setProfileImg,
 } from "../store/lesson/lessonInfo";
 import "../style/lesson/lessonDetailCss.css";
+import defaultThumbnail from '../assets/non-image.png'
 
 function LessonDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const lessonId = id;
-  // const lessonId = useSelector((state) => state.lessonInfo.lessonId);
   const accessToken = localStorage.getItem("access_token");
   const categoryName = useSelector((state) => state.lessonInfo.categoryName);
   const difficulty = useSelector((state) => state.lessonInfo.difficulty);
@@ -47,12 +47,17 @@ function LessonDetail() {
   const lessonDate = useSelector((state) => state.lessonInfo.lessonDate);
   const userType = localStorage.getItem('role')
 
+  const categoryId = useSelector((state) => state.lessonInfo.categoryId)
 
+  const [ showModal, setShowModal ] = useState(false)
+
+  const categories = ["-", "한식", "양식", "중식", "일식", "아시안", "건강식", "디저트"]
   useEffect(() => {
     const DateTransformType = new Date(lessonDate);
     const currentTime = new Date();
-    const futureTime = new Date(currentTime.getTime() + 12 * 60 * 60 * 1000); // 현재 시간 + 12시간
-    if (lessonId) {
+    const futureTime = new Date(currentTime.getTime() + 12 * 60 * 60 * 1000); // 현재 시간 + 12시간 
+
+    if (lessonId && !showModal) {
       axios
         .get(`/api/v1/lesson/${lessonId}`, {
           headers: {
@@ -60,7 +65,7 @@ function LessonDetail() {
           },
         })
         .then((res) => {
-          console.log(res)
+          console.log(res.data)
           dispatch(setCookyerId(res.data.cookyerId));
           dispatch(setCookyerName(res.data.cookyerName));
           dispatch(setFood(res.data.food));
@@ -98,21 +103,25 @@ function LessonDetail() {
         .catch((err) => {
           console.log(err);
           console.log(lessonId)
-          alert(err.response.data.message);
         });
     }
-  }, [lessonId])
+  }, [lessonId, showModal])
 
   return (
     <div className="lessonDetailContainer">
       <div className="detailLeftSection">
         <br />
         <div className="detailCategoryContainer">
-          <span className="detailCategory">{categoryName}</span>{" "}
+          <span className="detailCategory">{categories[categoryId]}</span>{" "}
           <span className="detailCategory">{difficulty}</span>
         </div>
         <h2 className="detailLessonTitle"> {lessonTitle} </h2>
-        <img className="detailThumbnail" src={thumbnailUrl} alt="" />
+        {thumbnailUrl ? (
+          <img className="detailThumbnail" src={thumbnailUrl} alt="" />
+        ) : (
+          <img className="detailThumbnail" src={defaultThumbnail} alt="image" />
+
+        )}
         <IntroduceLesson />
         <hr />
         <IntroduceCookyer />
@@ -121,7 +130,7 @@ function LessonDetail() {
 
       <div className="detailRightSection">
         <CookieeNumber />
-        <ApplyLesson />
+        <ApplyLesson showModal={showModal} setShowModal={setShowModal} />
         <LessonSchedule />
         {userType !== 'COOKIEE' && <EditLesson lessonId={lessonId} />}
       </div>

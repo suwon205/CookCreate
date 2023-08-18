@@ -28,8 +28,8 @@ const ShowChat = ({lessonId, chatTitle, chatOver}) => {
   const connect = () => {
 
     client.current = new StompJs.Client({
-      // brokerURL: `wss://i9c111.p.ssafy.io/api/v1/message`,
-      brokerURL: `ws://localhost:8080/api/v1/message`,
+      brokerURL: `wss://i9c111.p.ssafy.io/api/v1/message`,
+      // brokerURL: `ws://localhost:8080/api/v1/message`,
       onConnect: () => {
         console.log("웹소켓 연결");
   
@@ -122,17 +122,19 @@ const ShowChat = ({lessonId, chatTitle, chatOver}) => {
         {messageList.map((chat, index) => {
           if (chat.type === "CHAT")  {
             // return <SeparationBlock  key={index} EnterNickname={chat.content} />
-             return chat.userId !== id ? (<FriendChat key={index} message={chat.content} author={chat.userId} />)
+             return chat.userId !== id ? (<FriendChat key={index} message={chat.content} author={chat.nickname} />)
              : (<MyChat key={index} message={chat.content} />
              )
           }
         }
         )}
       </div>
-      {!chatOver && (
+      {!chatOver ? (
         <div className="InputChatContainer" >
           <InputChat sendMessage={sendMessage} />
         </div>
+      ) : (
+        <p style={{ marginLeft: '30px', marginTop: '20px',fontSize: '1rem', color : '#656363'}}>종료된 채팅방입니다.</p>
       )}
     </div>
   );

@@ -14,6 +14,7 @@ import com.mmt.repository.PaymentRepository;
 import com.mmt.repository.lesson.LessonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,9 @@ public class PaymentServiceImpl {
     private final LessonRepository lessonRepository;
     private WebClient webClient;
     private final RedisTemplate redisTemplate;
+
+    @Value("${kakao_key}")
+    private String kakao_key;
 
     @PostConstruct
     public void initWebClient() {
@@ -74,9 +78,9 @@ public class PaymentServiceImpl {
         parameter.add("total_amount", String.valueOf(paymentHistory.getTotalAmount()));
         parameter.add("tax_free_amount", "0");
         // 배포용 수정
-        // parameter.add("approval_url", "http://localhost:8080/api/v1/pay/completed?paymentId=" + paymentHistory.getPaymentId());
-        // parameter.add("cancel_url", "http://localhost:8080/api/v1/pay/cancel?paymentId=" + paymentHistory.getPaymentId());
-        // parameter.add("fail_url", "http://localhost:8080/api/v1/pay/fail?paymentId=" + paymentHistory.getPaymentId());
+//         parameter.add("approval_url", "http://localhost:8080/api/v1/pay/completed?paymentId=" + paymentHistory.getPaymentId());
+//         parameter.add("cancel_url", "http://localhost:8080/api/v1/pay/cancel?paymentId=" + paymentHistory.getPaymentId());
+//         parameter.add("fail_url", "http://localhost:8080/api/v1/pay/fail?paymentId=" + paymentHistory.getPaymentId());
         parameter.add("approval_url", "http://i9c111.p.ssafy.io/api/v1/pay/completed?paymentId=" + paymentHistory.getPaymentId());
         parameter.add("cancel_url", "http://i9c111.p.ssafy.io/api/v1/pay/cancel?paymentId=" + paymentHistory.getPaymentId());
         parameter.add("fail_url", "http://i9c111.p.ssafy.io/api/v1/pay/fail?paymentId=" + paymentHistory.getPaymentId());
@@ -233,7 +237,7 @@ public class PaymentServiceImpl {
 
     private HttpHeaders setHeaders() {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "KakaoAK 121971d9ee12aacfe40a56241db0cfbb");
+        headers.set("Authorization", "KakaoAK " + kakao_key);
         headers.set("Content-type", "Content-type: application/x-www-form-urlencoded;charset=utf-8");
         return headers;
     }

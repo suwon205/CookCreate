@@ -6,14 +6,22 @@
 
 .chatroom-container {
   display: flex;
+  height: 620px;
 }
 
-.ChatSpace {
-  width: 750px;
-  height: 800px;
+.ChatListContainer {
+  flex: 2;
+}
+
+.chat-room-content {
+  flex: 4;
+  border-bottom: 0.7px solid #d9d9d9;
+  border-right: 0.7px solid #d9d9d9;
 }
 
 .Emptychat {
-  margin-left: 40px;
-  margin-top: 40px;
+  margin-left: 30px;
+  margin-top: 30px;
+  font-size: 1rem;
+  color : #656363;
 }

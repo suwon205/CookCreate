@@ -41,14 +41,14 @@ function CookyerLessonStep({ size }) {
 
   useEffect(() => {
     console.log("curStep 설정")
-    dispatch(setCurStep("수업이 시작하면 진행 단계를 표시해주세요."))
+    dispatch(setCurStep("과외가 시작하면 진행 단계를 표시해주세요."))
   }, [])
 
   useEffect(() => {
     if (curIdx >= 0) {
       console.log(curIdx, "변화한 인덱스 값")
       if (curIdx === 0) {
-        dispatch(setCurStep("수업이 시작하면 진행 단계를 표시해주세요."))
+        dispatch(setCurStep("과외가 시작하면 진행 단계를 표시해주세요."))
         console.log("하..")
       } else {
         if (lessonStepList) {

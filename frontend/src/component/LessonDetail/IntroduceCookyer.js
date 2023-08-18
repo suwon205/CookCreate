@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import "../../style/lesson/introduceCookyerCss.css";
 
@@ -17,13 +17,12 @@ function IntroduceCookyer() {
     "건강식",
     "디저트",
   ];
-  const [previewImage, setPreviewImage] = useState(
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-  );
-
+  // 기본 프로필 사진
+  const previewImage =
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   return (
     <div className="introduceCookyerContainer">
-      <div className="introduceCookyerTitle">강사 소개</div>
+      <div className="introduceCookyerTitle">선생님 소개</div>
       <div className="introduceCookyerNameContainer">
         {profileImg ? (
           <img className="introduceCookyerProfileImg" src={profileImg} alt="" />

@@ -1,6 +1,7 @@
 .fileInputThumbnail{
   border: none;
   border-radius: 0;
+  object-fit: cover;
 }
 
 .lessonRegisterButton{

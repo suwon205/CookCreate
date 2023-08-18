@@ -4,27 +4,25 @@ import SideBar from "./SideBar";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import ReviewDetail from "./ReviewDetail";
-import Modal from 'react-modal';
+import Modal from "react-modal";
 
 //별점표시
 import StarShow from "../MyPageT/StarShow";
 import { useNavigate } from "react-router";
 import { setLessonId } from "../../store/lesson/lessonInfo";
 
-
-
 function Review() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const accessToken = useSelector((state) => state.auth.access_token);
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedReviewId, setSelectedReviewId] = useState(null); // 선택된 리뷰의 reviewId 
+  const [selectedReviewId, setSelectedReviewId] = useState(null); // 선택된 리뷰의 reviewId
 
   /** 이동할 과외 아이디 */
-  const [ goLessonDetail, setGoLessonDetail ] = useState(false)
-  const lessonId = useSelector((state) => state.lessonInfo.lessonId)
+  const [goLessonDetail, setGoLessonDetail] = useState(false);
+  const lessonId = useSelector((state) => state.lessonInfo.lessonId);
 
   // const [selectedReview, setSelectedReview] = useState(null);
   //모달리뷰
@@ -35,45 +33,46 @@ function Review() {
     setIsModalOpen(true);
   };
 
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
   useEffect(() => {
-    Modal.setAppElement("#root"); 
+    Modal.setAppElement("#root");
   }, []);
-
-
 
   //리뷰목록 불러오기
   useEffect(() => {
-    axios
-      .get(`api/v1/my/review`, {
-        headers: {
-          Access_Token: accessToken,
-        },
-      })
-      .then((res) => {
-        // console.log("리뷰목록",res.data);
-        setReviews("리뷰목록",res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [accessToken,reviews]);
+    console.log("리뷰목록 불러오기");
+    if (accessToken) {
+      axios
+        .get(`api/v1/my/review`, {
+          headers: {
+            Access_Token: accessToken,
+          },
+        })
+        .then((res) => {
+          // console.log("리뷰목록",res.data);
+          setReviews(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [accessToken]);
 
   const goLesson = (lessonId) => {
-    setGoLessonDetail(true)
-    dispatch(setLessonId(lessonId))
-    navigate(`/lesson/${lessonId}`)
-  }
+    setGoLessonDetail(true);
+    dispatch(setLessonId(lessonId));
+    navigate(`/lesson/${lessonId}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     if (goLessonDetail && lessonId !== null) {
-      navigate(`/lesson/${lessonId}`)
+      navigate(`/lesson/${lessonId}`);
     }
-  }, [lessonId])
+  }, [lessonId]);
 
   return (
     <div>
@@ -96,40 +95,70 @@ function Review() {
             </select>
           </div>
         </div>
-        {reviews.map((review, index) => (
-          <div key={index}>
-            <section className="review">
-              <div className="review_box">
-                <div className="review_item">
-                  <div className="review_cont">
-                    <div className="review_link" onClick={() => goLesson(review.lessonId)}>
-                      과외명: {review.lessonTitle}
-                    </div>
-                    <StarShow rating={review.rating} size="1.4rem" color="gold" />
-                    <div>{review.rating}</div>
-                    <div className="review_author">작성자:{review.nickname}</div>
-                    <div className="review_tutor">
-                      선생님:
-                      {review.cookyerName}
-                    </div>
-                    <div className="review_cont">
-                      리뷰내용
-                      <div className="review_cont">{review.reviewContents}</div>
-                    </div>
-                    <div className="review_fun">
-                      <button type="button" className="review_btn" onClick={() =>handleOpenModal(review.reviewId)}>
-                        <i className="review_icon">🔍</i>
-                        <span className="review_btn_txt">자세히보기</span>
-                      </button>
+        {reviews
+          ? reviews.map((review, index) => (
+              <div key={index}>
+                <section className="review">
+                  <div className="review_box">
+                    <div className="review_item">
+                      <div className="review_cont">
+                        <div
+                          className="review_link"
+                          onClick={() => goLesson(review.lessonId)}
+                        >
+                          과외명: {review.lessonTitle}
+                        </div>
+                        <StarShow
+                          rating={review.rating}
+                          size="1.4rem"
+                          color="gold"
+                        />
+                        <div>{review.rating}</div>
+                        <div className="review_author">
+                          작성자:{review.nickname}
+                        </div>
+                        <div className="review_tutor">
+                          선생님:
+                          {review.cookyerName}
+                        </div>
+                        <div className="review_cont">
+                          리뷰내용
+                          <div className="review_cont">
+                            {review.reviewContents}
+                          </div>
+                        </div>
+                        <div className="review_fun">
+                          <button
+                            type="button"
+                            className="review_btn"
+                            onClick={() => handleOpenModal(review.reviewId)}
+                          >
+                            <i className="review_icon">🔍</i>
+                            <span className="review_btn_txt">자세히보기</span>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </section>
               </div>
-            </section>
-          </div>
-        ))}
+            ))
+          : null}
       </section>
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}>
+      {/* <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal}> */}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={handleCloseModal}
+        style={{
+          content: {
+            width: '30%',   // 모달의 너비
+            height: '50%',  // 모달의 높이
+            top: '50%',     // 화면 세로 중앙
+            left: '50%',    // 화면 가로 중앙
+            transform: 'translate(-50%, -50%)', // 모달을 중앙으로 이동
+          },
+        }}
+      >
         <ReviewDetail reviewId={selectedReviewId} onClose={handleCloseModal} />
         {/* <ReviewDetail reviewId={review.reviewId} onClose={handleCloseModal} /> */}
       </Modal>

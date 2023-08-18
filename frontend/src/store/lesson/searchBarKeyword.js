@@ -1,15 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  keyword: "",
-};
-
+  type : 'all',
+  order : "title",
+  deadline : true,
+  category : [],
+  keyword : "",
+  lessonId : ""
+}
 const searchBarKeyword = createSlice({
   name: 'searchBarKeyword',
   initialState,
   reducers: {
     setSearchBarKeyword: (state, action) => {
       state.keyword = action.payload;
+      console.log(action)
     },
   },
 });

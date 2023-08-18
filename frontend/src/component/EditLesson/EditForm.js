@@ -3,25 +3,26 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../style/lesson/editForm.css";
-
+import AlertModal from "../Modal/AlertModal";
 function EditForm() {
   const navigate = useNavigate();
+
+  const [modalOpen, setModalOpen] = useState(false);
+
   const lessonId = useSelector((state) => state.lessonInfo.lessonId);
   const [filename, setFileName] = useState("");
   const initVideoUrl = useSelector((state) => state.lessonEdit.videoUrl);
   const [videoUrl, setVideoUrl] = useState(initVideoUrl);
-  // const [lessonVideoUrl, setLessonVideoUrl] = useState(initVideoUrl)
 
   const initThumbnail = useSelector((state) => state.lessonEdit.thumbnailUrl);
   const [thumbnailUrl, setThumbnailUrl] = useState(initThumbnail);
-  const [ThumbnailFile, setThumbnailFile] = useState(null); // 수정한 파일 정보 넣어줄 것
+  const [ThumbnailFile, setThumbnailFile] = useState(""); // 파일 이름 넣을 것
 
   const accessToken = localStorage.getItem("access_token");
   const lessonTitle = useSelector((state) => state.lessonEdit.lessonTitle);
   const categoryId = useSelector((state) =>
     parseInt(state.lessonEdit.categoryId)
   );
-  const maximum = useSelector((state) => parseInt(state.lessonEdit.maximum));
   const price = useSelector((state) => parseInt(state.lessonEdit.price));
   const difficulty = useSelector((state) => state.lessonEdit.difficulty);
   const timeTaken = useSelector((state) =>
@@ -35,7 +36,6 @@ function EditForm() {
 
   const categoryValid = useSelector((state) => state.lessonEdit.categoryValid);
   const titleValid = useSelector((state) => state.lessonEdit.titleValid);
-  const maxValid = useSelector((state) => state.lessonEdit.maxValid);
   const priceValid = useSelector((state) => state.lessonEdit.priceValid);
   const dateValid = useSelector((state) => state.lessonEdit.dateValid);
   const difficultyValid = useSelector(
@@ -61,7 +61,6 @@ function EditForm() {
   const isAllValid = [
     categoryValid,
     titleValid,
-    maxValid,
     priceValid,
     dateValid,
     difficultyValid,
@@ -69,29 +68,34 @@ function EditForm() {
     materialsValid,
     stepValid,
     descriptionValid,
-    thumbnailValid,
   ].every((isValid) => isValid);
 
   const handleThumbnailUrl = (e) => {
     setFileName(e.target.value); // 파일명 유저들에게 보여주기
     const file = e.target.files[0];
-    setThumbnailFile(file);
+    setThumbnailFile(file); //파일명 넣어주기
     setThumbnailUrl(URL.createObjectURL(file));
     setThumbnailValid(!!file);
+    console.log(file, ThumbnailFile, thumbnailUrl);
   };
+
   const handleVideoUrl = (e) => {
     setVideoUrl(e.target.value);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
   };
   const register = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    if (ThumbnailFile !== null) {
+    if (ThumbnailFile !== "") {
       formData.append("thumbnailUrl", ThumbnailFile);
     }
+
+    // formData.append("thumbnailUrl", ThumbnailFile);
     formData.append("lessonId", lessonId);
     formData.append("lessonTitle", lessonTitle);
     formData.append("categoryId", categoryId);
-    formData.append("maximum", maximum);
     formData.append("price", price);
     formData.append("difficulty", difficulty);
     formData.append("timeTaken", timeTaken);
@@ -114,9 +118,8 @@ function EditForm() {
         },
       })
       .then((res) => {
-        console.log(res);
-        alert("과외 수정에 성공했습니다!");
-        navigate("/lesson");
+        window.scrollTo({ top: 0 });
+        setModalOpen(true);
       })
       .catch((err) => {
         console.log(err);
@@ -168,6 +171,15 @@ function EditForm() {
       >
         과외 수정하기
       </button>
+      {modalOpen && (
+        <AlertModal
+          content="과외 수정이 성공적으로 이루어졌습니다."
+          path="/lesson"
+          data={false}
+          // actions={null}
+          actions={handleCloseModal}
+        />
+      )}
     </div>
   );
 }

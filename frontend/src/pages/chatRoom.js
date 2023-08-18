@@ -20,6 +20,19 @@ function ChatRoom() {
     setChatOver(chatOver);
   };
 
+  const emptyHeader = {
+    width: '100%',
+    backgroundColor: '#FFB697',
+    height: '70px'
+  };
+
+  const emptyRoom = {
+    width: '100%',
+    backgroundColor: '#FFFFFF',
+    height: '510px',
+    position: 'relative',
+  };
+
   return (
     <div className="chatroom-container">
       <div className="ChatListContainer">
@@ -27,7 +40,12 @@ function ChatRoom() {
       </div>
       <div className="chat-room-content">
         {lessonId === null ? (
-          <p className="Emptychat">채팅방을 선택해주세요.</p>
+          <div className="ChatSpace"> 
+            <div style={emptyHeader}/>
+            <div style={emptyRoom}>
+              <p className="Emptychat">채팅방을 선택해주세요.</p>
+            </div>
+          </div>
         ) : (
           <div className="ChatSpace">
             <ShowChat lessonId={lessonId} chatTitle={chatTitle} chatOver={chatOver} />

@@ -15,6 +15,9 @@ build/
 **/src/main/resources/application-aws.properties
 **/src/main/resources/application-credentials.properties
 
+### apikey ###
+**/src/main/resources/application-api-key.properties
+
 ### STS ###
 .apt_generated
 .classpath
