@@ -224,7 +224,7 @@ function Payment() {
                   onClick={() => handlePaymentLessonId(payment.lessonId)}
                   // onClick={() => handleRefund(payment.lessonId)}
                 > 
-                  강의 취소(환불하기)
+                  과외 취소 및 환불
                 </div>
               )}
               {errMsg}

@@ -32,7 +32,7 @@ function OtherCookiees() {
         </div>
       ) : (
         <div className="cookiee-nocookiees">
-          <p>수업에 참가중인 쿠키가 없습니다.</p>
+          <p>과외에 참가중인 쿠키가 없습니다.</p>
           <img src='/cookiee.png' alt=''/>
         </div>
       )}

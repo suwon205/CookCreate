@@ -335,9 +335,9 @@ function ClassList() {
                                   {displayTime(lesson.lessonDate)}
                                 </dd>: null}
                                 {new Date(lesson.lessonDate) <= currentDate.setHours(currentDate.getHours() + 1) ? (
-                                  <button onClick={() => createRoom(lesson.lessonId)}>수업시작</button>
+                                  <button onClick={() => createRoom(lesson.lessonId)}>과외시작</button>
                                 ) : (
-                                  <button disabled='disabled'>수업시작</button>
+                                  <button disabled='disabled'>과외시작</button>
                                 )}
                               </dl>
                               <div className="info_ea">

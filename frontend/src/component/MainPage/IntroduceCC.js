@@ -15,7 +15,7 @@ function IntroduceCC() {
         </div>
         <div className="introCC-content">
           <div>
-            미리 촬영한 수업 영상을 활용하여 수업을 진행하고, 
+            미리 촬영한 요리 영상을 활용하여 과외를 진행하고, 
             <br/>
             학생들이 요리하는 동안 실시간으로 피드백을 주는 선생님입니다.
             <br/>

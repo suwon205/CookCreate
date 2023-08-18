@@ -79,14 +79,14 @@ function AppliedLessonMenu({ myLessons }) {
               <div>{lesson.cookyerName}</div>
             </div>
             {lesson.sessionId === null ? (
-              <button disabled='disabled' className="drop-lesson-btn">수업예정</button>
+              <button disabled='disabled' className="drop-lesson-btn">과외예정</button>
             ) : (
               <button onClick={() => joinLesson(lesson.lessonId)} className={`drop-lesson-btn drop-lesson-btn-active`}>참여하기</button>
             )}
           </div>
         ))
       ) : (
-        <p>신청한 수업이 없습니다.</p>
+        <p>신청한 과외가 없습니다.</p>
       )}
     </div>
   );

@@ -111,7 +111,7 @@ function NavBar() {
             <img src="/logo.png" alt="로고" className="logo" />
           </span>
           {/* </Link> */}
-          <Link to="/lesson">수업 전체</Link>
+          <Link to="/lesson">과외 전체</Link>
           <SearchBar />
         </div>
         {isLogin ? (
@@ -128,7 +128,7 @@ function NavBar() {
                     className="drop-btn"
                     onClick={dropLessonMenu}
                   >
-                    신청수업
+                    신청과외
                   </button>
                   <RiArrowDropDownLine className="dropdown-icon" />
                   {lessonDropdown ? (

@@ -251,7 +251,7 @@ function ClassList() {
                     </div>
                   </div>
                     {lesson.sessionId === null ? (
-                      <button className="button" disabled="disabled">수업예정</button>
+                      <button className="button" disabled="disabled">과외예정</button>
                     ) : (
                       <button className="button orange" onClick={() => joinLesson(lesson.lessonId)}>참가하기</button>
                     )}

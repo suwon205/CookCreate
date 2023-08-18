@@ -47,7 +47,7 @@ function SignUpBefore() {
               <div className="centered">Cookyer</div>
             </div>
             <div className="description">
-              수업 영상을 제공하고
+              요리 영상을 제공하고
               <br />
               학생들에게 피드백을 해주는 선생님 회원
             </div>

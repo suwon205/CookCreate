@@ -11,7 +11,7 @@ function ApplyCompleteModal({ setShowModal, lesson }) {
       </div>
       <div className="apply-complete-contents">
         <div className="apply-complete-content">
-          <p className="apply-complete-title">신청 수업</p>
+          <p className="apply-complete-title">신청 과외</p>
           <p className="apply-complete-info">{lesson.lessonTitle}</p>
         </div>
         <div className="apply-complete-content">

@@ -141,7 +141,7 @@ function ApplyLesson({ showModal, setShowModal }) {
       {disableMsg && <div className="disableMsg">{disableMsg}</div>}
       {videoUrl && (
         <div className="applyLessonVideoUrl">
-          <a href={videoUrl}> 수업 맛보기 </a>
+          <a href={videoUrl}> 과외 맛보기 </a>
         </div>
       )}
     </div>
