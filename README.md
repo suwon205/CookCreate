@@ -5,7 +5,10 @@
 # 편하게 요리🍳하고, 모르면 바로 손드세요!🙋
 선생님과 학생의 양방향 소통을 지향하고<br/>
 핸즈프리 제스처로 유저들의 편의성을 개선한<br/>
-<strong>실시간 피드백 요리 화상 과외 서비스</strong>
+<strong>실시간 피드백 요리 화상 과외 서비스</strong><br/><br/>
+![](images/gifs/mainpage.gif)
+<br/>
+[> UCC 보러가기 <](https://youtu.be/q4hc7BR35PQ)
 
 ##  ✨ Member ✨
 
@@ -34,50 +37,7 @@
 
 ## 🍪 기능별 화면 🍪
 
-#### 👩[모두] 메인화면
-![](images/gifs/mainpage.gif)
-
-#### 👩[모두] 핸즈프리 제스처 테스트
-![](images/gifs/gesturetest.gif)
-
-#### 👩‍🍳[쿠커] 과외등록
-![](images/gifs/cookyer_create_lesson.gif)
-
-#### 👩‍🍳[쿠커] 직전 과외 불러오기
-![](images/gifs/cookyer_before_lesson.gif)
-
-#### 👩[쿠키] 과외신청
-![](images/gifs/cookiee_apply_lecture.gif)
-
-#### 👩‍🍳[쿠커] 과외수정
-![](images/gifs/cookyer_update_lesson.gif)
-
-#### 👩[모두] 채팅방
-![](images/gifs/chat.gif)
-
-#### 👩‍🍳[쿠커] 화상과외
-![](images/gifs/cookyer_videochat.gif)
-
-#### 👩‍🍳[쿠커] 화면공유
-![](images/gifs/cookyer_share_screen.gif)
-
-#### 👩[쿠키] 핸즈프리 제스처
-![](images/gifs/cookiee_handsfree_gesture.gif)
-
-#### 👩[쿠키] 리뷰작성
-![](images/gifs/cookiee_create_review.gif)
-
-#### 👩[쿠키] 리뷰수정
-![](images/gifs/cookiee_review_update.gif)
-
-#### 👩‍🍳[쿠커] 리뷰읽기
-![](images/gifs/cookyer_reviewread.gif)
-
-#### 👩‍🍳[쿠커] 마이페이지
-![](images/gifs/cookyer_mypage.gif)
-
-#### 👩[쿠키] 마이페이지
-![](images/gifs/cookiee_mypage.gif)
+#### [> 기능별 화면 GIF 보러가기 <](./exec/CookCreate-UI.md)
 
 
 ## :fork_and_knife: 사용한 외부 서비스
