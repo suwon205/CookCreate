@@ -52,6 +52,9 @@
 #### 👩‍🍳[쿠커] 과외수정
 ![](images/gifs/cookyer_update_lesson.gif)
 
+#### 👩[모두] 채팅방
+![](images/gifs/chat.gif)
+
 #### 👩‍🍳[쿠커] 화상과외
 ![](images/gifs/cookyer_videochat.gif)
 
