@@ -12,12 +12,12 @@
 
 ##  ✨ Member ✨
 
-| [<img src = "https://avatars.githubusercontent.com/u/82308415?v=4" width = 100>](https://github.com/https://github.com/byunyc0124) | [<img src = "https://avatars.githubusercontent.com/u/93422139?v=4" width = 100>](https://github.com/Phabala) | [<img src = "https://avatars.githubusercontent.com/u/90020798?v=4" width = 100>](https://github.com/https://github.com/jjoyra) |
+| [<img src = "https://avatars.githubusercontent.com/u/82308415?v=4" width = 100>](https://github.com/byunyc0124) | [<img src = "https://avatars.githubusercontent.com/u/93422139?v=4" width = 100>](https://github.com/Phabala) | [<img src = "https://avatars.githubusercontent.com/u/90020798?v=4" width = 100>](https://github.com/jjoyra) |
 |:---:|:---:|:---:|
 |변영채|김기홍|조희라|
 |BE, 팀장|AI|BE|
 
-| [<img src = "https://avatars.githubusercontent.com/u/122503936?v=4" width = 100>](https://github.com/https://github.com/suwon205) | [<img src = "https://avatars.githubusercontent.com/u/111420496?v=4" width = 100>](https://github.com/yeeeeeji) | [<img src = "https://avatars.githubusercontent.com/u/97263716?v=4" width = 100>](https://github.com/https://github.com/tsmich926) |
+| [<img src = "https://avatars.githubusercontent.com/u/122503936?v=4" width = 100>](https://github.com/suwon205) | [<img src = "https://avatars.githubusercontent.com/u/111420496?v=4" width = 100>](https://github.com/yeeeeeji) | [<img src = "https://avatars.githubusercontent.com/u/97263716?v=4" width = 100>](https://github.com/tsmich926) |
 |:---:|:---:|:---:|
 |양수원|윤예지|황수아|
 |FE|FE|FE|
