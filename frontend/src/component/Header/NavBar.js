@@ -9,6 +9,7 @@ import axios from "axios";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { resetlessonSearch } from "../../store/lesson/lessonSearch";
 import { setSearchBarKeyword } from "../../store/lesson/searchBarKeyword";
+import { setClassData } from "../../store/mypageS/accountS";
 function NavBar() {
   const navigator = useNavigate();
   const dispatch = useDispatch();
@@ -21,7 +22,8 @@ function NavBar() {
 
   /** 신청 수업 드롭다운 */
   const [lessonDropdown, setLessonDropdown] = useState(false);
-  const [myLessons, setMyLessons] = useState(undefined); // 학생 모달창에 불러서 쓸 레슨 정보
+  // const [myLessons, setMyLessons] = useState(undefined); // 학생 모달창에 불러서 쓸 레슨 정보
+  const classData = useSelector((state) => (state.accountS.classData))
 
   /** 유저 드롭다운 */
   const [userDropdown, setUserDropdown] = useState(false);
@@ -79,9 +81,11 @@ function NavBar() {
             typeof res.data === "object" &&
             res.data[0].message !== "신청한 과외가 없습니다."
           ) {
-            setMyLessons(res.data);
+            dispatch(setClassData(res.data))
+          // setMyLessons(res.data);
           } else {
-            setMyLessons(undefined);
+            dispatch(setClassData(undefined))
+          // setMyLessons(undefined);
           }
         })
         .catch((err) => {
@@ -154,7 +158,8 @@ function NavBar() {
                       onMouseLeave={() => dropLessonMenu(false)}
                       className="drop-wrap"
                     >
-                      <AppliedLessonMenu myLessons={myLessons} />
+                      <AppliedLessonMenu myLessons={classData} />
+                      {/* <AppliedLessonMenu myLessons={myLessons} /> */}
                     </div>
                   ) : null}
                 </div>

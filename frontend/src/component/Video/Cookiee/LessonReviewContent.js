@@ -31,7 +31,7 @@ const RatingField = styled.fieldset`
 `;
 
 
-function LessonReviewContent() {
+function LessonReviewContent({ setShowModal, setFailModal }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -82,18 +82,20 @@ function LessonReviewContent() {
     })
     .then((res) => {
       console.log(res.data);
-      dispatch(initVideoLessonInfo())
-      navigate(-1)
+      setShowModal(true)
+      // dispatch(initVideoLessonInfo())
+      // navigate(-1)
       if (document.fullscreenElement) {
         document
           .exitFullscreen()
           .then(() => console.log("Document Exited from Full screen mode"))
           .catch((err) => console.error(err));
       }
-      alert('리뷰가 등록되었습니다.');
+      // alert('리뷰가 등록되었습니다.');
     })
     .catch((err) => {
       console.log("리뷰등록못함", err);
+      setFailModal(true)
     });
 
   };

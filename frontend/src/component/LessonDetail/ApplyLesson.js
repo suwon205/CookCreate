@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../../style/lesson/apply-lesson-css.css";
 import { useNavigate } from "react-router";
 import ApplyCompleteModal from "./ApplyCompleteModal";
 import AlertModal from "../Modal/AlertModal";
+import { setClassData } from "../../store/mypageS/accountS";
 
 function ApplyLesson({ showModal, setShowModal }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
   const [disable, setDisable] = useState(false);
   const [disableMsg, setDisableMsg] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -27,9 +30,9 @@ function ApplyLesson({ showModal, setShowModal }) {
   const futureTime = new Date(currentTime.getTime() + 12 * 60 * 60 * 1000);
 
   /** 과외 신청 완료 및 실패 모달 */
-  // const [ showModal, setShowModal ] = useState(false)
   const [modalInfo, setModalInfo] = useState(null);
   const [showFailModal, setShowFailModal] = useState(false);
+  const [applySuccess, setApplySuccess] = useState(false)
 
   useEffect(() => {
     if (remaining === 0) {
@@ -80,6 +83,7 @@ function ApplyLesson({ showModal, setShowModal }) {
         if (payStatus === "COMPLETED") {
           popupWindow.close();
           console.log("결제 성공");
+          setApplySuccess(true)
           axios
             .post(
               `/api/v1/lesson/${lessonId}`,
@@ -109,6 +113,32 @@ function ApplyLesson({ showModal, setShowModal }) {
       };
     }
   }, [popupWindow]);
+
+  /** 결제 성공시 신청수업 모달 정보 업데이트 */
+  useEffect(() => {
+    if (applySuccess && access_token && role === "COOKIEE") {
+      axios
+        .get(`/api/v1/my/applied`, {
+          headers: {
+            Access_Token: access_token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data)
+          console.log('신청한 수업 목록 받아와짐')
+        if (typeof(res.data) === 'object' && res.data[0].message !== "신청한 과외가 없습니다.") {
+          dispatch(setClassData(res.data))
+        } else {
+          dispatch(setClassData(null))
+        }
+
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log("신청한 수업 목록 안받아와짐");
+        });
+    }
+  } , [applySuccess, access_token, role])
 
   return (
     <div className="applyLessonContainer">
