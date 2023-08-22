@@ -28,10 +28,7 @@ function CookyerFullScreen(props) {
 
   return (
     <div className='video-page'>
-      {isSessionOpened ? null : (
-        <LessonStepModal onClick={handleModalClick}/>
-      )}
-      {session ? (
+      {isSessionOpened ? (
         <div>
           <CookyerVideoSideBar size={'full'}/>
           
@@ -108,7 +105,10 @@ function CookyerFullScreen(props) {
             <CookyerLessonStep size={'full'}/>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <LessonStepModal onClick={handleModalClick}/>
+      )}
+      
     </div>
   );
 }
