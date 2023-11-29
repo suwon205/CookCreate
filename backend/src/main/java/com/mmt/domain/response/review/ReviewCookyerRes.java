@@ -17,6 +17,8 @@ public class ReviewCookyerRes extends ResponseDto {
     private String cookyerName;
     private float rating;
     private String reviewContents;
+    private String modifiedDate;
+    private String profileImg;
 
     public ReviewCookyerRes(Review review){
         this.reviewId = review.getReviewId();
@@ -28,5 +30,7 @@ public class ReviewCookyerRes extends ResponseDto {
         this.cookyerName = review.getLesson().getCookyerName();
         this.rating = review.getRating();
         this.reviewContents = review.getReviewContents();
+        this.modifiedDate = review.getModifiedDate().toString();
+        this.profileImg = review.getMember().getProfileImg();
     }
 }

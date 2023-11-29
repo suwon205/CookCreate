@@ -1,5 +1,7 @@
 .account-container {
     padding : 0rem 15rem;
+    display: flex;
+    justify-content: center;
 }
 
 .account input {
@@ -132,3 +134,8 @@
     background: #F7F7F7; /* You can adjust this to any desired color */
     padding: 20px; /* Adjust as needed */
 }
+.disabled {
+    background-color: #cccccc; /* 배경색을 회색으로 변경 */
+    color: #888888; /* 글자색을 연한 회색으로 변경 */
+    cursor: not-allowed; /* 커서 모양을 'not-allowed'로 변경하여 비활성화된 상태를 나타냄 */
+  }

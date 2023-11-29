@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCategories } from '../../store/lesson/lessonSearch';
 import '../../style/lesson/lessonFoodCategoryCss.css';
 
 const LessonFoodCategory = () => {
   const dispatch = useDispatch();
+  const initCategory = useSelector((state) => state.lessonSearch.category);
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  useEffect(() => {
+    if (initCategory.length === 0) {
+      setSelectedCategories([]);
+    }
+  }, [initCategory]);
+
   const foodCategories = [
     '한식', '양식', '중식', '일식', '아시안', '건강식', '디저트'
   ];
@@ -23,7 +31,6 @@ const LessonFoodCategory = () => {
 
     setSelectedCategories(updatedSelectedCategories);
 
-    // 인덱스 + 1 값을 문자열로 조합하여 Redux 스토어에 저장
     const selectedCategoriesStr = updatedSelectedCategories.join(',');
     dispatch(setCategories(selectedCategoriesStr));
   };
@@ -32,7 +39,7 @@ const LessonFoodCategory = () => {
     <div className='categoryContainer'>
       {foodCategories.map((category, index) => (
         <div
-        className={`categoryItem ${selectedCategories.includes(index + 1) ? 'selected' : ''}`}
+          className={`categoryItem ${selectedCategories.includes(index + 1) ? 'selected' : ''}`}
           key={index}
           onClick={() => handleCategoryClick(index)}
         >

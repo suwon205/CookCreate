@@ -12,6 +12,7 @@ function LessonItem({
   cookyerName,
   categoryId,
   difficulty,
+  remaining
 }) {
   const dispatch = useDispatch();
   const handleItemClick = () => {
@@ -42,6 +43,10 @@ function LessonItem({
   if (formattedDate < futureTime) {
     message = "앞으로 12시간 이내에 시작될 과외이므로, 신청 불가능합니다.";
   }
+  if (remaining === 0) {
+    message = "해당 과외의 신청 정원이 모두 마감되었습니다."
+  }
+  const formattedReviewAvg = reviewAvg.toFixed(1);
 
   return (
     <div onClick={handleItemClick} className="lessonItem">
@@ -52,7 +57,7 @@ function LessonItem({
       )}
       <h3 className="lessonItemTitle">{title}</h3>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div className="jjim">⭐ {reviewAvg}</div>
+        <div className="jjim">⭐ {formattedReviewAvg}</div>
         <div className="datename">
           {formattedDateString} | {cookyerName}
         </div>

@@ -102,10 +102,12 @@ function Review() {
     <div>
       <SideBar />
       <section>
-        <div className="header">
-          <h2 className="header_title">받은 리뷰:{grade.count}개</h2>
-          <h2 className="section_title">평균별점:{grade.avg}</h2>
-          <div></div>
+        <div className="my-class-title-wrap">
+          <h3 className="my-class-title">리뷰 목록</h3>
+        </div>
+        <div>
+          <h3 className="my-subtitle">받은 리뷰:{grade.count}개</h3>
+          <h2 className="my-subtitle">평균별점:{grade.avg}</h2>
         </div>
         <ul className="caution_list">
           <div className="caution_list_item">

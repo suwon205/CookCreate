@@ -324,3 +324,15 @@
     transform: rotate(360deg);
   }
 }
+
+.full-video-step-check-reset-btn {
+  margin-top: 3px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  width: 80px;
+  height: 40px;
+  border-radius: 46px;
+  color: #00A442;
+}

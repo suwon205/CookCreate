@@ -445,3 +445,11 @@ input[type="number"]::-webkit-inner-spin-button {
   }
   
 }
+
+.half-video-step-check-reset-btn {
+  margin-top: 1px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #00A442;
+}
