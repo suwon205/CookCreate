@@ -78,7 +78,7 @@ function CookyerScreen() {
 
       // On every Stream destroyed...
       const handleStreamDestroyed = (event) => {
-        console.log("나간 사람 제외", event)
+        console.log("나간 사람 제외", event.stream.connection.connectionId)
         dispatch(deleteSubscriber(event.stream.streamManager))
         dispatch(deleteCookiee(event.stream.connection.connectionId))
       };

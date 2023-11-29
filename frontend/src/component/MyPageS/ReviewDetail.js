@@ -87,8 +87,8 @@ export default function ReviewDetail({ reviewId,onClose}) {
   }
 
   return (
-    <div className="modal-content">
-      <button type="submit" onClick={onClose}>❌</button>
+    <div className="modal-content" >
+      <button type="submit" onClick={onClose} style={{marginLeft: '270px', marginTop:'10px'}} >❌</button>
     <h2 className="modal-title">리뷰 상세 정보</h2>
     
     
