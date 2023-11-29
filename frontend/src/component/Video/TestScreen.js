@@ -111,9 +111,9 @@ const TestScreen = (props) => {
 					}
         }
 
-        if (checkCount >= 8) dispatch(checkUp());
-        if (okCount >= 8) dispatch(trigTimer());
-        if (handCount >= 8) dispatch(raiseHand());
+        if (checkCount >= 16) dispatch(checkUp());
+        if (okCount >= 16) dispatch(trigTimer());
+        if (handCount >= 16) dispatch(raiseHand());
       } else {
         checkCount = 0;
         okCount = 0;

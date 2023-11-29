@@ -150,7 +150,7 @@ function DecimalStar({ rating }) {
     <StarRateWrap>
       {STAR_IDX_ARR.map((item, idx) => (
         <span className="star_icon" key={`${item}_${idx}`}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 14 13">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 13">
             <clipPath id={`${item}StarClip`}>
               <rect width={`${ratesResArr[idx]}`} height="13" />
             </clipPath>
@@ -159,7 +159,7 @@ function DecimalStar({ rating }) {
               d='M9,2l2.163,4.279L16,6.969,12.5,10.3l.826,4.7L9,12.779,4.674,15,5.5,10.3,2,6.969l4.837-.69Z'
               transform="translate(-2 -2)"
             />
-            <use clipPath={`url(#${item}StarClip)`} href={`#${item}Star`} fill="#FFB697" />
+            <use clipPath={`url(#${item}StarClip)`} href={`#${item}Star`} fill="orange" stroke="orange"/>
           </svg>
         </span>
       ))}
@@ -173,10 +173,13 @@ const StarRateWrap = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin: 2px 0 0 15px;
 
   .star_icon {
     display: inline-flex;
     margin-right: 5px;
+    svg {
+      width: ${({ iconSize }) => iconSize || '15px'};
+      height: ${({ iconSize }) => iconSize || '15px'};
+    }
   }
 `;

@@ -40,15 +40,15 @@ function OpenViduVideoComponent(props) {
     }, [props]);
 
     console.log(props.videoStyle);
-    console.log(`canvasRef.current: ${canvasRef.current}`);
-    console.log(`videoRef.current: ${videoRef.current}`);
-    console.log(`props.gesture: ${props.gesture}`);
 
     useEffect(() => {
-      if (canvasRef.current && videoRef.current && props.gesture) {
+      if (canvasRef.current && videoRef.current) { // && props.gesture 제거
         console.log("두번째 useEffect 실행됨")
         const canvas = canvasRef.current;
         const video = videoRef.current;
+        console.log(`canvasRef.current: ${canvasRef.current}`);
+        console.log(`videoRef.current: ${videoRef.current}`);
+        console.log(`props.gesture: ${props.gesture}`);
         let gesture = "";
 
         // if (canvas) {
@@ -147,17 +147,17 @@ function OpenViduVideoComponent(props) {
 						handCount += 1;
 					}
 
-          if (checkCount >= 10 && checkCalled === false) {
+          if (checkCount >= 20 && checkCalled === false) {
             pressCheckTrue(publisher);
             console.log('debug: setHandsup 호출시도');
             checkSetter(true);
           }
-					if (handCount >= 10 && handCalled === false) {
+					if (handCount >= 20 && handCalled === false) {
             pressHandsUpTrue(publisher);
             console.log('debug : handSetter 호출시도');
             handSetter(true);
           }
-          if (okCount >= 10 && okCalled === false) {
+          if (okCount >= 20 && okCalled === false) {
             startTimer(publisher);
             console.log('debug: startTimer 호출시도');
             okSetter(true); // 이 세터들 안필요한거 같은데 기술부채 갚을 때 지우는거 고려해보자

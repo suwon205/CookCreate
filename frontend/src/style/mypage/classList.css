@@ -1,0 +1,110 @@
+.my-class-title {
+  color: #404040;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.my-class-title-wrap {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.my-class-subtitle {
+  color: #404040;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.lessonItem {
+  width: 100%;
+  box-sizing: border-box; /* 내부 여백과 테두리를 포함한 전체 너비 설정 */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.thumbnail {
+  margin: 0 auto; /* 가운데 정렬 */
+  width: 100%;
+  height: 147px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.lessonItemTitle {
+  text-align: start;
+  font-weight: 500;
+  color: #414141;
+}
+
+.my-datename {
+  margin-bottom: 20px;
+  color: #666666;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.jjim {
+  color: #666666;
+  font-size: 0.9rem;
+}
+
+.badgeContainer {
+  display: flex; /* 내부 요소를 가로 방향으로 정렬 */
+  margin-top: 10px; /* 배지와 다른 요소 사이에 약간의 간격 추가 */
+}
+
+.categoryBadge,
+.difficultyBadge {
+  display: inline-block; /* Display badges in a single row */
+  margin-right: 10px; /* Add some space between badges */
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-style: none;
+  border-radius: 5px;
+  background: #f4f4f4;
+  color: #656363;
+}
+
+.my-class-btn {
+  display: inline-block; /* Display badges in a single row */
+  margin-left: 10px; /* Add some space between badges */
+  padding: 6px 12px;
+  border: 0.7px solid #d9d9d9;
+  border-radius: 5px;
+  color: #656363;
+  background-color: #ffffff;
+}
+
+.my-class-btn:disabled {
+  display: inline-block; /* Display badges in a single row */
+  margin-left: 10px; /* Add some space between badges */
+  padding: 6px 12px;
+  border: 0.7px solid #d9d9d9;
+  border-radius: 5px;
+  color: #d9d9d9;
+  background-color: #f4f4f4;
+}
+
+.badge-btn-wrap {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  justify-content: space-between;
+}
+
+.remain-text {
+  color: #666666;
+  font-size: 0.9rem;
+}
+
+.my-class-btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.my-remain-wrap {
+  display: flex;
+  justify-content: space-between;
+}

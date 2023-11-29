@@ -7,7 +7,7 @@ const initialState = {
   category : [],
   keyword : "",
   lessonId : "",
-  result : []
+  result : [],
 }
 
 const lessonSearch = createSlice({
