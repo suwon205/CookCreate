@@ -1,11 +1,7 @@
-
 .review-container {
   overflow: hidden;
-  width: 400px;
-  height: 400px;
-  border: 1px solid #ccc;
   border-radius: 3px;
-  padding: 1rem;
+  margin-top: 3rem;
 }
 
 .review-header {
@@ -16,9 +12,11 @@
 }
 
 .review-title {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
   font-weight: 500;
+  color: #414141;
   margin: 0;
-  font-size: 18px;
 }
 
 .review-star {
@@ -26,12 +24,10 @@
   margin-top: 3px;
 }
 
-
 .review-avg-container {
   display: flex;
   align-items: center;
 }
-
 
 .review-avg {
   font-weight: bold;
@@ -48,15 +44,14 @@
 
 .review-list {
   overflow-y: auto;
-  height: 300px;
-  
+  height: 500px;
+
   padding-right: 10px; /* 오른쪽에 스크롤이 생길 때 내용이 가려지는 것을 방지 */
 }
 
 .review-list::-webkit-scrollbar {
   width: 10px; /* 스크롤 바 너비 조절 */
 }
-
 
 .review-list::-webkit-scrollbar-thumb {
   background-color: #d3cec7; /* 스크롤 바 색상 */
@@ -67,28 +62,62 @@
   background-color: transparent; /* 스크롤 바 트랙 색상 */
 }
 
-
-
 .review-item {
   margin-bottom: 1rem;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 0.5rem;
+  border-bottom: 0.7px solid #e1e1e1;
+  padding: 1.8rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-info-wrap {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.review-profile-img {
+  width: 40px; /* 원하는 너비로 변경 */
+    height: 40px; /* 높이를 너비와 같게 설정하여 동그랗게 만듦 */
+    border-radius: 50%; /* 동그란 모양으로 표시 */
+    object-fit: cover; /* 이미지를 적절하게 맞춤 */
+    margin-right: 15px;
+}
+
+.review-text-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.review-item-star {
+  display: flex;
+  flex-direction: row;
+  font-size: 0.9rem;
+  color: orange;
 }
 
 .review-content {
-  font-size: 17px;
-  font-weight: 500;
-  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: #414141;
 }
 
 .review-nickname {
-  font-size: 14px;
+  font-size: 0.9rem;
+  font-weight: 500;
   color: #6f6f6f;
 }
 
+.review-date {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #b5b2b2;  
+}
+
 .no-reviews {
-  font-size: 14px;
-  color: #777;
+  font-size: 0.9rem;
+  color: #666;
   text-align: center;
   margin-top: 2rem;
 }

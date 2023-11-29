@@ -7,7 +7,7 @@ const initialState = {
   category : [],
   keyword : "",
   lessonId : "",
-  result : []
+  result : [],
 }
 
 const lessonSearch = createSlice({
@@ -35,13 +35,19 @@ const lessonSearch = createSlice({
     setResult : (state, action) => {
       state.result = action.payload
     },
-    resetlessonSearch : (state) => {
-      return initialState
-    }
+    setSearchBarKeyword: (state, action) => {
+      state.keyword = action.payload;
+    },
+    resetlessonSearch: (state) => {
+      return {
+        ...initialState,
+        result: state.result, // result 필드는 유지
+      };
+    },
   }
 })
 
 export const {
-  setOrder, setDeadLine, setCategories, setKeyword, setType,setResult, setLessonId, resetlessonSearch
+  setOrder, setDeadLine, setCategories, setKeyword, setType,setResult, setLessonId,setSearchBarKeyword, resetlessonSearch
 } = lessonSearch.actions
 export default lessonSearch.reducer
