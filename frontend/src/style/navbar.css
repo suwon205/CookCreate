@@ -48,6 +48,14 @@ a:hover, .nav-user:hover, .drop-btn:hover,.nav-sign:hover {
 .leftNav {
   display: flex;
   align-items: center;
+  color : #656363;
+  font-size: 0.9rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.leftNav:hover {
+  font-weight: 500;
 }
 
 .rightNav {
