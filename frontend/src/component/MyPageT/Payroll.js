@@ -6,6 +6,10 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { setLessonId } from "../../store/lesson/lessonInfo";
+import "./../../style/mypage/payroll.css";
+import "./../../style/mypage/mypage.css";
+
+
 
 
 function Payroll() {
@@ -57,22 +61,17 @@ function Payroll() {
   return (
     <div className="mypage">
       <SideBar />
-      <section className="pay_box">
-        <div className="pay_header">
-          <div>
-            <span>결제내역</span>
-          </div>
+      <section className="pay-box">
+        <div className="my-class-title-wrap">
+          <h3 className="my-class-title">정산내역</h3>
         </div>
-        {/* {userPayment.length === 0 ? ( // 결제내역이 없는 경우
-          <div className="no_payment">결제내역이 없습니다.</div>
-        ) : ( */}
           {payrollMessage ? (
-          <div className="no_payment">{payrollMessage}</div>
+          <div className="no-payment">{payrollMessage}</div>
         ) : (
           // 결제내역이 있는 경우
           pays.map((pay) => (
-            <div className="pay_item" key={pay.id}>
-              <dl className="pay_list">
+            <div className="pay-item" key={pay.id}>
+              <dl className="pay-list">
                 <div className="pay-state">
                     <div>결제상태</div>
                     <div>
@@ -97,22 +96,19 @@ function Payroll() {
                 <p className="pay_info">결제정보</p>
                 <div className="class_info">
                   <dl className="info_details">
-                    {/* <dt>가격</dt>
-                    <dd>{payment.totalAmount} 원</dd> */}
-                    <dt>과외명</dt>
-                    <dd onClick={() => goLesson(pay.lessonId)}>{pay.lessonTitle}</dd>
-                    <dt>결제 수단</dt>
-                    <dd>{pay.cardInfo}</dd>
-                    <dt>결제 승인 완료 시간</dt>
-                    <dd>{new Date(pay.approvedAt).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</dd>
+                    <div className="pay-row">
+                      <dt>과외명</dt>
+                      <dd onClick={() => goLesson(pay.lessonId)}>{pay.lessonTitle}</dd>
+                    </div>
+                    <div className="pay-row">
+                      <dt>승인시간</dt>
+                      <dd>{new Date(pay.approvedAt).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })}</dd>
+                    </div>
                   </dl>
-                  <dl className="info_price">
+                  <dl className="info_price pay-row">
                     <dt>결제 금액</dt>
                     <dd>
                       {pay.totalAmount} 원
-                      {/* <button type="button" className="payback">
-                        환불 신청
-                      </button> */}
                     </dd>
                   </dl>
                 </div>

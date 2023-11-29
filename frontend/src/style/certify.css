@@ -47,3 +47,31 @@
   font-size: 14px;
   color: #333;
 }
+
+.my-title {
+  color: #404040;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.my-subtitle {
+  color: #404040;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.my-title-wrap {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.my-btn {
+  display: inline-block; /* Display badges in a single row */
+  margin: 10px; /* Add some space between badges */
+  padding: 6px 12px;
+  border: 0.7px solid #d9d9d9;
+  border-radius: 5px;
+  color: #656363;
+  background-color: #ffffff;
+  cursor: pointer;
+}

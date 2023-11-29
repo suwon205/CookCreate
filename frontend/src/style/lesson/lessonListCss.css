@@ -3,7 +3,7 @@
     grid-template-columns: repeat(3, 1fr); /* 최소 280px, 가능한만큼 늘어남 */
     gap: 30px;
     justify-items: center; /* 가로 가운데 정렬 */
-    align-items: center; /* 세로 가운데 정렬 */
+    align-items: start; /* 세로 가운데 정렬 */
     margin-top: 40px;
 }
   

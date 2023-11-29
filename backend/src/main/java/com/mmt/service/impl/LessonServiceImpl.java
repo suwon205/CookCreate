@@ -261,7 +261,11 @@ public class LessonServiceImpl implements LessonService {
             // remaining 세팅
             List<LessonParticipant> lessonParticipantList = lessonParticipantRepository.findAllByLesson_LessonId(lesson.getLessonId());
             lessonSearchRes.setRemaining(lesson.getMaximum() - lessonParticipantList.size() + 1);
-
+            if(lessonSearchReq.isDeadline()){ // 숨겨야 하면
+                if(lessonSearchRes.getRemaining() == 0){
+                    continue;
+                }
+            }
             // reviewAvg 세팅
             ReviewAvgRes reviewAvgRes = reviewService.getReviewAvg(lesson.getCookyerId());
             lessonSearchRes.setReviewAvg(reviewAvgRes.getAvg());
@@ -287,8 +291,7 @@ public class LessonServiceImpl implements LessonService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd\'T\'HH:mm:ss");
             LocalDateTime lessonDate = LocalDateTime.parse(lesson.getLessonDate(), formatter).minusHours(12);
             LocalDateTime now = LocalDateTime.now();
-            if(lessonSearchReq.isDeadline()){
-                // 숨기기
+            if(lessonSearchReq.isDeadline()){ // 숨겨야 하면
                 if(now.isAfter(lessonDate)){
                     continue;
                 }

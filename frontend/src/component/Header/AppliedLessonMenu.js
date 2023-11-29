@@ -73,7 +73,8 @@ function AppliedLessonMenu({ myLessons }) {
     <div className='dropdown-content'>
       {myLessons ? (
         myLessons.map((lesson, i) => (
-          <div key={lesson.lessonId} className="drop-lesson">
+          <div key={i} className="drop-lesson">
+          {/* <div key={lesson.lessonId} className="drop-lesson"> */}
             <div>
               <div className="drop-title">{lesson.lessonTitle}</div>
               <div>{lesson.cookyerName}</div>

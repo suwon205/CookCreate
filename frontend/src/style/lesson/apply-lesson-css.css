@@ -35,6 +35,7 @@
 .applyLessonApplyButton.disabled {
     background-color: gray;
     cursor: not-allowed;
+    color : #FFF;
   }
 .applyLessonApplyButton:hover {
     background-color: #fd621f;

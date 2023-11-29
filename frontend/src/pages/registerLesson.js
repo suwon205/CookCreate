@@ -34,7 +34,7 @@ function RegisterLesson() {
       <br />
       <RegisterForm setContent={setContent} setShowAlert={setShowAlert} setPath={setPath}/>
       {showAlert ? (
-        <AlertModal content={content} path={path}/>
+        <AlertModal content={content} path={path} actions={setShowAlert} data={false}/>
       ) :  null}
     </div>
   );

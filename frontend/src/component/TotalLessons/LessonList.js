@@ -5,12 +5,11 @@ import axios from "axios";
 import "../../style/lesson/lessonListCss.css";
 import { useNavigate } from "react-router-dom";
 import { setLessonId } from "../../store/lesson/lessonInfo";
-import { resetlessonSearch, setResult } from "../../store/lesson/lessonSearch";
+import { setResult } from "../../store/lesson/lessonSearch";
 import AlertModal from "../Modal/AlertModal";
 function LessonList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const [lessons, setLessons] = useState([]);
   const type = useSelector((state) => state.lessonSearch.type);
   const deadline = useSelector((state) => state.lessonSearch.deadline);
   const order = useSelector((state) => state.lessonSearch.order);
@@ -49,7 +48,6 @@ function LessonList() {
           },
         })
         .then((res) => {
-          console.log("내브바 서치바");
           dispatch(setResult(res.data));
         })
         .catch((err) => {
@@ -68,7 +66,6 @@ function LessonList() {
         })
         .then((res) => {
           dispatch(setResult(res.data));
-          console.log("메인 서치바");
         })
         .catch((err) => {
           console.error(err);
@@ -113,6 +110,7 @@ function LessonList() {
               cookyerName={lesson.cookyerName}
               categoryId={lesson.categoryId}
               difficulty={lesson.difficulty}
+              remaining = {lesson.remaining}
             />
           </div>
         ))

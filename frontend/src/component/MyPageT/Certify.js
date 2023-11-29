@@ -70,7 +70,10 @@ function Certify() {
     <div>
       <SideBar />
       <div>
-        <h2>자격증 등록</h2>
+        <div className="my-title-wrap">
+          <h3 className="my-title">자격증 관리</h3>
+        </div>
+        <h3 className="my-subtitle">자격증 등록</h3>
         <form onSubmit={handleSubmit}>
           <div>
             <label>자격증 파일:</label>
@@ -86,7 +89,7 @@ function Certify() {
               />
             </div>
           )}
-          <button type="submit" disabled={loading}>
+          <button className="my-btn" type="submit" disabled={loading}>
             등록하기
           </button>
           {loading ? " 등록 중 입니다..." : ""}
@@ -94,7 +97,7 @@ function Certify() {
         </form>
       </div>
       <div>
-        <h2>자격증 목록</h2>
+        <h3 className="my-subtitle">자격증 목록</h3>
         <div>
           {certificates.map((certificate) => (
             <div key={certificate.badgeId}>
