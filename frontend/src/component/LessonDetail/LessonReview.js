@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import '../../style/lesson/lessonReviewCss.css';
+import "../../style/lesson/lessonReviewCss.css";
 import DecimalStar from "./DecimalStar";
-
 
 function LessonReview() {
   const accessToken = localStorage.getItem("access_token");
@@ -11,8 +10,6 @@ function LessonReview() {
   const [ReviewGrade, setReviewGrade] = useState("");
   const [Reviews, setReveiws] = useState([]);
   const [cookyerId, setCookyerId] = useState(null);
-
-
 
   useEffect(() => {
     if (ReviewGrade) {
@@ -58,48 +55,45 @@ function LessonReview() {
         .catch((err) => {
           console.log("리뷰에러", err);
         });
-      }
-    }, [accessToken, cookyerId]);
-    
-    console.log("리뷰리스트", Reviews);
+    }
+  }, [accessToken, cookyerId]);
 
-    return (
-      <div className="review-container">
-        <div className="review-header">
-          <h3 className="review-title">리뷰</h3>
-          {ReviewGrade.reviewCnt > 0 ? (
-            <div className="review-avg-container">
-              <div className="review-star" >
-                <DecimalStar rating={ReviewGrade.reviewAvg} />
-              </div>
-              <div className="review-avg">
-                <div>{ReviewGrade.reviewAvg.toFixed(1)}/5.0</div>
-              </div>
-              <div className="review-cnt">
-                <div>
-                  ({ReviewGrade.reviewCnt}건)
-                </div>
-              </div>
+  console.log("리뷰리스트", Reviews);
+
+  return (
+    <div className="review-container">
+      <div className="review-header">
+        <div className="review-title">리뷰</div>
+        {ReviewGrade.reviewCnt > 0 ? (
+          <div className="review-avg-container">
+            <div className="review-star">
+              <DecimalStar rating={ReviewGrade.reviewAvg} />
             </div>
-          ) : null}
-        </div>
-        <div className="review-list">
-          {ReviewGrade.reviewCnt > 0 ? (
-            <div>
-              {Reviews.map((content, reviewId) => (
-                <div key={reviewId} className="review-item">
-                  <div className="review-nickname">{content.nickname}</div>
-                  <div className="review-content">{content.reviewContents}</div>
-                </div>
-              ))}
+            <div className="review-avg">
+              <div>{ReviewGrade.reviewAvg.toFixed(1)}/5.0</div>
             </div>
-          ) : (
-            <div className="no-reviews">작성된 리뷰가 없습니다.</div>
-          )}
-        </div>
+            <div className="review-cnt">
+              <div>({ReviewGrade.reviewCnt}건)</div>
+            </div>
+          </div>
+        ) : null}
       </div>
-    );
-  }
+      <div className="review-list">
+        {ReviewGrade.reviewCnt > 0 ? (
+          <div>
+            {Reviews.map((content, reviewId) => (
+              <div key={reviewId} className="review-item">
+                <div className="review-nickname">{content.nickname}</div>
+                <div className="review-content">{content.reviewContents}</div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="no-reviews">작성된 리뷰가 없습니다.</div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default LessonReview;
-

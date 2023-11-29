@@ -1,11 +1,7 @@
-
 .review-container {
   overflow: hidden;
-  width: 400px;
-  height: 400px;
-  border: 1px solid #ccc;
   border-radius: 3px;
-  padding: 1rem;
+  margin-top: 3rem;
 }
 
 .review-header {
@@ -16,9 +12,12 @@
 }
 
 .review-title {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
   font-weight: 500;
+  margin-bottom: 30px;
+  color: #414141;
   margin: 0;
-  font-size: 18px;
 }
 
 .review-star {
@@ -26,12 +25,10 @@
   margin-top: 3px;
 }
 
-
 .review-avg-container {
   display: flex;
   align-items: center;
 }
-
 
 .review-avg {
   font-weight: bold;
@@ -49,14 +46,13 @@
 .review-list {
   overflow-y: auto;
   height: 300px;
-  
+
   padding-right: 10px; /* 오른쪽에 스크롤이 생길 때 내용이 가려지는 것을 방지 */
 }
 
 .review-list::-webkit-scrollbar {
   width: 10px; /* 스크롤 바 너비 조절 */
 }
-
 
 .review-list::-webkit-scrollbar-thumb {
   background-color: #d3cec7; /* 스크롤 바 색상 */
@@ -67,11 +63,9 @@
   background-color: transparent; /* 스크롤 바 트랙 색상 */
 }
 
-
-
 .review-item {
   margin-bottom: 1rem;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 0.7px solid #d9d9d9;
   padding-bottom: 0.5rem;
 }
 
@@ -79,10 +73,11 @@
   font-size: 17px;
   font-weight: 500;
   margin-bottom: 0.2rem;
+  color: #414141;
 }
 
 .review-nickname {
-  font-size: 14px;
+  font-size: 0.9rem;
   color: #6f6f6f;
 }
 

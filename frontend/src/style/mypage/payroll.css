@@ -1,0 +1,67 @@
+.no-payment {
+  border-radius: 7px;
+  border: 0.7px solid #D9D9D9;
+  height: 150px;
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.pay-list {
+  border-radius: 7px;
+  border: 0.7px solid #D9D9D9;
+  margin-top: 60px;
+}
+
+.pay-row {
+  padding-right: calc(16px + 200px);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  position: relative;
+}
+
+.pay-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(27.5% - 0.5px); /* 대략적으로 pay-col1의 너비에 맞춰서 조절합니다 */
+  width: 1px;
+  background-color: #D9D9D9;
+}
+
+.pay-col1 {
+  flex: 1;
+  text-align: center;
+  padding-right: 15px;
+}
+
+.pay-col2 {
+  flex: 3;
+  text-align: left;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.success {
+
+  border: 0.7px solid #2a7524;
+  background: #f1fff0;
+  color: #236c37;
+  /* border: none; */
+  padding: 7px 14px;
+  font-size: 14px;
+  border-radius: 50px;
+  margin-left: auto;
+
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  /* transform: translateY(-50%); */
+}

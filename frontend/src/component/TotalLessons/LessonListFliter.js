@@ -16,7 +16,6 @@ function LessonListFliter() {
   };
   const handleDeadLine = () => {
     console.log(deadlineCheck, '체크라인 업뎃 전')
-    // const shownCheckbox = ;
     setDeadlineCheck(!deadlineCheck);
     
     dispatch(setDeadLine(!storeDeadline));

@@ -78,9 +78,8 @@ function Review() {
     <div>
       <SideBar />
       <section>
-        <div className="header">
-          <h2 className="header_title">작성한 리뷰</h2>
-          {/* <h2 className="section_title"></h2> */}
+        <div className="my-class-title-wrap">
+          <h3 className="my-class-title">작성한 리뷰</h3>
         </div>
         <ul className="caution_list">
           <div className="caution_list_item">
@@ -102,30 +101,19 @@ function Review() {
                   <div className="review_box">
                     <div className="review_item">
                       <div className="review_cont">
-                        <div
-                          className="review_link"
-                          onClick={() => goLesson(review.lessonId)}
-                        >
+                        <div className="review_link" onClick={() => goLesson(review.lessonId)}>
                           과외명: {review.lessonTitle}
                         </div>
-                        <StarShow
-                          rating={review.rating}
-                          size="1.4rem"
-                          color="gold"
-                        />
+                        <StarShow rating={review.rating} size="1.4rem" color="gold" />
                         <div>{review.rating}</div>
-                        <div className="review_author">
-                          작성자:{review.nickname}
-                        </div>
+                        <div className="review_author">작성자:{review.nickname}</div>
                         <div className="review_tutor">
                           선생님:
                           {review.cookyerName}
                         </div>
                         <div className="review_cont">
                           리뷰내용
-                          <div className="review_cont">
-                            {review.reviewContents}
-                          </div>
+                          <div className="review_cont">{review.reviewContents}</div>
                         </div>
                         <div className="review_fun">
                           <button
@@ -151,11 +139,11 @@ function Review() {
         onRequestClose={handleCloseModal}
         style={{
           content: {
-            width: '30%',   // 모달의 너비
-            height: '50%',  // 모달의 높이
-            top: '50%',     // 화면 세로 중앙
-            left: '50%',    // 화면 가로 중앙
-            transform: 'translate(-50%, -50%)', // 모달을 중앙으로 이동
+            width: "30%", // 모달의 너비
+            height: "50%", // 모달의 높이
+            top: "50%", // 화면 세로 중앙
+            left: "50%", // 화면 가로 중앙
+            transform: "translate(-50%, -50%)", // 모달을 중앙으로 이동
           },
         }}
       >

@@ -14,6 +14,7 @@ import { setClassData, setCompletedData } from "../../store/mypageS/accountS";
 import { setLessonId } from "../../store/lesson/lessonInfo";
 import AlertModal from "../Modal/AlertModal";
 import SelectModal from "../Modal/SelectModal";
+import "../../style/mypage/classList.css";
 
 //시간 포맷
 const displayTime = (dateTime) => {
@@ -21,7 +22,6 @@ const displayTime = (dateTime) => {
 
   const localDate = new Date(dateTime);
   const options = {
-    year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
@@ -209,7 +209,7 @@ function ClassList() {
     setGoLessonDetail(true);
     dispatch(setLessonId(lessonId));
     navigate(`/lesson/${lessonId}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -256,50 +256,194 @@ function ClassList() {
 
   return (
     <div>
-        <SideBar />
-        <div className="column is-10 main_container">
-          <div className="header">
-            <div className="summary">
-              <dl className="summary__count">
-                <h1>과외목록</h1>
-              </dl>
-            </div>
+      <SideBar />
+      <div className="column is-10 main_container">
+        <div className="my-class-title-wrap">
+          <h3 className="my-class-title">과외목록</h3>
+        </div>
+        <div>
+          <h2 className="my-class-subtitle">예정된 과외</h2>
+          <div className="lessonListContainer">
+            {classData !== null && classData !== undefined && classData ? (
+              classData.map((lesson) => (
+                <div
+                  key={lesson.lessonId}
+                  className="columns is-multiline is-mobile courses_card_list_body lessonItemContainer"
+                >
+                  <div className="column is-3-fullhd is-3-widescreen is-4-desktop is-4-tablet is-6-mobile ">
+                    <div
+                      className="card course course_card_item"
+                      data-productid="324582"
+                      fxd-data='{"courseId":324582,"regPrice":0,"isInCart":false}'
+                      data-gtm-vis-recent-on-screen-8964582_476="200"
+                      data-gtm-vis-first-on-screen-8964582_476="200"
+                      data-gtm-vis-total-visible-time-8964582_476="100"
+                      data-gtm-vis-has-fired-8964582_476="1"
+                    >
+                      {/* <a className="course_card_front" href="ㅔㅔㅔㅔ"> */}
+                      <div onClick={() => goLesson(lesson.lessonId)}>
+                        <div>
+                          <img
+                            loading="lazy"
+                            src={lesson.thumbnailUrl}
+                            // data-src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
+                            className="thumbnail"
+                            alt="course_title.png"
+                          />
+                          <div className="onload_placeholder"></div>
+                          <div className="swiper-lazy-preloader"></div>
+                        </div>
+                        <div className="card-content">
+                          <h3 className="lessonItemTitle">{lesson.lessonTitle}</h3>
+                          <div className="view2_summary_info">
+                            <div className="info_delivery">
+                              {/* <dd>{lesson.lessonDate} 예정</dd> */}
+                              <div className="my-remain-wrap">
+                                <div className="remain-text">
+                                  {lesson.remaining}/{lesson.maximum}
+                                </div>
+                                {lesson ? (
+                                  <div className="my-datename">
+                                    {displayTime(lesson.lessonDate)} | {lesson.cookyerName}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="rating">
+                            <div className="rating_star">
+                              <div className="star_solid" style={{ width: "98.26086956521738%" }}>
+                                {/* ... (rest of the code) ... */}
+                              </div>
+                            </div>
+                            <p className="card-content_notice"></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="badge-btn-wrap">
+                        <div class="categoryBadge">
+                          {(() => {
+                            switch (lesson.categoryId) {
+                              case 1:
+                                return "한식";
+                              case 2:
+                                return "양식";
+                              case 3:
+                                return "중식";
+                              case 4:
+                                return "일식";
+                              case 5:
+                                return "아시안";
+                              case 6:
+                                return "건강식";
+                              case 7:
+                                return "디저트";
+                              default:
+                                return "알 수 없음";
+                            }
+                          })()}
+                        </div>
+                        <div className="my-class-btn-wrap">
+                          {new Date(lesson.lessonDate) <=
+                          currentDate.setHours(currentDate.getHours() + 1) ? (
+                            <button
+                              className="my-class-btn"
+                              onClick={() => createRoom(lesson.lessonId)}
+                            >
+                              과외시작
+                            </button>
+                          ) : (
+                            <button className="my-class-btn" disabled="disabled">
+                              과외시작
+                            </button>
+                          )}
+                          <button
+                            className="my-class-btn"
+                            onClick={() => updateClass(lesson.lessonId)}
+                          >
+                            수정
+                          </button>
+                          <button
+                            className="my-class-btn"
+                            onClick={() => handleDeleteClass(lesson.lessonId)}
+                          >
+                            삭제
+                          </button>
+                          {/* <button onClick={() => deleteClass(lesson.lessonId)}>삭제</button> */}
+                          {showAlert ? (
+                            <SelectModal
+                              content={"정말로 삭제하시겠습니까?"}
+                              path={null}
+                              actions={handleDeleteAction}
+                            />
+                          ) : null}
+                          {showCompletedAlert ? (
+                            <AlertModal
+                              content={deleteContent}
+                              path={null}
+                              actions={setShowCompletedAlert}
+                              data={false}
+                            />
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>신청한 과외가 없습니다.</p>
+            )}
           </div>
-            <div>
-              <h2>예정된 과외</h2>
-              {classData !== null && classData !== undefined && classData ? (
-                classData.map((lesson)=> (
-                  <div key = {lesson.lessonId} className="columns is-multiline is-mobile courses_card_list_body">
-                    <div className="column is-3-fullhd is-3-widescreen is-4-desktop is-4-tablet is-6-mobile ">
-                      <div
-                        className="card course course_card_item"
-                        data-productid="324582"
-                        fxd-data='{"courseId":324582,"regPrice":0,"isInCart":false}'
-                        data-gtm-vis-recent-on-screen-8964582_476="200"
-                        data-gtm-vis-first-on-screen-8964582_476="200"
-                        data-gtm-vis-total-visible-time-8964582_476="100"
-                        data-gtm-vis-has-fired-8964582_476="1"
-                      >
-                        <div className="course_card_front">
+        </div>
+        <div>
+          <h2 className="my-class-subtitle">완료한 과외</h2>
+          <div className="lessonListContainer">
+            {completedData !== null && completedData !== undefined && completedData ? (
+              completedData.map((lesson) => (
+                <div
+                  key={lesson.lessonId}
+                  className="columns is-multiline is-mobile courses_card_list_body lessonItemContainer"
+                  onClick={() => goLesson(lesson.lessonId)}
+                >
+                  <div className="column is-3-fullhd is-3-widescreen is-4-desktop is-4-tablet is-6-mobile ">
+                    <div
+                      className="card course course_card_item"
+                      data-productid="324582"
+                      fxd-data='{"courseId":324582,"regPrice":0,"isInCart":false}'
+                      data-gtm-vis-recent-on-screen-8964582_476="200"
+                      data-gtm-vis-first-on-screen-8964582_476="200"
+                      data-gtm-vis-total-visible-time-8964582_476="100"
+                      data-gtm-vis-has-fired-8964582_476="1"
+                    >
+                      <div className="course_card_front">
                         {/* <a className="course_card_front" href="ㅔㅔㅔㅔ"> */}
-                          <div className="card-image">
-                            <figure className="image is_thumbnail">
-                              <img
-                                loading="lazy"
-                                src={lesson.thumbnailUrl}
-                                // data-src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
-                                className="swiper-lazy"
-                                alt="course_title.png"
-                              />
-                              <div className="onload_placeholder"></div>
-                              <div className="swiper-lazy-preloader"></div>
-                            </figure>
-                          </div>
-                          <div className="card-content">
-                            <div className="course_title" onClick={() => goLesson(lesson.lessonId)}>과외명:{lesson.lessonTitle}</div>
-                            <div className="course_title">
-                            <dt>카테고리</dt>
-                              <dd>
+                        <div>
+                          <img
+                            loading="lazy"
+                            src={lesson.thumbnailUrl}
+                            // data-src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
+                            className="thumbnail"
+                            alt="course_title.png"
+                          />
+                          <div className="onload_placeholder"></div>
+                          <div className="swiper-lazy-preloader"></div>
+                        </div>
+                        <div className="card-content">
+                          <h3 className="lessonItemTitle">{lesson.lessonTitle}</h3>
+                          <div className="view2_summary_info">
+                            <div className="info_delivery">
+                              <div className="my-remain-wrap">
+                                <div className="remain-text">
+                                  수강인원: {lesson.maximum - lesson.remaining}
+                                </div>
+                                {lesson ? (
+                                  <div className="my-datename">
+                                    {displayTime(lesson.lessonDate)} | {lesson.cookyerName}
+                                  </div>
+                                ) : null}
+                              </div>
+                              <div class="categoryBadge">
                                 {(() => {
                                   switch (lesson.categoryId) {
                                     case 1:
@@ -320,158 +464,31 @@ function ClassList() {
                                       return "알 수 없음";
                                   }
                                 })()}
-                              </dd>
-                            </div>
-                            <div className="instructor">쿠커: {lesson.cookyerName}</div>
-                            <div className="view2_summary_info">
-                              <dl className="info_delivery">
-                                <dt>
-                                  <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_calendar.png" alt="기간아이콘" width="29" />
-                                  "과외 날짜"
-                                </dt>
-                                {/* <dd>{lesson.lessonDate} 예정</dd> */}
-                                {lesson ? 
-                                <dd>
-                                  {displayTime(lesson.lessonDate)}
-                                </dd>: null}
-                                {new Date(lesson.lessonDate) <= currentDate.setHours(currentDate.getHours() + 1) ? (
-                                  <button onClick={() => createRoom(lesson.lessonId)}>과외시작</button>
-                                ) : (
-                                  <button disabled='disabled'>과외시작</button>
-                                )}
-                              </dl>
-                              <div className="info_ea">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_people.png" alt="수강아이콘" width="29" style={{ paddingRight: "5px", verticalAlign: "text-bottom" }} />
-                                <b>"{lesson.remaining}"명 남음.</b>
-                                  최대인원:{lesson.maximum}명
                               </div>
                             </div>
-                            <div className="rating">
-                              <div className="rating_star">
-                                <div className="star_solid" style={{ width: "98.26086956521738%" }}>
-                                  {/* ... (rest of the code) ... */}
-                                </div>
-                              </div>
-                              <p className="card-content__notice"></p>
-                              <div className="tags">
-                                <button onClick={() => updateClass(lesson.lessonId)}>수정</button>
-                                <button onClick={() => handleDeleteClass(lesson.lessonId)}>삭제</button>
-                                {/* <button onClick={() => deleteClass(lesson.lessonId)}>삭제</button> */}
-                                {showAlert ? (
-                                  <SelectModal content={'정말로 삭제하시겠습니까?'} path={null} actions={handleDeleteAction}/>
-                                ) : null}
-                                {showCompletedAlert ? (
-                                  <AlertModal content={deleteContent} path={null} actions={setShowCompletedAlert} data={false}/>
-                                ) : null}
+                          </div>
+                          <div className="rating">
+                            <div className="rating_star">
+                              <div className="star_solid" style={{ width: "98.26086956521738%" }}>
+                                {/* ... (rest of the code) ... */}
                               </div>
                             </div>
+                            <p className="card-content__notice"></p>
                           </div>
                         </div>
                       </div>
+                      {/* </a> */}
                     </div>
                   </div>
-                ))
-              ) : (
-                <p>신청한 과외가 없습니다.</p>
-              )}
-            </div>
-            <div>
-              <h2>완료한 과외</h2>
-              {completedData !== null && completedData !== undefined && completedData ? (
-                completedData.map((lesson)=> (
-                  <div key = {lesson.lessonId} className="columns is-multiline is-mobile courses_card_list_body">
-                    <div className="column is-3-fullhd is-3-widescreen is-4-desktop is-4-tablet is-6-mobile ">
-                      <div
-                        className="card course course_card_item"
-                        data-productid="324582"
-                        fxd-data='{"courseId":324582,"regPrice":0,"isInCart":false}'
-                        data-gtm-vis-recent-on-screen-8964582_476="200"
-                        data-gtm-vis-first-on-screen-8964582_476="200"
-                        data-gtm-vis-total-visible-time-8964582_476="100"
-                        data-gtm-vis-has-fired-8964582_476="1"
-                      >
-                        <div className="course_card_front">
-                        {/* <a className="course_card_front" href="ㅔㅔㅔㅔ"> */}
-                          <div className="card-image">
-                            <figure className="image is_thumbnail">
-                              <img
-                                loading="lazy"
-                                src={lesson.thumbnailUrl}
-                                // data-src="https://cdn.inflearn.com/public/courses/324582/course_cover/1ead1042-97cc-41f2-bc73-a6e86ae86a4d/nodeReact.png"
-                                className="swiper-lazy"
-                                alt="course_title.png"
-                              />
-                              <div className="onload_placeholder"></div>
-                              <div className="swiper-lazy-preloader"></div>
-                            </figure>
-                          </div>
-                          <div className="card-content">
-                            <div className="course_title" onClick={() => goLesson(lesson.lessonId)}>과외명:{lesson.lessonTitle}</div>
-                            <div className="course_title">
-                            <dt>카테고리</dt>
-                              <dd>
-                                {(() => {
-                                  switch (lesson.categoryId) {
-                                    case 1:
-                                      return "한식";
-                                    case 2:
-                                      return "양식";
-                                    case 3:
-                                      return "중식";
-                                    case 4:
-                                      return "일식";
-                                    case 5:
-                                      return "아시안";
-                                    case 6:
-                                      return "건강식";
-                                    case 7:
-                                      return "디저트";
-                                    default:
-                                      return "알 수 없음";
-                                  }
-                                })()}
-                              </dd>
-                            </div>
-                            <div className="instructor">쿠커: {lesson.cookyerName}</div>
-                            <div className="view2_summary_info">
-                              <dl className="info_delivery">
-                                <dt>
-                                  <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_calendar.png" alt="기간아이콘" width="29" />
-                                  "과외 날짜"
-                                </dt>
-                                {/* <dd>{lesson.lessonDate} 완료</dd> */}
-                                {lesson ? 
-                                <dd>
-                                  {displayTime(lesson.lessonDate)}
-                                </dd>: null}
-                              </dl>
-                              <div className="info_ea">
-                                <img src="https://recipe1.ezmember.co.kr/img/mobile/icon_people.png" alt="수강아이콘" width="29" style={{ paddingRight: "5px", verticalAlign: "text-bottom" }} />
-                                <p>수강 인원</p>
-                                <p>{lesson.maximum - lesson.remaining}</p>
-                              </div>
-                            </div>
-                            <div className="rating">
-                              <div className="rating_star">
-                                <div className="star_solid" style={{ width: "98.26086956521738%" }}>
-                                  {/* ... (rest of the code) ... */}
-                                </div>
-                              </div>
-                              <p className="card-content__notice"></p>
-                            </div>
-                          </div>
-                        </div>
-                        {/* </a> */}
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p>완료한 과외가 없습니다.</p>
-              )}
-            </div>
+                </div>
+              ))
+            ) : (
+              <p>완료한 과외가 없습니다.</p>
+            )}
+          </div>
         </div>
       </div>
+    </div>
   );
 }
 

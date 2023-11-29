@@ -49,6 +49,8 @@ function LessonList() {
           },
         })
         .then((res) => {
+          console.log(res.data)
+
           console.log("내브바 서치바");
           dispatch(setResult(res.data));
         })
@@ -68,6 +70,7 @@ function LessonList() {
         })
         .then((res) => {
           dispatch(setResult(res.data));
+          console.log(res.data)
           console.log("메인 서치바");
         })
         .catch((err) => {
@@ -113,6 +116,7 @@ function LessonList() {
               cookyerName={lesson.cookyerName}
               categoryId={lesson.categoryId}
               difficulty={lesson.difficulty}
+              remaining = {lesson.remaining}
             />
           </div>
         ))
